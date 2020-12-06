@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit_user</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'edit_user.css' %}">
+</head>
+<body>
+
+    <div id="CANVAS_long">
+
+
+
+        <div id="TOP_long">
+            <nav>
+                <h2>Pets Connect</h2>
+                <a href="#">Dashboard</a>
+                <a href = '/logout'>Add Photo</a>
+                <a href='/users/edit/{{current_user.id}}'> Profile</a>
+                <a href = '/logout'>Log Off</a>
+                </nav>
+            </div>
+
+
+            <h2 class ='title_h2'>Edit user #{{user.id}} Admin ONLY</h2>
+        <div id="interface_block_two">
+            <div id="left_main"> 
+                <h2 class ='form_h2'>Edit Profile</h2> 
+                <form action="/process_edit_user" method="post">
+                    <!-- CHANGE 1 TO THIS USERS ID -->
+                {% csrf_token %}
+                <div class="form_row"><label class ='form_label' for = 'email'>Email Address </label> <input class='form_input' name = 'email' type = 'email' value='{{user.email}}'></div>
+                <div class="form_row"><label class ='form_label' for = 'first'>First Name </label> <input class='form_input' name = 'first' type = 'text' value='{{user.first_name}}'></div>
+                <div class="form_row"><label class ='form_label' for = 'last'>Last Name </label> <input class='form_input' name = 'last' type = 'text' value='{{user.last_name}}'></div>
+                <input type= "hidden" name='user_id' value = '{{user.id}}'>
+                <input type= "hidden" name='current_email' value = '{{user.email}}'>
+                <div class="form_row_button"><button class ='form_button' type ='submit'> Save </button></div>
+                </form>
+                
+               
+
+            </div>      <!-- END LEFT -->          
+                
+            
+            <div id="right_main"> 
+                <!-- CHANGE FORM TO PROCCESS PASSWORDD -->
+                <h2 class ='form_h2'>Change Password</h2>
+                <form action="/process_edit_password" method="post">
+                    {% csrf_token %}
+                    <div class="form_row"><label class ='form_label' for = 'pass'>Password </label> <input class='form_input' name = 'pass' type = 'password'></div>
+                    <div class="form_row"><label class ='form_label' for = 'confirm'>Confirm Password </label> <input class='form_input' name = 'confirm' type = 'password'></div>
+                    <input type= "hidden" name='user_id' value = '{{user.id}}'>
+                    <div class="form_row_button"><button class ='form_button' type ='submit'> Update Password </button></div>
+                    
+                </form> 
+
+                {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                {% endif %}  
+            </div>    <!-- END RIGHT --> 
+            
+              
+            
+        </div> <!-- END INTERFACE -->
+        
+             
+       
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>

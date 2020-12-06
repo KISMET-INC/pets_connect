@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'login_reg.css' %}">
+    <title>Login and Registration</title>
+</head>
+<body>
+    <div id="CANVAS_long">
+        <div id="interface_block_two">
+
+
+            <div id="left_main">
+                <form  class = 'col-9' action = '/register' method = 'post'>
+                    <h2 class ='form_h2'>Registration</h2>
+                    {% csrf_token %}
+                    <div class = 'form_row'><label class = 'form_label' for =  'first'>First Name </label>  <input class='form_input' name = 'first' type = 'text'></div>
+                    <div class = 'form_row'><label class ='form_label' for = 'email'>Email Name </label>  <input class='form_input' name = 'email' type = 'email'></div>
+                    <div class = 'form_row'><label class ='form_label' for = 'last'>Last Name </label>  <input class='form_input' name = 'last' type = 'text'></div>
+                    <div class = 'form_row'><label class ='form_label' for = 'bday'>Birthday </label>  <input class='form_input' name = 'bday' type = 'date'></div>
+                    <div class = 'form_row'><label class ='form_label' for = 'password'>Password </label>  <input class='form_input'name = 'pass' type = 'password'></div>
+                    <div class = 'form_row'><label class ='form_label' for = 'confirm'>Confirm PW </label>  <input class='form_input'name = 'confirm' type = 'password'></div>
+                    <div class = 'form_row_button'><button type ='submit'> Register </button> </div>             
+                </form>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %} 
+                    {% if message.extra_tags == 'reg' %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+                {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+
+
+
+
+            <div id="right_main">
+                <form class ='col-8' action = '/login' method = 'post'>
+                    <h2 class ='form_h2'>Login</h2>
+                    {% csrf_token %}
+                    <div class = 'form_row'><label class = 'form_label' for =  'email'>Email </label> <input class='form_input' name = 'email' type = 'email'>
+                    <div class = 'form_row'><label class = 'form_label' for =  = 'password'>Password </label> <input class='form_input' name = 'pass' type = 'password'>            
+                        <div class = 'form_row_button'><button type ='submit'> Login </button> </div>            
+                </form>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'login' %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

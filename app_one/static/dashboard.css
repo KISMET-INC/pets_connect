@@ -1,0 +1,17 @@
+h2.title_h2 {
+    font-weight: bolder;
+    width:100%;
+    margin: 0 auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#interface_block_one{
+    height: fit-content;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    justify-content: center;
+}

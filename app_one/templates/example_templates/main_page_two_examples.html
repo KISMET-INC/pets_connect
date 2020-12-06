@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+</head>
+<body>
+
+    <div id="CANVAS_long">
+        <div id="TOP_long">
+            <nav>
+                <h2 class = 'h2_nav'>Welcome, {{request.session.user_name}}!</h2>
+                <div class="nav_right">
+                    <a class = 'nav_right' href = '/logout'>Log Out</a>
+                    <a class = 'nav_right' href = '/logout'>Home</a>
+                </div>
+            </nav>
+        </div>
+
+
+        <div id="interface_block_long">
+            <div id="left_main">
+                <form action = '/upload_book' method = 'post'>
+                    <h2 class ='form_h2'>Add a Favorite Book</h2>
+                    {% csrf_token %}
+                    <div class="form_row"><label class ='form_label' for = 'title'>Title </label> <input class='form_input' name = 'title' type = 'text'></div>
+                    <div class="form_row"><label class ='form_label' for = 'desc'>Description </label> <textarea class='form_textarea'  name = 'desc'></textarea></div>
+                    
+                    <div class ='form_row'><label class = 'form_label date' for='cal'>Birthday</label><input class='form_input' name ='date' type ="date"></div>
+
+
+                    <div class="form_row two_cols">
+                        <div class="left">
+                            <label class ='form_label_select' for = 'form_select'>Select </label>
+                            <select class = 'form_select'>
+                                <option>Option 1 here</option>
+                            </select>
+                        </div>
+                        <div class="right">
+                            <div class="form_row"><label class ='form_label' for = 'title'>Title </label> <input class='form_input' name = 'title' type = 'text'></div>
+                        </div>
+                    </div>
+
+
+                        <div class = 'form_row'>
+                            <p class = 'form_group_title'>Radio Group </p>
+                            <div class="form_row_group radio ">
+                                <input class = 'form_group_input radio' type="radio" id="male" name="gender" value="male">
+                                <label class = 'form_group_label radio' for="male">Male</label><br>
+                                <input class = 'form_group_input radio' type="radio" id="female" name="gender" value="female">
+                                <label class = 'form_group_label radio' for="female">Female</label><br>
+                                <input class = 'form_group_input radio' type="radio" id="other" name="gender" value="other">
+                                <label class = 'form_group_label radio' for="other">Other</label>
+                            </div>
+                        </div>
+
+                        <div class = 'form_row'>
+                            <p class = 'form_group_title'>Checkbox Group </p>
+                            <div class="form_row_group check">
+                                <input class = 'form_group_input check' type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                <label class = 'form_group_label check' for="vehicle1"> I have a bike</label><br>
+                                <input class = 'form_group_input check' type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                <label class = 'form_group_label check' for="vehicle2"> I have a car</label><br>
+                                <input class = 'form_group_input check' type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                <label class = 'form_group_label check' for="vehicle3"> I have a boat</label><br>
+                            </div>
+                        </div>
+
+                        <div class="form_row"><button class ='form_button' type ='submit'> Add </button>  </div>            
+                    </div>         
+                </form>
+            
+            <div id="right_main">
+               
+                <form class = 'msg_post' action = '\' method ='post'>
+                    <div class="form_row">
+                        <P class = 'msg_post_title' > Post a Message</P>
+                        <textarea class = 'msg_post' name = 'msg_text'></textarea>
+                        <div class="form_row_button"><button class ='form_post_button' type ='submit'> POST </button>  </div>
+                    </div>
+                </form>
+
+                <form class = 'msg_comment' action = '\' method ='post'>
+                    <div class="form_row">
+                        <P class = 'msg_comment_title' > Post a Message</P>
+                        <textarea class = 'msg_comment' name = 'comment_text'></textarea>
+                        <div class="form_row_button"><button class ='form_comment_button' type ='submit'> POST </button>  </div>
+                    </div>
+                </form>
+                
+                <div class="info_block_1">
+                    <h1 class ='info_h1'> Headline</h1>
+                    <p class ='info_h1'> This is th einfo</p>
+                    <div class="info_h1"><a href class ='form_comment_button'> delete </a>  </div>
+                </div>
+
+                <div class="info_block_2">
+                    <h1 class ='info_h2'> Headline</h1>
+                    <p class ='info_h2'> This is th einfo</p>
+                    <div class="info_h2"><a href class ='form_comment_button'> delete </a>  </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>

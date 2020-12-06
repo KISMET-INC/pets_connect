@@ -1,0 +1,104 @@
+form.msg_post{
+    padding: 0px;
+    margin: 0 auto;
+    width: 97%;
+    margin-bottom: 30px;
+}
+
+#interface_block_two {
+    width: 90%;
+    justify-content: space-between;
+    margin-top: 2%;
+   
+}
+
+form {
+    border: 2px solid black;
+    padding: 50px;
+    margin: 0px;
+}
+
+form.desc {
+    width: 800px;
+    border:2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 350px;
+}
+
+
+
+
+textarea {
+    padding: 1%;
+    height: 200px;
+    width: 100%;
+    margin: 0 auto;
+    resize: none;
+   
+   
+}
+.password {
+    height: 350px;
+}
+
+
+label.form_label {
+    width: 100%;
+}
+
+h2.title_h2 {
+    font-weight: bolder;
+    width:85%;
+    margin: 0 auto;
+}
+input.form_input {
+    padding: 3%;
+    border: 1px solid grey;
+    width: 100%;
+}
+
+
+button {
+    background-color: green;
+    color: white;
+}
+
+.edit {
+    display:flex;
+    flex-direction: column;
+}
+
+.edit .title {
+    margin-left: 5%;
+}
+
+@media (max-width: 1800px){
+    #interface_block_two {
+        width: 40%;
+        flex-direction: column;
+    }
+    form {
+        margin-bottom: 30px;
+    }
+
+    .edit .title {
+        margin-left:30%;
+    }
+
+    #bottom_main {
+        width: 40%;
+        height: 450px;
+    }
+}
+
+/* form { 
+    padding: 30px;
+}
+
+h2.form_h2 {
+    margin-left: 20px;
+    background-color: white;
+    margin-top: -10px;
+    position: absolute;
+    z-index: 1;
+} */

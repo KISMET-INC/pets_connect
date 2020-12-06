@@ -1,0 +1,56 @@
+form.msg_post{
+    padding: 0px;
+    margin: 0 auto;
+    width: 97%;
+    margin-bottom: 30px;
+}
+
+#bottom_main {
+    width:85%;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: fit-content;
+}
+#interface_block_two {
+    justify-content: space-around;
+    height: fit-content;
+}
+#left_main, #right_main {
+    width: 45%;
+}
+form {
+    border: none;
+    width: 90%;
+    padding: 50px;
+}
+h2.textarea {
+    margin-top: -30px;
+}
+
+textarea.msg_post {
+    width: 99%;
+    margin:15px;
+    height: 100px;
+}
+label.form_label {
+    width: 100%;
+}
+
+h2.title_h2 {
+    font-weight: bolder;
+    width:85%;
+    margin: 0 auto;
+}
+input.form_input {
+    width: 100%;
+}
+
+
+#right_main {
+    height: 70%;
+}
+
+button {
+    background-color: green;
+    color: white;
+}

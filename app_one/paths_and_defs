@@ -1,0 +1,106 @@
+    path('home', views.home),
+    path('signin', views.signin),
+    path('register', views.register),
+    path('dashboard/admin', views.admin),
+    path('users/new', views.new),
+    path('show/<int:user_id>', views.show),
+    path('remove_user/<int:user_id>', views.remove_user),
+    path('dashboard', views.dashboard),
+    path('users/edit_self', views.edit_self),
+
+    path('/proccess_edit_password', views.process_edit_password),
+    path('/process_edit_user', views.process_edit_user),
+    path('/process_edit_self', views.process_edit_self),
+
+    path('/process_add_message', views.process_add_message),
+    path('/process_add_comment', views.process_add_comment),
+
+
+#=============================================##
+# home()
+#
+#=============================================##
+def home(request):
+    return render(request,'home.html')
+
+#=============================================##
+# signin()
+#
+#=============================================##
+def signin(request):
+    return render(request,'signin.html')
+
+#=============================================##
+# register()
+#
+#=============================================##
+def register(request):
+    return render(request,'register.html')
+
+#=============================================##
+# admin()
+#
+#=============================================##
+def admin(request):
+    return render(request,'admin.html')
+
+#=============================================##
+# new()
+#
+#=============================================##
+def new(request):
+    return render(request,'new.html')
+
+#=============================================##
+# show()
+#
+#=============================================##
+def show(request, user_id):
+    return render(request,'show.html')
+
+#=============================================##
+# remove_user()
+#
+#=============================================##
+def remove_user(request):
+    return render(request,'remove_user.html')
+
+#=============================================##
+# eight()
+#
+#=============================================##
+def eight(request):
+    return render(request,'eight.html')
+
+#=============================================##
+# edit_self()
+#
+#=============================================##
+def edit_self(request):
+    return render(request,'edit_self.html')
+
+
+
+
+
+#=============================================##
+# process_edit_password()
+# return redirect('/')
+#=============================================##
+def process_edit_password(request):
+    return render(request,'process_edit_password.html')
+
+#=============================================##
+# process_add_message()
+# return redirect('/')
+#=============================================##
+def process_add_message(request, user_id):
+    return render(request,'process_add_message.html')
+
+#=============================================##
+# process_add_comment()
+# return redirect('/')
+#=============================================##
+def process_add_comment(request):
+    return render(request,'process_add_comment.html')
+

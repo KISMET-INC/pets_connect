@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'read_all.css' %}">
+    <title>Read(All)</title>
+</head>
+<body>
+    <div id="CANVAS">
+        <div id="interface_block">
+            <div id="top">
+                <h1>All Users</h1>
+            </div>
+            
+        <table>
+            <tr>
+                <th class ='id'>ID</th>
+                <th class ='title'>Name</th>
+                <th class ='actions'>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}} {{user.last_name}}</td>
+                <td>
+                    <a href='/user/{{user.id}}/delete'>Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        </div>
+    </div>
+</body>
+</html

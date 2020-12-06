@@ -1,0 +1,56 @@
+
+p {
+    display:inline-block;
+}
+p.info {
+
+    width: 20%;
+}
+
+.info_block_1 {
+    margin-top: 10px;
+    width:50%;
+    border:none;
+    padding:0px;
+}
+
+form {
+    padding: 0px;
+    border: none;
+}
+
+.info_block_2 {
+    border:none;
+    width: 100%;
+    
+}
+
+textarea.msg_comment {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+form.msg_comment {
+    font-size: 12px;
+    width:100%;
+    padding-left: 30px;
+    
+}
+
+p.info_h1 {
+    border: 1px solid black;
+    display:block;
+    width: 100%;
+}
+
+p.msg {
+    height: 100px;
+}
+
+p.comment {
+    font-size: 12px;
+    height: 50px;
+}

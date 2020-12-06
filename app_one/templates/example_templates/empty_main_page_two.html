@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'CHANGE.css' %}">
+</head>
+<body>
+
+    <div id="CANVAS_long">
+
+
+
+        <div id="TOP_long">
+            <nav>
+                <h2 class = 'h2_nav'>Welcome, {{request.session.user_name}}!</h2>
+                <div class="nav_right">
+                    <a class = 'nav_right' href = '/logout'>Log Out</a>
+                    <a class = 'nav_right' href = '/logout'>Home</a>
+                </div>
+            </nav>
+        </div>
+
+
+        <div id="interface_block_two">
+            <div id="left_main">   
+                <p>LEFT CHANGE </p>                   
+            </div>      <!-- END LEFT -->      
+                
+            
+            <div id="right_main"> 
+                <p>RIGHT</p>            
+            </div>    <!-- END RIGHT -->  
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>

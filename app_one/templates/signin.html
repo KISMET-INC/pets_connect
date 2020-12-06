@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'signin.css' %}">
+</head>
+<body>
+
+    <div id="CANVAS_long">
+
+
+
+        <div id="TOP_long">
+
+            <nav>
+                <h2 >Pet's Connect</h2>
+            
+                <div>
+                    <a href="/"> Home</a>
+                    <a href = '/signin'>Sign in</a>
+                <div>    
+            </nav>
+            
+        </div>
+    
+
+        <div id="interface_block_one">
+            <div>   
+                <h2 class ='form_h2'>Sign In</h2>
+                <form action="/process_signin" method="post">
+                {% csrf_token %}
+                <div class="form_row"><label class ='form_label' for = 'email'>Email Address </label> <input class='form_input' name = 'email' type = 'email'></div>
+                <div class="form_row"><label class ='form_label' for = 'pass'>Password </label> <input class='form_input' name = 'pass' type = 'password'></div>
+                <div class="form_row_button"><button class ='form_button' type ='submit'> Sign In </button></div>
+                    <a class = 'form_row_link' href = "/register">Don't have an account? Register</a>
+                </form>  
+            </div>
+        
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            <!-- END RIGHT -->  
+                
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+    
+</body>
+</html>
