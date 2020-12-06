@@ -18,7 +18,7 @@
         <div id="TOP_long">
             <nav>
                 <h2>Pets Connect</h2>
-                <a href="#">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
                 <a href = '#'>Add Photo</a>
                 <a href='/users/edit_self'> Profile</a>
                 <a href = '/logout'>Log Off</a>
@@ -51,12 +51,22 @@
                 </form>            
             </div>    <!-- END RIGHT --> 
 
-            <div>
-                <h2 class = 'form_h2'> Edit Description </h2>
-                <form class = 'desc' action = '/process/edit_desc' method ='post'>     
-                    <textarea name = 'msg_text'>{{current_user.desc}}</textarea>
-                    <div class="form_row_button"><button class ='form_post_button' type ='submit'> Save </button></div>
-                </form>
+            <div class = "line_input">
+                <div>
+                    <h2 class = 'form_h2'> Edit Description </h2>
+                    <form class = 'desc' action = '/process/edit_desc' method ='post'>     
+                        <textarea name = 'msg_text'>{{current_user.desc}}</textarea>
+                        <div class="form_row_button"><button class ='form_post_button' type ='submit'> Save </button></div>
+                    </form>
+                </div>
+                <div>
+                    <h2 class = 'form_h2'> Add Image URL </h2>
+                    <form class = 'desc' action = '/process/edit_desc' method ='post'>     
+                        <textarea name = 'msg_text'>{{current_user.desc}}</textarea>
+                        <div class="form_row_button"><button class ='form_post_button' type ='submit'> Save </button></div>
+                    </form>
+                </div>
+
             </div>
             
         </div> <!-- END INTERFACE -->

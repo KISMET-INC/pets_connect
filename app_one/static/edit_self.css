@@ -6,31 +6,40 @@ form.msg_post{
 }
 
 #interface_block_two {
-    width: 90%;
+    width: 60%;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 2%;
+    margin-top: 3%;
    
 }
 
 form {
+    width: 500px;
     border: 2px solid black;
     padding: 50px;
     margin: 0px;
+    height: 350px;
+    margin-bottom: 50px;
 }
 
 form.desc {
-    width: 800px;
+    width: 500px;
     border:2px solid black;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 350px;
+    height: 150px;
+    margin-bottom: 40px;
 }
 
-
+.line_input {
+    width: 100%;
+    display: flex;
+    justify-content:  space-between;
+}
 
 
 textarea {
     padding: 1%;
-    height: 200px;
+    height: 40px;
     width: 100%;
     margin: 0 auto;
     resize: none;
@@ -69,28 +78,33 @@ button {
 }
 
 .edit .title {
-    margin-left: 5%;
+    width: 60%;
+
+    margin: 0 auto;
+    margin-top: 50px;
+
 }
 
-@media (max-width: 1800px){
-    #interface_block_two {
-        width: 40%;
-        flex-direction: column;
-    }
-    form {
-        margin-bottom: 30px;
-    }
+@media (max-width: 1750px){
+   #interface_block_two {
+       display: unset;  
+       width: 60%;
 
-    .edit .title {
-        margin-left:30%;
-    }
+   }
 
-    #bottom_main {
-        width: 40%;
-        height: 450px;
-    }
+   .line_input {
+       display: unset;
+   }
+   form.desc {
+       width: 100%;
+   }
+
+   form {
+       width: 100%;
+       height: fit-content;
+   }
+
 }
-
 /* form { 
     padding: 30px;
 }
