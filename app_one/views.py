@@ -190,6 +190,7 @@ def show(request, user_id):
 #=============================================##
 def edit_user(request,user_id):
     context = {
+        'current_user' : User.objects.get(id=request.session['user_id']),
         'user': User.objects.get(id=user_id)
     }
     return render(request,'edit_user.html',context)

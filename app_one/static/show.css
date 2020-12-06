@@ -1,9 +1,7 @@
 
-p {
-    display:inline-block;
-}
-p.info {
 
+p.info {
+    
     width: 20%;
 }
 
@@ -15,7 +13,8 @@ p.info {
 }
 
 form {
-    padding: 0px;
+    margin-top: 15px;
+    padding: 20px;
     border: none;
 }
 
@@ -25,20 +24,16 @@ form {
     
 }
 
-textarea.msg_comment {
+textarea {
+  
+    resize: none;
     width: 100%;
     padding: 0px;
     margin: 0px;
-    border: 1px solid black;
+    border:none;
     padding: 5px;
 }
 
-form.msg_comment {
-    font-size: 12px;
-    width:100%;
-    padding-left: 30px;
-    
-}
 
 p.info_h1 {
     border: 1px solid black;
@@ -51,6 +46,62 @@ p.msg {
 }
 
 p.comment {
+    padding: 10px;
+    background-color: #E5E5E5;
     font-size: 12px;
     height: 50px;
+}
+
+.left {
+    width: 40%;
+}
+
+.info {
+    margin-bottom: 50px;
+}
+
+
+
+.right {
+    
+    display: flex;
+    flex-direction:column;
+    text-align: left;
+}
+
+.right .post {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+#interface_block_two {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment_btn {
+    position: relative;
+    top: -50px;
+    right: -85%;
+}
+
+.right .comment a {
+    margin-bottom: 0px;
+}
+form.msg_comment {
+    box-shadow: none;
+    padding: 0px 0px;
+    height: 50px;
+    width: 100%;
+    
+
+}
+
+
+.msg_comment textarea {
+    height: 50px;
+    border-radius: 10px;
+    width: 100%;
 }
