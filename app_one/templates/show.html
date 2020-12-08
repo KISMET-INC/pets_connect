@@ -13,7 +13,7 @@
 <body>
 
     <div id="CANVAS_long">
-        <div id="TOP_long">
+        <div class = 'sticky' id="TOP_long">
             <nav>
                 <h2>Pets Connect</h2>
                 <a href="/dashboard/admin">Dashboard</a>
@@ -36,7 +36,7 @@
                 <form  class = "message" action = '\process_add_message' method ='post'>
                     {% csrf_token %}                
                     <div>
-                        <textarea name = 'text' placeholder="Post a Message..."></textarea>
+                        <textarea name = 'text' placeholder="Image URL to post..."></textarea>
                         <input type="hidden" name = 'user_id' value= '{{user.id}}''>
                         <div class="form_row_button"><button class ='form_post_button' type ='submit'> POST </button></div>
                     </div>
@@ -46,11 +46,12 @@
 
             
             <div class = 'right'>
-                <h2> Message Board</h2>
+            
             {% for message in user_messages %}
             <div class= 'post'>
                 <a href='/users/show/{{message.user_from.id}}'>{{message.user_from.first_name}}</a> {{message.created_at}}
-                <p class ='info_h1 msg'> {{message.text}}</p>
+                <!-- <p class ='info_h1 msg'> {{message.text}}</p> -->
+                <img class = "cropped" src = "{{message.text}}">
              
                 {% for comment in message.comments.all %}
                     <div class= 'comment'>

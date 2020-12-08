@@ -49,7 +49,7 @@ p.comment {
     padding: 10px;
     background-color: #E5E5E5;
     font-size: 12px;
-    height: 50px;
+  
 }
 
 .left {
@@ -60,13 +60,27 @@ p.comment {
     margin-bottom: 50px;
 }
 
+.post {
+    width: 400px;
+    height:fit-content;
+}
 
 
 .right {
-    
+    width: 100%;
     display: flex;
-    flex-direction:column;
+    justify-content: space-around;
+    flex-wrap: wrap;
     text-align: left;
+}
+
+.post {
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .right .post {
@@ -82,9 +96,7 @@ p.comment {
 }
 
 .comment_btn {
-    position: relative;
-    top: -50px;
-    right: -85%;
+   
 }
 
 .right .comment a {
@@ -95,13 +107,41 @@ form.msg_comment {
     padding: 0px 0px;
     height: 50px;
     width: 100%;
+    display:flex;
     
 
 }
-
-
+.comment {
+    width: 100%;
+}
 .msg_comment textarea {
     height: 50px;
     border-radius: 10px;
     width: 100%;
+}
+
+#CANVAS_long div.sticky {
+position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+#interface_block_two div.left div.info {
+    position: -webkit-sticky;
+      position: sticky;
+      top: 110px;
+}
+
+#interface_block_two div.left form.message {
+    position: -webkit-sticky;
+      position: sticky;
+      top: 270px;
+}
+
+.cropped {
+    width: 250px; /* width of container */
+    height: 250px; /* height of container */
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+    border: 5px solid black;
 }

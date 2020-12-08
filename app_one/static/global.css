@@ -25,7 +25,8 @@ body {
 
 /* CANVAS NAV BAR */
 nav {
-
+    z-index: 2;
+    background-color: white;
     height: 75px;
     display:flex;
     justify-content: space-around;
@@ -41,6 +42,14 @@ nav a {
     font-weight: bold;
     font-size:13px;
     text-align: right;
+}
+
+.cropped2 {
+    width: 200px; /* width of container */
+    height: 200px; /* height of container */
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+    border: 5px solid black;
 }
 
 
