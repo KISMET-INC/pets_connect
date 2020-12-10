@@ -17,7 +17,7 @@
             <nav>
                 <h2>Pets Connect</h2>
                 <a href="#">Dashboard</a>
-                <a href = '/users/show/{{current_user.id}}'>Add Photo</a>
+                <a href = '/logout'>Add Photo</a>
                 <a href='/users/edit_self'> Profile</a>
                 <a href = '/logout'>Log Off</a>
             </nav>
@@ -29,9 +29,28 @@
             <h2>Welcome {{current_user.first_name}}!</h2>
             <h3>(Normal Account) </h3>
             <table>
-                {% for picture in pictures %}
                 <tr>
-                    <img class = "cropped" src = "{{picture.text}}">
+                    <th class= "id">id</th>
+                    <th class = 'name'>name</th>
+                    <th class = 'email'>email</th>
+                    <th class= "created_at">created_at</th>
+                    <th class = 'level'>level</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <!-- EDIT 1 TO CHOSEN USER ID -->
+                    <td>{{user.id}}</td>
+                    <td><a href='/users/show/{{user.id}}'>{{user.first_name}} {{user.last_name}}</a></td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.created_at}}</td>
+                    <!-- EDIT 1 TO CHOSEN USER ID -->
+                    <!-- ADD REMOVE MESSAGE BOX -->
+
+                    {% if user.user_level == 9 %}
+                    <td>admin</td>
+                    {% else %}
+                    <td>normal</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>

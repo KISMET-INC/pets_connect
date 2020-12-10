@@ -488,3 +488,10 @@ h2.title_h2 {
 h2 {
     font-family: 'Montserrat Alternates', sans-serif;
 }
+
+.cropped {
+    width: 250px; /* width of container */
+    height: 250px; /* height of container */
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+}

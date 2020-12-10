@@ -180,7 +180,7 @@ def new(request):
 def show(request, user_id):
     context = {
         'user': User.objects.get(id=user_id),
-        'user_messages': Message.objects.filter(user_to_id = user_id).order_by("-created_at"),
+        'user_pictures': Picture.objects.filter(user_from_id = user_id).order_by("-created_at"),
     }
     return render(request,'show.html',context)
 
@@ -205,7 +205,8 @@ def dashboard(request):
     else:
         context = {
             'current_user': User.objects.get(id=request.session['user_id']),
-            'users' : User.objects.all()
+            'users' : User.objects.all(),
+            'pictures' : Picture.objects.all()
         }
 
         if request.session['user_level'] == 0:
@@ -287,8 +288,8 @@ def process_add_message(request):
 
     current_user = User.objects.get(id=request.session['user_id'])
     user_to_message = User.objects.get(id=post['user_id'])
-    this_message = Message.objects.create(text = post['text'], user_to = user_to_message, user_from = current_user )
-    user_messages = Message.objects.filter(user_to_id = 1)
+    this_message = Picture.objects.create(text = post['text'], user_from = current_user )
+    user_messages = Picture.objects.filter(user_from_id = current_user.id)
 
     print(user_messages)
     return redirect (f'/users/show/{user_to_message.id}')

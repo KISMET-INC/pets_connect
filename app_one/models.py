@@ -169,17 +169,16 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
-    ## USER.SENT MESSAGES (bucket)
-    ## USER.RECIEVED MESSAGES (bucket)
+    ## USER.IMAGES (bucket)
 
-class Message(models.Model):
+
+class Picture(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     text = models.CharField(max_length=255)
-    user_to = models.ForeignKey(User, related_name = "recieved_messages",on_delete = models.CASCADE)
-    user_from = models.ForeignKey(User, related_name= "sent_messages", on_delete = models.CASCADE)
-    ## MESSAGE.COMMENTS (bucket)
+    user_from = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
+    ## PICTURE.COMMENTS (bucket)
     
 
 
@@ -188,4 +187,4 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     text = models.CharField(max_length=255)
-    message = models.ForeignKey(Message, related_name="comments",on_delete = models.CASCADE)
+    picture = models.ForeignKey(Picture, related_name="comments",on_delete = models.CASCADE)
