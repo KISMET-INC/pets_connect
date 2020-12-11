@@ -10,8 +10,185 @@ h2.title_h2 {
 
 #interface_block_one{
     height: fit-content;
+
     width: 80%;
     margin: 0 auto;
     margin-top: 30px;
     justify-content: center;
+}
+
+.modal-body {
+    display:flex;
+}
+
+.modal-header {
+    border:0px;
+}
+.comments {
+    text-align: left;
+    display: unset;
+   
+}
+
+
+.comments p {
+   
+    font-size: 16px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.comments  p {
+    font-size: 16px;
+}
+
+.likes button{
+    background-color: transparent;
+    width: 250px;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    border:none;
+    box-shadow: none;
+    text-align: center;
+}
+
+i {
+    margin-top: 10px;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+input {
+    padding-left: 10px;
+    height:50px;
+    resize:none;
+    border:none;
+    width: 80%;
+
+}
+
+button:focus {
+    outline: 0px;
+    border: 0px;
+}
+
+form {
+    border: 2px solid grey;
+    width: 90%;
+    box-shadow: none;
+}
+
+
+
+.image_board {
+    display:flex;
+}
+
+.image_board .likes{
+    background-color: #E5E5E5;
+    margin-right: 10px;
+}
+
+.likes p {
+    text-align: center;
+    width: 100%
+}
+
+img {
+    margin-right: 10px;
+
+}
+
+span {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.post_comment button {
+    margin:0px;
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    color: grey;
+    text-align: right;
+}
+.post_comment {
+    background-color: white;
+    padding: 3px;
+    display: flex;
+    position: absolute;
+    width: 275px;
+    bottom: 30px;
+}
+.left {
+    text-align: center;
+    padding: 0px;
+    width: 350px;
+    margin-right: 20px;
+    border-right: 3px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left img {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.left p {
+    padding: 10px;
+}
+.right {
+    padding-top: 0px;
+    width: 300px;
+    display: unset;
+    height: 400px;
+    margin-bottom: 10px;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.right::-webkit-scrollbar {
+    display: none;
+  }
+  
+.right p.name  {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    text-align:center;
+    width: 250px;
+    height: 60px;
+    background-color: white;
+    position:absolute;
+}
+.modal {
+    margin-top: 200px;
+    border-radius: 50px;
+
+}
+
+
+.modal-content {
+   width: fit-content;
+}
+
+
+.modal-body {
+    padding: 0px;
+    height: 500px;
+   
+    
+
+}
+
+.cropped2 {
+    width: 350px; /* width of container */
+    height: 350px; /* height of container */
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+    border: 0px;
 }

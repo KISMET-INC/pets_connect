@@ -24,7 +24,7 @@ def read_all(request):
 def process_remove_user(request, user_id):
     this_user = User.objects.get(id = user_id)
     this_user.delete()
-    return redirect('/dashboard')
+    return redirect('/dashboard/0')
 
 
 #=============================================##
@@ -59,9 +59,9 @@ def process_register(request):
             request.session['user_id'] = new_user.id
             request.session['user_name'] = new_user.first_name
             request.session['user_level'] = new_user.user_level
-            return redirect('/dashboard')
+            return redirect('/dashboard/0')
 
-        return redirect('/dashboard')
+        return redirect('/dashboard/0')
 
 
 
@@ -99,7 +99,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/dashboard/admin')
-            return redirect('/dashboard')
+            return redirect('/dashboard/0')
 
 
 #=============================================##
@@ -177,12 +177,12 @@ def new(request):
 # show()
 #
 #=============================================##
-def show(request, user_id):
+def add_image(request, user_id):
     context = {
         'user': User.objects.get(id=user_id),
-        'user_pictures': Picture.objects.filter(user_from_id = user_id).order_by("-created_at"),
+        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
     }
-    return render(request,'show.html',context)
+    return render(request,'add_image.html',context)
 
 #=============================================##
 # edit_user()
@@ -199,14 +199,15 @@ def edit_user(request,user_id):
 # dashboard()
 #
 #=============================================##
-def dashboard(request):
+def dashboard(request,image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
         context = {
             'current_user': User.objects.get(id=request.session['user_id']),
             'users' : User.objects.all(),
-            'pictures' : Picture.objects.all()
+            'images' : Image.objects.all(),
+            'current_image': image_id
         }
 
         if request.session['user_level'] == 0:
@@ -269,7 +270,7 @@ def process_edit_user(request):
         user.last_name = request.POST['last']
         user.save()
 
-        return redirect(f'/dashboard')
+        return redirect(f'/dashboard/0')
 
 #=============================================##
 # process_edit_self()
@@ -279,20 +280,30 @@ def process_edit_self(request):
     return render(request,'process_edit_self.html')
 
 #=============================================##
-# process_add_message()
+# process_add_image()
 # return redirect('/')
 #=============================================##
-def process_add_message(request):
+def process_add_image(request):
     post = request.POST
     print(request.POST)
 
     current_user = User.objects.get(id=request.session['user_id'])
-    user_to_message = User.objects.get(id=post['user_id'])
-    this_message = Picture.objects.create(text = post['text'], user_from = current_user )
-    user_messages = Picture.objects.filter(user_from_id = current_user.id)
+    this_image = Image.objects.create(url = post['url'], user = current_user )
+    user_images = Image.objects.filter(user = current_user.id)
 
-    print(user_messages)
-    return redirect (f'/users/show/{user_to_message.id}')
+    return redirect (f'/users/add_image/{current_user.id}')
+
+
+#=============================================##
+# process_remove_image()
+# return redirect('/')
+#=============================================##
+def process_remove_image(request,image_id):
+    post = request.POST
+    user_id = request.session['user_id']
+    this_image = Image.objects.get(id=image_id)
+    this_image.delete()
+    return redirect (f'/users/add_image/{user_id}')
 
 #=============================================##
 # process_add_comment()
@@ -302,8 +313,7 @@ def process_add_comment(request):
     post = request.POST
     print(request.POST)
 
-    this_message = Message.objects.get(id = post['message_id'])
-    new_comment = Comment.objects.create(text = post['text'], message = this_message)
+    this_image = Image.objects.get(id = post['image_id'])
+    new_comment = Comment.objects.create(text = post['text'], image = this_image)
 
-
-    return redirect (f'/users/show/{this_message.user_to.id}')
+    return redirect (f'/dashboard/{this_image.id}')

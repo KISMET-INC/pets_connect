@@ -172,13 +172,13 @@ class User(models.Model):
     ## USER.IMAGES (bucket)
 
 
-class Picture(models.Model):
+class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    text = models.CharField(max_length=255)
-    user_from = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
-    ## PICTURE.COMMENTS (bucket)
+    url = models.CharField(max_length=255)
+    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
+    ## IMAGE.COMMENTS (bucket)
     
 
 
@@ -187,4 +187,4 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     text = models.CharField(max_length=255)
-    picture = models.ForeignKey(Picture, related_name="comments",on_delete = models.CASCADE)
+    image = models.ForeignKey(Image, related_name="comments",on_delete = models.CASCADE)

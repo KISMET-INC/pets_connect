@@ -17,17 +17,18 @@ urlpatterns = [
     path('register', views.register),
     path('dashboard/admin', views.admin),
     path('users/new', views.new),
-    path('users/show/<int:user_id>', views.show),
+    path('users/add_image/<int:user_id>', views.add_image),
     path('users/edit_user/<int:user_id>', views.edit_user),
     path('users/remove_user/<int:user_id>', views.process_remove_user),
-    path('dashboard', views.dashboard),
+    path('dashboard/<int:image_id>', views.dashboard),
     path('users/edit_self', views.edit_self),
     
 
     path('process_edit_password', views.process_edit_password),
     path('process_edit_user', views.process_edit_user),
     path('process_edit_self', views.process_edit_self),
-    path('process_add_message', views.process_add_message),
+    path('process_add_image', views.process_add_image),
+    path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_add_comment', views.process_add_comment),
     
 
