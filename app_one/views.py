@@ -288,7 +288,7 @@ def process_add_image(request):
     print(request.POST)
 
     current_user = User.objects.get(id=request.session['user_id'])
-    this_image = Image.objects.create(url = post['url'], user = current_user )
+    this_image = Image.objects.create(url = post['url'], user = current_user, name = post['name'], desc = post['desc'] )
     user_images = Image.objects.filter(user = current_user.id)
 
     return redirect (f'/users/add_image/{current_user.id}')
@@ -313,7 +313,24 @@ def process_add_comment(request):
     post = request.POST
     print(request.POST)
 
+    this_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = post['image_id'])
-    new_comment = Comment.objects.create(text = post['text'], image = this_image)
+    new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
 
     return redirect (f'/dashboard/{this_image.id}')
+
+
+#=============================================##
+# process_like()
+# return redirect('/')
+#=============================================##
+def process_like(request,image_id):
+    post = request.POST
+    print(request.POST)
+    
+    this_user = User.objects.get(id= request.session['user_id'])
+    this_image = Image.objects.get(id =image_id)
+    this_image.loves.add(this_user) 
+    this_image.save();
+
+    return redirect (f'/dashboard/0')

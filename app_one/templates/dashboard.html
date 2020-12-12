@@ -18,23 +18,28 @@
     <div id="CANVAS_long">
         <div id="TOP_long">
             <nav>
-                <h2>Pets Connect</h2>
-                <a href="/dashboard/0">Dashboard</a>
-                <a href = '/users/add_image/{{current_user.id}}'>Add Photo</a>
-                <a href='/users/edit_self'> Profile</a>
-                <a href = '/logout'>Log Off</a>
+                <div>
+                    <h2>Pets Connect</h2>
+                    <div>
+                        <a href = '/users/add_image/{{current_user.id}}'><i style='font-size:25px' class="fas fa-camera"></i></a>
+                        <a href = '/logout'><i style='font-size:25px' class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
             </nav>
         </div>
         
 
 
         <div id="interface_block_one">
-            
+
             <div class = 'image_board'>
             {% for image in images %}
                 <div class= "likes">
-                    <button class = 'image" type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
-                    <p><span>Benny </span><i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} <i style='font-size:20px' class="fas fa-heart"></i> {{image.id}} <i style='font-size:20px' class="fas fa-comment-alt"></i> {{image.comments.count}} </p>
+                    <button class = 'image' type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
+                    <p><span>{{image.name}} </span>
+                    <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                    <i style='font-size:20px' class="fas fa-heart"></i> {{image.id}} 
+                    <button class = 'empty' type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}} </p>
                 </div>
                     <!-- Modal -->
                 <div id="{{image.id}}" class="modal fade" role="dialog">
@@ -46,14 +51,15 @@
                                 <div class ='left'>
                                     <img class="cropped2" src = {{image.url}}>
                                     <p><i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} <i style='font-size:20px' class="fas fa-heart"></i> {{image.id}}<i style='font-size:20px' class="fas fa-comment-alt"></i>{{image.comments.count}} </p>
-                                    <p id='name'>Posted by:{{image.user.first_name}}</p>
+                                    <p>Posted by:{{image.user.first_name}}</p>
+                                    <p>{{image.desc}}</p>
                                 </div>
 
                                 <div class= 'right'>
-                                   <p class = 'name'>Jarvis</p>
+                                <p class = 'name'>{{image.name}}</p>
                                 <div class = 'comments'>
-                                    {% for comment in image.comments.all reversed %}
-                                        <p>Karen: {{comment.text}}</p>
+                                    {% for comment in image.comments.all %}
+                                        <p><b>{{comment.user.first_name}}:</b> {{comment.text}}</p>
                                     {% endfor %}
                                 </div>
 

@@ -11,7 +11,7 @@ h2.title_h2 {
 #interface_block_one{
     height: fit-content;
 
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
     margin-top: 30px;
     justify-content: center;
@@ -24,23 +24,22 @@ h2.title_h2 {
 .modal-header {
     border:0px;
 }
+
 .comments {
+    padding-top: 60px;
     text-align: left;
-    display: unset;
-   
 }
 
 
 .comments p {
-   
-    font-size: 16px;
+    
+    color: black;
+    font-size: 12px;
     padding: 5px;
     margin-bottom: 20px;
 }
 
-.comments  p {
-    font-size: 16px;
-}
+
 
 .likes button{
     background-color: transparent;
@@ -65,6 +64,7 @@ input {
     resize:none;
     border:none;
     width: 80%;
+   
 
 }
 
@@ -83,11 +83,14 @@ form {
 
 .image_board {
     display:flex;
+    width:100%;
+    flex-wrap: wrap;
 }
 
 .image_board .likes{
     background-color: #E5E5E5;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .likes p {
@@ -137,8 +140,10 @@ span {
     margin-bottom: 10px;
 }
 .left p {
-    padding: 10px;
+    padding: 5px;
 }
+
+
 .right {
     padding-top: 0px;
     width: 300px;
@@ -166,9 +171,7 @@ span {
     position:absolute;
 }
 .modal {
-    margin-top: 200px;
-    border-radius: 50px;
-
+    
 }
 
 
@@ -191,4 +194,10 @@ span {
     object-fit: cover;
     object-position: 20% 10%; /* try 20px 10px */ 
     border: 0px;
+}
+
+.likes p button.empty {
+
+    width: 30px;
+    height: 35px;
 }

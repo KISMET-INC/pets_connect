@@ -170,6 +170,7 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
     ## USER.IMAGES (bucket)
+    ## USER.COMMENTS (bucket)
 
 
 class Image(models.Model):
@@ -177,7 +178,10 @@ class Image(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     url = models.CharField(max_length=255)
+    name = models.CharField(max_length=25)
     user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
+    loves = models.ManyToManyField(User, related_name="loves")
+    desc = models.CharField(max_length=255)
     ## IMAGE.COMMENTS (bucket)
     
 
@@ -188,3 +192,5 @@ class Comment(models.Model):
 
     text = models.CharField(max_length=255)
     image = models.ForeignKey(Image, related_name="comments",on_delete = models.CASCADE)
+    user = models.ForeignKey(User, related_name="comments",on_delete = models.CASCADE)
+    

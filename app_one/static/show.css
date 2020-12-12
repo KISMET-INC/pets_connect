@@ -13,25 +13,26 @@ p.info {
 }
 
 form {
-    margin-top: 15px;
+    position: sticky;
+    top:160px;
     padding: 20px;
     border: none;
+    box-shadow: none;
+    width: 100%;
 }
 
-.info_block_2 {
-    border:none;
-    width: 100%;
+.detail {
+    background-color: #e5e5e5;
+    width: 97%;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     
 }
 
-textarea {
-  
-    resize: none;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    border:none;
-    padding: 5px;
+.detail a  button {
+   text-align: center;
+   margin-top: 10px;
 }
 
 
@@ -50,58 +51,65 @@ p.comment {
     background-color: #E5E5E5;
     font-size: 12px;
   
+  
 }
 
 .left {
-    width: 40%;
+    width: 20%;
+   
+
 }
 
 .info {
     margin-bottom: 50px;
 }
 
-.post {
-    width: 400px;
-    height:fit-content;
-}
 
 
 .right {
-    width: 100%;
+    margin-left: 60px;
     display: flex;
-    justify-content: space-around;
+    justify-content: right;
+    align-items: right;
+    width: 90%;
     flex-wrap: wrap;
-    text-align: left;
+
 }
 
 .post {
+    height:fit-content;
     display:flex;
     flex-direction: column;
-    width: 300px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
     
 }
 
-.right .post {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 50px;
-    padding: 20px;
+.post p {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    
 }
+
 
 #interface_block_two {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
+    width:80%;
 }
 
-.comment_btn {
-   
-}
 
 .right .comment a {
     margin-bottom: 0px;
 }
+
+.right h2 {
+    width: 100%;
+    margin: 20px;
+}
+
 form.msg_comment {
     box-shadow: none;
     padding: 0px 0px;
@@ -133,8 +141,35 @@ position: -webkit-sticky;
 }
 
 #interface_block_two div.left form.message {
-    position: -webkit-sticky;
+      position: -webkit-sticky;
       position: sticky;
       top: 270px;
 }
 
+
+input {
+    margin-bottom: 10px;
+    border: 1px solid grey;
+    height: 30px;
+    width: 100%;
+    padding-left: 5px;
+}
+
+button {
+    color: grey;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+img {
+    margin-left: 10px;
+}
+
+#interface_block_two .sticky {
+    height: fit-content;
+    background-color: red;
+    position: -webkit-sticky;
+    position:sticky;
+    bottom:100px;
+}
