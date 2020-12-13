@@ -4,46 +4,49 @@
     border: none;
     padding: 0px;
     margin-top: 50px;
-    width: 73%;
+    width: 70%;
     display: block;
    
 }
 
+
+h2 {
+    font-size: 20px;
+}
 #interface_block_one ul {
     margin-left: 20px;
     color: red;
 
 }
 form {   
-    padding: 1%;
+    margin-top: 20px;
     border:none;
     box-shadow: none;
     width: 100%;
     height: fit-content;
- 
-    
 }
 
-.form_row .form_input {
-    border-radius: 5px;
+form input {
+    margin-bottom: 20px;
     width: 30%;
-    height: 20px;
-    border: 1px solid #C3C3C3;
-    padding:1%;
+    height: 25px;
+}
+
+form input:nth-child(5){
+    margin-bottom: 30px;
+}
+
+form div a {
+    margin-top: 20px;
 }
 
 
-label.form_label {
+label {
     display:block;
     font-weight: bold;
     width:100%;
 }
 
-.form_row_button {
-    width: 30%;
-    /* border: 1px solid blue; */
-    margin-bottom: 20px;
-}
 
 
 #interface_block_one div h2 {
@@ -56,77 +59,37 @@ li {
     margin-top: 5px;
 }
 
-
-
-/*************************/
-/*  BREAK 1024           
-/*************************/
-
-@media (max-width: 1024px){
-    #interface_block_one {
-        width: 75%;
-
-    }
-
-    
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-
-/*************************/
-/*  BREAK 541          
-/*************************/
-@media (max-width: 541px){
-    #interface_block_one {
-        padding-top: 300px;
-        display: unset;
-        
-    }
-    #left_main {
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 40px;
-        padding: 0px;
-    }
-    #right_main {
-        width:  80%;
-    }
-    #right_main li {  
-        margin-top: 15px;
-    }
-
-
-    
+form div button {
+    margin: 0px;
+    display: block;
+    width: fit-content;
+    box-shadow: none;
 }
+
+form div a {
+    width: 100%;
+}
+
+/******************************/
+/*  MEDIA BREAKPOINT 768px         
+/******************************/
+form input {
+    width: 50%;
+}
+
 
 /*************************/
 /*  BREAK 426          
 /*************************/
 @media (max-width: 426px){
 
-
-    #interface_block_one {
-        padding-top: 300px;
-        display: unset;
-        
-    }
-    #left_main {
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 40px;
-        padding: 0px;
-    }
-
-    #left_main a {
-        font-size: 13px;
-    }
-    #right_main {
-        width: 100%;
-    }
-    #right_main li {  
-        margin-top: 15px;
-    }
-
-
+   
     
 }
 
@@ -136,12 +99,10 @@ li {
 
 @media (max-width: 321px){
 
-    form {
-        width: 90%;
-        margin: 0 auto;
-        padding: 10px;
-        height: fit-content;
+    form input {
+        width: 80%;
     }
+
 
  
 
