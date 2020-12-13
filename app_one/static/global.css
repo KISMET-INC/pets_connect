@@ -40,7 +40,8 @@ body {
 
 /* CANVAS NAV BAR */
 nav {
-    z-index: 2;
+    position: relative;
+    z-index: 10;
     background-color: white;
     height: 75px;
     display:flex;
@@ -77,6 +78,7 @@ nav div div{
 
 nav h2 {
     font-size: 20px;
+    margin: 0px;
 }
 
 /* FORMS GENRAL */
