@@ -10,11 +10,94 @@ h2.title_h2 {
 
 #interface_block_one{
     height: fit-content;
-
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
     margin-top: 30px;
     justify-content: center;
+}
+
+
+.dashboard {
+    display:flex;
+    width:70%;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: left;
+}
+
+.image {
+    margin-left:2px;
+    margin-bottom: 2px; 
+}
+
+.cropped {
+    width: 220px;
+    height: 220px;
+}
+
+.stats{
+    background-color: #E5E5E5;
+    margin-right: 10px;
+    width: 100%;
+    padding: 10px 0px;
+}
+.stats p:nth-child(1){
+    font-family: 'Montserrat Alternates', sans-serif;   
+    font-size: 13px;
+    color: #BFBFBF;
+}
+
+.stats p {
+    text-align: center;
+    width: 100%;
+    margin-bottom:-10px;
+    height: fit-content;
+    
+}
+
+.stats p button:nth-child(3){
+    color: #337AB7;
+}
+
+.stats p:nth-child(2){
+    margin-bottom: 5px;
+    color:#BFBFBF
+}
+
+.stats i.fas::before {
+    font-size: 16px;
+    color:#BFBFBF;
+}
+
+.stats button{
+    background-color: transparent;
+    width:fit-content;
+    height: fit-content;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    border:none;
+    box-shadow: none;
+    text-align: center;
+}
+
+
+
+span {
+    font-family: monospace;
+    max-width:5px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.dashboard .image button {
+    padding: 0px;
+    margin: 0px;
+    box-shadow: none;
+    border: none;
+    height:fit-content;
+    width: fit-content;
 }
 
 .modal-body {
@@ -41,16 +124,7 @@ h2.title_h2 {
 
 
 
-.likes button{
-    background-color: transparent;
-    width: 250px;
-    display: inline;
-    margin: 0px;
-    padding: 0px;
-    border:none;
-    box-shadow: none;
-    text-align: center;
-}
+
 
 i {
     margin-top: 10px;
@@ -81,34 +155,6 @@ form {
 
 
 
-.image_board {
-    display:flex;
-    width:100%;
-    flex-wrap: wrap;
-}
-
-.image_board .likes{
-    background-color: #E5E5E5;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.likes p {
-    text-align: center;
-    width: 100%
-}
-
-img {
-    margin-right: 10px;
-
-}
-
-span {
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 5px;
-}
 
 .post_comment button {
     margin:0px;
@@ -188,16 +234,92 @@ span {
 
 }
 
-.cropped2 {
-    width: 350px; /* width of container */
-    height: 350px; /* height of container */
-    object-fit: cover;
-    object-position: 20% 10%; /* try 20px 10px */ 
-    border: 0px;
+/*******************************/
+/*  MEDIA BREAKPOINT 1441px         
+/*******************************/
+@media (max-width: 1441px){
+    .cropped {
+        width: 198px;
+        height: 198px;
+    }
+
 }
 
-.likes p button.empty {
 
-    width: 30px;
-    height: 35px;
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 1025px){
+
+    .dashboard {
+        justify-content: left;
+    }
+
+    .image {
+        margin-right: 2px;
+        margin-bottom: 2px;
+    }
+
+    .image img.cropped{
+        width: 175px;
+        height: 175px;
+    }
+
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 769px         
+/*******************************/
+@media (max-width: 769px){
+
+    .image {
+        margin-bottom: 3px;  
+    }
+
+    .image img.cropped {
+        width: 130px;
+        height: 130px;
+    }
+
+    .stats p:nth-child(1){
+        font-size: 9px;
+    }
+
+    .stats i.fas::before {
+        font-size: 11px;
+    }
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 426px  
+/*******************************/
+@media (max-width: 426px){
+
+    .dashboard {
+        width: 90%;
+    }
+    .image img.cropped {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 376px  
+/*******************************/
+@media (max-width: 376px){
+
+    .image img.cropped {
+        width: 160px;
+        height: 160px;
+    }
+
+    
+    .stats p:nth-child(1){
+        font-size: 11px;
+    }
+
+    .stats i.fas::before {
+        font-size: 13px;
+    }
 }

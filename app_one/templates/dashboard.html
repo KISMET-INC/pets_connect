@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
+    <title>Pets Connect</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" />
@@ -32,16 +32,22 @@
 
         <div id="interface_block_one">
 
-            <div class = 'image_board'>
-            {% for image in images %}
-                <div class= "likes">
-                    <button class = 'image' type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
-                    <p><span>{{image.name}} </span>
-                    <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
-                    <i style='font-size:20px' class="fas fa-heart"></i> {{image.id}} 
-                    <button class = 'empty' type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}} </p>
+            <div class = 'dashboard'>
+                {% for image in images %}
+                <div class = image>
+                    <button type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
+                    <div class= "stats">
+                        <p>{{image.name}}</p>
+                        <p>
+                        <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                        <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                        <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}} </p>
+                    </div>
                 </div>
-                    <!-- Modal -->
+                
+                
+                
+                <!-- MODAL -->
                 <div id="{{image.id}}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->

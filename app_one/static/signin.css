@@ -1,5 +1,4 @@
 
-
 #interface_block_one {
     border: none;
     padding: 0px;
@@ -9,15 +8,10 @@
     margin-bottom: 50px;   
 }
 
-
 h2 {
     font-size: 20px;
 }
-#interface_block_one ul {
-    margin-left: 20px;
-    color: red;
 
-}
 form {   
     margin-top: 20px;
     border:none;
@@ -26,17 +20,6 @@ form {
     height: fit-content;
 }
 
-form input {
-    margin-bottom: 10px;
-    width: 30%;
-    height: 25px;
-}
-
-form div a {
-    margin-top: 20px;
-}
-
-
 label {
     display:block;
     font-weight: bold;
@@ -44,15 +27,10 @@ label {
 }
 
 
-
-#interface_block_one div h2 {
-    margin-left: 0px;
-    font-size: 20px;
-}
-
-li {
-    margin-left: 0px;   
-    margin-top: 5px;
+form input {
+    margin-bottom: 10px;
+    width: 30%;
+    height: 25px;
 }
 
 form div {
@@ -70,7 +48,20 @@ form div button {
 }
 
 form div a {
+    margin-top: 20px;
     width: 100%;
+}
+
+
+ul {
+    margin-left: 20px;
+    color: red;
+}
+
+
+li {
+    margin-left: 0px;   
+    margin-top: 5px;
 }
 
 /*******************************/
