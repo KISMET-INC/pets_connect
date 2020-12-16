@@ -36,11 +36,14 @@ body {
     width: 100%;
 }
 
-
+#TOP_long {
+    position: sticky;
+    top: 0px;
+}
 
 /* CANVAS NAV BAR */
 nav {
-    position: relative;
+   
     z-index: 10;
     background-color: white;
     height: 75px;

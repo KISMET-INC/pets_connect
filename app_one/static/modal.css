@@ -1,0 +1,135 @@
+.modal {
+    width: 100%;
+    
+}
+
+.modal-dialog {
+    width:fit-content;
+}
+
+.modal-content {
+    width:fit-content;
+    margin: 0 auto; 
+}
+
+.modal-body {
+    padding:0px;
+    display:flex;
+    width:fit-content;
+    height:fit-content;
+}
+
+
+.cropped2 {
+    border: none;
+    border-radius: 5px 0px 0px 0px;
+}
+
+
+.modal .left {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #E5E5E5;
+    padding: 0px;
+    width: fit-content;
+    border-right: 1px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal .left img {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+
+.modal .right {
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 250px;
+    display: unset;
+    margin: 0 auto; 
+    margin-bottom: 10px;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.modal .right::-webkit-scrollbar {
+    display: none;
+}
+
+
+.modal .right p.name  {
+    font-family: 'Montserrat Alternates', sans-serif;
+    color:#337AB7;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    text-align:center;
+    height: 45px;
+    background-color: white;
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 550px  
+/*******************************/
+@media (max-width: 550px){
+
+    .dashboard {
+        width: 90%;
+    }
+    .image img.cropped {
+        width: 120px;
+        height: 120px;
+    }
+    
+   .modal-dialog{
+       margin: 0 auto;  
+       margin-top:50px;
+   }
+    .modal-body{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        height: fit-content;
+    }
+
+    .cropped2 {
+        width:150px;
+        height:150px;
+    }
+
+    .modal .left {
+        width: 100%;
+        margin: 0 auto; 
+        border: none;
+        position:sticky;
+    }
+
+    .modal .left p:nth-child(3), p:nth-child(4){
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .modal .right{
+        height:fit-content;
+        padding-left:20px;
+        padding-right: 20px;
+    }
+
+    .modal .right p.name {
+        margin: 0px;
+        padding: 0px;
+        background-color:white;
+        top:100px;
+        font-size: 14px;
+    }
+    }
+
+    .modal .comments {
+        max-height: 200px;
+    }
+

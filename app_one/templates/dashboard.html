@@ -39,9 +39,10 @@
                     <div class= "stats">
                         <p>{{image.name}}</p>
                         <p>
-                        <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
-                        <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
-                        <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}} </p>
+                            <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                            <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                        </p>
                     </div>
                 </div>
                 
@@ -56,7 +57,11 @@
 
                                 <div class ='left'>
                                     <img class="cropped2" src = {{image.url}}>
-                                    <p><i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} <i style='font-size:20px' class="fas fa-heart"></i> {{image.id}}<i style='font-size:20px' class="fas fa-comment-alt"></i>{{image.comments.count}} </p>
+                                    <p>
+                                        <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                                        <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                                        <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                                    </p>
                                     <p>Posted by:{{image.user.first_name}}</p>
                                     <p>{{image.desc}}</p>
                                 </div>
@@ -64,10 +69,14 @@
                                 <div class= 'right'>
                                 <p class = 'name'>{{image.name}}</p>
                                 <div class = 'comments'>
-                                    {% for comment in image.comments.all %}
+                                    {% for comment in image.comments.all reversed %}
                                         <p><b>{{comment.user.first_name}}:</b> {{comment.text}}</p>
                                     {% endfor %}
                                 </div>
+
+                                {% if image.comments.count > 7 %}
+                                    <p class= "scroll">Scroll For More Comments</p>
+                                {% endif %}
 
                                 <form class = "post_comment" action = '\process_add_comment' method ='post'>
                                     {% csrf_token %}

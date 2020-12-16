@@ -1,0 +1,26 @@
+.stats {
+    background-color: #E5E5E5;
+    padding: 10px;
+}
+
+.stats p {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+p i{
+    color:grey;
+}
+
+.stats p button {
+    background-color: transparent;
+    display:inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+button:focus {
+    outline: 0px;
+    border: 0px;
+}
