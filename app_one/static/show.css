@@ -13,7 +13,6 @@
     
 }
 
-
 form {
     width:100%;
     display:flex;
@@ -31,7 +30,6 @@ input {
     height: 25px;
 }
 
-
 button {
     box-shadow: none;
     border: none;
@@ -39,8 +37,6 @@ button {
     background-color:white; 
     
 }
-
-
 
 form button {
     margin: 0px;
@@ -50,19 +46,18 @@ form button {
     margin: 0 auto; 
 }
 
-
 #interface_block_two .iright {
     width: 70%;
     padding-left: 13%;
     text-align: center;
 }
+
 .iright .dashboard {
     display:flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: right;
 }
-
 
 .iright .dimage {
     margin-left:2px;
@@ -74,11 +69,11 @@ form button {
     height: fit-content;
 }
 
-
 .cropped {
     border-radius: 5px 5px 0px 0px;
     width:100%;
 }
+
 .dimage a button {
     background-color: transparent;
     width:fit-content;
@@ -91,40 +86,21 @@ form button {
     text-align: center;
 }
 
-
-
-/*******************************/
-/*  MEDIA BREAKPOINT 1201px        
-/*******************************/
-@media (max-width: 1999px){
- 
-
-}
-
-
-
-
-
-
 /*******************************/
 /*  MEDIA BREAKPOINT 1075px         
 /*******************************/
 @media (max-width: 1075px){
 
-
     #interface_block_two .iright{
         width: 500px;
     }
-
 
     #interface_block_two .ileft {
         width: 30%;
         
     }
 
-
 }
-
 
 /*******************************/
 /*  MEDIA BREAKPOINT 960px         
@@ -135,17 +111,15 @@ form button {
         flex-direction: column;
         align-items: right;
     }
-    
+
     #interface_block_two .iright{
         width: 70%;
     }
-
 
     #interface_block_two .ileft {
         width: 30%;
         
     }
-
 
 }
 
@@ -154,8 +128,6 @@ form button {
 /*  MEDIA BREAKPOINT 960px         
 /*******************************/
 @media (max-width: 960px){
-
- 
 
     #interface_block_two {
         width: 100%;
@@ -174,8 +146,8 @@ form button {
     }
 
     #interface_block_two .iright {
-       padding: 0px;
-       margin: 0px;
+        padding: 0px;
+        margin: 0px;
     }
 
     #TOP_long {
@@ -189,11 +161,11 @@ form button {
         width: 70%;
     }
 
-  .iright .dashboard {
+    .iright .dashboard {
         padding: 0px;
         flex-direction: unset;
     }
-   
+
 }
 
 
