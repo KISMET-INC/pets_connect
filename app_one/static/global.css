@@ -4,6 +4,16 @@
     margin: 0px;
     padding: 0px;
     font-size: 12px;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -16,16 +26,25 @@ button {
     color: white;
     display: block;
     box-shadow: 2px 2px black;
+
+    
 }
+
+
 
 body {
     width: 100%;
 }
 
+#TOP_long {
+    position: sticky;
+    top: 0px;
+}
 
 /* CANVAS NAV BAR */
 nav {
-    z-index: 2;
+   
+    z-index: 10;
     background-color: white;
     height: 75px;
     display:flex;
@@ -39,119 +58,32 @@ nav {
 
 
 nav a {
+    margin-left: 20px;
+    width: 100%;
     font-weight: bold;
     font-size:13px;
     text-align: right;
 }
 
-.cropped2 {
-    width: 200px; /* width of container */
-    height: 200px; /* height of container */
-    object-fit: cover;
-    object-position: 20% 10%; /* try 20px 10px */ 
-    border: 5px solid black;
+nav div {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    width:70%;
+
 }
 
-
-nav div{
-    width:50%;
-}
-
-nav h2 {
-    font-size: 19px;
-}
-
-
-@media (max-width: 869px){
-  
-    nav div {
-        width:40%;
-    }
-    nav h2 {
-        font-size: 22px;
-    }
-}
-
-
-@media (max-width: 534px){
-
-    nav {
-        padding: 0px 10%;
-    }
-    nav h2 {
-        font-size: 22px;
-    }
-  
-    nav div a {
-        display: block;
-    }
-
-    nav div a:first-child {
-       margin: 0px;
-    }
-    nav div {
-        width: 50%;
-        text-align: right;
-        padding-right: 0;
-    }
-}
-
-@media (max-width: 376px){
-    nav h2 {
-        font-size: 19px;
-    }
-  
-    nav a {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 320px){
-    nav {
-        padding: 2%;
-    }
-    nav h2 {
-        font-size: 18px;
-    }
-  
-    nav div {
-       width:fit-content;
-       text-align:right;
-    }
-}
-
-#TOP_long {
-    margin-bottom: 20px;
+nav div div{
+    width:200px;
+    align-items: center;
     
 }
-/* CANVAS MAIN CONTENT LONG */
-#interface_block_two {
-    margin: 0 auto;
-    width: 65%;
-    display:flex;
-    justify-content: center;
+
+
+nav h2 {
+    font-size: 20px;
+    margin: 0px;
 }
-
-#interface_block_one{
-    height: fit-content;
-    width: 75%;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-
-#left_main, #right_main {
-    background-color:green;
-    margin-top: 20px;
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 2px solid yellow;
-    width: 50%;
-    min-width: 300px;
-}
-
-
 
 /* FORMS GENRAL */
 
@@ -161,6 +93,10 @@ form {
 
 }
 
+
+#TOP_long{
+    margin-bottom: 30px;
+}
 h2.form_h2 {
     font-size: 20px;
 }
@@ -488,3 +424,48 @@ h2.title_h2 {
 h2 {
     font-family: 'Montserrat Alternates', sans-serif;
 }
+
+.cropped {
+
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+}
+
+.cropped2 {
+
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */ 
+    border: 5px solid black;
+}
+
+
+
+#interface_block_one {
+    width: 70%;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 426px){
+    
+
+    nav div {
+        width: 90%;
+    }
+
+    nav h2{
+        font-size: 15px;
+        
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+    
+    nav div div {
+        width: 140px;
+    
+    }
+}
+
+

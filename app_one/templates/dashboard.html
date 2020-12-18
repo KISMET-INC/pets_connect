@@ -3,59 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
+    <title>Pets Connect</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'global.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'modal.css' %}">
+    <link rel="stylesheet" href="{% static 'stats.css' %}">
 </head>
 <body>
 
     <div id="CANVAS_long">
         <div id="TOP_long">
             <nav>
-                <h2>Pets Connect</h2>
-                <a href="#">Dashboard</a>
-                <a href = '/logout'>Add Photo</a>
-                <a href='/users/edit_self'> Profile</a>
-                <a href = '/logout'>Log Off</a>
+                <div>
+                    <h2>Pets Connect</h2>
+                    <div>
+                        <a href = '/users/add_image/{{current_user.id}}'><i style='font-size:25px' class="fas fa-camera"></i></a>
+                        <a href = '/logout'><i style='font-size:25px' class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
             </nav>
         </div>
         
 
 
         <div id="interface_block_one">
-            <h2>Welcome {{current_user.first_name}}!</h2>
-            <h3>(Normal Account) </h3>
-            <table>
-                <tr>
-                    <th class= "id">id</th>
-                    <th class = 'name'>name</th>
-                    <th class = 'email'>email</th>
-                    <th class= "created_at">created_at</th>
-                    <th class = 'level'>level</th>
-                </tr>
-                {% for user in users %}
-                <tr>
-                    <!-- EDIT 1 TO CHOSEN USER ID -->
-                    <td>{{user.id}}</td>
-                    <td><a href='/users/show/{{user.id}}'>{{user.first_name}} {{user.last_name}}</a></td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.created_at}}</td>
-                    <!-- EDIT 1 TO CHOSEN USER ID -->
-                    <!-- ADD REMOVE MESSAGE BOX -->
 
-                    {% if user.user_level == 9 %}
-                    <td>admin</td>
-                    {% else %}
-                    <td>normal</td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </table>
-        </div> <!-- END INTERFACE -->
+            <div class = 'dashboard'>
+                {% for image in images %}
+                <div class = dimage>
+                    <button type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
+                    <div class= "stats">
+                        <p class = 'name'>{{image.name}}</p>
+                        <p>
+                            <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                            <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                        </p>
+                    </div>
+                </div>
+                
+                
+                
+                <!-- MODAL -->
+                <div id="{{image.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
 
+                                <div class ='left'>
+                                    <img class="cropped2" src = {{image.url}}>
+                                    <div class = 'stats'>
+                                        <p>
+                                            <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
+                                            <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                                        </p>
+                                    </div>
+                                    <p>Posted by:{{image.user.first_name}}</p>
+                                    <p>{{image.desc}}</p>
+                                </div>
+
+                                <div class= 'right'>
+                                <p class = 'name'>{{image.name}}</p>
+                                <div class = 'comments'>
+                                    {% for comment in image.comments.all reversed %}
+                                        <p><b>{{comment.user.first_name}}:</b> {{comment.text}}</p>
+                                    {% endfor %}
+                                </div>
+
+                                {% if image.comments.count > 7 %}
+                                    <p class= "scroll">Scroll For More Comments</p>
+                                {% endif %}
+
+                                <form class = "post_comment" action = '\process_add_comment' method ='post'>
+                                    {% csrf_token %}
+                                    <input name = 'text' placeholder="Add a Comment...">
+                                    <input type="hidden" name = 'image_id' value= '{{image.id}}'>
+                                    <button type ='submit'> POST </button>
+                                </form>
+
+                             
+
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <!-- END MODAL -->
+
+            {% endfor %}  
+            </div>
+        
+ 
+    
     </div>  <!-- END CANVAS -->
 </body>
+<script>
+
+console.log(window.location.href)
+var url = window.location.href.toString()
+console.log(url.length)
+var current_image = url.slice(url.length-1)
+if (current_image != 0){
+    console.log("show modal")
+    document.getElementById(current_image).className = "modal";
+     $(`#${current_image}`).modal('show');
+  
+}
+console.log(current_image)
+
+</script>
 </html>
