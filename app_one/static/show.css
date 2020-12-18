@@ -35,7 +35,7 @@ input {
 button {
     box-shadow: none;
     border: none;
-    color:grey;
+    color:#BFBFBF;
     background-color:white; 
     
 }
@@ -59,7 +59,7 @@ form button {
 .iright .dashboard {
     display:flex;
     flex-wrap: wrap;
-    width: 110%;
+    width: 100%;
     justify-content: right;
 }
 
@@ -69,11 +69,16 @@ form button {
     margin-bottom:2px;
     background-color: #E5E5E5;
     padding-bottom: 10px;
-    width: fit-content;
+    border-radius: 5px;
+    width: 48%;
+    height: fit-content;
 }
 
 
-
+.cropped {
+    border-radius: 5px 5px 0px 0px;
+    width:100%;
+}
 .dimage a button {
     background-color: transparent;
     width:fit-content;
@@ -86,14 +91,13 @@ form button {
     text-align: center;
 }
 
-/*******************************/
-/*  MEDIA BREAKPOINT 1263px        
-/*******************************/
-@media (max-width: 1263px){
-    #interface_block_two .iright{
-        width: 80%;
-    }
 
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1201px        
+/*******************************/
+@media (max-width: 1999px){
+ 
 
 }
 
@@ -107,11 +111,7 @@ form button {
 /*******************************/
 @media (max-width: 1075px){
 
-    .cropped {
-        width: 190px;
-        height: 190px;
-    }
-    
+
     #interface_block_two .iright{
         width: 500px;
     }
@@ -131,10 +131,6 @@ form button {
 /*******************************/
 @media (max-width: 960px){
 
-    .cropped {
-        width: 300px;
-        height: 300px;
-    }
     .dashboard {
         flex-direction: column;
         align-items: right;
@@ -158,11 +154,6 @@ form button {
 /*  MEDIA BREAKPOINT 960px         
 /*******************************/
 @media (max-width: 960px){
-
-    .cropped {
-        width: 150px;
-        height: 150px;
-    }
 
  
 

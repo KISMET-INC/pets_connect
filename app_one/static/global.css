@@ -426,15 +426,13 @@ h2 {
 }
 
 .cropped {
-    width: 250px; /* width of container */
-    height: 250px; /* height of container */
+
     object-fit: cover;
     object-position: 20% 10%; /* try 20px 10px */ 
 }
 
 .cropped2 {
-    width: 250px; /* width of container */
-    height: 250px; /* height of container */
+
     object-fit: cover;
     object-position: 20% 10%; /* try 20px 10px */ 
     border: 5px solid black;

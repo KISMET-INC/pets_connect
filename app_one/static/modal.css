@@ -4,7 +4,8 @@
 }
 
 .modal-dialog {
-    width:fit-content;
+    width:100%;
+    margin-top: 105px;
 }
 
 .modal-content {
@@ -21,6 +22,7 @@
 
 
 .cropped2 {
+    height: 300px;
     border: none;
     border-radius: 5px 0px 0px 0px;
 }
@@ -72,22 +74,89 @@
     background-color: white;
 }
 
+.modal .left p:nth-child(2) {
+    color: #BFBFBF;
+}
+
+
+.modal .comments {
+    border-radius: 5px;
+    background-color:#EDEDED;
+    text-align: left;
+    padding: 15px;
+    height: 250px;
+    overflow: scroll;
+}
+
+
+.modal .comments p {
+    color: black;
+    font-size: 12px;
+    padding: 5px;
+    margin-bottom: 10px;
+
+}
+
+.modal .scroll {
+    color: grey;
+    margin: 15px;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.modal form {
+    border: 2px solid grey;
+    box-shadow: none;
+    position:sticky;
+    top: 0;
+}
+
+.modal input {
+    padding-left: 10px;
+    height:50px;
+    resize:none;
+    border:none;
+    width: 80%;
+}
+
+.post_comment button {
+    margin:0px;
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    color: grey;
+    text-align: right;
+}
+
+.post_comment {
+    background-color: white;
+    padding: 3px;
+    display: flex;
+}
+
+
+
 /*******************************/
 /*  MEDIA BREAKPOINT 550px  
 /*******************************/
 @media (max-width: 550px){
 
-    .dashboard {
-        width: 90%;
+
+    .modal {
+        scroll-behavior: none;
+      
     }
-    .image img.cropped {
-        width: 120px;
-        height: 120px;
+
+    .modal-content {
+        width: 70%;
     }
-    
+
+   
    .modal-dialog{
        margin: 0 auto;  
        margin-top:50px;
+      
+      
    }
     .modal-body{
         width: 100%;
@@ -95,12 +164,9 @@
         flex-direction: column;
         margin: 0 auto;
         height: fit-content;
+        
     }
 
-    .cropped2 {
-        width:150px;
-        height:150px;
-    }
 
     .modal .left {
         width: 100%;
@@ -118,18 +184,28 @@
         height:fit-content;
         padding-left:20px;
         padding-right: 20px;
+        width: 100%;
     }
 
     .modal .right p.name {
-        margin: 0px;
+        height:fit-content;
+        margin: 10px;
         padding: 0px;
         background-color:white;
         top:100px;
         font-size: 14px;
+        
     }
+    
+    .cropped2 {
+        height: 200px;
     }
-
     .modal .comments {
-        max-height: 200px;
+        height: 250px;
+       
     }
 
+    .model .comments p {
+        width:90%;
+    }
+}
