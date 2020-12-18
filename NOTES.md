@@ -32,3 +32,4 @@
 - [ ] Data Validation for Comments and Images (Never Empty)
 - [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
 - [ ] Deploy and maintain on AWS EC2 server
+- [ ] Fix visual error in responsive design on landing page
