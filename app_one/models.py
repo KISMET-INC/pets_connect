@@ -3,7 +3,7 @@ from datetime import *
 import bcrypt
 from django_resized import ResizedImageField
 from django.db.models.signals import post_delete
-from .utils import file_cleanup
+
 
 class UserManager(models.Manager):
 
@@ -175,7 +175,7 @@ class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    pet_img = ResizedImageField(size=[300, 300], crop=['middle', 'center'], quality=100, upload_to='images/') 
+    pet_img = ResizedImageField(size=[300, 300], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)
     desc = models.CharField(max_length=255)
 

@@ -36,6 +36,7 @@ Certain images are stretched instead of cropped using CSS styling only because t
 - [x] Add File Upload functionality using Pillow Technology Library
 - [ ] Optimize Modals
 - [ ] Add an automated email to user when someone likes loves or comments their photo
+- [ ] Add toggle for receiving emails
 - [ ] Data Validation for Comments and Images (Never Empty)
 - [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
 - [ ] Deploy and maintain on AWS EC2 server
