@@ -1,6 +1,9 @@
 from django.db import models
 from datetime import *
 import bcrypt
+from django_resized import ResizedImageField
+from django.db.models.signals import post_delete
+from .utils import file_cleanup
 
 class UserManager(models.Manager):
 
@@ -172,7 +175,7 @@ class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    pet_img = models.ImageField(upload_to='images/') 
+    pet_img = ResizedImageField(size=[300, 300], crop=['middle', 'center'], quality=100, upload_to='images/') 
     name = models.CharField(max_length=25)
     desc = models.CharField(max_length=255)
 
@@ -180,7 +183,7 @@ class Image(models.Model):
     likes = models.ManyToManyField(User, related_name="likes")
     user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
     ## IMAGE.COMMENTS (bucket)
-    
+
 
 
 class Comment(models.Model):
