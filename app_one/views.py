@@ -346,13 +346,18 @@ def process_add_comment(request):
 # process_like()
 # return redirect('/')
 #=============================================##
-def process_like(request,image_id):
+def process_like_love(request,image_id,target_id):
     post = request.POST
     print(request.POST)
     
     this_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id =image_id)
-    this_image.loves.add(this_user) 
+
+    if(target_id == 0):
+        this_image.likes.add(this_user) 
+    if(target_id == 1):
+        this_image.loves.add(this_user) 
+
     this_image.save();
 
     return redirect (f'/dashboard/0')

@@ -35,7 +35,7 @@ urlpatterns = [
     path('process_add_image', views.process_add_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_add_comment', views.process_add_comment),
-    path('process_like/<int:image_id>', views.process_like),
+    path('process_like_love/<int:image_id>/<int:target_id>', views.process_like_love),
     
 
 ]

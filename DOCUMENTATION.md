@@ -11,11 +11,14 @@ Certain images are stretched instead of cropped using CSS styling only because t
 ### Solution:
 - Researched and found an pip environment library on github 'Django-resized' that crops images before uploading to the database. 
 - This solved the stretching problem because all files are resized to the same aspect ratio.
-
+### Problem: [12/22/20]
+Even when resized certain images are still stretched when changing the window size. It made me wonder if it a problem that lies within different types of jpg files.
+### Solution:
+-  In models.py I changed the force_format to PNG in the Image class and even though files still have the jpg extenstion they no longer stretch
 
 # What I Wish I Had Done Differently
 - Mapped out the responsive wireframe design before building the project
-  - It proved difficult to make responsive after architeture is already built without responsiveness in mind
+- It proved difficult to make responsive after architeture is already built without responsiveness in mind
 
 # What I've Learned So Far
 - I learned the basics of responsive design, my first project where I kept multiple device sizes in mind.
