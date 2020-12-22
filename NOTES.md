@@ -24,9 +24,9 @@
 
 # TODO
 
-- [ ] Add loves to Model
-- [ ] Change First name to Username and remove Last Name
-- [ ] Add Files Model and make one to many relationship (to allows for image filtering by user)
+- [x] Add loves to Model
+- [x] Change First name to Username and remove Last Name
+- [x] Add Files Model and make one to many relationship (to allows for image filtering by user)
 - [ ] Add File Upload functionality using Pillow Technology Library
 - [ ] Add an automated email to user when someone likes loves or comments their photo
 - [ ] Data Validation for Comments and Images (Never Empty)

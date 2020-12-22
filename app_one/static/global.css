@@ -428,7 +428,7 @@ h2 {
 .cropped {
 
     object-fit: cover;
-    object-position: 20% 10%; /* try 20px 10px */ 
+   
 }
 
 .cropped2 {

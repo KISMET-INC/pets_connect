@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
-
+from .forms import *
 
 #=============================================##
 # read_all()
@@ -50,14 +50,14 @@ def process_register(request):
             user_level = 9
 
         
-        new_user = User.objects.create(first_name=post['first'], last_name=post['last'], password = hash, email = post['email'], user_level= user_level)
+        new_user = User.objects.create(user_name=post['first'], password = hash, email = post['email'], user_level= user_level)
 
         if new_user.user_level == 9:
             return redirect('/dashboard/admin')
 
         if user_level not in request.session:
             request.session['user_id'] = new_user.id
-            request.session['user_name'] = new_user.first_name
+            request.session['user_name'] = new_user.user_name
             request.session['user_level'] = new_user.user_level
             return redirect('/dashboard/0')
 
@@ -179,6 +179,7 @@ def new(request):
 #=============================================##
 def add_image(request, user_id):
     context = {
+        'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
     }
@@ -285,12 +286,13 @@ def process_edit_self(request):
 #=============================================##
 def process_add_image(request):
     post = request.POST
+    upload_pet_form = UploadPetForm(request.POST, request.FILES)
     print(request.POST)
-
+    print(request.FILES)
     current_user = User.objects.get(id=request.session['user_id'])
-    this_image = Image.objects.create(url = post['url'], user = current_user, name = post['name'], desc = post['desc'] )
-    user_images = Image.objects.filter(user = current_user.id)
-
+    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
+    # user_images = Image.objects.filter(user = current_user.id)
+    this_image.save()
     return redirect (f'/users/add_image/{current_user.id}')
 
 
