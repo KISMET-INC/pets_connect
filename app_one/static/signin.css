@@ -1,146 +1,91 @@
 
-
 #interface_block_one {
     border: none;
     padding: 0px;
-    margin-top: 100px;
-    width: 50%;
+    margin-top: 50px;
+    width: 70%;
     display: block;
+    margin-bottom: 50px;   
 }
 
-#interface_block_one ul {
-    margin-left: 10%;
-    color: red;
+h2 {
+    font-size: 20px;
 }
+
 form {   
-    padding: 10%;
-    border-radius: 10px;
+    margin-top: 20px;
+    border:none;
+    box-shadow: none;
     width: 100%;
     height: fit-content;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
 }
 
-.form_row .form_input {
-    border-radius: 5px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #C3C3C3;
-    padding:1%;
-}
-
-
-label.form_label {
+label {
     display:block;
     font-weight: bold;
     width:100%;
-   
 }
-.form_row_button {
+
+
+form input {
+    margin-bottom: 10px;
+    width: 30%;
+    height: 25px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    /* border: 1px solid blue; */
-    margin-bottom: 20px;
+}
+
+form div button {
+    margin: 0px;
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    box-shadow: none;
+}
+
+form div a {
+    margin-top: 20px;
+    width: 100%;
 }
 
 
-#interface_block_one div h2 {
-    font-size: 25px;
+ul {
+    margin-left: 20px;
+    color: red;
 }
+
 
 li {
-    margin-top: 20px;
+    margin-left: 0px;   
+    margin-top: 5px;
 }
 
-
-
-/*************************/
-/*  BREAK 1024           
-/*************************/
-
+/*******************************/
+/*  MEDIA BREAKPOINT 1024px         
+/*******************************/
 @media (max-width: 1024px){
-    #interface_block_one {
-        width: 75%;
 
+    form input {
+        width: 50%;
     }
 
-    
 }
 
 
-/*************************/
-/*  BREAK 541          
-/*************************/
-@media (max-width: 541px){
-    #interface_block_one {
-        padding-top: 300px;
-        display: unset;
-        
-    }
-    #left_main {
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 40px;
-        padding: 0px;
-    }
-    #right_main {
-        width:  80%;
-    }
-    #right_main li {  
-        margin-top: 15px;
-    }
-
-
-    
-}
-
-/*************************/
-/*  BREAK 426          
-/*************************/
+/*******************************/
+/*  MEDIA BREAKPOINT 425px         
+/*******************************/
 @media (max-width: 426px){
 
-
-    #interface_block_one {
-        padding-top: 300px;
-        display: unset;
-        
-    }
-    #left_main {
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 40px;
-        padding: 0px;
-    }
-
-    #left_main a {
-        font-size: 13px;
-    }
-    #right_main {
+    form input {
         width: 100%;
     }
-    #right_main li {  
-        margin-top: 15px;
-    }
 
-
-    
 }
 
-/*************************/
-/*  BREAK 321          
-/*************************/
-
-@media (max-width: 321px){
-
-    form {
-        width: 90%;
-        margin: 0 auto;
-        padding: 10px;
-        height: fit-content;
-    }
-
- 
-
-    
-}
 
 

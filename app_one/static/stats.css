@@ -1,0 +1,65 @@
+.stats {
+    background-color: #E5E5E5;
+    padding: 10px;
+}
+
+.stats p {
+    color:#BFBFBF;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    margin-bottom:-10px;
+    height: fit-content;
+}
+
+.stats {
+    background-color: #E5E5E5;
+    margin-right: 10px;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.stats p.name {
+    font-family: 'Montserrat Alternates', sans-serif;   
+    font-size: 13px;
+    color: #BFBFBF;
+}
+
+.stats p {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.stats p button {
+    background-color: transparent;
+    display:inline-block;
+    width:fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    border:none;
+    box-shadow: none;
+    text-align: center;
+}
+
+
+.stats p:nth-child(2){
+    margin-bottom: 5px;
+    color:#BFBFBF
+}
+
+p i{
+    color:#BFBFBF;
+}
+
+.stats i.fas::before {
+    color:#BFBFBF;
+}
+
+
+button:focus {
+    outline: 0px;
+    border: 0px;
+}

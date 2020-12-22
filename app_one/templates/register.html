@@ -19,36 +19,43 @@
         <div id="TOP_long">
 
             <nav>
-                <h2>Pet's Connect</h2>
-            
                 <div>
-                    <a href="/"> Home</a>
-                    <a href = '/signin'>Sign in</a>
-                <div>    
+                    <h2>Pets Connect</h2>
+                    <div>
+                        <a href = '/main_page   '> Home</a>
+                        <a href = '/signin'> Sign In</a>
+                    </div>
+                </div>
             </nav>
-
+            
         </div>
+    
 
 
         <div id="interface_block_one">
-            <div>   
-                <h2 class ='form_h2'>Register</h2>
+                <h2>Register</h2>
                 <form action="/process_register" method="post">
-                {% csrf_token %}
-                <div class="form_row"><label class ='form_label' for = 'email'>Email Address </label> <input class='form_input' name = 'email' type = 'email'></div>
-                <div class="form_row"><label class ='form_label' for = 'first'>First Name </label> <input class='form_input' name = 'first' type = 'text'></div>
-                <div class="form_row"><label class ='form_label' for = 'last'>Last Name </label> <input class='form_input' name = 'last' type = 'text'></div>
-                <div class="form_row"><label class ='form_label' for = 'pass'>Password </label> <input class='form_input' name = 'pass' type = 'password'></div>
-                <div class="form_row"><label class ='form_label' for = 'confirm'>Confirm Password </label> <input class='form_input' name = 'confirm' type = 'password'></div>
-                <div class="form_row_button"><button class ='form_button' type ='submit'> Register </button></div>
-                <a href = "/signin">Already have an account? Sign In</a>
-                </form>
-                
-                
-            
+                    {% csrf_token %}
 
+                    <label for = 'email'>Email Address </label> 
+                    <input name = 'email' type = 'email'>
 
-            </div>      <!-- END LEFT -->      
+                    <label for = 'first'>Username </label> 
+                    <input name = 'first' type = 'text'>
+
+                    <label for = 'last'>Last Name </label> 
+                    <input name = 'last' type = 'text'>
+
+                    <label for = 'pass'>Password </label>
+                    <input name = 'pass' type = 'password'>
+                
+                    <label for = 'confirm'>Confirm Password </label> 
+                    <input name = 'confirm' type = 'password'>
+                    <div>
+                        <button class="btn btn-primary btn-lg"  type ='submit'> Register </button>
+                        <a href = "/signin">Already have an account? Sign In</a>
+                    </div>
+                </form>  
             
                     {% if messages %}
                     <ul class="messages">

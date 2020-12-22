@@ -169,17 +169,20 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
-    ## USER.SENT MESSAGES (bucket)
-    ## USER.RECIEVED MESSAGES (bucket)
+    ## USER.IMAGES (bucket)
+    ## USER.COMMENTS (bucket)
 
-class Message(models.Model):
+
+class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    text = models.CharField(max_length=255)
-    user_to = models.ForeignKey(User, related_name = "recieved_messages",on_delete = models.CASCADE)
-    user_from = models.ForeignKey(User, related_name= "sent_messages", on_delete = models.CASCADE)
-    ## MESSAGE.COMMENTS (bucket)
+    url = models.CharField(max_length=255)
+    name = models.CharField(max_length=25)
+    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
+    loves = models.ManyToManyField(User, related_name="loves")
+    desc = models.CharField(max_length=255)
+    ## IMAGE.COMMENTS (bucket)
     
 
 
@@ -188,4 +191,6 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     text = models.CharField(max_length=255)
-    message = models.ForeignKey(Message, related_name="comments",on_delete = models.CASCADE)
+    image = models.ForeignKey(Image, related_name="comments",on_delete = models.CASCADE)
+    user = models.ForeignKey(User, related_name="comments",on_delete = models.CASCADE)
+    
