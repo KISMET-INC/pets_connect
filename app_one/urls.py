@@ -1,5 +1,10 @@
 from django.urls import path
 from . import views
+from django.contrib import admin 
+from django.urls import path 
+from django.conf import settings 
+from django.conf.urls.static import static 
+from .views import *
 
 
 urlpatterns = [
@@ -30,7 +35,10 @@ urlpatterns = [
     path('process_add_image', views.process_add_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_add_comment', views.process_add_comment),
-    path('process_like/<int:image_id>', views.process_like),
+    path('process_like_love/<int:image_id>/<int:target_id>', views.process_like_love),
     
 
 ]
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

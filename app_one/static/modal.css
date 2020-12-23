@@ -4,7 +4,7 @@
 }
 
 .modal-dialog {
-    width:100%;
+    width:fit-content;
     margin-top: 105px;
 }
 

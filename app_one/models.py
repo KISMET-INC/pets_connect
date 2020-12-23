@@ -1,6 +1,9 @@
 from django.db import models
 from datetime import *
 import bcrypt
+from django_resized import ResizedImageField
+from django.db.models.signals import post_delete
+
 
 class UserManager(models.Manager):
 
@@ -23,10 +26,6 @@ class UserManager(models.Manager):
         
         if len(post['first']) < 2:
             errors['first'] = 'First Name bust be at least 2 characters'
-
-        # check last name length
-        if len(post['last']) < 2:
-            errors['last'] = 'Last Name bust be at least 2 characters'
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
@@ -164,8 +163,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    user_name = models.CharField(max_length=30)
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
@@ -177,13 +175,15 @@ class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    url = models.CharField(max_length=255)
+    pet_img = ResizedImageField(size=[300, 300], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)
-    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
-    loves = models.ManyToManyField(User, related_name="loves")
     desc = models.CharField(max_length=255)
+
+    loves = models.ManyToManyField(User, related_name="loves")
+    likes = models.ManyToManyField(User, related_name="likes")
+    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
     ## IMAGE.COMMENTS (bucket)
-    
+
 
 
 class Comment(models.Model):
