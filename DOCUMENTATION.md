@@ -38,6 +38,7 @@ Even when resized certain images are still stretched when changing the window si
 - [x] Add Files Model and make one to many relationship (to allows for image filtering by user)
 - [x] Add File Upload functionality using Pillow Technology Library
 - [ ] Optimize Modals
+- [ ] Learn how to make modular reusable code snippets
 - [ ] Add an automated email to user when someone likes loves or comments their photo
 - [ ] Add toggle for receiving emails
 - [ ] Data Validation for Comments and Images (Never Empty)
