@@ -37,12 +37,12 @@
             <div class = 'dashboard'>
                 {% for image in images %}
                 <div class = dimage>
-                    <button type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.url}}></button>
+                    <button type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.pet_img.url}}></button>
                     <div class= "stats">
                         <p class = 'name'>{{image.name}}</p>
                         <p>
-                            <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
-                            <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                            <a href="/process_like_love/{{image.id}}/0"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                            <a href="/process_like_love/{{image.id}}/1"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.loves.count}} 
                             <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
                         </p>
                     </div>
@@ -58,11 +58,11 @@
                             <div class="modal-body">
 
                                 <div class ='left'>
-                                    <img class="cropped2" src = {{image.url}}>
+                                    <img class="cropped2" src = {{image.pet_img.url}}>
                                     <div class = 'stats'>
                                         <p>
-                                            <a href="/process_like/{{image.id}}"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.loves.count}} 
-                                            <a href="/process_lov/{{image.id}}"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.id}} 
+                                            <a href="/process_like_love/{{image.id}}/0"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                                            <a href="/process_like_love/{{image.id}}/1"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.loves.count}} 
                                             <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
                                         </p>
                                     </div>

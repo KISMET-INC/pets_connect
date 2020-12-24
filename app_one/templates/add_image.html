@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{% static 'stats.css' %}">
 </head>
 <body>
-
     <div id="CANVAS_long">
         <div id="TOP_long">
             <nav>
@@ -34,13 +33,13 @@
         <div id="interface_block_two">
 
             <div class = "ileft">
-                <form action = '\process_add_image' method ='post'>
-                    <h3>Add to Your Collection</h3>
-                    {% csrf_token %}                
+                <form enctype="multipart/form-data" action = '\process_add_image' method ='post'>
+                    <h3>Add to Your Pet Collection</h3>
+                    {% csrf_token %}     
                         <input type='text' name ='name' placeholder="Pets name..">
-                        <input name = 'url' placeholder="Image URL to post...">
                         <input name = 'desc' placeholder="Description...">
                         <input type="hidden" name = 'user_id' value= '{{user.id}}'>
+                        {{ upload_pet_form.as_p}}           
                         <button type ='submit'> POST </button>
                 </form>
             </div>
@@ -52,9 +51,14 @@
                 <div class = 'dashboard'>
                     {% for image in images %}
                     <div class= 'dimage'>
-                        <img class = "cropped" src = "{{image.url}}">
+
+                        <img class='cropped' src = '{{ image.pet_img.url }}' >
+
+
+                        
 
                         <div class="stats">
+                            <p>{{image.name}}</p>
                             <p>
                                 <i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} 
                                 <i style='font-size:20px' class="fas fa-heart"></i> {{image.loves.count}} 
@@ -74,7 +78,7 @@
                                 <div class="modal-body">
 
                                     <div class ='left'>
-                                        <img class="cropped2" src = {{image.url}}>
+                                        <img class="cropped2" src = {{image.pet_img.url}}>
                                         <div class="stats">
                                             <p>
                                                 <i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} 

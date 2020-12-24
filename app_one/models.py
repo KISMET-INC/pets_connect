@@ -1,6 +1,9 @@
 from django.db import models
 from datetime import *
 import bcrypt
+from django_resized import ResizedImageField
+from django.db.models.signals import post_delete
+
 
 class UserManager(models.Manager):
 
@@ -23,10 +26,6 @@ class UserManager(models.Manager):
         
         if len(post['first']) < 2:
             errors['first'] = 'First Name bust be at least 2 characters'
-
-        # check last name length
-        if len(post['last']) < 2:
-            errors['last'] = 'Last Name bust be at least 2 characters'
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
@@ -66,7 +65,7 @@ class UserManager(models.Manager):
                 errors['passcheck'] = 'Password does not match'
         return errors
 
-#=============================================##
+    #=============================================##
     # basic_validator SPECIFIC PASSWORDS
     # validates the data for user registration
     #=============================================##
@@ -97,10 +96,6 @@ class UserManager(models.Manager):
 
         if len(post['first']) < 2:
             errors['first'] = 'First Name bust be at least 2 characters'
-
-        # check last name length
-        if len(post['last']) < 2:
-            errors['last'] = 'Last Name bust be at least 2 characters'
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
@@ -113,59 +108,17 @@ class UserManager(models.Manager):
                 errors['email_in_use'] = 'Email already in use'
 
         return errors
-
-
-
-    #=============================================##
-    # basic_validator (GENERIC)
-    # validates the data for user registration
-    #=============================================##
-    def basic_validator_generic(self, postData):
-        # easy use variable
-        post = postData
-        # empty error dictionary
-        errors = {}
-
-        # check password and confirm password match
-        if post['pass'] != post['confirm']:
-            errors['passmatch'] = 'Passwords do no match'
-        # check password length
-        if len(post['pass']) < 2:
-            errors['passlen'] = 'Password must be at least 8 characters'
-        # check first name length
-        if len(post['first']) < 2:
-            errors['first'] = 'First Name bust be at least 2 characters'
-        # check last name length
-        if len(post['last']) < 2:
-            errors['last'] = 'Last Name bust be at least 2 characters'
-
-        # check unique email address
-        users = User.objects.filter(email = postData['email'])
-        if len(users) > 0:
-            errors['email'] = 'Email already in use'
-
-        # check appropriate age
-        today = date.today()
-            #date to year - cast as int
-        this_year = int(today.strftime('%Y'))
-        birth_year_str = post['bday']
-            # slice out year - cast to int
-        birth_year = int(birth_year_str[0:4])
-
-        if this_year - 13 < birth_year:
-            errors['age'] = 'You must be at least 13 years old'
-
-        return errors
-
-
+        
+#=============================================##
+# MODEL CLASSES
+#=============================================##
 
 class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    user_name = models.CharField(max_length=30)
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
@@ -177,13 +130,15 @@ class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    url = models.CharField(max_length=255)
+    pet_img = ResizedImageField(size=[300, 300], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)
-    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
-    loves = models.ManyToManyField(User, related_name="loves")
     desc = models.CharField(max_length=255)
+
+    loves = models.ManyToManyField(User, related_name="loves")
+    likes = models.ManyToManyField(User, related_name="likes")
+    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
     ## IMAGE.COMMENTS (bucket)
-    
+
 
 
 class Comment(models.Model):
