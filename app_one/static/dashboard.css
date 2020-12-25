@@ -1,3 +1,5 @@
+@import 'modal.css';
+@import 'stats.css';
 
 #interface_block_one{
     height: fit-content;
@@ -27,6 +29,7 @@ button:focus {
     width: 33%;
     border-radius: 5px;
 }
+
 
 img.cropped {
     width: 100%;

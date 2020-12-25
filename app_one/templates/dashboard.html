@@ -12,27 +12,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'global.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'modal.css' %}">
-    <link rel="stylesheet" href="{% static 'stats.css' %}">
 </head>
 <body>
 
     <div id="CANVAS_long">
-        <div id="TOP_long">
-            <nav>
-                <div>
-                    <h2>Pets Connect</h2>
-                    <div>
-                        <a href = '/users/add_image/{{current_user.id}}'><i style='font-size:25px' class="fas fa-camera"></i></a>
-                        <a href = '/logout'><i style='font-size:25px' class="fas fa-arrow-alt-circle-right"></i></a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        
+        {% include 'nav.html' %}
 
 
         <div id="interface_block_one">
+            {% include 'test.html'%}
 
             <div class = 'dashboard'>
                 {% for image in images %}
@@ -112,6 +100,17 @@
         document.getElementById(current_image).className = "modal";
         $(`#${current_image}`).modal('show'); 
     }
+
+    $( ".dimage" )
+    .mouseover(function() {
+        $("#TOP_long").css('opacity', '.99');
+        $( this ).css('opacity', '.6')
+    });
+
+    $( ".dimage" )
+    .mouseleave(function() {
+        $(this).css('opacity', '1')
+    });
 
 </script>
 </html>
