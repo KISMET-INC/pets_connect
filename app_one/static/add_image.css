@@ -27,22 +27,41 @@ input {
     width:100%;
     align-self: left;
     margin-bottom: 10px;
-    height: 25px;
+    height: 40px;
 }
+
+p input{
+    height:20px;
+}
+
+.stats i.fa-trash::before {
+    color:#555555;
+    
+}
+
+.stats {
+    padding:15px;
+}
+
 
 button {
     box-shadow: none;
     border: none;
-    color:#BFBFBF;
     background-color:white; 
-    
+    color:#555555;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
+
 }
 
+p button i {
+    font-size:17px;
+}
 form button {
     margin: 0px;
     padding: 0px;
     text-align: right;
-    width: 90%;
+    width: 100%;
     margin: 0 auto; 
 }
 
@@ -72,8 +91,16 @@ form button {
 .cropped {
     border-radius: 5px 5px 0px 0px;
     width:100%;
-    height:250px;
- 
+}
+
+button i {
+    font-size:25px;
+    
+}
+
+
+p a {
+    margin-left:20px;
 }
 
 .dimage a button {
@@ -86,6 +113,21 @@ form button {
     border:none;
     box-shadow: none;
     text-align: center;
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1200px         
+/*******************************/
+@media (max-width: 1200px){
+    .iright .dimage {
+        width:100%;
+    }
+    .cropped {
+       
+        object-position: 0% 0%; /* try 20px 10px */
+
+    }
+
 }
 
 /*******************************/

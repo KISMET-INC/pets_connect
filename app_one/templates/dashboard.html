@@ -41,9 +41,9 @@
                     <div class= "stats">
                         <p class = 'name'>{{image.name}}</p>
                         <p>
-                            <a href="/process_like_love/{{image.id}}/0"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
-                            <a href="/process_like_love/{{image.id}}/1"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.loves.count}} 
-                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                            <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                            <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
+                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
                         </p>
                     </div>
                 </div>
@@ -61,9 +61,9 @@
                                     <img class="cropped2" src = {{image.pet_img.url}}>
                                     <div class = 'stats'>
                                         <p>
-                                            <a href="/process_like_love/{{image.id}}/0"><i style='font-size:20px' class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
-                                            <a href="/process_like_love/{{image.id}}/1"><i style='font-size:20px' class="fas fa-heart"></i></a> {{image.loves.count}} 
-                                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                                            <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                                            <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
+                                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
                                         </p>
                                     </div>
                                     <p>Posted by:{{image.user.first_name}}</p>
@@ -110,7 +110,7 @@
 console.log(window.location.href)
 var url = window.location.href.toString()
 console.log(url.length)
-var current_image = url.slice(url.length-1)
+var current_image = url.slice(url.length-2)
 if (current_image != 0){
     console.log("show modal")
     document.getElementById(current_image).className = "modal";

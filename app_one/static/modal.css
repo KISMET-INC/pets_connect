@@ -4,7 +4,8 @@
 }
 
 .modal-dialog {
-    width:fit-content;
+    width:80%;
+    margin: auto;
     margin-top: 105px;
 }
 
@@ -21,7 +22,7 @@
 }
 
 .cropped2 {
-    height: 300px;
+    width:100%;
     border: none;
     border-radius: 5px 0px 0px 0px;
 }
@@ -31,7 +32,7 @@
     border-radius: 5px;
     background-color: #E5E5E5;
     padding: 0px;
-    width: fit-content;
+    width: 50%;
     border-right: 1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -43,9 +44,6 @@
 
 .modal .right {
     padding-top: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 250px;
     display: unset;
     margin: 0 auto; 
     margin-bottom: 10px;
@@ -79,8 +77,11 @@
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: 250px;
+    height: 60%;
+    width:100%;
+    margin: 0 auto; 
     overflow: scroll;
+    
 }
 
 .modal .comments p {
@@ -107,7 +108,7 @@
 
 .modal input {
     padding-left: 10px;
-    height:50px;
+    height:40px;
     resize:none;
     border:none;
     width: 80%;
@@ -126,6 +127,9 @@
     background-color: white;
     padding: 3px;
     display: flex;
+    width:90%;
+    margin: 0 auto; 
+    margin-top:10px;
 }
 
 /*******************************/
@@ -137,12 +141,9 @@
         scroll-behavior: none;
     }
 
-    .modal-content {
-        width: 70%;
-    }
-
     .modal-dialog {
-        margin: 0 auto;  
+        width:69%;
+        margin: 0 auto; 
         margin-top:50px;
     }
 
@@ -183,7 +184,7 @@
     }
 
     .cropped2 {
-        height: 200px;
+        
     }
 
     .modal .comments {
