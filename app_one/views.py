@@ -179,6 +179,7 @@ def new(request):
 #=============================================##
 def add_image(request, user_id):
     context = {
+        
         'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
