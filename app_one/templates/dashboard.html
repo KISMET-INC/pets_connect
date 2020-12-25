@@ -110,7 +110,7 @@
 console.log(window.location.href)
 var url = window.location.href.toString()
 console.log(url.length)
-var current_image = url.slice(url.length-2)
+var current_image = url.slice(-2)
 if (current_image != 0){
     console.log("show modal")
     document.getElementById(current_image).className = "modal";
