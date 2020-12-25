@@ -1,0 +1,47 @@
+<!-- MODAL -->
+<div id="{{image.id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class ='left'>
+                    <img class="cropped2" src = {{image.pet_img.url}}>
+                    <div class = 'stats'>
+                        <p>
+                            <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                            <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
+                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                        </p>
+                    </div>
+                    <p>Posted by:{{image.user.first_name}}</p>
+                    <p>{{image.desc}}</p>
+                </div>
+
+                <div class= 'right'>
+                <p class = 'name'>{{image.name}}</p>
+                <div class = 'comments'>
+                    {% for comment in image.comments.all reversed %}
+                        <p><b>{{comment.user.first_name}}:</b> {{comment.text}}</p>
+                    {% endfor %}
+                </div>
+
+                {% if image.comments.count > 7 %}
+                    <p class= "scroll">Scroll For More Comments</p>
+                {% endif %}
+
+                <form class = "post_comment" action = '\process_add_comment' method ='post'>
+                    {% csrf_token %}
+                    <input name = 'text' placeholder="Add a Comment...">
+                    <input type="hidden" name = 'image_id' value= '{{image.id}}'>
+                    <button type ='submit'> POST </button>
+                </form>
+
+             
+
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+<!-- END MODAL -->

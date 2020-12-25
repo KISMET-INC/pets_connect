@@ -41,10 +41,11 @@ Even when resized certain images are still stretched when changing the window si
 - [ ] Add toggle for receiving emails
 - [X] Deploy and maintain on AWS EC2 server
 - [ ] Add hover titles to the nav bar
+- [ ] When page reloads user is still in same location in the feed
 ## Bug Fixes
 - [X] Fix visual error in responsive design on landing page
 - [ ] Work on Debug Nginx Media problem
-- [ ] Fix modal dialog size in dashboard
+- [x] Fix modal dialog size in dashboard
 - [ ] Signed in username not show up on posts
 - [ ] Add favicon
 ## Efficiency
