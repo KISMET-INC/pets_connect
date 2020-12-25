@@ -61,6 +61,7 @@ img.cropped {
 
     .dashboard {
         justify-content: left;
+        width:95%;
     }
 
     .dimage{
