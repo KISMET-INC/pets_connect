@@ -205,11 +205,15 @@ def dashboard(request,image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
+        if image_id != 0:
+            current_image = Image.objects.get(id=image_id)
+        else:
+            current_image = 0;
         context = {
             'current_user': User.objects.get(id=request.session['user_id']),
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
-            'current_image': image_id
+            'current_image':current_image
         }
 
         if request.session['user_level'] == 0:
@@ -317,7 +321,7 @@ def process_add_comment(request):
     print(request.POST)
 
     this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id = post['image_id'])
+    this_image = Image.objects.get(id = post['current_image_id'])
     new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
 
     return redirect (f'/dashboard/{this_image.id}')

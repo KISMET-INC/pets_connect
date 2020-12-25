@@ -18,41 +18,64 @@
     <div id="CANVAS_long">
         {% include 'nav.html' %}
 
-
         <div id="interface_block_one">
-            {% include 'test.html'%}
-
             <div class = 'dashboard'>
                 {% for image in images %}
-                <div class = dimage>
-                    <a href="/dashboard/{{image.id}}"><button type ='button' data-toggle='modal' data-target='#{{image.id}}'><img class = 'cropped' src ={{image.pet_img.url}}></button></a>
-                    <div class= "stats">
-                        <p class = 'name'>{{image.name}}</p>
-                        <p>
-                            <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
-                            <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
-                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
-                        </p>
-                    </div>
-                </div>
-                
-                
-                
-               {% include 'modal.html' %}
-            {% endfor %}  
-            </div>
-        
- 
-    
-    </div>  <!-- END CANVAS -->
+                    <div class = dimage>
+                        <a href="/dashboard/{{image.id}}"><button type ='button'><img class = 'cropped' src ={{image.pet_img.url}}></button></a>
+                        <div class= "stats">
+                            <p class = 'name'>{{image.name}}</p>
+                            <p>
+                                <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
+                                <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
+                                <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                            </p>
+                        </div>
+                    </div>  
+                {% endfor %}
+                </div>  
+        </div>  <!-- END INTEFACE -->
+
+    {% include 'modal.html' %}  
 </body>
 <script>
 
-    var current_image = '{{current_image}}'
-    if (current_image != 0){
-        document.getElementById(current_image).className = "modal";
-        $(`#${current_image}`).modal('show'); 
+    var current_image = '{{current_image.id}}'
+    if (current_image != 0 ){
+        $('#comment_modal').modal('show');
+        var isVisible = $('#comment_modal').is(':visible');
+        console.log(isVisible)
     }
+
+    var modal = document.getElementById('.modal-dialog');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+       alert('not')
+    }
+    }
+    
+
+    // $('#CANVAS_long').click(function(){
+    //     console.log('onclick')
+        
+    //     var isVisible = $('.modal').is(':visible');
+
+    //     if(isVisible){
+    //         console.log("in focus")
+    //         wasOpened == true;
+    //     }
+
+    //     if(wasOpened==true && isVisible == true){
+    //         wasOpened=false;
+    //         window.location='/dashboard/0'
+    //     }
+
+    // })
+    
+
+    
 
     $( ".dimage" )
     .mouseover(function() {

@@ -1,43 +1,43 @@
 <!-- MODAL -->
-<div id="{{image.id}}" class="modal fade" role="dialog">
+<div id="comment_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
 
                 <div class ='left'>
-                    <img class="cropped2" src = {{image.pet_img.url}}>
+                    <img class="cropped2" src = {{current_image.pet_img.url}}>
                     <div class = 'stats'>
                         <p>
-                            <a href="/process_like_love/{{image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{image.likes.count}} 
-                            <a href="/process_like_love/{{image.id}}/1"><i class="fas fa-heart"></i></a> {{image.loves.count}} 
-                            <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i></button> {{image.comments.count}}
+                            <a href="/process_like_love/{{current_image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{current_image.likes.count}} 
+                            <a href="/process_like_love/{{current_image.id}}/1"><i class="fas fa-heart"></i></a> {{current_image.loves.count}} 
+                            <button type = 'button' data-toggle='modal' data-target='#{{current_image.id}}' ><i class="fas fa-comment-alt"></i></button> {{current_image.comments.count}}
                         </p>
                     </div>
-                    <p>Posted by:{{image.user.first_name}}</p>
-                    <p>{{image.desc}}</p>
+                    <p>Posted by:{{current_image.user.user_name}}</p>
+                    <p>{{current_image.desc}}</p>
                 </div>
 
                 <div class= 'right'>
-                <p class = 'name'>{{image.name}}</p>
-                <div class = 'comments'>
-                    {% for comment in image.comments.all reversed %}
-                        <p><b>{{comment.user.first_name}}:</b> {{comment.text}}</p>
-                    {% endfor %}
+                <div class = top>
+                    <p class = 'name'>{{current_image.name}}</p>
+                    <form class = "post_comment" action = '\process_add_comment' method ='post'>
+                        {% csrf_token %}
+                        <input name = 'text' placeholder="Add a Comment...">
+                        <input type="hidden" name = 'current_image_id' value= '{{current_image.id}}'>
+                        <button type ='submit'> POST </button>
+                    </form>
                 </div>
+                <div class = 'comments'></div>
+                    {% if current_image.comments.all.count == 0 %}
+                        <p>No comments</p>
+                    {% else %}
 
-                {% if image.comments.count > 7 %}
-                    <p class= "scroll">Scroll For More Comments</p>
-                {% endif %}
-
-                <form class = "post_comment" action = '\process_add_comment' method ='post'>
-                    {% csrf_token %}
-                    <input name = 'text' placeholder="Add a Comment...">
-                    <input type="hidden" name = 'image_id' value= '{{image.id}}'>
-                    <button type ='submit'> POST </button>
-                </form>
-
-             
+                    {% for comment in current_image.comments.all reversed %}
+                        <p><b>{{comment.user.user_name}}:</b> {{comment.text}}</p>
+                    {% endfor %}
+                    {% endif %}
+                </div>       
 
                 </div>
             </div>
