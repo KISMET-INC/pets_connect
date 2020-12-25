@@ -95,7 +95,7 @@ def process_signin(request):
     else:
             this_user = User.objects.get(id = user[0].id)
             request.session['user_id'] = this_user.id
-            request.session['user_name'] = this_user.first_name
+            request.session['user_name'] = this_user.user_name
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/dashboard/admin')
@@ -287,32 +287,12 @@ def process_edit_self(request):
 def process_add_image(request):
     post = request.POST
 
-    # Opens a image in RGB mode 
-  
-    print(request.FILES)
-    # # Size of the image in pixels (size of orginal image) 
-    # # (This is not mandatory) 
-    # width, height = im.size 
-    
-    # # Setting the points for cropped image 
-    # left = 5
-    # top = height / 4
-    # right = 164
-    # bottom = 3 * height / 4
-    
-    # # Cropped image of above dimension 
-    # # (It will not change orginal image) 
-    # im1 = im.crop((left, top, right, bottom)) 
-    
-    # # Shows the image in image viewer 
-
-
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
-    print(request.POST)
-    print(request.FILES)
+
     current_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
     this_image.save()
+
     return redirect (f'/users/add_image/{current_user.id}')
 
 
