@@ -107,17 +107,11 @@
 </body>
 <script>
 
-console.log(window.location.href)
-var url = window.location.href.toString()
-console.log(url.length)
-var current_image = url.slice(-2)
-if (current_image != 0){
-    console.log("show modal")
-    document.getElementById(current_image).className = "modal";
-     $(`#${current_image}`).modal('show');
-  
-}
-console.log(current_image)
+    var current_image = '{{current_image}}'
+    if (current_image != 0){
+        document.getElementById(current_image).className = "modal";
+        $(`#${current_image}`).modal('show'); 
+    }
 
 </script>
 </html>
