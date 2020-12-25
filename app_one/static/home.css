@@ -3,7 +3,6 @@
     margin: 0 auto;
 }
 
-
 .jumbotron {
     background-size:cover;
     margin-bottom: 10px;
@@ -82,7 +81,7 @@
     }
 
     .jumbotron {
-        background-size: 110%;
+        background-size: stretch;
     }
     #interface_block_one {
         width: 100%
@@ -104,9 +103,7 @@
 /***************************** */
 @media (max-width: 426px){
     .jumbotron {
-        background-size: 110%;
         background-repeat: no-repeat;
-        max-height: 500px;
         padding-left: 0px;
         padding-right: 0px;       
     }
@@ -133,7 +130,6 @@
     .light h2 {
         text-align: center;
         font-size: 20px;
-      
     }
 
     .light div {
@@ -163,8 +159,6 @@
         font-weight: bold;
     }
 
-
-
     .bottom {
         background-color:white;
         width: 100%;
@@ -173,9 +167,6 @@
         margin-top: 50px;
         padding-top: 50px;
         margin-bottom: 50px;
-        
-
-
     }
 
     .bottom div {
@@ -196,9 +187,7 @@
 /***************************** */
 
 @media (max-width: 376px){
-    body {
-    }
-
+   
     #TOP_long {
         margin-bottom: 0px;
     }

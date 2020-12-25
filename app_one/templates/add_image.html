@@ -11,9 +11,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'global.css' %}">
-    <link rel="stylesheet" href="{% static 'show.css' %}">
     <link rel="stylesheet" href="{% static 'modal.css' %}">
     <link rel="stylesheet" href="{% static 'stats.css' %}">
+    <link rel="stylesheet" href="{% static 'add_image.css' %}">
 </head>
 <body>
     <div id="CANVAS_long">
@@ -34,13 +34,13 @@
 
             <div class = "ileft">
                 <form enctype="multipart/form-data" action = '\process_add_image' method ='post'>
-                    <h3>Add to Your Pet Collection</h3>
+                    <h3>Share Your Pet</h3>
                     {% csrf_token %}     
                         <input type='text' name ='name' placeholder="Pets name..">
-                        <input name = 'desc' placeholder="Description...">
+                        <input name = 'desc' placeholder="Description..">
                         <input type="hidden" name = 'user_id' value= '{{user.id}}'>
                         {{ upload_pet_form.as_p}}           
-                        <button type ='submit'> POST </button>
+                        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
                 </form>
             </div>
 
@@ -54,19 +54,15 @@
 
                         <img class='cropped' src = '{{ image.pet_img.url }}' >
 
-
-                        
-
                         <div class="stats">
-                            <p>{{image.name}}</p>
+                            <a class= "delete" href='\process_remove_image\{{image.id}}'><button type ='submit'><i class="fas fa-trash"> </i> Delete </button></a>
                             <p>
-                                <i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.likes.count}} 
-                                <i style='font-size:20px' class="fas fa-heart"></i> {{image.loves.count}} 
-                                <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i style='font-size:20px' class="fas fa-comment-alt"></i> {{image.comments.count}}</button>
+                                <i class="fas fa-thumbs-up"></i> {{image.likes.count}} 
+                                <i class="fas fa-heart"></i> {{image.loves.count}} 
+                                <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i> {{image.comments.count}}</button>
                             </p>
                         </div>
-                            <p>{{image.desc}}</p>
-                            <a href='\process_remove_image\{{image.id}}'><button type ='submit'> Delete </button></a>
+
                     </div>
                 
 
@@ -81,9 +77,9 @@
                                         <img class="cropped2" src = {{image.pet_img.url}}>
                                         <div class="stats">
                                             <p>
-                                                <i style='font-size:20px' class="fas fa-thumbs-up"></i> {{image.id}} 
-                                                <i style='font-size:20px' class="fas fa-heart"></i> {{image.loves.count}} 
-                                                <button><i style='font-size:20px' class="fas fa-comment-alt"></i> {{image.comments.count}}</button>
+                                                <i class="fas fa-thumbs-up"></i> {{image.likes.count}} 
+                                                <i class="fas fa-heart"></i> {{image.loves.count}} 
+                                                <button><i class="fas fa-comment-alt"></i> {{image.comments.count}}</button>
                                             </p>
                                         </div>
                                         <p>Submitted by:{{image.user.first_name}}</p>

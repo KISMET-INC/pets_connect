@@ -22,11 +22,12 @@
 
 .stats p.name {
     font-family: 'Montserrat Alternates', sans-serif;   
-    font-size: 13px;
+    font-size: 16px;
     color: #BFBFBF;
 }
 
 .stats p {
+    font-size: 16px;
     margin: 0px;
     padding: 0px;
 }
@@ -42,6 +43,8 @@
     border:none;
     box-shadow: none;
     text-align: center;
+    color:#BFBFBF;
+    font-family:unset;
 }
 
 
@@ -51,7 +54,9 @@
 }
 
 p i{
+    font-size:20px;
     color:#BFBFBF;
+    margin-top:7px;
 }
 
 .stats i.fas::before {
