@@ -183,6 +183,8 @@ def add_image(request, user_id):
         'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
+        'url': f'/dashboard/0',
+        'icon': 'fas fa-table'
     }
     return render(request,'add_image.html',context)
 
@@ -205,15 +207,18 @@ def dashboard(request,image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
+        current_user = User.objects.get(id=request.session['user_id'])
         if image_id != 0:
             current_image = Image.objects.get(id=image_id)
         else:
             current_image = 0;
         context = {
-            'current_user': User.objects.get(id=request.session['user_id']),
+            'current_user': current_user,
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
-            'current_image':current_image
+            'current_image':current_image,
+            'url': f'/users/add_image/{current_user.id}',
+            'icon': 'fas fa-camera'
         }
 
         if request.session['user_level'] == 0:

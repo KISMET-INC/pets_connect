@@ -48,9 +48,10 @@ Even when resized certain images are still stretched when changing the window si
 - [x] Fix modal dialog size in dashboard
 - [ ] Signed in username not show up on posts
 - [ ] Add favicon
+- [ ] Click out problem | fade problem | Reload problem
 ## Efficiency
 - [x] Learn how to make modular reusable code snippets
-- [ ] Optimize Modals, Stats, Nav
+- [x] Optimize Modals, Stats, Nav
 ## Changes
 - [x] Change First name to Username and remove Last Name
 ## Security
