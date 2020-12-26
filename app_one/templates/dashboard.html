@@ -23,7 +23,10 @@
                 {% for image in images %}
                     <div class = dimage>
                         <a href="/dashboard/{{image.id}}"><button type ='button'><img class = 'cropped' src ={{image.pet_img.url}}></button></a>
-                        {% include 'stats.html' %}
+                        <div class="stats">
+                            <p class = 'name'>{{image.desc}}</p>
+                            {% include 'stats.html' %}
+                        </div>
                     </div>  
                 {% endfor %}
                 </div>  
@@ -38,37 +41,26 @@
         $('#comment_modal').modal('show');
     } 
 
+    $(function() {
+        jQuery(".fa-podcast[title]").tooltip();
+        jQuery(".fa-heart[title]").tooltip();
+        jQuery(".fa-comment-alt[title]").tooltip();
+    });
 
-    // $('#CANVAS_long').click(function(){
-    //     console.log('onclick')
-        
-    //     var isVisible = $('.modal').is(':visible');
 
-    //     if(isVisible){
-    //         console.log("in focus")
-    //         wasOpened == true;
-    //     }
 
-    //     if(wasOpened==true && isVisible == true){
-    //         wasOpened=false;
-    //         window.location='/dashboard/0'
-    //     }
-
-    // })
-    
-
-    
-
-    $( ".dimage" )
+    $( "img" )
     .mouseover(function() {
+        
         $("#TOP_long").css('opacity', '.99');
         $( this ).css('opacity', '.6')
     });
 
-    $( ".dimage" )
+    $( "img" )
     .mouseleave(function() {
         $(this).css('opacity', '1')
     });
 
+    
 </script>
 </html>

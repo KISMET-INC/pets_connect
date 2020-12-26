@@ -184,7 +184,8 @@ def add_image(request, user_id):
         'user': User.objects.get(id=user_id),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
         'url': f'/dashboard/0',
-        'icon': 'fas fa-table'
+        'icon': 'fas fa-table',
+        'title': 'Dashboard'
     }
     return render(request,'add_image.html',context)
 
@@ -218,7 +219,8 @@ def dashboard(request,image_id):
             'images' : Image.objects.order_by("-created_at"),
             'current_image':current_image,
             'url': f'/users/add_image/{current_user.id}',
-            'icon': 'fas fa-camera'
+            'icon': 'fas fa-camera',
+            'title': 'Post Image'
         }
 
         if request.session['user_level'] == 0:

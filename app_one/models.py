@@ -132,7 +132,7 @@ class Image(models.Model):
 
     pet_img = ResizedImageField(size=[500, 500], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)
-    desc = models.CharField(max_length=255)
+    desc = models.CharField(max_length=5)
 
     loves = models.ManyToManyField(User, related_name="loves")
     likes = models.ManyToManyField(User, related_name="likes")

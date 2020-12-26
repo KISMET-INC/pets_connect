@@ -3,9 +3,17 @@
         <div>
             <h2>Pets Connect</h2>
             <div>
-                <a href = '{{url}}'><i style='font-size:25px' class="{{icon}}"></i></a>
-                <a href = '/logout'><i style='font-size:25px' class="fas fa-arrow-alt-circle-right"></i></a>
+                <a href = '{{url}}'><i data-placement="bottom" title= {{title}} class="{{icon}}"></i></a>
+                <a href = '/logout'><i class="fas fa-arrow-alt-circle-right" data-placement="bottom" title= 'Sign Out' ></i></a>
             </div>
         </div>
     </nav>
 </div>
+<script>
+    $(function() {
+
+        $(".fa-arrow-alt-circle-right[title]").tooltip();
+        $(".fa-table[title]").tooltip();
+        $(".fa-camera[title]").tooltip();
+    });
+</script>

@@ -8,11 +8,7 @@
                 <div class ='left'>
                     <img class="cropped2" src = {{current_image.pet_img.url}}>
                     <div class = 'stats'>
-                        <p>
-                            <a href="/process_like_love/{{current_image.id}}/0"><i class="fas fa-thumbs-up"></i></a> {{current_image.likes.count}} 
-                            <a href="/process_like_love/{{current_image.id}}/1"><i class="fas fa-heart"></i></a> {{current_image.loves.count}} 
-                            <button type = 'button' data-toggle='modal' data-target='#{{current_image.id}}' ><i class="fas fa-comment-alt"></i></button> {{current_image.comments.count}}
-                        </p>
+                       {% include 'stats.html' %}
                     </div>
                     <p>Posted by:{{current_image.user.user_name}}</p>
                     <p>{{current_image.desc}}</p>

@@ -49,13 +49,14 @@ Even when resized certain images are still stretched when changing the window si
 - [ ] Signed in username not show up on posts
 - [ ] Add favicon
 - [ ] Click out problem | fade problem | Reload problem
+- [ ] Nav tooltip too long
 ## Efficiency
 - [x] Learn how to make modular reusable code snippets
 - [x] Optimize Modals, Stats, Nav
 ## Changes
 - [x] Change First name to Username and remove Last Name
 ## Security
-- [ ] Data Validation for Comments and Images (Never Empty)
+- [ ] Data Validation for Comments and Images (Never Empty) 30chars
 - [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
 
 # Outside Libraries
