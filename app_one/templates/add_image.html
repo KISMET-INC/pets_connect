@@ -40,7 +40,7 @@
                     {% for image in images %}
                     <div class= 'dimage'>
 
-                        <img class='cropped' src = '{{ image.pet_img.url }}' >
+                        <img id={{image.id}} class='cropped' src = '{{ image.pet_img.url }}' >
 
                         <div class="stats">
                             <a class= "delete" href='\process_remove_image\{{image.id}}'><button type ='submit'><i class="fas fa-trash"> </i> Delete </button></a>

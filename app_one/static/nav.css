@@ -35,7 +35,7 @@ nav div {
     display:flex;
     justify-content: space-between;
     align-items:center;
-    width:70%;
+    width:90%;
 
 }
 
@@ -47,6 +47,7 @@ nav div div{
 
 
 nav h2 {
-    font-size: 20px;
     margin: 0px;
+    font-family: 'Damion', cursive;
+    font-size: 50px;
 }
