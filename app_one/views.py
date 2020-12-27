@@ -219,8 +219,8 @@ def dashboard(request,image_id):
             'images' : Image.objects.order_by("-created_at"),
             'current_image':current_image,
             'url': f'/users/add_image/{current_user.id}',
-            'icon': 'fas fa-camera',
-            'title': 'Post Image'
+            'icon': 'fas fa-cloud-upload-alt',
+            'title': 'Share'
         }
 
         if request.session['user_level'] == 0:
