@@ -18,8 +18,8 @@
             <div class = 'dashboard'>
                 {% for image in images %}
                     <div id= {{image.id}} class = dimage>
-                        <a href="/dashboard/{{image.id}}#{{image.id}}"><button type ='button'><img  class = 'cropped' src ={{image.pet_img.url}}></button></a>
-                        <div class="stats">
+                        <a href="/dashboard/{{image.id}}#{{image.id}}"><button type ='button'><img  id= 'img{{image.id}}' class = 'cropped' src ={{image.pet_img.url}}></button></a>
+                        <div id = 'stat{{image.id}}' class="stats">
                             <p class = 'name'>{{image.desc}}</p>
                             {% include 'stats.html' %}
                         </div>
@@ -31,8 +31,7 @@
     {% include 'modal.html' %}  
 </body>
 <script>
-
-
+        
     var current_image = '{{current_image.id}}'
     if (current_image != 0 ){
         $('#comment_modal').modal('show');
@@ -48,15 +47,21 @@
 
 
 
-    $( "img" )
+    $( ".dimage" )
     .mouseover(function() {
+        var id = $(this).attr('id');
+        var img = `#img${id}`
+        var stats = `#stat${id}`
         $("#TOP_long").css('opacity', '.99');
-        $( this ).css('opacity', '.6')
+        $( `${img}`).css('opacity', '.6')
+        $(`${stats}`).show()
     });
 
-    $( "img" )
+    $( ".dimage" )
     .mouseleave(function() {
-        $(this).css('opacity', '1')
+        var imgId = `#stat${$(this).attr('id')}`;
+        $( 'a button img').css('opacity', '1')
+        $(`${imgId}`).hide()
     });
 
     

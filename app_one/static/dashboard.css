@@ -1,10 +1,10 @@
 @import 'modal.css';
 @import 'stats.css';
 
-
 .stats {
-    display:none;
+    display: none;
 }
+
 #interface_block_one{
     height: fit-content;
     width: 100%;
@@ -32,6 +32,7 @@ button:focus {
     margin-bottom: 2px;
     width: 24.8%;
     border-radius: 5px;
+    background-color: black;
 }
 
 

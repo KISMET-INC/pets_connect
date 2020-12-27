@@ -352,4 +352,4 @@ def process_like_love(request,image_id,target_id):
 
     this_image.save();
 
-    return redirect (f'/dashboard/0')
+    return redirect (f'/dashboard/0#{image_id}')

@@ -1,35 +1,31 @@
 .stats {
     background-color: #E5E5E5;
-    padding: 10px;
+    position: relative;
+    top: -100px;
+    height:0px;
+    background:rgb(0, 0, 0, 0.3);
+    margin-right: 10px;
+    width: 100%;
+    z-index: 1;
 }
 
 .stats p {
-    color:#BFBFBF;
+    color: black;
     margin: 0px;
+    margin-bottom:-10px;
     padding: 0px;
     text-align: center;
     width: 100%;
-    margin-bottom:-10px;
     height: fit-content;
-}
-
-.stats {
-    background-color: #E5E5E5;
-    margin-right: 10px;
-    width: 100%;
-    padding: 10px 0px;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .stats p.name {
     font-family: 'Montserrat Alternates', sans-serif;   
     font-size: 14px;
     color: #BFBFBF;
-}
-
-.stats p {
-    font-size: 16px;
-    margin: 0px;
-    padding: 0px;
 }
 
 
