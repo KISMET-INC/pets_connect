@@ -1,5 +1,3 @@
-
-
 $( ".dimage" )
 .mouseover(function() {
     var id = $(this).attr('id');
@@ -8,7 +6,7 @@ $( ".dimage" )
     $("#TOP_long").css('opacity', '.99');
     $(".heading").css('opacity', '.99');
     $( `${img}`).css('opacity', '.6').click(function(){
-        window.location = `/dashboard/${id}`
+        window.location = `/explore/${id}`
     });
     $(`${stats}`).show()
 });

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% include 'headerlinks.html' %}
+    {% include 'scripts/headerlinks.html' %}
     <title>Pets Connect</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'global.css' %}">
-    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
 </head>
 <body>
     <div id="CANVAS_long">
-        {% include 'nav.html' %}
+        {% include 'modules/nav.html' %}
 
 
         <div id="interface_block_one">
@@ -37,20 +37,15 @@
 
             </div>
 
-
-                
-    
-            
             <h3>Your Posts</h3>
             <div class = 'dashboard'>
                 {% for image in images %}
-                    {%include 'image.html' %}
+                    {%include 'modules/image.html' %}
                 {% endfor %}
             </div>
 
-            {% include 'modal.html' %}
-
-
+            {% include 'modules/modal.html' %}
+            {% include 'scripts/reloadscript.html' %}
         </div> <!-- END INTERFACE -->
 
 

@@ -5,13 +5,11 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                {% for image in images %}
-                {% endfor %}
 
                 <div class ='left'>
                     <img class="cropped2" src = {{current_image.pet_img.url}}>
                     <div class = 'stats'>
-                       {% include 'stats.html' %}
+                       {% include 'modules/stats.html' %}
                     </div>
                     <p>Posted by:{{current_image.user.user_name}}</p>
                     <p>{{current_image.desc}}</p>

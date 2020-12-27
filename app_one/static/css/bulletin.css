@@ -1,0 +1,155 @@
+@import 'person.css';
+@import 'post.css';
+@import 'stats.css';
+
+#interface_block_two {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto; 
+}
+
+.bulletin_left {
+    width:60%;
+}
+.bulletin_left .following .person div.outline {
+    display:flex;
+    justify-content: center;
+    border: 2px solid teal;
+
+}
+
+.bulletin_left .post .person{
+    display:flex;
+    align-items: center;
+    width:200px;
+}
+
+.bulletin_right .followers .person {
+    width:75px;
+}
+
+.bulletin_left .post .person p,  .bulletin_right .followers .person p{
+    font-weight: bold;
+    font-size:14px;
+}
+
+.post {
+    margin-top: 50px;
+    border:1px solid grey;
+}
+.posts .user_img, .followers .person .user_img{
+    width:40px;
+    height:40px;
+}
+
+.user_img {
+    width:60px;
+    height:60px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    background-color: #E5E5E5;
+    padding-left: 20px;
+    position:static;
+    height:fit-content;
+    align-items: left;
+}
+.stats p {
+    color:#E5E5E5;
+    width:fit-content;
+}
+
+.stats h2 {
+    font-size: 14px;
+    margin:5px;
+}
+input {
+    height:40px;
+    width:100%;
+    margin: 0 auto; 
+    background-color:transparent;
+    border:none;
+    border-top: 1px solid black;
+}
+.following {
+    display:flex;
+    border:1px solid grey;
+    min-width: 70px;
+    padding:15px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
+
+.bulletin_right {
+    width: 40%;
+    padding-left: 50px;
+    display:flex;
+    flex-direction: column;
+    
+
+}
+.bulletin_right .followers h2:nth-child(1){
+    margin:0px;
+    font-size: 15px;
+    color: gray
+
+}
+
+
+
+.bulletin_right p{
+    margin: 0px;
+}
+
+.bulletin_right .followers .user_img {
+    margin-left:0px;
+}
+
+.user {
+    display:flex;
+    top: 105px;
+    align-items: center;
+}
+.user , .followers{
+    position:sticky;
+    
+}
+
+
+.followers {
+    width: 100%;
+    top:200px;
+}
+
+.followers div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.followers .person {
+    margin: 0px;
+}
+.bulletin_right .user .person .user_img {
+    margin: 0px;
+    margin-right: 20px;
+}
+.bulletin_right .user .person p {
+    display:none;
+}
+
+
+.bulletin_right .footer {
+    position:sticky;
+    top: 530px;
+}
+.bulletin_right .footer p{
+   margin-bottom:5px;
+   color:grey;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'scripts/headerlinks.html' %}
+    <title>Pets Connect</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/bulletin.css' %}">
+</head>
+<body>
+    <div id="CANVAS_long">
+        {% include 'modules/nav.html' %}
+        <div id="interface_block_two">
+
+            <div class = 'bulletin_left'>
+                <div class = 'following'>
+                    {% for image in user.images.all %}
+                        {% include 'modules/person.html' %}
+                    {% endfor %}
+                </div>
+
+                <div class = 'posts'>
+                    {% for image in user.images.all %}
+                        {% include 'modules/post.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class = 'bulletin_right'>
+                <div class = 'user'>
+                    {% include 'modules/person.html' %}
+                    <div>
+                        <h2>{{user.user_name}}</h2>
+                        <p>{{user.email}}</p>
+                    </div>
+                </div>
+                <div class = 'followers'>
+                    <div>
+                        <h3>Followers</h3>
+                        
+                        <p>See all {{user.images.all.count}} followers</p>
+                    </div>
+                    
+                    {% for image in user.images.all|slice:":5" %}
+                    <div class = 'user'>
+                        {% include 'modules/person.html' %}
+                        <div>
+                            <h2>{{image.name}}</h2>
+                            <p>follows you</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class = 'footer'>
+                    <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
+                    <p>© 2020 PETSCONNECT </p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

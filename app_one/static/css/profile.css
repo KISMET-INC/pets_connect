@@ -34,8 +34,8 @@
     background-color: white;
     display:flex;
     justify-content: space-between;
-    position:sticky;
-    top:75px;
+    /* position:sticky;
+    top:75px; */
     padding-top:50px;
     z-index: 3;
 }

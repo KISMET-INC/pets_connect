@@ -1,0 +1,52 @@
+<script>
+    var url = '{{url}}'
+    var current_image = '{{current_image.id}}'
+    console.log(url)
+    
+    if (current_image != 0 ){
+        $('#comment_modal').modal('show');
+    } 
+
+    $("#comment_modal").on('hidden.bs.modal', function(){
+        if(url.includes('explore')){
+            loadurl = `/explore/0`
+        } else if (url.includes('profile')){
+            loadurl = `/user/profile/{{user.id}}/0`
+        } else if (url.include('bulletin')){
+            loadurl = `/user/bulletin/{{user.id}}/0`
+        }
+        window.location = loadurl
+    });
+
+    $( ".dimage" )
+    .mouseover(function() {
+        var id = $(this).attr('id');
+        var img = `.open_modal${id}`
+        var stats = `#stat${id}`
+        console.log(id)
+        if(url.includes('explore')){
+            loadurl = `/explore/${id}`
+        } else if (url.includes('profile')){
+            loadurl = `/user/profile/{{user.id}}/${id}`
+        } else if (url.include('bulletin')){
+            loadurl = `/user/bulletin/{{user.id}}/${id}`
+        }
+
+        $("#TOP_long").css('opacity', '.99');
+        $(".heading").css('opacity', '.99');
+        $( `${img}`).css('opacity', '.6').click(function(){
+            window.location = loadurl
+            console.log("clicked")
+        });
+        $(`${stats}`).show()
+});
+
+$( ".dimage" )
+    .mouseleave(function() {
+    var id = $(this).attr('id');
+    var stats = `#stat${id}`
+    var img = `.open_modal${id}`
+    $( `${img}`).css('opacity', '1')
+    $(`${stats}`).hide()
+});
+</script>
