@@ -1,0 +1,227 @@
+@import 'modal.css';
+@import 'stats.css';
+@import 'image.css';
+
+.stats {
+    display: none;
+    padding: 0px;
+}
+
+.stats p.name {
+    display:none;
+}
+
+.dimage {
+    width:19.5%;
+}
+
+#interface_block_one {
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto; 
+
+}
+#TOP_long {
+    background-color: white;
+    margin: 0px;
+}
+
+.heading {
+    margin: 0 auto; 
+    width: 100%;
+    height:fit-content;
+    background-color: white;
+    display:flex;
+    justify-content: space-between;
+    position:sticky;
+    top:75px;
+    padding-top:50px;
+    z-index: 3;
+}
+.profile_info {
+    display:flex;
+    align-items: center;
+    margin-bottom: 25px;
+    
+}
+.profile_info div p {
+    margin-top: 25px;
+}
+.user_img {
+    width:200px;
+    height: 200px;
+    background-color: #E5E5E5;
+    border-radius: 100px;
+    margin-right: 50px;   
+}
+
+
+form {
+    width:40%;
+    display:flex;
+    flex-direction: column;
+    border: 0px;
+    box-shadow: none;
+    background-color: white;
+}
+
+input {
+    width:100%;
+    align-self: left;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+p input{
+    height:20px;
+}
+
+.stats i.fa-trash::before {
+    color:#555555;
+    
+}
+
+
+button {
+    box-shadow: none;
+    border: none;
+    background-color:white; 
+    color:#555555;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+p button i {
+    font-size:17px;
+}
+form button {
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+    width: 100%;
+    margin: 0 auto; 
+}
+
+
+.dashboard {
+    display:flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: right;
+}
+
+.dashboard h3 {
+    display:block;
+}
+
+
+
+
+
+button i {
+    font-size:25px;
+    
+}
+
+
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1200px         
+/*******************************/
+@media (max-width: 1200px){
+    .iright .dimage {
+        width:100%;
+    }
+    .cropped {
+        object-position: 0% 0%; /* try 20px 10px */
+
+    }
+
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1075px         
+/*******************************/
+@media (max-width: 1075px){
+
+    #interface_block_two .iright{
+        width: 500px;
+    }
+
+    #interface_block_two .ileft {
+        width: 30%;
+        
+    }
+
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 960px         
+/*******************************/
+@media (max-width: 960px){
+
+    .dashboard {
+        flex-direction: column;
+        align-items: right;
+    }
+
+    #interface_block_two .iright{
+        width: 70%;
+    }
+
+    #interface_block_two .ileft {
+        width: 30%;
+        
+    }
+
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 960px         
+/*******************************/
+@media (max-width: 960px){
+
+    #interface_block_two {
+        width: 100%;
+        padding-top: 0px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #interface_block_two .ileft {
+
+        position: sticky;
+        top: 100px;
+        background-color: white;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    #interface_block_two .iright {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #TOP_long {
+        height: 100px;
+        margin-bottom: 0px;
+        background-color: white;
+    }
+
+    form {
+        margin: 0 auto; 
+        width: 70%;
+    }
+
+    .iright .dashboard {
+        padding: 0px;
+        flex-direction: unset;
+    }
+
+}
+
+

@@ -8,7 +8,7 @@
 .modal-dialog {
     width:fit-content;
     margin: auto;
-    margin-top: 105px;
+    margin-top: 3%;
    
 }
 
@@ -32,6 +32,7 @@
     width:100%;
     border: none;
     margin-left: -1px;
+    margin-top: -1px;
     border-radius: 5px 0px 0px 0px;
 }
 
@@ -95,7 +96,6 @@
     width:100%;
     margin: 0 auto; 
     overflow: scroll;
-    
 }
 
 .modal .comments p {

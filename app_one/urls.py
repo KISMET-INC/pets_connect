@@ -22,6 +22,7 @@ urlpatterns = [
     path('register', views.register),
     path('dashboard/admin', views.admin),
     path('users/new', views.new),
+    path('user/profile/<int:user_id>/<int:image_id>', views.profile),
     path('users/add_image/<int:user_id>', views.add_image),
     path('users/edit_user/<int:user_id>', views.edit_user),
     path('users/remove_user/<int:user_id>', views.process_remove_user),

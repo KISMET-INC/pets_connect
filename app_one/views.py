@@ -174,7 +174,7 @@ def new(request):
     return render(request,'new.html')
 
 #=============================================##
-# show()
+# add_image()
 #
 #=============================================##
 def add_image(request, user_id):
@@ -188,6 +188,22 @@ def add_image(request, user_id):
         'title': 'Dashboard'
     }
     return render(request,'add_image.html',context)
+
+#=============================================##
+# profile()
+#
+#=============================================##
+def profile(request, user_id, image_id):
+    context = {
+
+        'upload_pet_form': UploadPetForm(),
+        'user': User.objects.get(id=user_id),
+        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
+        'modal_url': f'/user/profile/{user_id}/',
+        'icon': 'fas fa-table',
+        'title': 'Dashboard'
+    }
+    return render(request,'profile.html',context)
 
 #=============================================##
 # edit_user()
@@ -214,11 +230,11 @@ def dashboard(request,image_id):
         else:
             current_image = 0;
         context = {
-            'current_user': current_user,
+            'user': current_user,
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
             'current_image':current_image,
-            'url': f'/users/add_image/{current_user.id}',
+            'modal_url': f'/dashboard/',
             'icon': 'fas fa-cloud-upload-alt',
             'title': 'Share'
         }
@@ -305,7 +321,7 @@ def process_add_image(request):
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
     this_image.save()
 
-    return redirect (f'/users/add_image/{current_user.id}')
+    return redirect (f'/user/profile/{current_user.id}/0')
 
 
 #=============================================##

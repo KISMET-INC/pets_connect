@@ -1,9 +1,12 @@
 <!-- MODAL -->
+
 <div id="comment_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
+                {% for image in images %}
+                {% endfor %}
 
                 <div class ='left'>
                     <img class="cropped2" src = {{current_image.pet_img.url}}>
@@ -41,3 +44,7 @@
     </div>
 </div>
 <!-- END MODAL -->
+
+<script>
+
+</script>

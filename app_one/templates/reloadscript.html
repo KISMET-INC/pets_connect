@@ -1,0 +1,10 @@
+<script> 
+    var current_image = '{{current_image.id}}'
+    if (current_image != 0 ){
+        $('#comment_modal').modal('show');
+    } 
+
+    $("#comment_modal").on('hidden.bs.modal', function(){
+        window.location = '/dashboard/0'
+    });
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'headerlinks.html' %}
+    <title>Pets Connect</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+</head>
+<body>
+    <div id="CANVAS_long">
+        {% include 'nav.html' %}
+
+
+        <div id="interface_block_one">
+            <div class = 'heading'>
+                <div class = 'profile_info'>
+                    <div class = 'user_img'></div>
+                    <div>
+                        <h2>{{user.user_name}}</h2> 
+                        <h2>{{user.email}}</h2>
+                        <p>followers <b>5</b> following <b>10 </b> posts <b>{{user.images.all.count}} </b> likes: <b>17</b></p>
+                    </div>
+                </div>
+
+                <form enctype="multipart/form-data" action = '\process_add_image' method ='post'>
+                    <h3>Share Your Pet</h3>
+                    {% csrf_token %}     
+                        <input type='text' name ='name' placeholder="Pets name..">
+                        <input name = 'desc' placeholder="Description..">
+                        <input type="hidden" name = 'user_id' value= '{{user.id}}'>
+                        {{ upload_pet_form.as_p}}           
+                        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
+                </form>
+
+            </div>
+
+
+                
+    
+            
+            <h3>Your Posts</h3>
+            <div class = 'dashboard'>
+                {% for image in images %}
+                    {%include 'image.html' %}
+                {% endfor %}
+            </div>
+
+            {% include 'modal.html' %}
+
+
+        </div> <!-- END INTERFACE -->
+
+
+    </div>  <!-- END CANVAS -->
+</body>
+
+</html>

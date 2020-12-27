@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'global.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    
 </head>
 <body>
 
@@ -17,53 +18,13 @@
         <div id="interface_block_one">
             <div class = 'dashboard'>
                 {% for image in images %}
-                    <div id= {{image.id}} class = dimage>
-                        <a href="/dashboard/{{image.id}}#{{image.id}}"><button type ='button'><img  id= 'img{{image.id}}' class = 'cropped' src ={{image.pet_img.url}}></button></a>
-                        <div id = 'stat{{image.id}}' class="stats">
-                            <p class = 'name'>{{image.desc}}</p>
-                            {% include 'stats.html' %}
-                        </div>
-                    </div>  
+                    {% include 'image.html' %}
                 {% endfor %}
-                </div>  
-        </div>  <!-- END INTEFACE -->
+            </div>  <!-- END INTEFACE -->
 
-    {% include 'modal.html' %}  
+    {% include 'modal.html' %} 
+    {% include 'reloadscript.html' %} 
 </body>
-<script>
-        
-    var current_image = '{{current_image.id}}'
-    if (current_image != 0 ){
-        $('#comment_modal').modal('show');
-        
-    } 
-    
+<script src="/static/js/image.js"></script>
 
-    $(function() {
-        jQuery(".fa-podcast[title]").tooltip();
-        jQuery(".fa-heart[title]").tooltip();
-        jQuery(".fa-comment-alt[title]").tooltip();
-    });
-
-
-
-    $( ".dimage" )
-    .mouseover(function() {
-        var id = $(this).attr('id');
-        var img = `#img${id}`
-        var stats = `#stat${id}`
-        $("#TOP_long").css('opacity', '.99');
-        $( `${img}`).css('opacity', '.6')
-        $(`${stats}`).show()
-    });
-
-    $( ".dimage" )
-    .mouseleave(function() {
-        var imgId = `#stat${$(this).attr('id')}`;
-        $( 'a button img').css('opacity', '1')
-        $(`${imgId}`).hide()
-    });
-
-    
-</script>
 </html>
