@@ -1,21 +1,48 @@
 <script>
+
+$(window).on('load', function() {
+    $(window).scrollTop(1500);
+    
+});
+
+
+$("button").click(function(){
+    var top = $(window).scrollTop()
+    console.log(top)
+});
+
     var url = '{{url}}'
     var current_image = '{{current_image.id}}'
-    console.log(url)
     
     if (current_image != 0 ){
         $('#comment_modal').modal('show');
     } 
+    
+    if(url.includes('bulletin')){
+        $( 'p button').mouseover(function() {
+            var img_id = $(this).attr('id');
+            loadurl =`/user/bulletin/{{user.id}}/${img_id}`
+        }).click(function() {
+           
+            window.location = loadurl
+        })
+
+    }
 
     $("#comment_modal").on('hidden.bs.modal', function(){
         if(url.includes('explore')){
             loadurl = `/explore/0`
+            window.location = loadurl  // not DRY but smoother UI this way
+            
         } else if (url.includes('profile')){
             loadurl = `/user/profile/{{user.id}}/0`
-        } else if (url.include('bulletin')){
+            window.location = loadurl  
+        } else if (url.includes('bulletin')){
             loadurl = `/user/bulletin/{{user.id}}/0`
+            
+            window.location = loadurl  
         }
-        window.location = loadurl
+        
     });
 
     $( ".dimage" )
@@ -28,9 +55,7 @@
             loadurl = `/explore/${id}`
         } else if (url.includes('profile')){
             loadurl = `/user/profile/{{user.id}}/${id}`
-        } else if (url.include('bulletin')){
-            loadurl = `/user/bulletin/{{user.id}}/${id}`
-        }
+        } 
 
         $("#TOP_long").css('opacity', '.99');
         $(".heading").css('opacity', '.99');

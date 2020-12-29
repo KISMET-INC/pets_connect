@@ -5,16 +5,16 @@
     <div class = 'stats'>
         {% include 'modules/stats.html' %}
         <p>{{image.likes.count}} loves</p>
+        
         {% for comment in image.comments.all|slice:":3" %}
-        <h2>{{comment.user.user_name}}: <span>{{comment.text}}</span></h2>
+            <h2>{{comment.user.user_name}}: <span>{{comment.text}}</span></h2>
         {% endfor %}
-        {% if image.comments.all.count > 3 %}
-        <h3><a Show all {{image.comments.count}} comments </h3>
-        {% endif %}
-        <input placeholder="Add a comment">
 
-        {% include 'modules/modal.html' %}
-        {% include 'scripts/reloadscript.html' %}
+        {% if image.comments.all.count > 3 %}
+            <h3><a Show all {{image.comments.count}} comments </h3>
+        {% endif %}
+
+        <input placeholder="Add a comment">
 
     </div>
 </div>

@@ -229,9 +229,18 @@ def edit_user(request,user_id):
 #
 #=============================================##
 def bulletin(request,user_id,image_id):
+
+    current_user = User.objects.get(id=request.session['user_id'])
+    if image_id != 0:
+        current_image = Image.objects.get(id=image_id)
+    else:
+        current_image = 0;
+
+
     context = {
-        'current_user' : User.objects.get(id=request.session['user_id']),
-        'user': User.objects.get(id=user_id)
+        'user': User.objects.get(id=user_id),
+        'url' : f'/user/bulletin/{user_id}/{image_id}',
+        'current_image': current_image
     }
     return render(request,'bulletin.html',context)
 

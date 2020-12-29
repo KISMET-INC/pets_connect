@@ -2,6 +2,7 @@
 @import 'post.css';
 @import 'stats.css';
 
+
 #interface_block_two {
     display: flex;
     justify-content: space-between;
@@ -10,7 +11,8 @@
 }
 
 .bulletin_left {
-    width:60%;
+    width:65%;
+    
 }
 .bulletin_left .following .person div.outline {
     display:flex;
@@ -77,16 +79,19 @@ input {
 }
 .following {
     display:flex;
+    height:120px;
     border:1px solid grey;
     min-width: 70px;
     padding:15px;
     padding-bottom: 20px;
     border-radius: 5px;
     flex-wrap: wrap;
+    overflow: scroll;
+
 }
 
 .bulletin_right {
-    width: 40%;
+    width: 35%;
     padding-left: 50px;
     display:flex;
     flex-direction: column;
@@ -152,4 +157,14 @@ input {
 .bulletin_right .footer p{
    margin-bottom:5px;
    color:grey;
+}
+
+@media (max-width:1000px){
+    .bulletin_left {
+        width: 70%;
+        margin: 0 auto; 
+    }
+    .bulletin_right{
+        display:none;
+    }
 }
