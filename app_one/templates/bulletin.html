@@ -13,17 +13,19 @@
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
-
+           
             <div class = 'bulletin_left'>
                 <div class = 'following'>
-                    {% for image in user.images.all %}
+                    {% for user in user.is_following.all %}
                         {% include 'modules/person.html' %}
                     {% endfor %}
                 </div>
 
                 <div class = 'posts'>
-                    {% for image in user.images.all %}
-                        {% include 'modules/post.html' %}
+                    {% for user in user.is_following.all %}
+                        {% for image in user.images.all %}
+                            {% include 'modules/post.html' %}
+                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>
@@ -40,14 +42,14 @@
                     <div>
                         <h3>Followers</h3>
                         
-                        <p>See all {{user.images.all.count}} followers</p>
+                        <p>See all {{user.being_followed.all.count}} followers</p>
                     </div>
                     
-                    {% for image in user.images.all|slice:":5" %}
+                    {% for user in user.being_followed.all|slice:":5" %}
                     <div class = 'user'>
                         {% include 'modules/person.html' %}
                         <div>
-                            <h2>{{image.name}}</h2>
+                            <h2>{{user.user_name}}</h2>
                             <p>follows you</p>
                         </div>
                     </div>

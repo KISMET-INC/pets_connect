@@ -399,3 +399,19 @@ def process_like_love(request,image_id,target_id):
     this_image.save();
 
     return redirect (f'/explore/0#{image_id}')
+
+#=============================================##
+# process_follow()
+# return redirect('/')
+#=============================================##
+def process_follow(request,image_id,user_to_follow_id):
+
+    this_user = User.objects.get(id= request.session['user_id'])
+    user_to_follow = User.objects.get(id= user_to_follow_id)
+
+    this_user.is_following.add(user_to_follow);
+    user_to_follow.being_followed.add(this_user);
+    this_user.save()
+    user_to_follow.save()
+
+    return redirect (f'/explore/0#{image_id}')

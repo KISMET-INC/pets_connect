@@ -129,6 +129,7 @@ input {
 .followers {
     width: 100%;
     top:200px;
+    height: 350px;
 }
 
 .followers div:nth-child(1) {

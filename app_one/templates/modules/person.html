@@ -1,12 +1,12 @@
 <div class = 'person'>
     <div class = 'outline'>
             <a href = '/user/profile/{{image.user.id}}/0'>
-                {% if image.pet_img.url != none %}
+                {% if user.img.url != none %}
                 <img class = 'user_img' src = {{image.pet_img.url}}>
                 {% else %}
                 <div class = 'user_img'></div>
                 {% endif %}
             </a>
         </div>
-        <p>{{image.name}}</p>
+        <p>{{user.user_name}}</p>
     </div>

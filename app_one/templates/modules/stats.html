@@ -1,6 +1,6 @@
 
     <p>
-        <a href="/process_like_love/{{image.id}}/0"><i data-placement="bottom" class="fas fa-podcast" title ="Follow"></i></a> {{image.likes.count}} 
+        <a href="/process_follow/{{image.id}}/{{image.user.id}}"><i data-placement="bottom" class="fas fa-podcast" title ="Follow"></i></a> {{image.likes.count}} 
         <a href="/process_like_love/{{image.id}}/1"><i data-placement="bottom" class="fas fa-heart" title="Love"></i></a> {{image.loves.count}} 
         <button id = {{image.id}} class = 'open_modal{{image.id}}' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button> {{image.comments.count}}
     </p>

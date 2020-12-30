@@ -117,11 +117,16 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
-
+    
     user_name = models.CharField(max_length=30)
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
+
+    following = models.ManyToManyField("User", related_name="is_following")
+    followers = models.ManyToManyField("User", related_name="being_followed")
+    
+
     ## USER.IMAGES (bucket)
     ## USER.COMMENTS (bucket)
 

@@ -38,6 +38,7 @@ urlpatterns = [
     path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_add_comment', views.process_add_comment),
     path('process_like_love/<int:image_id>/<int:target_id>', views.process_like_love),
+    path('process_follow/<int:image_id>/<int:user_to_follow_id>', views.process_follow),
     
 
 ]
