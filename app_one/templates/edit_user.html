@@ -3,76 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit_user</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% include 'scripts/headerlinks.html' %}
+    <title>Pets Connect</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'global.css' %}">
-    <link rel="stylesheet" href="{% static 'edit_self.css' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
 </head>
 <body>
-
     <div id="CANVAS_long">
+        {% include 'modules/nav.html' %}
 
 
-
-        <div id="TOP_long">
-            <nav>
-                <h2>Pets Connect</h2>
-                <a href="/dashboard/admin">Dashboard</a>
-                <a href = '/logout'>Add Photo</a>
-                <a href='/users/edit_self'> Profile</a>
-                <a href = '/logout'>Log Off</a>
-            </nav>
-        </div>
-
-        <div class="edit">
-            <div id="interface_block_two">
-                <h2 class ='title'>[Admin] Edit User #{{user.id}}</h2>
-            <div> 
-                <h2 class ='form_h2'>Edit Information</h2> 
-                <form action="/process_edit_user" method="post">
-                    <!-- CHANGE 1 TO THIS USERS ID -->
-                {% csrf_token %}
-                <div class="form_row"><label class ='form_label' for = 'email'>Email Address </label> <input class='form_input' name = 'email' type = 'email' value='{{user.email}}'></div>
-                <div class="form_row"><label class ='form_label' for = 'first'>First Name </label> <input class='form_input' name = 'first' type = 'text' value='{{user.first_name}}'></div>
-                <div class="form_row"><label class ='form_label' for = 'last'>Last Name </label> <input class='form_input' name = 'last' type = 'text' value='{{user.last_name}}'></div>
-                <input type= "hidden" name='user_id' value = '{{user.id}}'>
-                <input type= "hidden" name='current_email' value = '{{user.email}}'>
-                <div class="form_row_button"><button class ='form_button' type ='submit'> Save </button></div>
-                </form>
-            </div>      <!-- END LEFT -->          
-                
-            
-            <div> 
-                <!-- CHANGE FORM TO PROCCESS PASSWORDD -->
-                <h2 class ='form_h2'>Change Password</h2>
-                <form action="/process_edit_password" method="post">
-                    {% csrf_token %}
-                    <div class="form_row"><label class ='form_label' for = 'pass'>Password </label> <input class='form_input' name = 'pass' type = 'password'></div>
-                    <div class="form_row"><label class ='form_label' for = 'confirm'>Confirm Password </label> <input class='form_input' name = 'confirm' type = 'password'></div>
-                    <input type= "hidden" name='user_id' value = '{{user.id}}'>
-                    <div class="form_row_button"><button class ='form_button' type ='submit'> Update Password </button></div>    
-                </form> 
+        <div id="interface_block_one edit_user">
+            <div class = 'heading'>
+                <div class = 'edit_profile_info'>
+                   {% include 'modules/user_img.html' %}
+                    <form enctype="multipart/form-data" action="/process_edit_user" method="post">
+                        {% csrf_token %}
+                        <input type= 'text' value = '{{user.user_name}}' name = 'user_name'> 
+                        <input type= 'text' value = '{{user.email}}' name = 'email'> 
+                        {{ user_upload_img.as_p}}
+                        <button type ='submit'> SUBMIT </button>
+                    </form>
                 </div>
 
-                {% if messages %}
-                <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-                </ul>
-                {% endif %}  
-            </div>    <!-- END RIGHT --> 
-            
-              
-            
-        </div> <!-- END INTERFACE -->
-        
-             
-       
+                
+
 
     </div>  <!-- END CANVAS -->
-    
 </body>
+
 </html>

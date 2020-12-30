@@ -6,5 +6,9 @@
     <div id = 'stat{{image.id}}' class = 'stats' >
         <p class = 'name'>{{image.desc}}</p>
         {% include 'modules/stats.html' %}
+        {% if delete != none %}
+        <a href='/process_remove_image/{{image.id}}'>Delete</p>
+        <a href='/process_edit_image/{{image.id}}'>Edit</p>
+        {% endif %}
     </div>
 </div>  

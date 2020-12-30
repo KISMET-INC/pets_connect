@@ -17,11 +17,12 @@
         <div id="interface_block_one">
             <div class = 'heading'>
                 <div class = 'profile_info'>
-                    <div class = 'user_img'></div>
+                    {% include 'modules/user_img.html' %}
                     <div>
                         <h2>{{user.user_name}}</h2> 
                         <h2>{{user.email}}</h2>
-                        <p>followers <b>5</b> following <b>10 </b> posts <b>{{user.images.all.count}} </b> likes: <b>17</b></p>
+                        <p>followers <b>{{user.being_followed.all.count}}</b> following <b>{{user.is_following.all.count}} </b> posts <b>{{user.images.all.count}} </b> likes: <b>{{user.loves.all.count}}</b></p>
+                        <a href='/users/edit_user/{{user.id}}'> EDIT PROFILE </a>
                     </div>
                 </div>
 

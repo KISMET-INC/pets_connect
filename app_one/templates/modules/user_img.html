@@ -1,0 +1,5 @@
+{% if user.user_img.url != none %}
+    <img src ='{{user.user_img.url}}' class = 'user_img'>
+{% else %}
+    <div class = 'user_img'></div>
+{% endif %}

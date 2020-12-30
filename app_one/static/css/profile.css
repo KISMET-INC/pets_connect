@@ -53,7 +53,7 @@
     height: 200px;
     background-color: #E5E5E5;
     border-radius: 100px;
-    margin-right: 50px;   
+    margin-right: 50px;  
 }
 
 
@@ -126,7 +126,9 @@ button i {
 }
 
 
-
+.edit_profile_info {
+    display:flex;
+}
 
 /*******************************/
 /*  MEDIA BREAKPOINT 1200px         

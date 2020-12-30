@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.db.models import Sum
 from .models import *
 import bcrypt
 from .forms import *
@@ -99,7 +100,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/explore/admin')
-            return redirect('/explore/0')
+            return redirect(f'/user/bulletin/{this_user.id}/0')
 
 
 #=============================================##
@@ -198,17 +199,19 @@ def profile(request, user_id, image_id):
         current_image = Image.objects.get(id=image_id)
     else:
         current_image = 0
+    images = Image.objects.filter(user = user_id).order_by("-created_at");
 
     context = {
 
         'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
-        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
+        'images': images,
         'current_image': current_image,
         'modal_url': f'/user/profile/{user_id}/',
         'icon': 'fas fa-table',
         'title': 'explore',
-        'url': f'/user/profile/{user_id}/{image_id}'        
+        'url': f'/user/profile/{user_id}/{image_id}',
+        'delete': True     
     }
     return render(request,'profile.html',context)
 
@@ -219,7 +222,8 @@ def profile(request, user_id, image_id):
 def edit_user(request,user_id):
     context = {
         'current_user' : User.objects.get(id=request.session['user_id']),
-        'user': User.objects.get(id=user_id)
+        'user': User.objects.get(id=user_id),
+        'user_upload_img' : UploadUserImgForm(),
     }
     return render(request,'edit_user.html',context)
 
@@ -315,21 +319,19 @@ def process_edit_password(request):
 # return redirect('/')
 #=============================================##
 def process_edit_user(request):
-    user = User.objects.get(id=request.POST['user_id'])
+    user = User.objects.get(id=request.session['user_id'])
     post = request.POST
-    errors = User.objects.basic_validator_edit_user(post)
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect(f'/users/edit_user/{user.id}')
-    else:
+    user_upload_img = UploadUserImgForm(request.POST, request.FILES)
         
-        user.email = request.POST['email']
-        user.first_name = request.POST['first']
-        user.last_name = request.POST['last']
-        user.save()
+    user.email = request.POST['email']
+    user.user_name = request.POST['user_name']
+    user.user_img = request.FILES['user_img']
+    print(request.FILES)
 
-        return redirect(f'/explore/0')
+
+    user.save()
+
+    return redirect(f'/user/profile/{user.id}/0')
 
 #=============================================##
 # process_edit_self()
@@ -363,7 +365,7 @@ def process_remove_image(request,image_id):
     user_id = request.session['user_id']
     this_image = Image.objects.get(id=image_id)
     this_image.delete()
-    return redirect (f'/users/add_image/{user_id}')
+    return redirect (f'/user/profile/{user_id}/0')
 
 #=============================================##
 # process_add_comment()
