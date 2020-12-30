@@ -1,15 +1,6 @@
 <script>
 
-$(window).on('load', function() {
-    $(window).scrollTop(1500);
-    
-});
 
-
-$("button").click(function(){
-    var top = $(window).scrollTop()
-    console.log(top)
-});
 
     var url = '{{url}}'
     var current_image = '{{current_image.id}}'
@@ -17,13 +8,12 @@ $("button").click(function(){
     if (current_image != 0 ){
         $('#comment_modal').modal('show');
     } 
-    
+
     if(url.includes('bulletin')){
         $( 'p button').mouseover(function() {
             var img_id = $(this).attr('id');
             loadurl =`/user/bulletin/{{user.id}}/${img_id}`
         }).click(function() {
-           
             window.location = loadurl
         })
 
