@@ -11,22 +11,31 @@ Certain images are stretched instead of cropped using CSS styling only because t
 ### Solution:
 - Researched and found an pip environment library on github 'Django-resized' that crops images before uploading to the database. 
 - This solved the stretching problem because all files are resized to the same aspect ratio.
+***
 ### Problem: [12/22/20]
 Even when resized certain images are still stretched when changing the window size. It made me wonder if it a problem that lies within different types of jpg files.
 ### Solution:
 -  In models.py I changed the force_format to PNG in the Image class and even though files still have the jpg extenstion they no longer stretch
-
+***
+### Problem: [12/31/20]
+As project gets more complex and more data snippets begin to overlap. the include becomes a problem when using the snippet on different pages from where it gets different object paths to the same object.
+### Solution
+Used the With function on DJango template engine to set variables such as which user it represents before passing in if needed.
+***
 # What I Wish I Had Done Differently
 - Mapped out the responsive wireframe design before building the project
 - It proved difficult to make responsive after architeture is already built without responsiveness in mind
+- Build the program in REACT. THere is alot of routing in my app that would have been better recieved as an SPA with no loading flashes
 
 # What I've Learned So Far
 - I learned the basics of responsive design, my first project where I kept multiple device sizes in mind.
 - I learned how to effectively manipulate Bootstrap5 Modals
 - I learned how to organize my CSS code and target DOM elements more through hierarchy than through multiple class names
 - I learned to modularize my css for items that reoocurr across views.
+- I learned the 'include' tag in Django Template which alowed me to modularize code snippets
+- Although I didnt end up needing it, I learned how to make custom filter tags for template database queries using templatetags folder
   ## Problem 
-- Because I did more targeting through heirarchy, as the project got more complex and elements began to interfere with each other and wrong elements began to be targeted when CSS files were shared across views
+- Because I did more targeting through heirarchy, as the project got more complex and elements began to interfere with each other and wrong elements began to be targeted when CSS files were shared across views. 
   ## Solution
 - I realized the importance of planning the elements first so that overlapping CSS files do not interfere with each other. The targeting chain is extremely important for this. Classes and ID are needed and should be used strategically without being overused.
 
@@ -42,14 +51,21 @@ Even when resized certain images are still stretched when changing the window si
 - [X] Deploy and maintain on AWS EC2 server
 - [ ] Add hover titles to the nav bar
 - [ ] When page reloads user is still in same location in the feed
+- [ ] Integrate EDIT POST
+- [ ] Integrate Share POST
+- [ ] Add UNFOLLOW
 ## Bug Fixes
 - [X] Fix visual error in responsive design on landing page
 - [ ] Work on Debug Nginx Media problem
 - [x] Fix modal dialog size in dashboard
-- [ ] Signed in username not show up on posts
+- [x] Signed in username not show up on posts
 - [ ] Add favicon
-- [ ] Click out problem | fade problem | Reload problem
+- [x] Click out problem | Reload problem
+- [ ] fade problem
+- [ ] scroll problem
 - [ ] Nav tooltip too long
+- [ ] Make Edit and Delete on Image look nice
+- [ ] Fix render routing after interactions
 ## Efficiency
 - [x] Learn how to make modular reusable code snippets
 - [x] Optimize Modals, Stats, Nav
@@ -58,6 +74,7 @@ Even when resized certain images are still stretched when changing the window si
 ## Security
 - [ ] Data Validation for Comments and Images (Never Empty) 30chars
 - [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
+- [ ] Dont allow routing without signin
 
 # Outside Libraries
 ### Pillow
