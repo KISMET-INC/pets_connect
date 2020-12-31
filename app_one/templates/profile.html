@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+   
 </head>
 <body>
     <div id="CANVAS_long">
@@ -17,15 +18,26 @@
         <div id="interface_block_one">
             <div class = 'heading'>
                 <div class = 'profile_info'>
-                    {% include 'modules/user_img.html' %}
+                    
+                        {% with user=clicked_user %}
+                        {% include 'modules/user_img.html' %}
+                        {% endwith %}
+                    
+                  
+
+                        
+                    
                     <div>
-                        <h2>{{user.user_name}}</h2> 
-                        <h2>{{user.email}}</h2>
-                        <p>followers <b>{{user.being_followed.all.count}}</b> following <b>{{user.is_following.all.count}} </b> posts <b>{{user.images.all.count}} </b> likes: <b>{{user.loves.all.count}}</b></p>
-                        <a href='/users/edit_user/{{user.id}}'> EDIT PROFILE </a>
+                        <h2>{{clicked_user.user_name}}</h2> 
+                        <h2>{{clicked_user.email}}</h2>
+                        <p>followers <b>{{clicked_user.being_followed.all.count}}</b> following <b>{{clicked_user.is_following.all.count}} </b> posts <b>{{clicked_user.images.all.count}} </b> hearts: <b>{{clicked_user.loves.all.count}}</b></p>
+                        {% if session_user == clicked_user %}
+                        <a href='/users/edit_user/{{session_user.id}}'> EDIT PROFILE </a>
+                        {% endif %}
                     </div>
                 </div>
 
+                {% if session_user == clicked_user %}
                 <form enctype="multipart/form-data" action = '\process_add_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
@@ -35,10 +47,15 @@
                         {{ upload_pet_form.as_p}}           
                         <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
                 </form>
+                {% endif %}
 
             </div>
 
+            {% if session_user == clicked_user %}
             <h3>Your Posts</h3>
+            {% else %}
+            <h3>{{clicked_user.user_name}}'s Posts</h3>
+            {% endif %}
             <div class = 'dashboard'>
                 {% for image in images %}
                     {%include 'modules/image.html' %}
@@ -52,5 +69,4 @@
 
     </div>  <!-- END CANVAS -->
 </body>
-
 </html>

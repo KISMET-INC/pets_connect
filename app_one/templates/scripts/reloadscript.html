@@ -1,57 +1,51 @@
 <script>
 
-
-    var url = '{{url}}'
+    var url_location = '{{location}}'
     var image = '{{image.id}}'
+  
+    
     
     if (image != 0 ){
         $('#comment_modal').modal('show');
     } 
 
-    if(url.includes('bulletin')){
+    if(url_location == 'bulletin'){
         $( 'p button').mouseover(function() {
             var img_id = $(this).attr('id');
-            loadurl =`/user/bulletin/{{user.id}}/${img_id}`
+            loadurl =`/user/${url_location}/{{session_user.id}}/${img_id}`
         }).click(function() {
             window.location = loadurl
         })
 
     }
 
-    $("#comment_modal").on('hidden.bs.modal', function(){
-        if(url.includes('explore')){
-            loadurl = `/explore/0`
-            window.location = loadurl  // not DRY but smoother UI this way
-            
-        } else if (url.includes('profile')){
-            loadurl = `/user/profile/{{user.id}}/0`
-            window.location = loadurl  
-        } else if (url.includes('bulletin')){
-            loadurl = `/user/bulletin/{{user.id}}/0`
-            
-            window.location = loadurl  
-        }
+    $("#comment_modal").on('hidden.bs.modal', function(e){
+        if(url_location == 'explore'){
+            window.history.pushState({}, '', '/explore/0')
+        } else {
+            loadurl = `/user/${url_location}/{{session_user.id}}/0`
+            window.history.pushState({}, '', loadurl)
+        } 
+        
         
     });
 
-
+            
     $( ".dimage" )
     .mouseover(function() {
-        var id = $(this).attr('id');
-        var img = `.open_modal${id}`
-        var stats = `#stat${id}`
-        console.log(id)
-        if(url.includes('explore')){
-            loadurl = `/explore/${id}`
-        } else if (url.includes('profile')){
-            loadurl = `/user/profile/{{user.id}}/${id}`
+        var img_id = $(this).attr('id');
+        var img = `.open_modal${img_id}`
+        var stats = `#stat${img_id}`
+        if(url_location == 'explore'){
+            loadurl = `/explore/${img_id}`
+        } else {
+            loadurl = `/user/${url_location}/{{session_user.id}}/${img_id}`
         } 
 
         $("#TOP_long").css('opacity', '.99');
         $(".heading").css('opacity', '.99');
         $( `${img}`).css('opacity', '.6').click(function(){
             window.location = loadurl
-            console.log("clicked")
         });
         $(`${stats}`).show()
     });
@@ -64,5 +58,5 @@
         $( `${img}`).css('opacity', '1')
         $(`${stats}`).hide()
     });
-
+    
 </script>

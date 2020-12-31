@@ -17,11 +17,13 @@
         <div id="interface_block_one edit_user">
             <div class = 'heading'>
                 <div class = 'edit_profile_info'>
-                   {% include 'modules/user_img.html' %}
+                    {% with user=session_user %}
+                        {% include 'modules/user_img.html' %}
+                    {% endwith %}
                     <form enctype="multipart/form-data" action="/process_edit_user" method="post">
                         {% csrf_token %}
-                        <input type= 'text' value = '{{user.user_name}}' name = 'user_name'> 
-                        <input type= 'text' value = '{{user.email}}' name = 'email'> 
+                        <input type= 'text' value = '{{session_user.user_name}}' name = 'user_name'> 
+                        <input type= 'text' value = '{{session_user.email}}' name = 'email'> 
                         {{ user_upload_img.as_p}}
                         <button type ='submit'> SUBMIT </button>
                     </form>

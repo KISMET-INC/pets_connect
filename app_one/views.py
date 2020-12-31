@@ -182,7 +182,7 @@ def add_image(request, user_id):
     context = {
 
         'upload_pet_form': UploadPetForm(),
-        'user': User.objects.get(id=user_id),
+        'session_user': User.objects.get(id=request.session['user_id']),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
         'url': f'/explore/0',
         'icon': 'fas fa-table',
@@ -195,6 +195,7 @@ def add_image(request, user_id):
 #
 #=============================================##
 def profile(request, user_id, image_id):
+    session_user = User.objects.get(id=request.session['user_id'])
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
@@ -204,13 +205,13 @@ def profile(request, user_id, image_id):
     context = {
 
         'upload_pet_form': UploadPetForm(),
-        'user': User.objects.get(id=user_id),
+        'session_user': session_user,
+        'clicked_user' : User.objects.get(id=user_id),
         'images': images,
         'image': current_image,
-        'modal_url': f'/user/profile/{user_id}/',
         'icon': 'fas fa-table',
         'title': 'explore',
-        'url': f'/user/profile/{user_id}/{image_id}',
+        'location': 'profile',
         'delete': True     
     }
     return render(request,'profile.html',context)
@@ -221,8 +222,7 @@ def profile(request, user_id, image_id):
 #=============================================##
 def edit_user(request,user_id):
     context = {
-        'current_user' : User.objects.get(id=request.session['user_id']),
-        'user': User.objects.get(id=user_id),
+        'session_user' : User.objects.get(id=request.session['user_id']),
         'user_upload_img' : UploadUserImgForm(),
     }
     return render(request,'edit_user.html',context)
@@ -234,22 +234,20 @@ def edit_user(request,user_id):
 #=============================================##
 def bulletin(request,user_id,image_id):
 
-    current_user = User.objects.get(id=request.session['user_id'])
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
         current_image = 0;
 
-    query = Image.objects.all()
-
-
-    
-
     context = {
-        'user': User.objects.get(id=user_id),
+        'session_user': User.objects.get(id=request.session['user_id']),
+        'selected_user': User.objects.get(id=user_id),
         'url' : f'/user/bulletin/{user_id}/{image_id}',
         'image': current_image,
-        'images': Image.objects.order_by("-created_at")
+        'images': Image.objects.order_by("-created_at"),
+        'location': 'bulletin',
+
+
     }
     return render(request,'bulletin.html',context)
 
@@ -258,7 +256,7 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request,image_id):
+def explore(request, image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
@@ -268,12 +266,11 @@ def explore(request,image_id):
         else:
             current_image = 0;
         context = {
-            'user': current_user,
+            'session_user': current_user,
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
             'image':current_image,
-            'url': f'/explore/{image_id}',
-            'modal_url': f'/explore/',
+            'location': 'explore',
             'icon': 'fas fa-cloud-upload-alt',
             'title': 'Share'
         }
@@ -330,8 +327,8 @@ def process_edit_user(request):
         
     user.email = request.POST['email']
     user.user_name = request.POST['user_name']
-    user.user_img = request.FILES['user_img']
-    print(request.FILES)
+    if request.FILES:
+        user.user_img = request.FILES['user_img']
 
 
     user.save()

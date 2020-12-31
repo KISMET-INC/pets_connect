@@ -1,6 +1,8 @@
 
 <div class = 'post'>
+    {% with user=image.user %}
     {% include 'modules/person.html' %}
+    {% endwith %}
     <img src = '{{image.pet_img.url}}'>
     <div class = 'stats'>
         {% include 'modules/stats.html' %}

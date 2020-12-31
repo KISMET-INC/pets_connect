@@ -1,9 +1,12 @@
-    {% if user in image.user.being_followed.all %}
+    {% if session_user == image.user %}
     <p>
-        <a><i data-placement="bottom" class="fas fa-podcast" title ="Already Followed"></i></a> {{image.user.being_followed.count}} 
-        <a href="/process_like_love/{{image.id}}/1"><i data-placement="bottom" class="fas fa-heart" title="Love"></i></a> {{image.loves.count}} 
+        <i data-placement="bottom" class="fas fa-podcast" title ="Follows"></i>  {{image.user.being_followed.count}}  
+        <i data-placement="bottom" class="fas fa-heart" title="Love"></i> {{image.loves.count}} 
         <button id = {{image.id}} class = 'open_modal{{image.id}}' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button> {{image.comments.count}}
     </p>
+    <a href='/process_remove_image/{{image.id}}'>Delete</a>
+    <a href='/process_edit_image/{{image.id}}'>Edit</a>
+
     {% else %}
     <p>
         <a href="/process_follow/{{image.id}}/{{image.user.id}}"><i data-placement="bottom" class="fas fa-podcast" title ="Follow"></i></a>  {{image.user.being_followed.count}}  

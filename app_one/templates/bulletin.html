@@ -16,14 +16,14 @@
            
             <div class = 'bulletin_left'>
                 <div class = 'following'>
-                    {% for user in user.is_following.all %}
+                    {% for user in session_user.is_following.all %}
                         {% include 'modules/person.html' %}
                     {% endfor %}
                 </div>
 
                 <div class = 'posts'>
                     {% for image in images %}
-                    {% if user in image.user.being_followed.all %}
+                    {% if session_user in image.user.being_followed.all %}
                             {% include 'modules/post.html' %}
                         {% endif %}
                     {% endfor %}
@@ -32,10 +32,12 @@
 
             <div class = 'bulletin_right'>
                 <div class = 'user'>
-                    {% include 'modules/person.html' %}
+                    {% with user=session_user %}
+                        {% include 'modules/person.html' %}
+                    {% endwith %}
                     <div>
-                        <h2>{{user.user_name}}</h2>
-                        <p>{{user.email}}</p>
+                        <h2>{{session_user.user_name}}</h2>
+                        <p>{{session_user.email}}</p>
                     </div>
                 </div>
                 <div class = 'followers'>
@@ -45,7 +47,7 @@
                         <p>See all {{user.being_followed.all.count}} followers</p>
                     </div>
                     
-                    {% for user in user.being_followed.all|slice:":5" %}
+                    {% for user in session_user.being_followed.all|slice:":5" %}
                     <div class = 'user'>
                         {% include 'modules/person.html' %}
                         <div>
