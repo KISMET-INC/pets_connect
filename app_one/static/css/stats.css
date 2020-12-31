@@ -9,11 +9,9 @@
     z-index: 1;
 }
 
-.stats p {
-    color: black;
-    margin: 0px;
-    margin-bottom:-10px;
-    padding: 0px;
+
+.stats p, .edit_stats {
+    color:#BFBFBF;
     text-align: center;
     width: 100%;
     height: fit-content;
@@ -22,7 +20,11 @@
     padding: 0px;
 }
 
-.stats p.name {
+.stats div a {
+    width: fit-content;
+}
+
+.stats p.name , .stats div a  {
     font-family: 'Montserrat Alternates', sans-serif;   
     font-size: 14px;
     color: #BFBFBF;
@@ -35,6 +37,7 @@
     width:fit-content;
     height: fit-content;
     margin: 0px;
+    margin-left: 5px;
     padding: 0px;
     border:none;
     box-shadow: none;

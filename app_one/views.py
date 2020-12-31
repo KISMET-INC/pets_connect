@@ -72,10 +72,8 @@ def logout(request):
 # to process_signin page on success
 #=============================================##
 def process_signin(request):
-    post = request.POST
-    user = User.objects.filter(email = post['email'])
-    errors = User.objects.basic_validator_login(post)
-    print(errors)
+    user = User.objects.filter(email = request.POST['email'])
+    errors = User.objects.basic_validator_login(request.POST)
 
     if len(errors) > 0:
         for value in errors.values():
@@ -178,7 +176,6 @@ def edit_user(request,user_id):
 #
 #=============================================##
 def bulletin(request,user_id,image_id):
-
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
@@ -202,26 +199,28 @@ def bulletin(request,user_id,image_id):
 #
 #=============================================##
 def explore(request, user_id,image_id):
+
     if 'user_id' not in request.session:
         return redirect('/signin')
-    else:
-        current_user = User.objects.get(id=request.session['user_id'])
-        if image_id != 0:
-            current_image = Image.objects.get(id=image_id)
-        else:
-            current_image = 0;
-        context = {
-            'session_user': current_user,
-            'users' : User.objects.all(),
-            'images' : Image.objects.order_by("-created_at"),
-            'image':current_image,
-            'location': 'explore',
-            'icon': 'fas fa-cloud-upload-alt',
-            'title': 'Share'
-        }
 
-        if request.session['user_level'] == 0:
-            return render(request,'explore.html',context)
+    
+    current_user = User.objects.get(id=request.session['user_id'])
+    if image_id != 0:
+        current_image = Image.objects.get(id=image_id)
+    else:
+        current_image = 0;
+    context = {
+        'session_user': current_user,
+        'users' : User.objects.all(),
+        'images' : Image.objects.order_by("-created_at"),
+        'image':current_image,
+        'location': 'explore',
+        'icon': 'fas fa-cloud-upload-alt',
+        'title': 'Share'
+    }
+
+    if request.session['user_level'] == 0:
+        return render(request,'explore.html',context)
     return render(request,'admin.html',context)
 
 
@@ -232,34 +231,32 @@ def explore(request, user_id,image_id):
 #=============================================##
 def process_edit_password(request):
     errors = User.objects.basic_validator_passwords(request.POST)
-    print(request.POST['user_id'])
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
         return redirect(f'/edit_user/{request.POST["user_id"]}')
     else:
-        user = User.objects.get(id=request.POST['user_id'])
-        user.password = request.POST['pass']
+        session_user = User.objects.get(id=request.POST['user_id'])
+        session_user.password = request.POST['pass']
 
         
-    return redirect(f'/edit_user/{user.id}')
+    return redirect(f'/edit_user/{session_user.id}')
 
 #=============================================##
 # process_edit_user()
 # return redirect('/')
 #=============================================##
 def process_edit_user(request):
-    user = User.objects.get(id=request.session['user_id'])
-    post = request.POST
+    session_user = User.objects.get(id=request.session['user_id'])
     user_upload_img = UploadUserImgForm(request.POST, request.FILES)
         
-    user.email = request.POST['email']
-    user.user_name = request.POST['user_name']
+    session_user.email = request.POST['email']
+    session_user.user_name = request.POST['user_name']
     if request.FILES:
-        user.user_img = request.FILES['user_img']
-    user.save()
+        session_user.user_img = request.FILES['user_img']
+    session_user.save()
 
-    return redirect(f'/profile/{user.id}/0')
+    return redirect(f'/profile/{session_user.id}/0')
 
 
 #=============================================##
@@ -269,11 +266,11 @@ def process_edit_user(request):
 def process_add_image(request):
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
-    current_user = User.objects.get(id=request.session['user_id'])
-    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
 
-    return redirect (f'/profile/{current_user.id}/0')
+    return redirect (f'/profile/{session_user.id}/0')
 
 
 #=============================================##
@@ -281,25 +278,22 @@ def process_add_image(request):
 # return redirect('/')
 #=============================================##
 def process_remove_image(request,image_id):
-    post = request.POST
-    user_id = request.session['user_id']
+    session_user = request.session['user_id']
     this_image = Image.objects.get(id=image_id)
     this_image.delete()
-    return redirect (f'/profile/{user_id}/0')
+    return redirect (f'/profile/{session_user}/0')
 
 #=============================================##
 # process_add_comment()
 # return redirect('/')
 #=============================================##
 def process_add_comment(request):
-    post = request.POST
-    print(request.POST)
 
-    this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id = post['image_id'])
-    new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_image = Image.objects.get(id = request.POST['image_id'])
+    new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
 
-    return redirect (f'/explore/{this_image.id}')
+    return redirect (f'/explore/{session_user}/{this_image.id}')
 
 
 #=============================================##
@@ -307,20 +301,18 @@ def process_add_comment(request):
 # return redirect('/')
 #=============================================##
 def process_like_love(request,image_id,target_id):
-    post = request.POST
-    print(request.POST)
     
-    this_user = User.objects.get(id= request.session['user_id'])
+    session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id =image_id)
 
     if(target_id == 0):
-        this_image.likes.add(this_user) 
+        this_image.likes.add(session_user) 
     if(target_id == 1):
-        this_image.loves.add(this_user) 
+        this_image.loves.add(session_user) 
 
     this_image.save();
 
-    return redirect (f'/explore/0#{image_id}')
+    return redirect (f'/explore/{session_user}/0')
 
 #=============================================##
 # process_follow()
@@ -328,12 +320,13 @@ def process_like_love(request,image_id,target_id):
 #=============================================##
 def process_follow(request,image_id,user_to_follow_id):
 
-    this_user = User.objects.get(id= request.session['user_id'])
+    session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
 
-    this_user.is_following.add(user_to_follow);
-    user_to_follow.being_followed.add(this_user);
-    this_user.save()
+    session_user.is_following.add(user_to_follow);
+    user_to_follow.being_followed.add(session_user);
+    session_user.save()
     user_to_follow.save()
 
-    return redirect (f'/explore/0#{image_id}')
+    return redirect (f'explore/{session_user.id}/')
+

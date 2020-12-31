@@ -41,7 +41,7 @@ img.cropped {
     border-radius: 5px 5px 0px 0px;
 }
 
-.dashboard .dimage button {
+/* .dashboard .dimage button {
     padding: 0px;
     margin: 0px;
     box-shadow: none;
@@ -49,7 +49,7 @@ img.cropped {
     height:fit-content;
     width: fit-content;
     background-color: transparent;
-}
+} */
 
 /*******************************/
 /*  MEDIA BREAKPOINT 1110px         

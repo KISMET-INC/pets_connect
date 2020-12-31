@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('profile/<int:user_id>/<int:image_id>', views.profile),
     path('edit_user/<int:user_id>', views.edit_user),
+    path('process_add_image', views.process_add_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_edit_user', views.process_edit_user),
     path('process_edit_password', views.process_edit_password),

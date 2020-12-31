@@ -4,8 +4,11 @@
         <i data-placement="bottom" class="fas fa-heart" title="Love"></i> {{image.loves.count}} 
         <button id = {{image.id}} class = 'open_modal{{image.id}}' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button> {{image.comments.count}}
     </p>
-    <a href='/process_remove_image/{{image.id}}'>Delete</a>
-    <a href='/process_edit_image/{{image.id}}'>Edit</a>
+    <div class = 'edit_stats'>
+        <a href='/process_remove_image/{{image.id}}'>Delete | </a>
+        <a href='/process_edit_image/{{image.id}}'>|  Edit</a>
+    </div>
+    
 
     {% else %}
     <p>

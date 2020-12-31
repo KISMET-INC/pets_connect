@@ -54,6 +54,8 @@ Used the With function on DJango template engine to set variables such as which 
 - [ ] Integrate EDIT POST
 - [ ] Integrate Share POST
 - [ ] Add UNFOLLOW
+- [ ] Add cancel button to Edit user
+- [ ] Add ability to change password
 ## Bug Fixes
 - [X] Fix visual error in responsive design on landing page
 - [ ] Work on Debug Nginx Media problem
