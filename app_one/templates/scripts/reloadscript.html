@@ -20,15 +20,10 @@
     }
 
     $("#comment_modal").on('hidden.bs.modal', function(e){
-        if(url_location == 'explore'){
-            window.history.pushState({}, '', '/explore/0')
-        } else {
-            loadurl = `/user/${url_location}/{{session_user.id}}/0`
+            loadurl = `/${url_location}/{{session_user.id}}/0`
             window.history.pushState({}, '', loadurl)
-        } 
+    }); 
         
-        
-    });
 
             
     $( ".dimage" )
@@ -36,11 +31,9 @@
         var img_id = $(this).attr('id');
         var img = `.open_modal${img_id}`
         var stats = `#stat${img_id}`
-        if(url_location == 'explore'){
-            loadurl = `/explore/${img_id}`
-        } else {
-            loadurl = `/user/${url_location}/{{session_user.id}}/${img_id}`
-        } 
+        
+        loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+        
 
         $("#TOP_long").css('opacity', '.99');
         $(".heading").css('opacity', '.99');

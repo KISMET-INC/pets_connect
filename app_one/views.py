@@ -5,17 +5,6 @@ from .models import *
 import bcrypt
 from .forms import *
 
-#=============================================##
-# read_all()
-# RENDERS table to see all users in database
-# with the ability to delete users
-#=============================================##
-def read_all(request):
-    context = {
-        'users': User.objects.all()
-    }
-    return render(request,'example_templates/read_all.html',context)
-
 
 #=============================================##
 # process_remove_user()
@@ -100,16 +89,8 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/explore/admin')
-            return redirect(f'/user/bulletin/{this_user.id}/0')
+            return redirect(f'/bulletin/{this_user.id}/0')
 
-
-#=============================================##
-# landing()
-# RENDERS login_reg.html
-#=============================================##
-def landing(request):
-    users = User.objects.all()
-    return render(request,'example_templates/login_reg.html')
 
 #=============================================##
 # END LOGIN DEFS
@@ -118,20 +99,6 @@ def landing(request):
 #=============================================##
 # START PAGE DEFS
 #=============================================##
-
-
-#=============================================##
-# main_page()
-# RENDERS books login html if User_iD
-# session key is avaiable
-# WITHOUT KEY REDIRECTS to root
-#=============================================##
-def main_page(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
-    else:
-        return render(request,'landing.html')
-
 
 
 
@@ -167,28 +134,6 @@ def admin(request):
     }
     return render(request,'admin.html',context)
 
-#=============================================##
-# new()
-#
-#=============================================##
-def new(request):   
-    return render(request,'new.html')
-
-#=============================================##
-# add_image()
-#
-#=============================================##
-def add_image(request, user_id):
-    context = {
-
-        'upload_pet_form': UploadPetForm(),
-        'session_user': User.objects.get(id=request.session['user_id']),
-        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
-        'url': f'/explore/0',
-        'icon': 'fas fa-table',
-        'title': 'explore'
-    }
-    return render(request,'add_image.html',context)
 
 #=============================================##
 # profile()
@@ -256,7 +201,7 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request, image_id):
+def explore(request, user_id,image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
@@ -279,23 +224,6 @@ def explore(request, image_id):
             return render(request,'explore.html',context)
     return render(request,'admin.html',context)
 
-#=============================================##
-# edit_self()
-#
-#=============================================##
-def edit_self(request):
-    context = {
-            'current_user': User.objects.get(id=request.session['user_id']),
-    }
-    return render(request,'edit_self.html',context)
-
-
-#=============================================##
-# remove_user()
-#
-#=============================================##
-def remove_user(request,user_id):
-    return render(request,'explore.html')
 
 
 #=============================================##
@@ -308,13 +236,13 @@ def process_edit_password(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/users/edit_user/{request.POST["user_id"]}')
+        return redirect(f'/edit_user/{request.POST["user_id"]}')
     else:
         user = User.objects.get(id=request.POST['user_id'])
         user.password = request.POST['pass']
 
         
-    return redirect(f'/users/show/{user.id}')
+    return redirect(f'/edit_user/{user.id}')
 
 #=============================================##
 # process_edit_user()
@@ -329,33 +257,23 @@ def process_edit_user(request):
     user.user_name = request.POST['user_name']
     if request.FILES:
         user.user_img = request.FILES['user_img']
-
-
     user.save()
 
-    return redirect(f'/user/profile/{user.id}/0')
+    return redirect(f'/profile/{user.id}/0')
 
-#=============================================##
-# process_edit_self()
-# return redirect('/')
-#=============================================##
-def process_edit_self(request):
-    return render(request,'process_edit_self.html')
 
 #=============================================##
 # process_add_image()
 # return redirect('/')
 #=============================================##
 def process_add_image(request):
-    post = request.POST
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
-
     current_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
     this_image.save()
 
-    return redirect (f'/user/profile/{current_user.id}/0')
+    return redirect (f'/profile/{current_user.id}/0')
 
 
 #=============================================##
@@ -367,7 +285,7 @@ def process_remove_image(request,image_id):
     user_id = request.session['user_id']
     this_image = Image.objects.get(id=image_id)
     this_image.delete()
-    return redirect (f'/user/profile/{user_id}/0')
+    return redirect (f'/profile/{user_id}/0')
 
 #=============================================##
 # process_add_comment()
