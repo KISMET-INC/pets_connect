@@ -17,15 +17,17 @@ urlpatterns = [
     path('process_signin', views.process_signin),
     path('process_remove_user/<int:user_id>', views.process_remove_user),
 
-    path('', views.home),
+    path('', views.landing),
     path('signin', views.signin),
     path('register', views.register),
-    path('dashboard/admin', views.admin),
+    path('explore/admin', views.admin),
     path('users/new', views.new),
+    path('user/profile/<int:user_id>/<int:image_id>', views.profile),
+    path('user/bulletin/<int:user_id>/<int:image_id>', views.bulletin),
     path('users/add_image/<int:user_id>', views.add_image),
     path('users/edit_user/<int:user_id>', views.edit_user),
     path('users/remove_user/<int:user_id>', views.process_remove_user),
-    path('dashboard/<int:image_id>', views.dashboard),
+    path('explore/<int:image_id>', views.explore),
     path('users/edit_self', views.edit_self),
     
 
@@ -36,6 +38,7 @@ urlpatterns = [
     path('process_remove_image/<int:image_id>', views.process_remove_image),
     path('process_add_comment', views.process_add_comment),
     path('process_like_love/<int:image_id>/<int:target_id>', views.process_like_love),
+    path('process_follow/<int:image_id>/<int:user_to_follow_id>', views.process_follow),
     
 
 ]

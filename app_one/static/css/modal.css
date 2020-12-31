@@ -1,16 +1,21 @@
+@import 'stats.css';
+
 .modal {
     width: 100%;
     
 }
 
 .modal-dialog {
-    width:80%;
+    width:fit-content;
     margin: auto;
-    margin-top: 105px;
+    margin-top: 3%;
+   
 }
 
 .modal-content {
     width:fit-content;
+    height:fit-content;
+    max-height: 500px;
     margin: 0 auto; 
 }
 
@@ -19,11 +24,15 @@
     display:flex;
     width:fit-content;
     height:fit-content;
+    max-height: 500px;
+   
 }
 
 .cropped2 {
     width:100%;
     border: none;
+    margin-left: -1px;
+    margin-top: -1px;
     border-radius: 5px 0px 0px 0px;
 }
 
@@ -68,6 +77,12 @@
     background-color: white;
 }
 
+.modal .right .top {
+    position:sticky;
+    top: 0;
+    background-color: white;
+}
+
 .modal .left p:nth-child(2) {
     color: #BFBFBF;
 }
@@ -77,11 +92,10 @@
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: 60%;
+    height: fit-content;
     width:100%;
     margin: 0 auto; 
     overflow: scroll;
-    
 }
 
 .modal .comments p {
@@ -90,6 +104,10 @@
     padding: 5px;
     margin-bottom: 10px;
 
+}
+
+.modal .no_comments {
+    background-color: white;
 }
 
 .modal .scroll {
@@ -129,7 +147,7 @@
     display: flex;
     width:90%;
     margin: 0 auto; 
-    margin-top:10px;
+    margin-bottom:15px;
 }
 
 /*******************************/
@@ -139,20 +157,29 @@
 
     .modal {
         scroll-behavior: none;
+        
+    }
+
+    .modal-content {
+        max-height: 800px;
+        height:fit-content;
     }
 
     .modal-dialog {
         width:69%;
         margin: 0 auto; 
-        margin-top:50px;
+        margin-top:50px;    
+        height:fit-content;
     }
 
     .modal-body {
         width: 100%;
         display: flex;
         flex-direction: column;
+        max-height: 800px;
+        height:fit-content;
         margin: 0 auto;
-        height: fit-content;     
+       
     }
 
     .modal .left {
@@ -181,10 +208,6 @@
         background-color:white;
         top:100px;
         font-size: 14px;
-    }
-
-    .cropped2 {
-        
     }
 
     .modal .comments {

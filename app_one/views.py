@@ -24,7 +24,7 @@ def read_all(request):
 def process_remove_user(request, user_id):
     this_user = User.objects.get(id = user_id)
     this_user.delete()
-    return redirect('/dashboard/0')
+    return redirect('/explore/0')
 
 
 #=============================================##
@@ -53,15 +53,15 @@ def process_register(request):
         new_user = User.objects.create(user_name=post['first'], password = hash, email = post['email'], user_level= user_level)
 
         if new_user.user_level == 9:
-            return redirect('/dashboard/admin')
+            return redirect('/explore/admin')
 
         if user_level not in request.session:
             request.session['user_id'] = new_user.id
             request.session['user_name'] = new_user.user_name
             request.session['user_level'] = new_user.user_level
-            return redirect('/dashboard/0')
+            return redirect('/explore/0')
 
-        return redirect('/dashboard/0')
+        return redirect('/explore/0')
 
 
 
@@ -98,8 +98,8 @@ def process_signin(request):
             request.session['user_name'] = this_user.user_name
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
-                return redirect('/dashboard/admin')
-            return redirect('/dashboard/0')
+                return redirect('/explore/admin')
+            return redirect('/explore/0')
 
 
 #=============================================##
@@ -139,8 +139,8 @@ def main_page(request):
 # home()
 #
 #=============================================##
-def home(request):
-    return render(request,'home.html')
+def landing(request):
+    return render(request,'landing.html')
 
 #=============================================##
 # signin()
@@ -174,7 +174,7 @@ def new(request):
     return render(request,'new.html')
 
 #=============================================##
-# show()
+# add_image()
 #
 #=============================================##
 def add_image(request, user_id):
@@ -183,8 +183,34 @@ def add_image(request, user_id):
         'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
         'images': Image.objects.filter(user = user_id).order_by("-created_at"),
+        'url': f'/explore/0',
+        'icon': 'fas fa-table',
+        'title': 'explore'
     }
     return render(request,'add_image.html',context)
+
+#=============================================##
+# profile()
+#
+#=============================================##
+def profile(request, user_id, image_id):
+    if image_id != 0:
+        current_image = Image.objects.get(id=image_id)
+    else:
+        current_image = 0
+
+    context = {
+
+        'upload_pet_form': UploadPetForm(),
+        'user': User.objects.get(id=user_id),
+        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
+        'current_image': current_image,
+        'modal_url': f'/user/profile/{user_id}/',
+        'icon': 'fas fa-table',
+        'title': 'explore',
+        'url': f'/user/profile/{user_id}/{image_id}'        
+    }
+    return render(request,'profile.html',context)
 
 #=============================================##
 # edit_user()
@@ -197,23 +223,54 @@ def edit_user(request,user_id):
     }
     return render(request,'edit_user.html',context)
 
+    
 #=============================================##
-# dashboard()
+# bulletin()
 #
 #=============================================##
-def dashboard(request,image_id):
+def bulletin(request,user_id,image_id):
+
+    current_user = User.objects.get(id=request.session['user_id'])
+    if image_id != 0:
+        current_image = Image.objects.get(id=image_id)
+    else:
+        current_image = 0;
+
+
+    context = {
+        'user': User.objects.get(id=user_id),
+        'url' : f'/user/bulletin/{user_id}/{image_id}',
+        'current_image': current_image
+    }
+    return render(request,'bulletin.html',context)
+
+
+#=============================================##
+# explore()
+#
+#=============================================##
+def explore(request,image_id):
     if 'user_id' not in request.session:
         return redirect('/signin')
     else:
+        current_user = User.objects.get(id=request.session['user_id'])
+        if image_id != 0:
+            current_image = Image.objects.get(id=image_id)
+        else:
+            current_image = 0;
         context = {
-            'current_user': User.objects.get(id=request.session['user_id']),
+            'user': current_user,
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
-            'current_image': image_id
+            'current_image':current_image,
+            'url': f'/explore/{image_id}',
+            'modal_url': f'/explore/',
+            'icon': 'fas fa-cloud-upload-alt',
+            'title': 'Share'
         }
 
         if request.session['user_level'] == 0:
-            return render(request,'dashboard.html',context)
+            return render(request,'explore.html',context)
     return render(request,'admin.html',context)
 
 #=============================================##
@@ -232,7 +289,7 @@ def edit_self(request):
 #
 #=============================================##
 def remove_user(request,user_id):
-    return render(request,'dashboard.html')
+    return render(request,'explore.html')
 
 
 #=============================================##
@@ -272,7 +329,7 @@ def process_edit_user(request):
         user.last_name = request.POST['last']
         user.save()
 
-        return redirect(f'/dashboard/0')
+        return redirect(f'/explore/0')
 
 #=============================================##
 # process_edit_self()
@@ -294,7 +351,7 @@ def process_add_image(request):
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
     this_image.save()
 
-    return redirect (f'/users/add_image/{current_user.id}')
+    return redirect (f'/user/profile/{current_user.id}/0')
 
 
 #=============================================##
@@ -317,10 +374,10 @@ def process_add_comment(request):
     print(request.POST)
 
     this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id = post['image_id'])
+    this_image = Image.objects.get(id = post['current_image_id'])
     new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
 
-    return redirect (f'/dashboard/{this_image.id}')
+    return redirect (f'/explore/{this_image.id}')
 
 
 #=============================================##
@@ -341,4 +398,20 @@ def process_like_love(request,image_id,target_id):
 
     this_image.save();
 
-    return redirect (f'/dashboard/0')
+    return redirect (f'/explore/0#{image_id}')
+
+#=============================================##
+# process_follow()
+# return redirect('/')
+#=============================================##
+def process_follow(request,image_id,user_to_follow_id):
+
+    this_user = User.objects.get(id= request.session['user_id'])
+    user_to_follow = User.objects.get(id= user_to_follow_id)
+
+    this_user.is_following.add(user_to_follow);
+    user_to_follow.being_followed.add(this_user);
+    this_user.save()
+    user_to_follow.save()
+
+    return redirect (f'/explore/0#{image_id}')

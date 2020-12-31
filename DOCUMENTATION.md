@@ -32,21 +32,32 @@ Even when resized certain images are still stretched when changing the window si
 
 
 # TODO
-
+## Features
 - [x] Add loves to Model
-- [x] Change First name to Username and remove Last Name
 - [x] Add Files Model and make one to many relationship (to allows for image filtering by user)
 - [x] Add File Upload functionality using Pillow Technology Library
-- [ ] Optimize Modals
-- [ ] Learn how to make modular reusable code snippets
 - [ ] Add an automated email to user when someone likes loves or comments their photo
+- [ ] Create Pets Connect email for automated emails
 - [ ] Add toggle for receiving emails
-- [ ] Data Validation for Comments and Images (Never Empty)
-- [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
-- [ ] Deploy and maintain on AWS EC2 server
-- [ ] Fix visual error in responsive design on landing page
+- [X] Deploy and maintain on AWS EC2 server
 - [ ] Add hover titles to the nav bar
-
+- [ ] When page reloads user is still in same location in the feed
+## Bug Fixes
+- [X] Fix visual error in responsive design on landing page
+- [ ] Work on Debug Nginx Media problem
+- [x] Fix modal dialog size in dashboard
+- [ ] Signed in username not show up on posts
+- [ ] Add favicon
+- [ ] Click out problem | fade problem | Reload problem
+- [ ] Nav tooltip too long
+## Efficiency
+- [x] Learn how to make modular reusable code snippets
+- [x] Optimize Modals, Stats, Nav
+## Changes
+- [x] Change First name to Username and remove Last Name
+## Security
+- [ ] Data Validation for Comments and Images (Never Empty) 30chars
+- [ ] Investigate Char counts for strings and set validations accordingly to maintain visual appeal
 
 # Outside Libraries
 ### Pillow

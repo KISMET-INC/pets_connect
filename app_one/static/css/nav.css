@@ -1,0 +1,53 @@
+#TOP_long {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    
+}
+
+nav i {
+    font-size: 25px;
+}
+/* CANVAS NAV BAR */
+nav {
+
+    background-color: white;
+    height: 75px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    width:100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+nav a {
+    margin-left: 20px;
+    width: 100%;
+    font-weight: bold;
+    font-size:13px;
+    text-align: right;
+}
+
+nav div {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    width:90%;
+
+}
+
+nav div div{
+    width:275px;
+    align-items: center;
+    
+}
+
+
+nav h2 {
+    margin: 0px;
+    font-family: 'Damion', cursive;
+    font-size: 50px;
+}

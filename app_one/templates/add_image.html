@@ -3,31 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'headerlinks.html' %}
     <title>Pets Connect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'global.css' %}">
-    <link rel="stylesheet" href="{% static 'modal.css' %}">
-    <link rel="stylesheet" href="{% static 'stats.css' %}">
     <link rel="stylesheet" href="{% static 'add_image.css' %}">
 </head>
 <body>
     <div id="CANVAS_long">
-        <div id="TOP_long">
-            <nav>
-                <div>
-                    <h2>Pets Connect</h2>
-                    <div>
-                        <a href = '/dashboard/0'><i style='font-size:25px' class="fas fa-table"></i></a>
-                        <a href = '/logout'><i style='font-size:25px' class="fas fa-arrow-alt-circle-right"></i></a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        {% include 'nav.html' %}
 
 
         <div id="interface_block_two">
@@ -52,15 +36,11 @@
                     {% for image in images %}
                     <div class= 'dimage'>
 
-                        <img class='cropped' src = '{{ image.pet_img.url }}' >
+                        <img id={{image.id}} class='cropped' src = '{{ image.pet_img.url }}' >
 
                         <div class="stats">
                             <a class= "delete" href='\process_remove_image\{{image.id}}'><button type ='submit'><i class="fas fa-trash"> </i> Delete </button></a>
-                            <p>
-                                <i class="fas fa-thumbs-up"></i> {{image.likes.count}} 
-                                <i class="fas fa-heart"></i> {{image.loves.count}} 
-                                <button type = 'button' data-toggle='modal' data-target='#{{image.id}}' ><i class="fas fa-comment-alt"></i> {{image.comments.count}}</button>
-                            </p>
+                            {% include 'stats.html' %}
                         </div>
 
                     </div>

@@ -1,3 +1,9 @@
+@import 'modal.css';
+@import 'stats.css';
+
+.stats {
+    display: none;
+}
 
 #interface_block_one{
     height: fit-content;
@@ -15,7 +21,7 @@ button:focus {
 
 .dashboard {
     display:flex;
-    width:70%;
+    width:90%;
     flex-wrap: wrap;
     margin: 0 auto;
     justify-content: left;
@@ -24,13 +30,14 @@ button:focus {
 .dimage {
     margin-left:2px;
     margin-bottom: 2px;
-    width: 33%;
+    width: 24.8%;
     border-radius: 5px;
+    background-color: black;
 }
+
 
 img.cropped {
     width: 100%;
-   
     border-radius: 5px 5px 0px 0px;
 }
 
@@ -45,11 +52,20 @@ img.cropped {
 }
 
 /*******************************/
+/*  MEDIA BREAKPOINT 1110px         
+/*******************************/
+@media (max-width: 1110px){
+    .dimage {
+        width:24.5%
+    }
+}
+
+/*******************************/
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
 @media (max-width: 1025px){
     .dimage {
-        width:48%;
+        width:33%;
     }
 
 }
@@ -61,11 +77,14 @@ img.cropped {
 
     .dashboard {
         justify-content: left;
-        width:95%;
+        width:90%;
     }
 
     .dimage{
-        width:100%;
+        width:48%;
+    }
+    .stats {
+        display:none
     }
     .cropped {
         height:auto;

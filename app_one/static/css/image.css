@@ -1,0 +1,11 @@
+@import 'stats.css';
+
+.dimage {
+    background-color: black;
+    margin:1px;
+}
+
+.cropped {
+    border-radius: 5px 5px 0px 0px;
+    width:100%;
+}
