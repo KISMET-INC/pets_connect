@@ -240,11 +240,17 @@ def bulletin(request,user_id,image_id):
     else:
         current_image = 0;
 
+    query = Image.objects.all()
+
+
+    
 
     context = {
         'user': User.objects.get(id=user_id),
         'url' : f'/user/bulletin/{user_id}/{image_id}',
-        'current_image': current_image
+        'current_image': current_image,
+        'images': Image.objects.order_by("-created_at")
+       
     }
     return render(request,'bulletin.html',context)
 

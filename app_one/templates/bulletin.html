@@ -23,7 +23,8 @@
 
                 <div class = 'posts'>
                     {% for user in user.is_following.all %}
-                        {% for image in user.images.all %}
+                    {% load custom_tags %}
+                        {% for image in user.images.all|sort_by:"-created_at" %}
                             {% include 'modules/post.html' %}
                         {% endfor %}
                     {% endfor %}
@@ -56,6 +57,9 @@
                     {% endfor %}
                 </div>
                 <div class = 'footer'>
+                    {% load custom_tags %}
+
+
                     <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
                     <p>© 2020 PETSCONNECT </p>
                 </div>
