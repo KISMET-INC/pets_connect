@@ -5,3 +5,26 @@ img {
     width:100%;
 }
 
+.stats div {
+    width:90%;
+    display:flex;
+    align-items: center;
+}
+
+.stats div a {
+    margin-left: -100px;
+}
+
+.post_comment {
+    border: none;
+    box-shadow: none;
+    background-color:transparent;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.post_comment button {
+    background-color: transparent;
+    position:relative;
+    left: -40px;   
+}

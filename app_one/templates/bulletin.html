@@ -22,11 +22,10 @@
                 </div>
 
                 <div class = 'posts'>
-                    {% for user in user.is_following.all %}
-                    {% load custom_tags %}
-                        {% for image in user.images.all|sort_by:"-created_at" %}
+                    {% for image in images %}
+                    {% if user in image.user.being_followed.all %}
                             {% include 'modules/post.html' %}
-                        {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

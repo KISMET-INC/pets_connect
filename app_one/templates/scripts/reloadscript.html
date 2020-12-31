@@ -1,11 +1,10 @@
 <script>
 
 
-
     var url = '{{url}}'
-    var current_image = '{{current_image.id}}'
+    var image = '{{image.id}}'
     
-    if (current_image != 0 ){
+    if (image != 0 ){
         $('#comment_modal').modal('show');
     } 
 
@@ -35,6 +34,7 @@
         
     });
 
+
     $( ".dimage" )
     .mouseover(function() {
         var id = $(this).attr('id');
@@ -54,14 +54,15 @@
             console.log("clicked")
         });
         $(`${stats}`).show()
-});
+    });
 
-$( ".dimage" )
-    .mouseleave(function() {
-    var id = $(this).attr('id');
-    var stats = `#stat${id}`
-    var img = `.open_modal${id}`
-    $( `${img}`).css('opacity', '1')
-    $(`${stats}`).hide()
-});
+    $( ".dimage" )
+        .mouseleave(function() {
+        var id = $(this).attr('id');
+        var stats = `#stat${id}`
+        var img = `.open_modal${id}`
+        $( `${img}`).css('opacity', '1')
+        $(`${stats}`).hide()
+    });
+
 </script>

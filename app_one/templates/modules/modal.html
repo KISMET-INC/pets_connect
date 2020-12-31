@@ -7,30 +7,25 @@
             <div class="modal-body">
 
                 <div class ='left'>
-                    <img class="cropped2" src = {{current_image.pet_img.url}}>
+                    <img class="cropped2" src = {{image.pet_img.url}}>
                     <div class = 'stats'>
                        {% include 'modules/stats.html' %}
                     </div>
-                    <p>Posted by:{{current_image.user.user_name}}</p>
-                    <p>{{current_image.desc}}</p>
+                    <p>Posted by:{{image.user.user_name}}</p>
+                    <p>{{image.desc}}</p>
                 </div>
 
                 <div class= 'right'>
                 <div class = top>
-                    <p class = 'name'>{{current_image.name}}</p>
-                    <form class = "post_comment" action = '\process_add_comment' method ='post'>
-                        {% csrf_token %}
-                        <input name = 'text' placeholder="Add a Comment...">
-                        <input type="hidden" name = 'current_image_id' value= '{{current_image.id}}'>
-                        <button type ='submit'> POST </button>
-                    </form>
+                    <p class = 'name'>{{image.name}}</p>
+                   {% include 'modules/comment.html' %}
                 </div>
                 
-                    {% if current_image.comments.all.count == 0 %}
+                    {% if image.comments.all.count == 0 %}
                     <div class = 'no_comments'>
                     {% else %}
                     <div class = 'comments'>
-                    {% for comment in current_image.comments.all reversed %}
+                    {% for comment in image.comments.all reversed %}
                         <p><b>{{comment.user.user_name}}:</b> {{comment.text}}</p>
                     {% endfor %}
                     {% endif %}

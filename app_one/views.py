@@ -206,7 +206,7 @@ def profile(request, user_id, image_id):
         'upload_pet_form': UploadPetForm(),
         'user': User.objects.get(id=user_id),
         'images': images,
-        'current_image': current_image,
+        'image': current_image,
         'modal_url': f'/user/profile/{user_id}/',
         'icon': 'fas fa-table',
         'title': 'explore',
@@ -248,9 +248,8 @@ def bulletin(request,user_id,image_id):
     context = {
         'user': User.objects.get(id=user_id),
         'url' : f'/user/bulletin/{user_id}/{image_id}',
-        'current_image': current_image,
+        'image': current_image,
         'images': Image.objects.order_by("-created_at")
-       
     }
     return render(request,'bulletin.html',context)
 
@@ -272,7 +271,7 @@ def explore(request,image_id):
             'user': current_user,
             'users' : User.objects.all(),
             'images' : Image.objects.order_by("-created_at"),
-            'current_image':current_image,
+            'image':current_image,
             'url': f'/explore/{image_id}',
             'modal_url': f'/explore/',
             'icon': 'fas fa-cloud-upload-alt',
@@ -382,7 +381,7 @@ def process_add_comment(request):
     print(request.POST)
 
     this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id = post['current_image_id'])
+    this_image = Image.objects.get(id = post['image_id'])
     new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
 
     return redirect (f'/explore/{this_image.id}')
