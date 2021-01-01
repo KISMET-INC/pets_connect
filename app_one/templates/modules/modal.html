@@ -1,6 +1,6 @@
 <!-- MODAL -->
 
-<div id="comment_modal" class="modal fade" role="dialog">
+<div id="comment_modal" class="modal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -18,7 +18,7 @@
                 <div class= 'right'>
                 <div class = top>
                     <p class = 'name'>{{image.name}}</p>
-                   {% include 'modules/comment.html' %}
+                    {% include 'modules/comment.html' %}
                 </div>
                 
                     {% if image.comments.all.count == 0 %}

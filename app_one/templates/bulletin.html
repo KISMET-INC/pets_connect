@@ -44,7 +44,7 @@
                     <div>
                         <h3>Followers</h3>
                         
-                        <p>See all {{user.being_followed.all.count}} followers</p>
+                        <p>See all {{session_user.being_followed.all.count}} followers</p>
                     </div>
                     
                     {% for user in session_user.being_followed.all|slice:":5" %}

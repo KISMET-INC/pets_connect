@@ -188,8 +188,6 @@ def bulletin(request,user_id,image_id):
         'image': current_image,
         'images': Image.objects.order_by("-created_at"),
         'location': 'bulletin',
-
-
     }
     return render(request,'bulletin.html',context)
 
@@ -198,7 +196,7 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request, user_id,image_id, position):
+def explore(request, user_id,image_id):
 
     if 'user_id' not in request.session:
         return redirect('/signin')
@@ -217,7 +215,6 @@ def explore(request, user_id,image_id, position):
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
-        'position': position
     }
 
     if request.session['user_level'] == 0:
@@ -288,13 +285,14 @@ def process_remove_image(request,image_id):
 # process_add_comment()
 # return redirect('/')
 #=============================================##
-def process_add_comment(request):
+def process_add_comment(request,location):
 
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
     new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
-
-    return redirect (f'/explore/{session_user}/{this_image.id}')
+    if request.POST['component'] == 'post':
+        return redirect (f'/{location}/{session_user.id}/0')
+    return redirect (f'/{location}/{session_user.id}/{this_image.id}')
 
 
 #=============================================##
@@ -307,7 +305,7 @@ def process_heart(request,image_id,location):
     this_image = Image.objects.get(id =image_id)
     this_image.loves.add(session_user) 
     this_image.save();
- 
+
     return redirect (f'/{location}/{session_user.id}/0')
 
 #=============================================##
