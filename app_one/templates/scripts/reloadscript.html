@@ -2,9 +2,22 @@
 
     var url_location = '{{location}}'
     var image = '{{image.id}}'
-  
+    var position = '{{position}}';
+    console.log('{{image.id}}')
     
+    $(window).on('load', function(e) {
+                $(window).scrollTop('{{position}}')
+            });
+
+
+
+
+    $('img').mouseover(function(){
+        position = Math.round(window.scrollY)
+    })
+
     
+
     if (image != 0 ){
         $('#comment_modal').modal('show');
     } 
@@ -12,7 +25,7 @@
     if(url_location == 'bulletin'){
         $( 'p button').mouseover(function() {
             var img_id = $(this).attr('id');
-            loadurl =`/user/${url_location}/{{session_user.id}}/${img_id}`
+            loadurl =`/user/${url_location}/{{session_user.id}}/${img_id}/`
         }).click(function() {
             window.location = loadurl
         })
@@ -20,25 +33,26 @@
     }
 
     $("#comment_modal").on('hidden.bs.modal', function(e){
-            loadurl = `/${url_location}/{{session_user.id}}/0`
+            loadurl = `/${url_location}/{{session_user.id}}/0/0`
             window.history.pushState({}, '', loadurl)
     }); 
         
 
             
-    $( ".dimage" )
+    $( '.dimage' )
     .mouseover(function() {
         var img_id = $(this).attr('id');
         var img = `.open_modal${img_id}`
         var stats = `#stat${img_id}`
         
-        loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+        loadurl = `/${url_location}/{{session_user.id}}/${img_id}/${position}#40`
         
 
         $("#TOP_long").css('opacity', '.99');
         $(".heading").css('opacity', '.99');
-        $( `${img}`).css('opacity', '.6').click(function(){
-            window.location = loadurl
+        $( `${img}`).css('opacity', '.6')
+        .click(function(){
+            window.location = loadurl          
         });
         $(`${stats}`).show()
     });
@@ -51,5 +65,6 @@
         $( `${img}`).css('opacity', '1')
         $(`${stats}`).hide()
     });
+  
     
 </script>

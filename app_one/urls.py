@@ -28,10 +28,10 @@ urlpatterns = [
     path('process_edit_password', views.process_edit_password),
 
     path('bulletin/<int:user_id>/<int:image_id>', views.bulletin),
-    path('explore/<int:user_id>/<int:image_id>', views.explore),
+    path('explore/<int:user_id>/<int:image_id>/<int:position>', views.explore),
     path('process_add_comment', views.process_add_comment),
-    path('process_like_love/<int:image_id>/<int:target_id>', views.process_like_love),
-    path('process_follow/<int:image_id>/<int:user_to_follow_id>', views.process_follow),
+    path('process_heart/<int:image_id>/<str:location>', views.process_heart),
+    path('process_follow/<int:image_id>/<int:user_to_follow_id>/<str:location>', views.process_follow),
     
     path('explore/admin', views.admin),
     path('process_remove_user/<int:user_id>', views.process_remove_user),

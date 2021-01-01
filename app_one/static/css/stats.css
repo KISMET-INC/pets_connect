@@ -62,6 +62,9 @@ p i{
     color:#BFBFBF;
 }
 
+.stats i.loved::before{
+    color:teal;
+}
 
 button:focus {
     outline: 0px;

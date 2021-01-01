@@ -198,7 +198,7 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request, user_id,image_id):
+def explore(request, user_id,image_id, position):
 
     if 'user_id' not in request.session:
         return redirect('/signin')
@@ -216,7 +216,8 @@ def explore(request, user_id,image_id):
         'image':current_image,
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
-        'title': 'Share'
+        'title': 'Share',
+        'position': position
     }
 
     if request.session['user_level'] == 0:
@@ -300,25 +301,20 @@ def process_add_comment(request):
 # process_like()
 # return redirect('/')
 #=============================================##
-def process_like_love(request,image_id,target_id):
+def process_heart(request,image_id,location):
     
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id =image_id)
-
-    if(target_id == 0):
-        this_image.likes.add(session_user) 
-    if(target_id == 1):
-        this_image.loves.add(session_user) 
-
+    this_image.loves.add(session_user) 
     this_image.save();
-
-    return redirect (f'/explore/{session_user}/0')
+ 
+    return redirect (f'/{location}/{session_user.id}/0')
 
 #=============================================##
 # process_follow()
 # return redirect('/')
 #=============================================##
-def process_follow(request,image_id,user_to_follow_id):
+def process_follow(request,image_id,user_to_follow_id,location):
 
     session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
@@ -328,5 +324,5 @@ def process_follow(request,image_id,user_to_follow_id):
     session_user.save()
     user_to_follow.save()
 
-    return redirect (f'explore/{session_user.id}/')
+    return redirect (f'/{location}/{session_user.id}/0')
 
