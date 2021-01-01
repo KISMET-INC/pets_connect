@@ -7,6 +7,7 @@
             <div class="modal-body">
 
                 <div class ='left'>
+                    <p>{{location}}</p>
                     <img class="cropped2" src = {{image.pet_img.url}}>
                     <div class = 'stats'>
                        {% include 'modules/stats.html' %}
@@ -26,7 +27,7 @@
                     {% else %}
                     <div class = 'comments'>
                     {% for comment in image.comments.all reversed %}
-                        <p><b>{{comment.user.user_name}}:</b> {{comment.text}}</p>
+                        {% include 'modules/single_comment.html' %}
                     {% endfor %}
                     {% endif %}
                 </div>       

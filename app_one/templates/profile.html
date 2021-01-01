@@ -33,6 +33,8 @@
                         <p>followers <b>{{clicked_user.being_followed.all.count}}</b> following <b>{{clicked_user.is_following.all.count}} </b> posts <b>{{clicked_user.images.all.count}} </b> hearts: <b>{{clicked_user.loves.all.count}}</b></p>
                         {% if session_user == clicked_user %}
                         <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE </a>
+                        {% else %}
+                        <a href='/stop_follow/{{clicked_user.id}}'> STOP FOLLOWING </a>
                         {% endif %}
                     </div>
                 </div>

@@ -87,7 +87,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/explore/admin')
-            return redirect(f'/bulletin/{this_user.id}/0')
+            return redirect(f'/bulletin/{this_user.id}/0/0')
 
 
 #=============================================##
@@ -288,12 +288,12 @@ def process_remove_image(request,image_id):
 # return redirect('/')
 #=============================================##
 def process_add_comment(request,location):
-
+    print(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
     new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
     if request.POST['component'] == 'post':
-        return redirect (f'/{location}/{session_user.id}/0')
+        return redirect (f'/{location}/{this_image.id}')
     return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
 
 
@@ -326,3 +326,28 @@ def process_follow(request,image_id,user_to_follow_id,location):
 
     return redirect (f'/{location}/{session_user.id}/0')
 
+def comment_frame(request, image_id):
+    image = Image.objects.get(id=image_id)
+    session_user = User.objects.get(id= request.session['user_id'])
+
+    context ={
+        'session_user': session_user,
+        'comments': Comment.objects.filter(image = image).order_by('-created_at'),
+        'location': 'comment_frame',
+        'image': image
+    }
+    return render(request,'comment_frame.html',context)
+
+
+    #=============================================##
+# process_add_comment()
+# return redirect('/')
+#=============================================##
+def process_delete_comment(request,comment_id,image_id,location):
+    print(request.POST)
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_comment = Comment.objects.get(id = comment_id)
+    this_comment.delete();
+    if location == 'comment_frame':
+        return redirect(f'/{location}/{image_id}')
+    return redirect (f'/{location}/{session_user.id}/{image_id}/0')

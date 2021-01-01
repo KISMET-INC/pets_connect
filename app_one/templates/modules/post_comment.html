@@ -1,7 +1,0 @@
-<!-- post_comment(image.id) -->
-<form class = "post_comment" action = '\process_add_comment' method ='post'>
-    {% csrf_token %}
-    <input name = 'text' placeholder="Add a Comment...">
-    <input type="hidden" name = 'image_id' value= '{{image.id}}'>
-    <button type ='submit'> POST </button>
-</form>

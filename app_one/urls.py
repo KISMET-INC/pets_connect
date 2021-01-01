@@ -36,4 +36,7 @@ urlpatterns = [
     path('explore/admin', views.admin),
     path('process_remove_user/<int:user_id>', views.process_remove_user),
 
+    path('comment_frame/<int:image_id>',views.comment_frame),
+    path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>',views.process_delete_comment)
+
 ]

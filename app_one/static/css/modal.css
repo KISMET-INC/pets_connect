@@ -7,15 +7,13 @@
 
 .modal-dialog {
     width:fit-content;
-    margin: auto;
+    margin: 0 auto;
     margin-top: 3%;
-   
 }
 
 .modal-content {
     width:fit-content;
     height:fit-content;
-    max-height: 500px;
     margin: 0 auto; 
 }
 
@@ -24,8 +22,7 @@
     display:flex;
     width:fit-content;
     height:fit-content;
-    max-height: 500px;
-   
+    max-height:500px;
 }
 
 .cropped2 {
@@ -103,6 +100,9 @@
     font-size: 12px;
     padding: 5px;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+    max-width:350px;
+    margin: 0px;
 
 }
 
@@ -118,8 +118,9 @@
 }
 
 .modal form {
-    border: 2px solid grey;
+     border: 1px solid grey;
     box-shadow: none;
+    width:90%;
     position:sticky;
     top: 0;
 }
@@ -149,6 +150,23 @@
     margin: 0 auto; 
     margin-bottom:15px;
 }
+
+.modal .stats {
+    align-items: center;
+    display:none;
+}
+
+
+.modal .single_comment h2 {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.modal .single_comment h2 {
+    font-size: 15px;
+}
+
+
 
 /*******************************/
 /*  MEDIA BREAKPOINT 550px  

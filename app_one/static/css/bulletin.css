@@ -6,12 +6,12 @@
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 80%;
     margin: 0 auto; 
 }
 
 .bulletin_left {
-    width:65%;
+    width:60%;
     
 }
 .bulletin_left .following .person div.outline {
@@ -72,25 +72,27 @@ input {
     height:40px;
     width:100%;
     margin: 0 auto; 
+    padding-left:10px;
+    padding-right:70px;
     background-color:transparent;
     border:none;
     border-top: 1px solid black;
 }
 .following {
     display:flex;
-    height:120px;
+    height:140px;
     border:1px solid grey;
     min-width: 70px;
     padding:15px;
     padding-bottom: 20px;
     border-radius: 5px;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     overflow: scroll;
 
 }
 
 .bulletin_right {
-    width: 35%;
+    width: 40%;
     padding-left: 50px;
     display:flex;
     flex-direction: column;
