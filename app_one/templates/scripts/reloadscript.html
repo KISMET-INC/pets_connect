@@ -15,11 +15,11 @@
         
     }
 
-   
+    // Bulletin is different because the click target is not buried inside the .dimage
     if(url_location == 'bulletin'){
         $( 'p button').mouseover(function() {
             var img_id = $(this).attr('id');
-            loadurl =`/${url_location}/{{session_user.id}}/${img_id}`
+            loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
         }).click(function() {
             window.history.pushState({}, '', loadurl)
             window.location.reload();

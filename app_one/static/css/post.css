@@ -11,7 +11,9 @@ img {
     align-items: center;
 }
 
-
+iframe {
+    border:none;
+}
 
 .post_comment {
     border: none;

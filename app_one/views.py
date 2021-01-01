@@ -137,7 +137,7 @@ def admin(request):
 # profile()
 #
 #=============================================##
-def profile(request, user_id, image_id):
+def profile(request, user_id, image_id, modal_trigger):
     session_user = User.objects.get(id=request.session['user_id'])
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
@@ -155,7 +155,7 @@ def profile(request, user_id, image_id):
         'icon': 'fas fa-table',
         'title': 'explore',
         'location': 'profile',
-        'delete': True     
+        'trigger': modal_trigger
     }
     return render(request,'profile.html',context)
 
@@ -175,7 +175,7 @@ def edit_user(request,user_id):
 # bulletin()
 #
 #=============================================##
-def bulletin(request,user_id,image_id):
+def bulletin(request,user_id,image_id, modal_trigger):
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
@@ -188,6 +188,7 @@ def bulletin(request,user_id,image_id):
         'image': current_image,
         'images': Image.objects.order_by("-created_at"),
         'location': 'bulletin',
+        'trigger': modal_trigger
     }
     return render(request,'bulletin.html',context)
 
@@ -196,7 +197,7 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request, user_id,image_id,trigger):
+def explore(request, user_id,image_id,modal_trigger):
 
     if 'user_id' not in request.session:
         return redirect('/signin')
@@ -215,7 +216,7 @@ def explore(request, user_id,image_id,trigger):
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
-        'trigger': trigger
+        'trigger': modal_trigger
     }
 
     if request.session['user_level'] == 0:
