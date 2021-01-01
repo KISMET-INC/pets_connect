@@ -3,13 +3,14 @@
     var url_location = '{{location}}'
     var image = '{{image.id}}'
 
-    // if (url_location.contains('1')){
-    //     $('#comment_modal').removeClass('fade');
-    // }
-
+    if ('{{trigger}}' == '1'){
+        $('#comment_modal').addClass('fade');
+    } else {
+        $('#comment_modal').removeClass('fade');
+    }
+    
 
     if (image != 0 ){
-        $('#comment_modal').addClass('fade');
         $('#comment_modal').modal('show');
         
     }
@@ -27,8 +28,9 @@
     }
 
     $("#comment_modal").on('hidden.bs.modal', function(e){
-            loadurl = `/${url_location}/{{session_user.id}}/0`
+            loadurl = `/${url_location}/{{session_user.id}}/0/0`
             window.history.pushState({}, '', loadurl)
+            $('#comment_modal').addclass('fade');
     });
     
 
@@ -44,7 +46,7 @@
 
         $( `${img}`).css('opacity', '.6')
         .click(function(){
-            window.history.pushState({}, '', loadurl)
+            window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
 

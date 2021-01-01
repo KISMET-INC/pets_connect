@@ -20,7 +20,7 @@ urlpatterns = [
 
 
 
-    path('profile/<int:user_id>/<int:image_id>', views.profile),
+    path('profile/<int:user_id>/<int:image_id>/', views.profile),
     path('edit_user/<int:user_id>', views.edit_user),
     path('process_add_image', views.process_add_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('process_edit_password', views.process_edit_password),
 
     path('bulletin/<int:user_id>/<int:image_id>', views.bulletin),
-    path('explore/<int:user_id>/<int:image_id>', views.explore),
+    path('explore/<int:user_id>/<int:image_id>/<int:trigger>', views.explore),
     path('process_add_comment/<str:location>', views.process_add_comment),
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),
     path('process_follow/<int:image_id>/<int:user_to_follow_id>/<str:location>', views.process_follow),
