@@ -20,9 +20,8 @@
 .modal-body {
     padding:0px;
     display:flex;
-    width:fit-content;
-    height:fit-content;
-    max-height:400px;
+    width:750px;
+    height: 450px;
 }
 
 .cropped2 {
@@ -35,9 +34,10 @@
 
 .modal .left {
     text-align: center;
-    border-radius: 5px;
+    border-radius: 5px 0px 0px 0px;
     background-color: #E5E5E5;
     padding: 0px;
+    padding-bottom: 10px;
     width: 50%;
     border-right: 1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -89,7 +89,7 @@
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: 75%;
+    height: 69%;
     width:100%;
     margin: 0 auto; 
     overflow: scroll;

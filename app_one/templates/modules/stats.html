@@ -3,7 +3,7 @@
     <p>
         <i data-placement="bottom" class="fas fa-podcast" title ="Followers"></i>  {{image.user.being_followed.count}}  
         <i data-placement="bottom" class="fas fa-heart" title="Pet Loves"></i> {{image.loves.count}} 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> {{image.comments.count}}
+        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> {{image.comments.count}}
     </p>
     <div class = 'edit_stats'>
         <a href='/process_remove_image/{{image.id}}/{{location}}'>Delete </a> |
@@ -14,18 +14,18 @@
     {% else %}
     <p>
         {% if session_user in image.user.being_followed.all %}
-        <i data-placement="bottom" class="fas fa-podcast loved" title ="Already Following"></i> {{image.user.being_followed.count}}  
+    
         {% else %}
         <a href="/process_follow/{{image.id}}/{{image.user.id}}/{{location}}"><i data-placement="bottom" class="fas fa-podcast" title ="Follow User"></i></a>  {{image.user.being_followed.count}}  
         {% endif %}
 
         {% if session_user in image.loves.all %}
-        <i data-placement="bottom" class="fas fa-heart loved" title="Already Loved"></i></a> {{image.loves.count}} 
+        <i data-placement="bottom" class="fas fa-heart loved" title="Already Loved"></i></a><span class = 'loved'> {{image.loves.count}}</span>
         {% else %}
         <a href="/process_heart/{{image.id}}/{{location}}"><i data-placement="bottom" class="fas fa-heart" title="Love Pet"></i></a> {{image.loves.count}} 
         {% endif %}
 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button> {{image.comments.count}}
+        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button> {{image.comments.count}}
     </p>
     {% endif %}
 
