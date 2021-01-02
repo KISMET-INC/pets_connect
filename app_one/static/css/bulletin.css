@@ -195,7 +195,7 @@ input {
 
 @media (max-width:1000px){
     .bulletin_left {
-        width: 70%;
+        width: 100%;
         margin: 0 auto; 
     }
     .bulletin_right{

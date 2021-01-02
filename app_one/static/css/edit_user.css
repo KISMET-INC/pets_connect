@@ -1,56 +1,118 @@
-form.msg_post{
-    padding: 0px;
-    margin: 0 auto;
-    width: 97%;
-    margin-bottom: 30px;
-}
 
-#bottom_main {
-    width:85%;
-    margin: 0 auto;
-    margin-top: 30px;
-    height: fit-content;
-}
-#interface_block_two {
-    justify-content: space-around;
-    height: fit-content;
-}
-#left_main, #right_main {
-    width: 45%;
-}
-form {
-    border: none;
+#interface_block_one {
     width: 90%;
-    padding: 50px;
-}
-h2.textarea {
-    margin-top: -30px;
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto; 
+
 }
 
-textarea.msg_post {
-    width: 99%;
-    margin:15px;
-    height: 100px;
-}
-label.form_label {
+.heading {
+    margin: 0 auto; 
+    margin-bottom:20px;
     width: 100%;
+    height:fit-content;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* position:sticky;
+    top:75px; */
+    padding-top:50px;
+    z-index: 3;
 }
-
-h2.title_h2 {
-    font-weight: bolder;
-    width:85%;
+.profile_info {
+    display:flex;
+    width:70%;
+    align-items: center;
     margin: 0 auto;
+
+    margin-bottom: 25px;
+    
 }
-input.form_input {
-    width: 100%;
+.profile_info p, .profile_info a,.profile_info b{
+    font-size: 16px;
+}
+.user_img {
+    width:200px;
+    height: 200px;
+    background-color: #E5E5E5;
+    border-radius: 100px;
+    margin-right: 50px;  
 }
 
 
-#right_main {
-    height: 70%;
+form {
+    width:60%;
+    display:flex;
+    flex-direction: column;
+    margin-top:40px;
+    border: 0px;
+    box-shadow: none;
+    background-color: white;
 }
 
+input#id_user_img {
+    height:40px;
+    margin-left:-10px; 
+}
+
+input {
+    width:100%;
+    align-self: left;
+    margin-bottom: 10px;
+    height: 40px;
+    padding-left:10px;
+    margin-top:10px;
+}
+
+p input{
+    height:20px;
+}
 button {
-    background-color: green;
-    color: white;
+    box-shadow: none;
+    border: none;
+    background-color:white; 
+    color:#555555;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+p button i {
+    font-size:17px;
+}
+form button {
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+    width: 100%;
+    margin: 0 auto; 
+}
+
+@media (max-width:950px){
+    .heading{
+        padding: 0px;
+    }
+    .profile_info{
+        display:flex;
+        flex-direction: column;
+    }
+
+    .user_img {
+        margin: 0px;
+    }
+
+    form {
+        margin-top: 50px;
+        width:100%;
+    }
+
+}
+
+@media (max-width:700px){
+    #interface_block_one {
+        width: 100%;
+    }
+
 }

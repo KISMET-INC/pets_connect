@@ -38,7 +38,7 @@ button:focus {
 
 img.cropped {
     width: 100%;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 /* .dashboard .dimage button {

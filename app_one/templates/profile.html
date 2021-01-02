@@ -23,14 +23,16 @@
                         {% include 'modules/user_img.html' %}
                         {% endwith %}
                     
-                  
 
                         
                     
                     <div>
                         <h2>{{clicked_user.user_name}}</h2> 
                         <h2>{{clicked_user.email}}</h2>
-                        <p>followers <b>{{clicked_user.being_followed.all.count}}</b> following <b>{{clicked_user.is_following.all.count}} </b> posts <b>{{clicked_user.images.all.count}} </b> hearts: <b>{{clicked_user.loves.all.count}}</b></p>
+                        <p>followers <b>{{clicked_user.being_followed.all.count}}</b> |
+                            following <b>{{clicked_user.is_following.all.count}} </b> | 
+                            posts <b>{{clicked_user.images.all.count}} </b> | 
+                            hearts: <b>{{clicked_user.loves.all.count}}</b></p>
                         {% if session_user == clicked_user %}
                         <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE </a>
                         {% else %}
@@ -40,6 +42,7 @@
                 </div>
 
                 {% if session_user == clicked_user %}
+             
                 <form enctype="multipart/form-data" action = '/process_add_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
@@ -49,14 +52,15 @@
                         {{ upload_pet_form.as_p}}           
                         <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
                 </form>
+            
                 {% endif %}
 
             </div>
 
             {% if session_user == clicked_user %}
-            <h3>Your Posts</h3>
+            <h3>Your Pets</h3>
             {% else %}
-            <h3>{{clicked_user.user_name}}'s Posts</h3>
+            <h3>{{clicked_user.user_name}}'s Pets</h3>
             {% endif %}
             <div class = 'dashboard'>
                 {% for image in images %}
