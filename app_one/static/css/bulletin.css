@@ -56,6 +56,8 @@
     justify-content: left;
     background-color: #E5E5E5;
     padding-left: 20px;
+    padding-right: 20px;
+    padding-top:10px;
     position:static;
     height:fit-content;
     align-items: left;
@@ -63,20 +65,47 @@
 .stats p {
     width:fit-content;
 }
+.stats p:nth-child(1){
+    color: #E5E5E5;
+}
+.stats p:nth-child(2){
+    font-weight: bold;
+    margin-top:10px;
+}
 
 .stats h2 {
     font-size: 14px;
     margin:5px;
 }
+#comment_frame .single_comment {
+    display:flex;
+    justify-content: space-between;
+}
+#comment_frame .single_comment h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size:18px;
+    margin: 0px;
+    margin-bottom: 5px;
+    width:fit-content;
+}
+
+#comment_frame .single_comment span {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#comment_frame h3 {
+    font-size:15px;
+    margin: 0px;
+    margin-top:15px
+}
+
 input {
     height:40px;
     width:100%;
     margin: 0 auto; 
-    padding-left:10px;
     padding-right:70px;
     background-color:transparent;
     border:none;
-    border-top: 1px solid black;
 }
 .following {
     display:flex;

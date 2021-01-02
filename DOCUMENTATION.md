@@ -41,7 +41,10 @@ For every view I sent a 'location' variable through the context and made sure th
 Because the page refreshes to load the modal with the correct image informatin i needed a way to tell the application when to have the modal fade in and when to have it pop on (in order to simulate a static chat within the modal)
 ### Solution
 I sent a variable through the application that tells the application wheter it needs to load the modal with a fade or not. When returning from the the process of adding a comment it adds the no fade trigger into the url so that when the window opens the modal knows it is a nofade. When the user clicks off of the modal, the fade is turned back on for the next selection.
-
+### Problem BULLETIN CHAT [1/1/21]
+Once again the reloading breaking the flow of the UI when posting and deleting omments from the bulletin board
+### Solution
+Added the comments through an Iframe so that when a comment is added or removed it doesnt reload the person back to the top. The user stays put to add or delete more comments where they are. NOTE: Not the most memory efficient solution as it has to load and Iframe and the IFRAMEs css for every post on the bulletin board. I am looking into ways to solve this problem in a more efficient manner.
 ***
 # What I Wish I Had Done Differently
 - Mapped out the responsive wireframe design before building the project
@@ -93,12 +96,16 @@ I sent a variable through the application that tells the application wheter it n
 - [ ] reevalute breakpoints responsive design
 - [ ] tweek modal visual
 - [ ] tweek post visual
+- [ ] add UNLOVE
 ## Efficiency
 - [x] Learn how to make modular reusable code snippets
 - [x] Optimize Modals, Stats, Nav
 - [ ] Refactor
+- [ ] Refactor so that it doesnt import CSS files for every post
 ## Changes
 - [x] Change First name to Username and remove Last Name
+- [ ] ADD DECENT DATA
+- [ ] Make name in post centered by whatever means possible
 ## Security
 - [ ] Data Validation for Comments and Images (Never Empty) 30chars
 - [x] Investigate Char counts for strings and set validations accordingly to maintain visual appeal

@@ -6,20 +6,15 @@
     <img src = '{{image.pet_img.url}}'>
     <div class = 'stats'>
         {% include 'modules/stats.html' %}
-        <p>{{image.loves.count}} loves</p>
-<!--         
-        {% for comment in image.comments.all|slice:":3" %}
-            <h2>{{comment.user.user_name}}: <span>{{comment.text}}</span></h2>
-        {% endfor %}
+        {% if image.loves.count == 1 %}
+        <p>{{image.loves.count}} person loves {{image.name}}!</p>
+        {% elif image.loves.count > 1 %}
+        <p>{{image.loves.count}} people love {{image.name}}!</p>
+        {% else %}
+        <p>click to give this pet some love!</p>
+        {% endif %}
 
-        {% if image.comments.all.count > 3 %}
-            <h3><a Show all {{image.comments.count}} comments </h3>
-        {% endif %} -->
         <iframe src = '/comment_frame/{{image.id}}'></iframe>
-    
-        <!-- {% with component='post'%}
-        {% include 'modules/comment.html' %}
-        {% endwith %} -->
 
     </div>
 </div>

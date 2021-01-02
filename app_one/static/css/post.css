@@ -4,7 +4,9 @@
 img {
     width:100%;
 }
-
+.post.stats {
+    margin-top:10px;
+}
 .stats div {
     width:90%;
     display:flex;
@@ -19,14 +21,15 @@ iframe {
 
 .post_comment {
     border: none;
+    border-top:1px solid black;
+    border-radius: 0px;
     box-shadow: none;
     background-color:transparent;
     width: 100%;
-    margin-top: 20px;
+    position:absolute;
+    bottom:0;
 }
 
 .post_comment button {
-    background-color: transparent;
-    position:relative;
-    left: -40px;   
+    background-color: transparent;  
 }
