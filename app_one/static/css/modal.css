@@ -22,7 +22,7 @@
     display:flex;
     width:fit-content;
     height:fit-content;
-    max-height:500px;
+    max-height:400px;
 }
 
 .cropped2 {
@@ -49,10 +49,9 @@
 }
 
 .modal .right {
-    padding-top: 0px;
+    padding: 5px;
     display: unset;
     margin: 0 auto; 
-    margin-bottom: 10px;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -78,6 +77,7 @@
     position:sticky;
     top: 0;
     background-color: white;
+    z-index:1
 }
 
 .modal .left p:nth-child(2) {
@@ -89,10 +89,16 @@
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: fit-content;
+    height: 75%;
     width:100%;
     margin: 0 auto; 
     overflow: scroll;
+    vertical-align: baseline;
+}
+
+.modal .single_comment h2 {
+    margin:0px; 
+    margin-bottom:25px
 }
 
 .modal .comments p {
@@ -118,7 +124,7 @@
 }
 
 .modal form {
-     border: 1px solid grey;
+    border: 1px solid grey;
     box-shadow: none;
     width:90%;
     position:sticky;
@@ -130,7 +136,7 @@
     height:40px;
     resize:none;
     border:none;
-    width: 80%;
+    width: 75%;
 }
 
 .post_comment button {
@@ -146,7 +152,7 @@
     background-color: white;
     padding: 3px;
     display: flex;
-    width:90%;
+    width:80%;
     margin: 0 auto; 
     margin-bottom:15px;
 }
