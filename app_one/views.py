@@ -270,18 +270,18 @@ def process_add_image(request):
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
 
-    return redirect (f'/profile/{session_user.id}/0')
+    return redirect (f'/explore/{session_user.id}/0/0')
 
 
 #=============================================##
 # process_remove_image()
 # return redirect('/')
 #=============================================##
-def process_remove_image(request,image_id):
+def process_remove_image(request,image_id,location):
     session_user = request.session['user_id']
     this_image = Image.objects.get(id=image_id)
     this_image.delete()
-    return redirect (f'/profile/{session_user}/0')
+    return redirect (f'/{location}/{session_user}/0/0')
 
 #=============================================##
 # process_add_comment()
@@ -308,7 +308,7 @@ def process_heart(request,image_id,location):
     this_image.loves.add(session_user) 
     this_image.save();
 
-    return redirect (f'/{location}/{session_user.id}/0')
+    return redirect (f'/{location}/{session_user.id}/0/0')
 
 #=============================================##
 # process_follow()
@@ -324,8 +324,12 @@ def process_follow(request,image_id,user_to_follow_id,location):
     session_user.save()
     user_to_follow.save()
 
-    return redirect (f'/{location}/{session_user.id}/0')
+    return redirect (f'/profile/{user_to_follow.id}/0/0')
 
+#=============================================##
+# process_follow()
+# return redirect('/')
+#=============================================##
 def comment_frame(request, image_id):
     image = Image.objects.get(id=image_id)
     session_user = User.objects.get(id= request.session['user_id'])
@@ -340,7 +344,7 @@ def comment_frame(request, image_id):
 
 
     #=============================================##
-# process_add_comment()
+# process_delete_comment()
 # return redirect('/')
 #=============================================##
 def process_delete_comment(request,comment_id,image_id,location):
@@ -351,3 +355,17 @@ def process_delete_comment(request,comment_id,image_id,location):
     if location == 'comment_frame':
         return redirect(f'/{location}/{image_id}')
     return redirect (f'/{location}/{session_user.id}/{image_id}/0')
+
+#=============================================##
+# process_add_comment()
+# return redirect('/')
+#=============================================##
+def stop_following(request, user_id):
+    session_user = User.objects.get(id= request.session['user_id'])
+    clicked_user = User.objects.get(id= user_id)
+    session_user.is_following.remove(clicked_user)
+    clicked_user.being_followed.remove(session_user)
+    session_user.save()
+    clicked_user.save()
+    return redirect (f'/bulletin/{session_user.id}/0/0')
+

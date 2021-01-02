@@ -23,7 +23,7 @@ urlpatterns = [
     path('profile/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.profile),
     path('edit_user/<int:user_id>', views.edit_user),
     path('process_add_image', views.process_add_image),
-    path('process_remove_image/<int:image_id>', views.process_remove_image),
+    path('process_remove_image/<int:image_id>/<str:location>', views.process_remove_image),
     path('process_edit_user', views.process_edit_user),
     path('process_edit_password', views.process_edit_password),
 
@@ -37,6 +37,7 @@ urlpatterns = [
     path('process_remove_user/<int:user_id>', views.process_remove_user),
 
     path('comment_frame/<int:image_id>',views.comment_frame),
-    path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>',views.process_delete_comment)
+    path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>',views.process_delete_comment),
+    path('stop_following/<int:user_id>',views.stop_following)
 
 ]
