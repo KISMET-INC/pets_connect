@@ -305,7 +305,12 @@ def process_heart(request,image_id,location):
     
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id =image_id)
-    this_image.loves.add(session_user) 
+
+    if session_user in this_image.loves.all():
+        this_image.loves.remove(session_user) 
+    else:
+        this_image.loves.add(session_user) 
+    
     this_image.save();
 
     return redirect (f'/{location}/{session_user.id}/0/0')

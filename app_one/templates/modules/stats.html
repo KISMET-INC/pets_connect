@@ -20,7 +20,7 @@
         {% endif %}
 
         {% if session_user in image.loves.all %}
-        <i data-placement="bottom" class="fas fa-heart loved" title="Already Loved"></i></a><span class = 'loved'> {{image.loves.count}}</span>
+        <a href="/process_heart/{{image.id}}/{{location}}"><i data-placement="bottom" class="fas fa-heart loved" title="Already Loved"></i></a><span class = 'loved'> {{image.loves.count}}</span>
         {% else %}
         <a href="/process_heart/{{image.id}}/{{location}}"><i data-placement="bottom" class="fas fa-heart" title="Love Pet"></i></a> {{image.loves.count}} 
         {% endif %}

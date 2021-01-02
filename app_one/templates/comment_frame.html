@@ -18,9 +18,9 @@
             {% include 'modules/single_comment.html' %}
         {% endfor %}
 
-        {% if comments.count > 3 %}
+        <!-- {% if comments.count > 3 %}
         <h3>Show all {{image.comments.count}} comments </h3>
-        {% endif %}
+        {% endif %} -->
 
         {% with component='post'%}
         {% include 'modules/comment.html' %}

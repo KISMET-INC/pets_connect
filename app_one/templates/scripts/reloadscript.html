@@ -2,9 +2,28 @@
     
     var url_location = '{{location}}'
     var image = '{{image.id}}'
+    var trig = '{{trigger}}'
+    var img_id = trig.slice(1)
+    var img = `.open_modal${img_id}`
+    var stats = `#stat${img_id}`
+    
+
+        $(window).on("scroll", function() {
+            var position = $(window).scrollTop()
+            localStorage.setItem('positionY', position)
+            console.log(localStorage.getItem("positionY"))
+        });
+
+        $(window).on('load', function() {
+            if(localStorage.getItem('positionY')){
+                var pos = localStorage.getItem('positionY')
+                $("html, body").animate({ scrollTop: `${pos}px` },1000);
+            
+        }})
+
 
     if ('{{trigger}}' == '1'){
-        $('#comment_modal').addClass('fade');
+        $('#comment_modal').addClass('fade'); 
     } else {
         $('#comment_modal').removeClass('fade');
     }
@@ -44,8 +63,7 @@
 
         $(".opacity").css('opacity', '.99');
 
-        $( `${img}`).css('opacity', '.6')
-        .click(function(){
+        $( `${img}`).css('opacity', '.6') .click(function(){
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });

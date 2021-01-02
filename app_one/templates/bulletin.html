@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static '/css/bulletin.css' %}">
 </head>
 <body>
+   
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
@@ -44,7 +45,7 @@
                     <div>
                         <h3>Followers</h3>
                         
-                        <p>See all {{session_user.being_followed.all.count}} followers</p>
+                        <p>You have {{session_user.being_followed.all.count}} followers</p>
                     </div>
                     
                     {% for user in session_user.being_followed.all|slice:":5" %}
