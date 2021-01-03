@@ -24,7 +24,7 @@ nav {
 
 
 nav a {
-    margin-left: 20px;
+    margin-left: 10px;
     width: 100%;
     font-weight: bold;
     font-size:13px;
@@ -35,12 +35,12 @@ nav div {
     display:flex;
     justify-content: space-between;
     align-items:center;
-    width:90%;
+    width:80%;
 
 }
 
 nav div div{
-    width:275px;
+    width:200px;
     align-items: center;
     
 }

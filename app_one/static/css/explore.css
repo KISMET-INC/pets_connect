@@ -21,7 +21,7 @@ button:focus {
 
 .dashboard {
     display:flex;
-    width:90%;
+    width:80%;
     flex-wrap: wrap;
     margin: 0 auto;
     justify-content: left;

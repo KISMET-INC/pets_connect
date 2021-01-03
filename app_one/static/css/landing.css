@@ -39,13 +39,16 @@
 .light p:nth-child(3){
     margin-top: 5px;
     margin-bottom: 20px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    
 }
 .light div a:nth-child(2){
     align-self:flex-end;
 }
 
 .light h2 {
-    font-size: 22px;
+    font-size: 70px;
+    font-family: 'Damion', cursive;
 }
 
 .bottom {
