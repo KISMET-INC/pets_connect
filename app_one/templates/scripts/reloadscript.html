@@ -66,14 +66,14 @@
 
 
 
-        $('body').on('click', '.post_comment button', function(e){
+        $('body').on('click', '.post .post_comment button', function(e){
             var img_id = $(this).attr('id');
             var token = '{{csrf_token}}';
             var url_location = '{{location}}'
             var form_id = `.form_img_id${img_id}`
             var form_text = `.form_text${img_id}`
             var form_compnt = `.form_compnt${img_id}`
-
+    
             e.preventDefault()
             $.ajax({
                 cache: false,
@@ -90,7 +90,44 @@
                 console.log("Error in fetching data");
             })
 
+        });
+
+        $('#comment_modal button').click(function(){
+            var img_id = $(this).attr('id');
+            var url_location = '{{location}}'
+            var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
+            window.history.pushState({}, '', loadurl)
+            window.location.reload();
+
+
         })
+
+        // $('body').on('click', '#comment_modal button', function(e){
+        //     alert('click')
+        //     var img_id = $(this).attr('id');
+        //     var token = '{{csrf_token}}';
+        //     var url_location = '{{location}}'
+        //     var form_id = `#comment_modal .form_img_id${img_id}`
+        //     var form_text = `#comment_modal .form_text${img_id}`
+        //     var form_compnt = `#comment_modal .form_compnt${img_id}`
+           
+        //     e.preventDefault()
+        //     $.ajax({
+        //         cache: false,
+        //         headers: { "X-CSRFToken": token },  
+        //         type:'POST',
+        //         data : { image_id :$(`${form_id}`).val(), component: $(`${form_compnt}`).val(), text: $(`${form_text}`).val()},
+        //         url: `/process_add_comment/{{location}}`,
+        //     })
+        //     .done(function(data){
+        //             $(`#post${img_id}`).html(data);  
+        //             console.log('success')                                    
+        //     })
+        //     .fail(function(data){
+        //         console.log("Error in fetching data");
+        //     })
+
+        // })
     
     }
             
