@@ -25,7 +25,7 @@
                 <div class = 'posts'>
                     {% for image in images %}
                     {% if session_user in image.user.being_followed.all %}
-                            {% include 'modules/post.html' %}
+                            <div id='post{{image.id}}'>{% include 'modules/post.html' %}</div>
                         {% endif %}
                     {% endfor %}
                 </div>

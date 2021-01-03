@@ -4,8 +4,8 @@
     {% include 'modules/person.html' %}
     {% endwith %}
     <img src = '{{image.pet_img.url}}'>
-    <div class = 'stats'>
-        {% include 'modules/stats.html' %}
+    <div id = '{{image.id}}' class = 'stats'>
+        <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
         {% if image.loves.count == 1 %}
         <p>{{image.loves.count}} person loves {{image.name}}!</p>
         {% elif image.loves.count > 1 %}

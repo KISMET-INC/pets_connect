@@ -297,6 +297,15 @@ def process_add_comment(request,location):
     return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
 
 
+def updated_post(request, image_id):
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    return render(request,'modules/post.html', context)
+
 #=============================================##
 # process_like()
 # return redirect('/')
