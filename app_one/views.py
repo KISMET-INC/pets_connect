@@ -378,7 +378,7 @@ def comment_frame(request, image_id):
     return render(request,'comment_frame.html',context)
 
 
-    #=============================================##
+#=============================================##
 # process_delete_comment()
 # return redirect('/')
 #=============================================##
@@ -387,8 +387,8 @@ def process_delete_comment(request,comment_id,image_id,location):
     session_user = User.objects.get(id= request.session['user_id'])
     this_comment = Comment.objects.get(id = comment_id)
     this_comment.delete();
-    if location == 'comment_frame':
-        return redirect(f'/{location}/{image_id}')
+    if image_id == 0 and location == 'bulletin':
+        return redirect(f'/{location}/{image_id}/{session_user.id}/1')
     return redirect (f'/{location}/{session_user.id}/{image_id}/0')
 
 #=============================================##

@@ -14,7 +14,7 @@
         <p>click to give this pet some love!</p>
         {% endif %}
 
-        
+            <p>{{location}}</p>
             {% for comment in image.comments.all|dictsortreversed:'created_at'|slice:":3" %}
                 {% include 'modules/single_comment.html' %}
             {% endfor %}
