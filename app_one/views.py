@@ -289,9 +289,10 @@ def process_add_comment(request,location):
         'image': this_image,
         'session_user': session_user
     }
-    #if request.POST['component'] == 'post':
-    return render(request,'modules/post.html', context)
-    #return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
+    if request.POST['component'] == 'post':
+        print('true')
+        return render(request,'modules/post.html', context)
+    return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
     
     
     

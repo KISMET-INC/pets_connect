@@ -18,7 +18,9 @@
                 <div class= 'right'>
                 <div class = top>
                     <p class = 'name'>{{image.name}}</p>
-                    {% include 'modules/comment.html' %}
+                    {% with component='modal' %}
+                        {% include 'modules/comment.html' %}
+                    {% endwith %}
                 </div>
                 
                     {% if image.comments.all.count == 0 %}

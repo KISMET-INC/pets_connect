@@ -1,5 +1,5 @@
 
-<div class = 'post'>
+<div id = {{image.id}} class = 'post'>
     {% with user=image.user %}
     {% include 'modules/person.html' %}
     {% endwith %}
@@ -23,9 +23,8 @@
             <h3>Show all {{image.comments.count}} comments </h3>
             {% endif %} -->
     
-            {% with component='post'%}
+            {% with component='post' %}
             {% include 'modules/comment.html' %}
-            
             {% endwith %}
        
     

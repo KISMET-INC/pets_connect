@@ -35,63 +35,16 @@
 
     if(url_location == 'bulletin'){
         // Comment Button
-        $( 'p button')
-        .mouseover(function() {
+        var post_button;
+        var comment_button;
+        
+        $('body').on('click', '.fa-heart', function(){
             var img_id = $(this).attr('id');
-            loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`    
-        })
-        .click(function() {
-            window.history.pushState({}, '', loadurl)
-            window.location.reload();
-        })
-
-        $('.post_comment button').click(function(e){
-            e.preventDefault()
-            var img_id = $(this).attr('id');
-            var token = '{{csrf_token}}';
-            var form_id = `.form_img_id${img_id}`
-            var form_text = `.form_text${img_id}`
-            console.log($(`${form_id}`).val())
-                $.ajax({
+            console.log(img_id)
+            $.ajax({
                     cache: false,
-                    headers: { "X-CSRFToken": token },  
-                    type:'POST',
-                    data : { image_id :$(`${form_id}`).val(), component: 'post', text: $(`${form_text}`).val()},
-                    url: `/process_add_comment/{{location}}`,
-                })
-                .done(function(data){
-                    console.log(data)
-                    $(`#post${img_id}`).html(data);                    
-                })
-                .fail(function(data){
-                    console.log("Error in fetching data");
-                })
-        })
-
-        // Monitor hearts mouseover
-        $('.stats').mouseenter(function(){
-            $('.fa-heart')
-            .mouseenter(function(){
-                heart = true;            
-            })
-            .mouseleave(function(){
-                heart = false;
-            })
-
-    
-        })
-
-        // Hearts Toggle
-        $('.stats').click(function(){
-
-            var img_id = $(this).attr('id');
-            var replace = `#replace${img_id}`
-
-            if(heart == true){
-                $.ajax({
-                cache: false,
-                type:"GET",
-                url: `/process_heart/${img_id}/{{location}}`,
+                    type:"GET",
+                    url: `/process_heart/${img_id}/{{location}}`,
                 })
                 .done(function(data){
                     $(`#replace${img_id}`).html(data);                    
@@ -99,10 +52,48 @@
                 .fail(function(data){
                     console.log("Error in fetching data");
                 })
-            }
+        });
+
+
+        $('body').on('click', 'p button', function(){
+            console.log('click')
+            var img_id = $(this).attr('id');
+            var url_location = '{{location}}'
+            var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
+            window.history.pushState({}, '', loadurl)
+            window.location.reload();
+        })
+
+
+
+        $('body').on('click', '.post_comment button', function(e){
+            var img_id = $(this).attr('id');
+            var token = '{{csrf_token}}';
+            var url_location = '{{location}}'
+            var form_id = `.form_img_id${img_id}`
+            var form_text = `.form_text${img_id}`
+            var form_compnt = `.form_compnt${img_id}`
+
+            e.preventDefault()
+            $.ajax({
+                cache: false,
+                headers: { "X-CSRFToken": token },  
+                type:'POST',
+                data : { image_id :$(`${form_id}`).val(), component: $(`${form_compnt}`).val(), text: $(`${form_text}`).val()},
+                url: `/process_add_comment/{{location}}`,
+            })
+            .done(function(data){
+                    $(`#post${img_id}`).html(data);  
+                    console.log('success')                                    
+            })
+            .fail(function(data){
+                console.log("Error in fetching data");
+            })
 
         })
+    
     }
+            
 
 //*********************************************//
 //  WHEN HIDING MODAL
@@ -182,7 +173,8 @@
         });
 
         // Comment button needs different opacity. Will DRY UP later
-        $( `${img}x`).css('opacity', '1') .click(function(){
+        $( `${img}x`).css('opacity', '1') 
+        .click(function(){
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
