@@ -293,11 +293,6 @@ def process_add_comment(request,location):
         print('true')
         return render(request,'modules/post.html', context)
     return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
-    
-    
-    
-    
-    #  return redirect (f'/updated_post/{this_image.id}')
 
 
 def updated_post(request, image_id):
@@ -329,10 +324,6 @@ def process_heart(request,image_id,location):
         'session_user': session_user
     }
     return render(request,'modules/stats.html', context)
-
-    # return render(request,'modules/stats.html', context)
-
-    # return redirect (f'/updated_stats/{image_id}')
 
 def updated_stats(request, image_id):
     session_user = User.objects.get(id=request.session['user_id'])
@@ -382,14 +373,14 @@ def comment_frame(request, image_id):
 # process_delete_comment()
 # return redirect('/')
 #=============================================##
-def process_delete_comment(request,comment_id,image_id,location):
+def process_delete_comment(request,comment_id,image_id,location,component):
     print(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_comment = Comment.objects.get(id = comment_id)
     this_comment.delete();
-    if image_id == 0 and location == 'bulletin':
-        return redirect(f'/{location}/{image_id}/{session_user.id}/1')
-    return redirect (f'/{location}/{session_user.id}/{image_id}/0')
+    if component == 'modal':
+        return redirect(f'/{location}/{session_user.id}/{image_id}/0')
+    return redirect (f'/{location}/{session_user.id}/0/0')
 
 #=============================================##
 # process_add_comment()

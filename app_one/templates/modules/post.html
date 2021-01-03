@@ -15,9 +15,11 @@
         {% endif %}
 
             <p>{{location}}</p>
+            {% with component='post' %}
             {% for comment in image.comments.all|dictsortreversed:'created_at'|slice:":3" %}
                 {% include 'modules/single_comment.html' %}
             {% endfor %}
+            {% endwith %}
     
             {% if image.comments.count > 3 %}
             <h3>{{image.comments.count}} total comments </h3>

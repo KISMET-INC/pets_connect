@@ -1,6 +1,6 @@
 <div class= 'single_comment'>
     <h2>{{comment.user.user_name}}: <span>{{comment.text}}</span></h2>
     {% if comment.user == session_user %}
-    <a href='/process_delete_comment/{{comment.id}}/{{comment.image.id}}/{{location}}'><i class="fas fa-times"></i> </a>          
+    <a href='/process_delete_comment/{{comment.id}}/{{comment.image.id}}/{{location}}/{{component}}'><i class="fas fa-times"></i> </a>          
     {% endif %}
 </div>
