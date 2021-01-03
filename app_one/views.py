@@ -1,19 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.db.models import Sum
 from .models import *
 import bcrypt
 from .forms import *
-
-#=============================================##
-# read_all()
-# RENDERS table to see all users in database
-# with the ability to delete users
-#=============================================##
-def read_all(request):
-    context = {
-        'users': User.objects.all()
-    }
-    return render(request,'example_templates/read_all.html',context)
 
 
 #=============================================##
@@ -82,10 +72,8 @@ def logout(request):
 # to process_signin page on success
 #=============================================##
 def process_signin(request):
-    post = request.POST
-    user = User.objects.filter(email = post['email'])
-    errors = User.objects.basic_validator_login(post)
-    print(errors)
+    user = User.objects.filter(email = request.POST['email'])
+    errors = User.objects.basic_validator_login(request.POST)
 
     if len(errors) > 0:
         for value in errors.values():
@@ -99,37 +87,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/explore/admin')
-            return redirect('/explore/0')
-
-
-#=============================================##
-# landing()
-# RENDERS login_reg.html
-#=============================================##
-def landing(request):
-    users = User.objects.all()
-    return render(request,'example_templates/login_reg.html')
-
-#=============================================##
-# END LOGIN DEFS
-#=============================================##
-
-#=============================================##
-# START PAGE DEFS
-#=============================================##
-
-
-#=============================================##
-# main_page()
-# RENDERS books login html if User_iD
-# session key is avaiable
-# WITHOUT KEY REDIRECTS to root
-#=============================================##
-def main_page(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
-    else:
-        return render(request,'landing.html')
+            return redirect(f'/explore/{this_user.id}/0/0')
 
 
 
@@ -166,49 +124,30 @@ def admin(request):
     }
     return render(request,'admin.html',context)
 
-#=============================================##
-# new()
-#
-#=============================================##
-def new(request):   
-    return render(request,'new.html')
-
-#=============================================##
-# add_image()
-#
-#=============================================##
-def add_image(request, user_id):
-    context = {
-
-        'upload_pet_form': UploadPetForm(),
-        'user': User.objects.get(id=user_id),
-        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
-        'url': f'/explore/0',
-        'icon': 'fas fa-table',
-        'title': 'explore'
-    }
-    return render(request,'add_image.html',context)
 
 #=============================================##
 # profile()
 #
 #=============================================##
-def profile(request, user_id, image_id):
+def profile(request, user_id, image_id, modal_trigger):
+    session_user = User.objects.get(id=request.session['user_id'])
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
         current_image = 0
+    images = Image.objects.filter(user = user_id).order_by("-created_at");
 
     context = {
 
         'upload_pet_form': UploadPetForm(),
-        'user': User.objects.get(id=user_id),
-        'images': Image.objects.filter(user = user_id).order_by("-created_at"),
-        'current_image': current_image,
-        'modal_url': f'/user/profile/{user_id}/',
+        'session_user': session_user,
+        'clicked_user' : User.objects.get(id=user_id),
+        'images': images,
+        'image': current_image,
         'icon': 'fas fa-table',
         'title': 'explore',
-        'url': f'/user/profile/{user_id}/{image_id}'        
+        'location': 'profile',
+        'trigger': modal_trigger
     }
     return render(request,'profile.html',context)
 
@@ -218,8 +157,8 @@ def profile(request, user_id, image_id):
 #=============================================##
 def edit_user(request,user_id):
     context = {
-        'current_user' : User.objects.get(id=request.session['user_id']),
-        'user': User.objects.get(id=user_id)
+        'session_user' : User.objects.get(id=request.session['user_id']),
+        'user_upload_img' : UploadUserImgForm(),
     }
     return render(request,'edit_user.html',context)
 
@@ -228,19 +167,21 @@ def edit_user(request,user_id):
 # bulletin()
 #
 #=============================================##
-def bulletin(request,user_id,image_id):
-
-    current_user = User.objects.get(id=request.session['user_id'])
+def bulletin(request,user_id,image_id, modal_trigger):
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
         current_image = 0;
 
-
     context = {
-        'user': User.objects.get(id=user_id),
+        'session_user': User.objects.get(id=request.session['user_id']),
+        'selected_user': User.objects.get(id=user_id),
         'url' : f'/user/bulletin/{user_id}/{image_id}',
-        'current_image': current_image
+        'image': current_image,
+        'images': Image.objects.order_by("-created_at"),
+        'location': 'bulletin',
+        'trigger': modal_trigger,
+        'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
     }
     return render(request,'bulletin.html',context)
 
@@ -249,47 +190,32 @@ def bulletin(request,user_id,image_id):
 # explore()
 #
 #=============================================##
-def explore(request,image_id):
+def explore(request, user_id,image_id,modal_trigger):
+
     if 'user_id' not in request.session:
         return redirect('/signin')
-    else:
-        current_user = User.objects.get(id=request.session['user_id'])
-        if image_id != 0:
-            current_image = Image.objects.get(id=image_id)
-        else:
-            current_image = 0;
-        context = {
-            'user': current_user,
-            'users' : User.objects.all(),
-            'images' : Image.objects.order_by("-created_at"),
-            'current_image':current_image,
-            'url': f'/explore/{image_id}',
-            'modal_url': f'/explore/',
-            'icon': 'fas fa-cloud-upload-alt',
-            'title': 'Share'
-        }
 
-        if request.session['user_level'] == 0:
-            return render(request,'explore.html',context)
+    
+    current_user = User.objects.get(id=request.session['user_id'])
+    if image_id != 0:
+        current_image = Image.objects.get(id=image_id)
+    else:
+        current_image = 0;
+    context = {
+        'session_user': current_user,
+        'users' : User.objects.all(),
+        'images' : Image.objects.order_by("-created_at"),
+        'image':current_image,
+        'location': 'explore',
+        'icon': 'fas fa-cloud-upload-alt',
+        'title': 'Share',
+        'trigger': modal_trigger
+    }
+
+    if request.session['user_level'] == 0:
+        return render(request,'explore.html',context)
     return render(request,'admin.html',context)
 
-#=============================================##
-# edit_self()
-#
-#=============================================##
-def edit_self(request):
-    context = {
-            'current_user': User.objects.get(id=request.session['user_id']),
-    }
-    return render(request,'edit_self.html',context)
-
-
-#=============================================##
-# remove_user()
-#
-#=============================================##
-def remove_user(request,user_id):
-    return render(request,'explore.html')
 
 
 #=============================================##
@@ -298,120 +224,173 @@ def remove_user(request,user_id):
 #=============================================##
 def process_edit_password(request):
     errors = User.objects.basic_validator_passwords(request.POST)
-    print(request.POST['user_id'])
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/users/edit_user/{request.POST["user_id"]}')
+        return redirect(f'/edit_user/{request.POST["user_id"]}')
     else:
-        user = User.objects.get(id=request.POST['user_id'])
-        user.password = request.POST['pass']
+        session_user = User.objects.get(id=request.POST['user_id'])
+        session_user.password = request.POST['pass']
 
         
-    return redirect(f'/users/show/{user.id}')
+    return redirect(f'/edit_user/{session_user.id}')
 
 #=============================================##
 # process_edit_user()
 # return redirect('/')
 #=============================================##
 def process_edit_user(request):
-    user = User.objects.get(id=request.POST['user_id'])
-    post = request.POST
-    errors = User.objects.basic_validator_edit_user(post)
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect(f'/users/edit_user/{user.id}')
-    else:
+    session_user = User.objects.get(id=request.session['user_id'])
+    user_upload_img = UploadUserImgForm(request.POST, request.FILES)
         
-        user.email = request.POST['email']
-        user.first_name = request.POST['first']
-        user.last_name = request.POST['last']
-        user.save()
+    session_user.email = request.POST['email']
+    session_user.user_name = request.POST['user_name']
+    if request.FILES:
+        session_user.user_img = request.FILES['user_img']
+    session_user.save()
 
-        return redirect(f'/explore/0')
+    return redirect(f'/profile/{session_user.id}/0')
 
-#=============================================##
-# process_edit_self()
-# return redirect('/')
-#=============================================##
-def process_edit_self(request):
-    return render(request,'process_edit_self.html')
 
 #=============================================##
 # process_add_image()
 # return redirect('/')
 #=============================================##
 def process_add_image(request):
-    post = request.POST
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
-
-    current_user = User.objects.get(id=request.session['user_id'])
-    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = current_user, name = post['name'], desc = post['desc'] )
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
 
-    return redirect (f'/user/profile/{current_user.id}/0')
+    return redirect (f'/explore/{session_user.id}/0/0')
 
 
 #=============================================##
 # process_remove_image()
 # return redirect('/')
 #=============================================##
-def process_remove_image(request,image_id):
-    post = request.POST
-    user_id = request.session['user_id']
+def process_remove_image(request,image_id,location):
+    session_user = request.session['user_id']
     this_image = Image.objects.get(id=image_id)
     this_image.delete()
-    return redirect (f'/users/add_image/{user_id}')
+    return redirect (f'/{location}/{session_user}/0/0')
 
 #=============================================##
 # process_add_comment()
 # return redirect('/')
 #=============================================##
-def process_add_comment(request):
-    post = request.POST
+def process_add_comment(request,location):
     print(request.POST)
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_image = Image.objects.get(id = request.POST['image_id'])
+    new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    if request.POST['component'] == 'post':
+        return render(request,'modules/post.html', context)
+    return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
 
-    this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id = post['current_image_id'])
-    new_comment = Comment.objects.create(text = post['text'], image = this_image, user= this_user)
 
-    return redirect (f'/explore/{this_image.id}')
-
+def updated_post(request, image_id):
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    return render(request,'modules/post.html', context)
 
 #=============================================##
 # process_like()
 # return redirect('/')
 #=============================================##
-def process_like_love(request,image_id,target_id):
-    post = request.POST
-    print(request.POST)
+def process_heart(request,image_id,location):
     
-    this_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id =image_id)
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
 
-    if(target_id == 0):
-        this_image.likes.add(this_user) 
-    if(target_id == 1):
-        this_image.loves.add(this_user) 
-
+    if session_user in this_image.loves.all():
+        this_image.loves.remove(session_user) 
+    else:
+        this_image.loves.add(session_user) 
+    
     this_image.save();
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    return render(request,'modules/stats.html', context)
 
-    return redirect (f'/explore/0#{image_id}')
+def updated_stats(request, image_id):
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    return render(request,'modules/stats.html', context)
+
+
 
 #=============================================##
 # process_follow()
 # return redirect('/')
 #=============================================##
-def process_follow(request,image_id,user_to_follow_id):
+def process_follow(request,image_id,user_to_follow_id,location):
 
-    this_user = User.objects.get(id= request.session['user_id'])
+    session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
 
-    this_user.is_following.add(user_to_follow);
-    user_to_follow.being_followed.add(this_user);
-    this_user.save()
+    session_user.is_following.add(user_to_follow);
+    user_to_follow.being_followed.add(session_user);
+    session_user.save()
     user_to_follow.save()
 
-    return redirect (f'/explore/0#{image_id}')
+    return redirect (f'/profile/{user_to_follow.id}/0/0')
+
+#=============================================##
+# process_follow()
+# return redirect('/')
+#=============================================##
+def comment_frame(request, image_id):
+    image = Image.objects.get(id=image_id)
+    session_user = User.objects.get(id= request.session['user_id'])
+
+    context ={
+        'session_user': session_user,
+        'comments': Comment.objects.filter(image = image).order_by('-created_at'),
+        'location': 'comment_frame',
+        'image': image
+    }
+    return render(request,'comment_frame.html',context)
+
+
+#=============================================##
+# process_delete_comment()
+# return redirect('/')
+#=============================================##
+def process_delete_comment(request,comment_id,image_id,location,component):
+    print(request.POST)
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_comment = Comment.objects.get(id = comment_id)
+    this_comment.delete();
+    if component == 'modal':
+        return redirect(f'/{location}/{session_user.id}/{image_id}/0')
+    return redirect (f'/{location}/{session_user.id}/0/0')
+
+#=============================================##
+# process_add_comment()
+# return redirect('/')
+#=============================================##
+def stop_following(request, user_id):
+    session_user = User.objects.get(id= request.session['user_id'])
+    clicked_user = User.objects.get(id= user_id)
+    session_user.is_following.remove(clicked_user)
+    clicked_user.being_followed.remove(session_user)
+    session_user.save()
+    clicked_user.save()
+    return redirect (f'/bulletin/{session_user.id}/0/0')
+

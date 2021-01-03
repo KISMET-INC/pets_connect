@@ -1,23 +1,14 @@
-<div id="TOP_long">
+<div id="TOP_long" class='opacity'>
     <nav>
         <div>
             <h2>PetsConnect</h2>
             <div>
                 
-                <a href = '/explore/0'><i class="fas fa-compass" data-placement="bottom" title= 'Explore' ></i></a>
-                <a href = '/user/bulletin/{{user.id}}/0'><i class="fas fa-table" data-placement="bottom" title= 'Bulletin' ></i></a>
-                <a href = '/user/profile/{{user.id}}/0'><i class="fas fa-user" data-placement="bottom" title= 'Profile' ></i></a>
-                <a href = '#'><i class="fas fa-heart" data-placement="bottom" title= 'Notifications' ></i></a>
+                <a href = '/explore/{{session_user.id}}/0/0'><i class="fas fa-compass" data-placement="bottom" title= 'Explore' ></i></a>
+                <a href = '/bulletin/{{session_user.id}}/0/0'><i class="fas fa-users" data-placement="bottom" title= 'Bulletin' ></i></a>
+                <a href = '/profile/{{session_user.id}}/0/0'><i class="fas fa-user" data-placement="bottom" title= 'Profile' ></i></a>
                 <a href = '/logout'><i class="fas fa-arrow-alt-circle-right" data-placement="bottom" title= 'Sign Out' ></i></a>
             </div>
         </div>
     </nav>
 </div>
-<script>
-    // $(function() {
-
-    //     $(".fa-arrow-alt-circle-right[title]").tooltip();
-    //     $(".fa-table[title]").tooltip();
-    //     $(".fa-camera[title]").tooltip();
-    // });
-</script>

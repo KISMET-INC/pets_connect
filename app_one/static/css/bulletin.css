@@ -2,16 +2,19 @@
 @import 'post.css';
 @import 'stats.css';
 
+nav .fa-users::before {
+    color:#E5E5E5;
+}
 
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 80%;
     margin: 0 auto; 
 }
 
 .bulletin_left {
-    width:65%;
+    width:60%;
     
 }
 .bulletin_left .following .person div.outline {
@@ -56,42 +59,73 @@
     justify-content: left;
     background-color: #E5E5E5;
     padding-left: 20px;
+    padding-right: 20px;
+    padding-top:10px;
     position:static;
     height:fit-content;
     align-items: left;
 }
 .stats p {
-    color:#E5E5E5;
     width:fit-content;
 }
-
+.stats p:nth-child(1){
+    color: #E5E5E5;
+}
+.stats p:nth-child(2){
+    font-weight: bold;
+    margin-top:10px;
+}
+.stats p span {
+    display:none;
+}
 .stats h2 {
     font-size: 14px;
     margin:5px;
 }
+
+.single_comment {
+    display:flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+ .single_comment h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size:17px;
+    margin: 0px;
+    margin-bottom: 5px;
+    width:fit-content;
+}
+
+.single_comment span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:16px;
+    font-weight:normal;
+}
+
+
 input {
     height:40px;
     width:100%;
     margin: 0 auto; 
+    padding-right:70px;
     background-color:transparent;
     border:none;
-    border-top: 1px solid black;
 }
 .following {
     display:flex;
-    height:120px;
+    height:140px;
     border:1px solid grey;
     min-width: 70px;
     padding:15px;
     padding-bottom: 20px;
     border-radius: 5px;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     overflow: scroll;
 
 }
 
 .bulletin_right {
-    width: 35%;
+    width: 40%;
     padding-left: 50px;
     display:flex;
     flex-direction: column;
@@ -153,7 +187,9 @@ input {
 
 .bulletin_right .footer {
     position:sticky;
-    top: 530px;
+    top: 540px;
+    width:100%;
+    text-align:center;
 }
 .bulletin_right .footer p{
    margin-bottom:5px;
@@ -162,7 +198,7 @@ input {
 
 @media (max-width:1000px){
     .bulletin_left {
-        width: 70%;
+        width: 100%;
         margin: 0 auto; 
     }
     .bulletin_right{

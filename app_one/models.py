@@ -119,6 +119,7 @@ class User(models.Model):
     objects = UserManager()
     
     user_name = models.CharField(max_length=30)
+    user_img = ResizedImageField(size=[200, 200], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/', blank=True)
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()

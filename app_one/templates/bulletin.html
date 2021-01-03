@@ -13,39 +13,42 @@
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
-           
+
             <div class = 'bulletin_left'>
                 <div class = 'following'>
-                    {% for user in user.is_following.all %}
+                    {% for user in session_user.is_following.all %}
                         {% include 'modules/person.html' %}
                     {% endfor %}
                 </div>
 
                 <div class = 'posts'>
-                    {% for user in user.is_following.all %}
-                        {% for image in user.images.all %}
-                            {% include 'modules/post.html' %}
-                        {% endfor %}
+                    {% for image in images %}
+                    {% if session_user in image.user.being_followed.all %}
+                            <div id='post{{image.id}}'>{% include 'modules/post.html' %}</div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
 
             <div class = 'bulletin_right'>
                 <div class = 'user'>
-                    {% include 'modules/person.html' %}
+                    {% with user=session_user %}
+                        {% include 'modules/person.html' %}
+                    {% endwith %}
                     <div>
-                        <h2>{{user.user_name}}</h2>
-                        <p>{{user.email}}</p>
+                        <h2>{{session_user.user_name}}</h2>
+                        <p>{{session_user.email}}</p>
                     </div>
                 </div>
+
                 <div class = 'followers'>
+
                     <div>
-                        <h3>Followers</h3>
-                        
-                        <p>See all {{user.being_followed.all.count}} followers</p>
+                        <h3>Followers</h3>                
+                        <p>You have {{session_user.being_followed.all.count}} followers</p>
                     </div>
                     
-                    {% for user in user.being_followed.all|slice:":5" %}
+                    {% for user in session_user.being_followed.all|slice:":5" %}
                     <div class = 'user'>
                         {% include 'modules/person.html' %}
                         <div>
@@ -54,15 +57,19 @@
                         </div>
                     </div>
                     {% endfor %}
+
                 </div>
+
                 <div class = 'footer'>
                     <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
                     <p>© 2020 PETSCONNECT </p>
                 </div>
+
             </div>
         </div>
     </div>
-    {% include 'modules/modal.html' %}
+
+    <div class='replace_modal'>{% include 'modules/modal.html' %}</div>
     {% include 'scripts/reloadscript.html' %}
 </body>
 </html>

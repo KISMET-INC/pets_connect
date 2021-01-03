@@ -4,4 +4,31 @@
 img {
     width:100%;
 }
+.post.stats {
+    margin-top:10px;
+}
+.stats div {
+    width:90%;
+    display:flex;
+    align-items: center;
+}
 
+iframe {
+    border:none;
+    margin-top:10px;
+    height:175px;
+}
+
+.post_comment {
+    border: none;
+    border-top:1px solid black;
+    border-radius: 0px;
+    box-shadow: none;
+    background-color:transparent;
+    width: 100%;
+  
+}
+
+.post_comment button {
+    background-color: transparent;  
+}

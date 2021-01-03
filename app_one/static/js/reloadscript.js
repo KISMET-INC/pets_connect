@@ -1,9 +1,9 @@
-<script>
-
-// Variables from context
+$(document).ready(function(){
+    // Variables from context
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
+    alert(image)
     
 //*********************************************//
 // TRIGGERS FOR MODAL
@@ -224,4 +224,4 @@
     });
 
 
-</script>
+});

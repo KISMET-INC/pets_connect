@@ -2,6 +2,11 @@
 @import 'stats.css';
 @import 'image.css';
 
+
+nav .fa-user::before {
+    color:#E5E5E5;
+}
+
 .stats {
     display: none;
     padding: 0px;
@@ -12,11 +17,11 @@
 }
 
 .dimage {
-    width:19.5%;
+    width:24.5%;
 }
 
 #interface_block_one {
-    width: 90%;
+    width: 80%;
     display:flex;
     flex-direction: column;
     margin: 0 auto; 
@@ -29,6 +34,7 @@
 
 .heading {
     margin: 0 auto; 
+    margin-bottom:20px;
     width: 100%;
     height:fit-content;
     background-color: white;
@@ -38,27 +44,30 @@
     top:75px; */
     padding-top:50px;
     z-index: 3;
+
 }
+
+
 .profile_info {
     display:flex;
     align-items: center;
     margin-bottom: 25px;
     
 }
-.profile_info div p {
-    margin-top: 25px;
+.profile_info p, .profile_info a,.profile_info b{
+    font-size: 16px;
 }
 .user_img {
     width:200px;
     height: 200px;
     background-color: #E5E5E5;
     border-radius: 100px;
-    margin-right: 50px;   
+    margin-right: 50px;  
 }
 
 
 form {
-    width:40%;
+    width:30%;
     display:flex;
     flex-direction: column;
     border: 0px;
@@ -73,9 +82,7 @@ input {
     height: 40px;
 }
 
-p input{
-    height:20px;
-}
+
 
 .stats i.fa-trash::before {
     color:#555555;
@@ -126,102 +133,74 @@ button i {
 }
 
 
-
-
-/*******************************/
-/*  MEDIA BREAKPOINT 1200px         
-/*******************************/
-@media (max-width: 1200px){
-    .iright .dimage {
-        width:100%;
-    }
-    .cropped {
-        object-position: 0% 0%; /* try 20px 10px */
-
-    }
-
+.edit_profile_info {
+    display:flex;
 }
 
-/*******************************/
-/*  MEDIA BREAKPOINT 1075px         
-/*******************************/
-@media (max-width: 1075px){
-
-    #interface_block_two .iright{
-        width: 500px;
-    }
-
-    #interface_block_two .ileft {
-        width: 30%;
-        
-    }
-
-}
 
 /*******************************/
-/*  MEDIA BREAKPOINT 960px         
+/*  MEDIA BREAKPOINT 1025         
 /*******************************/
-@media (max-width: 960px){
+@media (max-width: 1025px){
 
-    .dashboard {
+    .heading {
+        display:flex;
         flex-direction: column;
-        align-items: right;
     }
-
-    #interface_block_two .iright{
-        width: 70%;
-    }
-
-    #interface_block_two .ileft {
-        width: 30%;
-        
-    }
-
-}
-
-
-/*******************************/
-/*  MEDIA BREAKPOINT 960px         
-/*******************************/
-@media (max-width: 960px){
-
-    #interface_block_two {
-        width: 100%;
-        padding-top: 0px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #interface_block_two .ileft {
-
-        position: sticky;
-        top: 100px;
-        background-color: white;
-        width: 100%;
-        padding-bottom: 20px;
-    }
-
-    #interface_block_two .iright {
-        padding: 0px;
-        margin: 0px;
-    }
-
-    #TOP_long {
-        height: 100px;
-        margin-bottom: 0px;
-        background-color: white;
+    .profile_info {
+        width:fit-content;
+        margin: 0 auto;
     }
 
     form {
-        margin: 0 auto; 
-        width: 70%;
+        margin: 0 auto;
+        width:100%;
+        position:sticky;
+        top:300px;
     }
-
-    .iright .dashboard {
-        padding: 0px;
-        flex-direction: unset;
+    .dimage {
+        width:49.5%;
     }
-
 }
 
+
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 765px         
+/*******************************/
+@media (max-width: 765px){
+    form {
+        width:100%;
+    }
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 700px         
+/*******************************/
+@media (max-width: 700px){
+    .heading div h2{
+        display:none;
+    }
+
+    .profile_info {
+        display:unset;
+        text-align: center;
+    }
+
+    .profile_info .user_img {
+
+        width:200px;
+        margin: 0 auto;
+
+    }
+
+    .profile_info p, .profile_info a {
+        margin-top:20px;
+    }
+
+    .dimage {
+        width:100%
+    }
+}
 
