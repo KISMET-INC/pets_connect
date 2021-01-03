@@ -49,7 +49,7 @@
     $("#comment_modal").on('hidden.bs.modal', function(e){
             loadurl = `/${url_location}/{{session_user.id}}/0/0`
             window.history.pushState({}, '', loadurl)
-            $('#comment_modal').addclass('fade');
+            $('#comment_modal').addClass('fade');
     });
             var heart=false;
 
@@ -68,7 +68,6 @@
                 url: `/process_heart/${img_id}/{{location}}`,
                 })
                 .done(function(data){
-                    heart=false;
                     $(`#replace${img_id}`).html(data);                    
                 })
                 .fail(function(data){
@@ -114,7 +113,7 @@
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
-        
+
          $(`${stats}`).show()
          console.log('num1 - '+ num1)
          console.log('num2 - '+num2)
