@@ -1,7 +1,6 @@
 
     {% if session_user == image.user %}
     <p>
-        <i data-placement="bottom" class="fas fa-podcast" title ="Followers"></i>  {{image.user.being_followed.count}}  
         <i data-placement="bottom" class="fas fa-heart" title="Pet Loves"></i> {{image.loves.count}} 
         <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> {{image.comments.count}}
     </p>

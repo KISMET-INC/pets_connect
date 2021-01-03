@@ -1,37 +1,39 @@
 
 <div id = {{image.id}} class = 'post'>
-    {% with user=image.user %}
-    {% include 'modules/person.html' %}
-    {% endwith %}
-    <img src = '{{image.pet_img.url}}'>
-    <div id = '{{image.id}}' class = 'stats'>
-        <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
-        {% if image.loves.count == 1 %}
-        <p>{{image.loves.count}} person loves {{image.name}}!</p>
-        {% elif image.loves.count > 1 %}
-        <p>{{image.loves.count}} people love {{image.name}}!</p>
-        {% else %}
-        <p>click to give this pet some love!</p>
-        {% endif %}
 
-            <p>{{location}}</p>
-            {% with component='post' %}
+    {% with user=image.user %}
+        {% include 'modules/person.html' %}
+    {% endwith %}
+
+    <img src = '{{image.pet_img.url}}'>
+
+    <div id = '{{image.id}}' class = 'stats'>
+        
+        <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
+
+        {% if image.loves.count == 1 %}
+            <p>{{image.loves.count}} person loves {{image.name}}!</p>
+        {% elif image.loves.count > 1 %}
+            <p>{{image.loves.count}} people love {{image.name}}!</p>
+        {% else %}
+            <p>click to give this pet some love!</p>
+        {% endif %}
+            
+        {% with component='post' %}
+        {% with location='bulletin' %}
             {% for comment in image.comments.all|dictsortreversed:'created_at'|slice:":3" %}
                 {% include 'modules/single_comment.html' %}
             {% endfor %}
-            {% endwith %}
-    
-            {% if image.comments.count > 3 %}
-            <h3>{{image.comments.count}} total comments </h3>
-            {% endif %}
-    
-            {% with component='post' %}
-            {% include 'modules/comment.html' %}
-            {% endwith %}
-       
-    
+        {% endwith %}
+        {% endwith %}
 
-        <!-- <iframe src = '/comment_frame/{{image.id}}'></iframe> -->
+        {% if image.comments.count > 3 %}
+            <h3>{{image.comments.count}} total comments </h3>
+        {% endif %}
+
+        {% with component='post' %}
+            {% include 'modules/comment.html' %}
+        {% endwith %}
 
     </div>
 </div>

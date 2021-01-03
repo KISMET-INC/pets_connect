@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="{% static '/css/bulletin.css' %}">
 </head>
 <body>
-   
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
-           
+
             <div class = 'bulletin_left'>
                 <div class = 'following'>
                     {% for user in session_user.is_following.all %}
@@ -41,10 +40,11 @@
                         <p>{{session_user.email}}</p>
                     </div>
                 </div>
+
                 <div class = 'followers'>
+
                     <div>
-                        <h3>Followers</h3>
-                        
+                        <h3>Followers</h3>                
                         <p>You have {{session_user.being_followed.all.count}} followers</p>
                     </div>
                     
@@ -57,17 +57,18 @@
                         </div>
                     </div>
                     {% endfor %}
+
                 </div>
+
                 <div class = 'footer'>
-                    {% load custom_tags %}
-
-
                     <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
                     <p>© 2020 PETSCONNECT </p>
                 </div>
+
             </div>
         </div>
     </div>
+
     <div class='replace_modal'>{% include 'modules/modal.html' %}</div>
     {% include 'scripts/reloadscript.html' %}
 </body>

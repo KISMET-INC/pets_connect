@@ -2,6 +2,9 @@
 @import 'post.css';
 @import 'stats.css';
 
+nav .fa-users::before {
+    color:#E5E5E5;
+}
 
 #interface_block_two {
     display: flex;

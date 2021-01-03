@@ -87,7 +87,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('/explore/admin')
-            return redirect(f'/bulletin/{this_user.id}/0/0')
+            return redirect(f'/explore/{this_user.id}/0/0')
 
 
 

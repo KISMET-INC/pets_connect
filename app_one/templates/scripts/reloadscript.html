@@ -34,14 +34,13 @@
 //*********************************************//
 
     if(url_location == 'bulletin'){
-        // Comment Button
-        var post_button;
-        var comment_button;
         
         $('body').on('click', '.fa-heart', function(){
             var img_id = $(this).attr('id');
-            console.log(img_id)
-            $.ajax({
+            var title = $(this).attr('title');
+            if(title != 'Pet Loves'){
+
+                $.ajax({
                     cache: false,
                     type:"GET",
                     url: `/process_heart/${img_id}/{{location}}`,
@@ -52,6 +51,8 @@
                 .fail(function(data){
                     console.log("Error in fetching data");
                 })
+            }
+            
         });
 
 
@@ -101,33 +102,6 @@
 
 
         })
-
-        // $('body').on('click', '#comment_modal button', function(e){
-        //     alert('click')
-        //     var img_id = $(this).attr('id');
-        //     var token = '{{csrf_token}}';
-        //     var url_location = '{{location}}'
-        //     var form_id = `#comment_modal .form_img_id${img_id}`
-        //     var form_text = `#comment_modal .form_text${img_id}`
-        //     var form_compnt = `#comment_modal .form_compnt${img_id}`
-           
-        //     e.preventDefault()
-        //     $.ajax({
-        //         cache: false,
-        //         headers: { "X-CSRFToken": token },  
-        //         type:'POST',
-        //         data : { image_id :$(`${form_id}`).val(), component: $(`${form_compnt}`).val(), text: $(`${form_text}`).val()},
-        //         url: `/process_add_comment/{{location}}`,
-        //     })
-        //     .done(function(data){
-        //             $(`#post${img_id}`).html(data);  
-        //             console.log('success')                                    
-        //     })
-        //     .fail(function(data){
-        //         console.log("Error in fetching data");
-        //     })
-
-        // })
     
     }
             
@@ -144,7 +118,7 @@
             window.history.pushState({}, '', loadurl)
             $('#comment_modal').addClass('fade');
     });
-            var heart=false;
+            
 
 
 //*********************************************//
@@ -197,7 +171,12 @@
         $(".opacity").css('opacity', '.99');
 
         // Return URL with image ID to push for loading modal
-        loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+        if ('{{clicked_user}}' != ''){
+            loadurl = `/${url_location}/{{clicked_user.id}}/${img_id}`
+        } else {
+            loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+
+        }
 
         // Decreases the opacity of the image.
         $( `${img}`)
@@ -209,7 +188,7 @@
             window.location.reload()          
         });
 
-        // Comment button needs different opacity. Will DRY UP later
+        // COMMENT ICON needs different opacity. Will DRY UP later
         $( `${img}x`).css('opacity', '1') 
         .click(function(){
             window.history.pushState({}, '', loadurl+'/1')

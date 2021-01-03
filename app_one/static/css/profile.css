@@ -2,6 +2,11 @@
 @import 'stats.css';
 @import 'image.css';
 
+
+nav .fa-user::before {
+    color:#E5E5E5;
+}
+
 .stats {
     display: none;
     padding: 0px;
@@ -16,7 +21,7 @@
 }
 
 #interface_block_one {
-    width: 90%;
+    width: 80%;
     display:flex;
     flex-direction: column;
     margin: 0 auto; 
