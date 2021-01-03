@@ -1,5 +1,5 @@
 <script>
-    
+$(document).ready(function(){
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
@@ -8,31 +8,31 @@
     var stats = `#stat${img_id}`
     
 
-        $(window).on("scroll", function() {
-            var position = $(window).scrollTop()
-            localStorage.setItem('positionY', position)
-            console.log(localStorage.getItem("positionY"))
-        });
+        // $(window).on("scroll", function() {
+        //     var position = $(window).scrollTop()
+        //     localStorage.setItem('positionY', position)
+        //     console.log(localStorage.getItem("positionY"))
+        // });
 
-        $(window).on('load', function() {
-            if(localStorage.getItem('positionY')){
-                var pos = localStorage.getItem('positionY')
-                $("html, body").animate({ scrollTop: `${pos}px` },1000);
+        // $(window).on('load', function() {
+        //     if(localStorage.getItem('positionY')){
+        //         var pos = localStorage.getItem('positionY')
+        //         $("html, body").animate({ scrollTop: `${pos}px` },1000);
             
-        }})
+        // }})
 
 
-    if ('{{trigger}}' == '1'){
-        $('#comment_modal').addClass('fade'); 
-    } else {
-        $('#comment_modal').removeClass('fade');
-    }
+    // if ('{{trigger}}' == '1'){
+    //     $('#comment_modal').addClass('fade'); 
+    // } else {
+    //     $('#comment_modal').removeClass('fade');
+    // }
     
 
-    if (image != 0 ){
-        $('#comment_modal').modal('show');
+    // if (image != 0 ){
+    //     $('#comment_modal').modal('show');
         
-    }
+    // }
 
     // Bulletin is different because the click target is not buried inside the .dimage
     if(url_location == 'bulletin'){
@@ -51,14 +51,36 @@
             window.history.pushState({}, '', loadurl)
             $('#comment_modal').addclass('fade');
     });
-    
 
+
+
+        
+        
+            $('.fa-heart').click(function(){
+                var img_id = $(this).attr('id');
+                var replace = `#replace${img_id}`
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: `/process_heart/${img_id}/{{location}}`,
+                })
+                .done(function(data){
+                    console.log(replace);
+                    $(`.dimage ${replace}`).html(data);
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                })
+            })
+        
             
+   
     $( '.dimage' )
     .mouseover(function() {
         var img_id = $(this).attr('id');
         var img = `.open_modal${img_id}`
         var stats = `#stat${img_id}`
+        var replace = `#replace${img_id}`
         loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
 
         $(".opacity").css('opacity', '.99');
@@ -67,11 +89,11 @@
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
-        $( `${img}x`).click(function(){
+
+        $( `${img}x`).css('opacity', '.6') .click(function(){
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
-
         $(`${stats}`).show()
     });
 
@@ -83,5 +105,6 @@
         $( `${img}`).css('opacity', '1')
         $(`${stats}`).hide()
     });
+});
     
 </script>

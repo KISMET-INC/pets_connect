@@ -303,8 +303,9 @@ def process_add_comment(request,location):
 #=============================================##
 def process_heart(request,image_id,location):
     
-    session_user = User.objects.get(id= request.session['user_id'])
-    this_image = Image.objects.get(id =image_id)
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
+    print(this_image)
 
     if session_user in this_image.loves.all():
         this_image.loves.remove(session_user) 
@@ -312,8 +313,20 @@ def process_heart(request,image_id,location):
         this_image.loves.add(session_user) 
     
     this_image.save();
+    print(this_image)
 
-    return redirect (f'/{location}/{session_user.id}/0/0')
+    return redirect (f'/updated_stats/{image_id}')
+
+def updated_stats(request, image_id):
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=image_id)
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    return render(request,'modules/stats.html', context)
+
+
 
 #=============================================##
 # process_follow()
