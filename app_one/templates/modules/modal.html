@@ -27,7 +27,7 @@
                     <div class = 'no_comments'>
                     {% else %}
                     <div class = 'comments'>
-                        <p>{{location}}</p>
+
                     {% with component='modal' %}
                     {% for comment in image.comments.all reversed %}
                         {% include 'modules/single_comment.html' %}

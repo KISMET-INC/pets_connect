@@ -82,9 +82,7 @@ input {
     height: 40px;
 }
 
-p input{
-    height:20px;
-}
+
 
 .stats i.fa-trash::before {
     color:#555555;
