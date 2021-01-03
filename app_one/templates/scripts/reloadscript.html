@@ -1,5 +1,5 @@
 <script>
-$(document).ready(function(){
+
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
@@ -22,17 +22,17 @@ $(document).ready(function(){
         // }})
 
 
-    // if ('{{trigger}}' == '1'){
-    //     $('#comment_modal').addClass('fade'); 
-    // } else {
-    //     $('#comment_modal').removeClass('fade');
-    // }
+    if ('{{trigger}}' == '1'){
+        $('#comment_modal').addClass('fade'); 
+    } else {
+        $('#comment_modal').removeClass('fade');
+    }
     
 
-    // if (image != 0 ){
-    //     $('#comment_modal').modal('show');
+    if (image != 0 ){
+        $('#comment_modal').modal('show');
         
-    // }
+    }
 
     // Bulletin is different because the click target is not buried inside the .dimage
     if(url_location == 'bulletin'){
@@ -51,32 +51,52 @@ $(document).ready(function(){
             window.history.pushState({}, '', loadurl)
             $('#comment_modal').addclass('fade');
     });
+            var heart=false;
 
+          
 
+            
 
-        
-        
-            $('.fa-heart').click(function(){
-                var img_id = $(this).attr('id');
-                var replace = `#replace${img_id}`
+        $('.dimage').click(function(){
+
+            var img_id = $(this).attr('id');
+            var replace = `#replace${img_id}`
+            if(heart == true){
                 $.ajax({
-                    cache: false,
-                    type:"GET",
-                    url: `/process_heart/${img_id}/{{location}}`,
+                cache: false,
+                type:"GET",
+                url: `/process_heart/${img_id}/{{location}}`,
                 })
                 .done(function(data){
-                    console.log(replace);
-                    $(`.dimage ${replace}`).html(data);
+                    heart=false;
+                    $(`#replace${img_id}`).html(data);                    
                 })
                 .fail(function(data){
                     console.log("Error in fetching data");
                 })
-            })
-        
+            }
             
+        })
+    
+            var num1 = 1
+            var num2 = 1
    
-    $( '.dimage' )
-    .mouseover(function() {
+    $( '.dimage' ).mouseenter(function() {
+        $('.fa-heart').mouseenter(function(){
+            num2++;
+            heart = true;
+            $(this).css('opacity', '.5')
+            console.log(heart)
+            
+        })
+
+        $('.fa-heart').mouseleave(function(){
+            heart = false;
+            console.log(heart)
+            $(this).css('opacity', '1')
+        })
+
+      
         var img_id = $(this).attr('id');
         var img = `.open_modal${img_id}`
         var stats = `#stat${img_id}`
@@ -94,7 +114,10 @@ $(document).ready(function(){
             window.history.pushState({}, '', loadurl+'/1')
             window.location.reload()          
         });
-        $(`${stats}`).show()
+        
+         $(`${stats}`).show()
+         console.log('num1 - '+ num1)
+         console.log('num2 - '+num2)
     });
 
     $( ".dimage" )
@@ -105,6 +128,7 @@ $(document).ready(function(){
         $( `${img}`).css('opacity', '1')
         $(`${stats}`).hide()
     });
-});
-    
+
+  
+
 </script>
