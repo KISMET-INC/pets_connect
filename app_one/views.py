@@ -90,14 +90,6 @@ def process_signin(request):
             return redirect(f'/bulletin/{this_user.id}/0/0')
 
 
-#=============================================##
-# END LOGIN DEFS
-#=============================================##
-
-#=============================================##
-# START PAGE DEFS
-#=============================================##
-
 
 
 
@@ -188,7 +180,8 @@ def bulletin(request,user_id,image_id, modal_trigger):
         'image': current_image,
         'images': Image.objects.order_by("-created_at"),
         'location': 'bulletin',
-        'trigger': modal_trigger
+        'trigger': modal_trigger,
+        'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
     }
     return render(request,'bulletin.html',context)
 
@@ -292,9 +285,18 @@ def process_add_comment(request,location):
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
     new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
-    if request.POST['component'] == 'post':
-        return redirect (f'/{location}/{this_image.id}')
-    return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
+    #if request.POST['component'] == 'post':
+    return render(request,'modules/post.html', context)
+    #return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
+    
+    
+    
+    
+    #  return redirect (f'/updated_post/{this_image.id}')
 
 
 def updated_post(request, image_id):

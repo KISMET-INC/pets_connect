@@ -34,7 +34,7 @@
 //*********************************************//
 
     if(url_location == 'bulletin'){
-
+        // Comment Button
         $( 'p button')
         .mouseover(function() {
             var img_id = $(this).attr('id');
@@ -45,8 +45,31 @@
             window.location.reload();
         })
 
+        $('.post_comment button').click(function(e){
+            e.preventDefault()
+            var img_id = $(this).attr('id');
+            var token = '{{csrf_token}}';
+            var form_id = `.form_img_id${img_id}`
+            var form_text = `.form_text${img_id}`
+            console.log($(`${form_id}`).val())
+                $.ajax({
+                    cache: false,
+                    headers: { "X-CSRFToken": token },  
+                    type:'POST',
+                    data : { image_id :$(`${form_id}`).val(), component: 'post', text: $(`${form_text}`).val()},
+                    url: `/process_add_comment/{{location}}`,
+                })
+                .done(function(data){
+                    console.log(data)
+                    $(`#post${img_id}`).html(data);                    
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                })
+        })
+
+        // Monitor hearts mouseover
         $('.stats').mouseenter(function(){
-             // Toggle heart boolean
             $('.fa-heart')
             .mouseenter(function(){
                 heart = true;            
@@ -54,8 +77,11 @@
             .mouseleave(function(){
                 heart = false;
             })
+
+    
         })
 
+        // Hearts Toggle
         $('.stats').click(function(){
 
             var img_id = $(this).attr('id');

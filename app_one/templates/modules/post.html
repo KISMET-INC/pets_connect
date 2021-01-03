@@ -14,7 +14,23 @@
         <p>click to give this pet some love!</p>
         {% endif %}
 
-        <iframe src = '/comment_frame/{{image.id}}'></iframe>
+        
+            {% for comment in image.comments.all|dictsortreversed:'created_at'|slice:":3" %}
+                {% include 'modules/single_comment.html' %}
+            {% endfor %}
+    
+            <!-- {% if comments.count > 3 %}
+            <h3>Show all {{image.comments.count}} comments </h3>
+            {% endif %} -->
+    
+            {% with component='post'%}
+            {% include 'modules/comment.html' %}
+            
+            {% endwith %}
+       
+    
+
+        <!-- <iframe src = '/comment_frame/{{image.id}}'></iframe> -->
 
     </div>
 </div>

@@ -1,7 +1,7 @@
+
 <form class = "post_comment" action = '\process_add_comment\{{location}}' method ='post'>
     {% csrf_token %}
-    <input name = 'text' placeholder="Add a Comment..." maxlength="50">
-    <input type="hidden" name = 'image_id' value= '{{image.id}}'>
-    <input type="hidden" name = 'component' value= '{{component}}'>
-    <button type ='submit'> POST </button>
+    <input class = 'form_text{{image.id}}' name = 'text' placeholder="Add a Comment..." maxlength="50">
+    <input class = 'form_img_id{{image.id}}' type="hidden" name = 'image_id' value= '{{image.id}}'>
+    <button id ={{image.id}} type ='submit'> POST </button>
 </form>

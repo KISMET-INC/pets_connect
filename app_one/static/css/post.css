@@ -26,8 +26,7 @@ iframe {
     box-shadow: none;
     background-color:transparent;
     width: 100%;
-    position:absolute;
-    bottom:0;
+  
 }
 
 .post_comment button {
