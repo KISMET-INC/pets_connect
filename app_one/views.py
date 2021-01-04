@@ -263,7 +263,7 @@ def process_add_image(request):
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
 
-    return redirect (f'/explore/{session_user.id}/0/0')
+    return redirect (f'/profile/{session_user.id}/0/0')
 
 
 #=============================================##

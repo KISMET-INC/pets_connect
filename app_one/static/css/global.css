@@ -399,26 +399,4 @@ h2 {
 }
 
 
-@media (max-width: 426px){
-    
-
-    nav div {
-        width: 90%;
-    }
-
-    nav h2{
-        font-size: 15px;
-        
-    }
-
-    nav a {
-        font-size: 11px;
-    }
-    
-    nav div div {
-        width: 140px;
-    
-    }
-}
-
 

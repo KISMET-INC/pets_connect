@@ -180,12 +180,12 @@
         // Decreases the opacity of the image.
         $( `${img}`)
         .css('opacity', '.6')
-        // When image is clicked it pushes new URL and reloads page
-        // to show modal. Work around to make modal appear as a chat
-        .click(function(){
-            window.history.pushState({}, '', loadurl+'/1')
-            window.location.reload()          
-        });
+        // // When image is clicked it pushes new URL and reloads page
+        // // to show modal. Work around to make modal appear as a chat
+        // .click(function(){
+        //     window.history.pushState({}, '', loadurl+'/1')
+        //     window.location.reload()          
+        // });
 
         // COMMENT ICON needs different opacity. Will DRY UP later
         $( `${img}x`).css('opacity', '1') 
