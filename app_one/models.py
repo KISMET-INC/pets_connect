@@ -32,7 +32,6 @@ class UserManager(models.Manager):
 
         # check unique email address
         users = User.objects.filter(email = postData['email'])
-        print(users)
         if len(users) > 0:
             errors['email_in_use'] = 'Email already in use'
         

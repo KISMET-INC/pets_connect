@@ -2,7 +2,10 @@ bcrypt==3.2.0
 cffi==1.14.4
 Django==2.2.4
 django-cleanup==5.1.0
+django-filter==2.4.0
 django-resized==0.3.11
+djangorestframework==3.12.2
+Markdown==3.3.3
 Pillow==8.0.1
 pycparser==2.20
 pytz==2020.4

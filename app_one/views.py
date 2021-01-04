@@ -49,9 +49,9 @@ def process_register(request):
             request.session['user_id'] = new_user.id
             request.session['user_name'] = new_user.user_name
             request.session['user_level'] = new_user.user_level
-            return redirect('/explore/0')
+            return redirect(f'/explore/{new_user.id}/0/0')
 
-        return redirect('/explore/0')
+        return redirect(f'/explore/{new_user.id}/0/0')
 
 
 
