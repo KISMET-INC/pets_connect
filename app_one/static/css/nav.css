@@ -49,3 +49,15 @@ nav h2 {
     font-family: 'Damion', cursive;
     font-size: 50px;
 }
+
+@media (max-width: 426px){
+    nav h2 {
+        font-size: 35px;
+    }
+    nav i:before {
+        font-size:20px
+    }
+    nav div div {
+        width:150px;
+    }
+}

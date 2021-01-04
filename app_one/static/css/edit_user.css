@@ -1,3 +1,6 @@
+nav .fa-user::before {
+    color:#E5E5E5;
+}
 
 #interface_block_one {
     width: 90%;
