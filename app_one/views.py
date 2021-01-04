@@ -249,7 +249,7 @@ def process_edit_user(request):
         session_user.user_img = request.FILES['user_img']
     session_user.save()
 
-    return redirect(f'/profile/{session_user.id}/0')
+    return redirect(f'/profile/{session_user.id}/0/0')
 
 
 #=============================================##
