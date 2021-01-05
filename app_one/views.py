@@ -44,6 +44,13 @@ def process_register(request):
 
         if new_user.user_level == 9:
             return redirect('/explore/admin')
+        
+        if new_user.user_level != 9:
+            kristen = User.objects.get(id=2)
+            new_user.is_following.add(kristen)
+            kristen.being_followed.add(new_user)
+            kristen.save()
+            new_user.save()
 
         if user_level not in request.session:
             request.session['user_id'] = new_user.id
