@@ -15,7 +15,7 @@
     text-align: center;
     width: 100%;
     height: fit-content;
-    font-size: 16px;
+    font-size: 20px;
     margin: 0px;
     padding: 0px;
 }
@@ -26,8 +26,10 @@
 
 .stats p.name , .stats div a  {
     font-family: 'Montserrat Alternates', sans-serif;   
-    font-size: 14px;
+    font-size: 15px;
     color: #BFBFBF;
+    width: 90%;
+    text-align: center;
 }
 
 .stats .edit_stats {
@@ -40,7 +42,8 @@
     width:fit-content;
     height: fit-content;
     margin: 0px;
-    margin-left: 5px;
+    margin-right: 5px;
+    margin-left: 20px;
     padding: 0px;
     border:none;
     box-shadow: none;
@@ -56,10 +59,14 @@
 }
 
 p i{
-    font-size:20px;
+    font-size:25px;
     color:#BFBFBF;
     margin-top:7px;
     opacity: 1;
+}
+
+p button i{
+    font-size: 22px;
 }
 
 .stats i.fas::before {
@@ -75,7 +82,7 @@ p i{
 }
 
 .stats span {
-    font-size:16px;
+    font-size:20px;
     font-weight: bold;
     
 }
