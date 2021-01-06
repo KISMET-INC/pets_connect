@@ -4,7 +4,7 @@
     top: -100px;
     height:0px; 
     background:rgb(0, 0, 0, 0.3); 
-    margin-right: 10px;
+    /* margin-right: 10px; */
     width: 100%;
     z-index: 1;
 }
@@ -14,7 +14,6 @@
     color:#BFBFBF;
     text-align: center;
     width: 100%;
-    height: fit-content;
     font-size: 20px;
     margin: 0px;
     padding: 0px;
@@ -26,9 +25,8 @@
 
 .stats p.name , .stats div a  {
     font-family: 'Montserrat Alternates', sans-serif;   
-    font-size: 15px;
+    font-size: 16px;
     color: #BFBFBF;
-    width: 90%;
     text-align: center;
 }
 
