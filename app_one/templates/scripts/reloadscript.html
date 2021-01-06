@@ -33,17 +33,20 @@
 // different targeting to function
 //*********************************************//
 
-    if(url_location == 'bulletin'){
+   // if(url_location == 'bulletin'){
         
         $('body').on('click', '.fa-heart', function(){
+            var url_location = '{{location}}'
             var img_id = $(this).attr('id');
+            var img = `.open_modal${img_id}`
             var title = $(this).attr('title');
+            $( `${img}`).css('opacity', '1')
             if(title != 'Pet Loves'){
 
                 $.ajax({
                     cache: false,
                     type:"GET",
-                    url: `/process_heart/${img_id}/{{location}}`,
+                    url: `/process_heart/${img_id}/${url_location}`,
                 })
                 .done(function(data){
                     $(`#replace${img_id}`).html(data);                    
@@ -103,7 +106,7 @@
 
         })
     
-    }
+  //  }
             
 
 //*********************************************//
@@ -129,26 +132,26 @@
 // update the stats elements to represent new status
 //*********************************************//        
 
-    $('.dimage').click(function(){
+    // $('.dimage').click(function(){
 
-        var img_id = $(this).attr('id');
-        var replace = `#replace${img_id}` 
-        var title = $(this).attr('title');
-        if(heart == true){
-            $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/process_heart/${img_id}/{{location}}`,
-            })
-            .done(function(data){
-                $(`#replace${img_id}`).html(data);                    
-            })
-            .fail(function(data){
-                console.log("Error in fetching data");
-            })
-        }
+    //     var img_id = $(this).attr('id');
+    //     var replace = `#replace${img_id}` 
+    //     var title = $(this).attr('title');
+    //     if(heart == true){
+    //         $.ajax({
+    //         cache: false,
+    //         type:"GET",
+    //         url: `/process_heart/${img_id}/{{location}}`,
+    //         })
+    //         .done(function(data){
+    //             $(`#replace${img_id}`).html(data);                    
+    //         })
+    //         .fail(function(data){
+    //             console.log("Error in fetching data");
+    //         })
+    //     }
         
-    })
+    // })
     
 
 //*********************************************//
@@ -197,22 +200,22 @@
         // Show the stats
         $(`${stats}`).show()
 
-        // Toggle heart boolean
-        $('.fa-heart')
-        .mouseenter(function(){
-            heart = true;            
-        })
-        .mouseleave(function(){
-            heart = false;
-        })
+        
 
     });
+    // Toggle heart boolean
+        // $('.fa-heart')
+        // .mouseenter(function(){
+        //     heart = true;            
+        // })
+        // .mouseleave(function(){
+        //     heart = false;
+        // })
 
 //*********************************************//
 // ON MOUSEOUT
 // Return image to normal opacity and hide stats
 //*********************************************//
-
     $( ".dimage" )
     .mouseleave(function() {
         var id = $(this).attr('id');
@@ -221,6 +224,23 @@
 
         $( `${img}`).css('opacity', '1')
         $(`${stats}`).hide()
+    });
+
+
+    $('body').on('click', '.dimage', function(){
+        var id = $(this).attr('id');
+        var stats = `#stat${id}`
+        var img = `.open_modal${id}`
+        
+
+            if( $(`${img}`).css('opacity') != '1') {
+                $( `${img}`).css('opacity', '1')
+                $(`${stats}`).hide()
+            } else {
+                $( `${img}`).css('opacity', '.6')
+                $(`${stats}`).show()
+            }
+        
     });
 
 
