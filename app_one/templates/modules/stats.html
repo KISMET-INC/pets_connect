@@ -1,8 +1,8 @@
 
     {% if session_user == image.user %}
     <p>
-        <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Pet Loves"></i> {{image.loves.count}} 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> {{image.comments.count}}
+        <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Pet Loves"></i><span> {{image.loves.count}}</span> 
+        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> <span>{{image.comments.count}}</span>
     </p>
     <div class = 'edit_stats'>
         <a href='/process_remove_image/{{image.id}}/{{location}}'>Delete </a> |

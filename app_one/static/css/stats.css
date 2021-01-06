@@ -1,7 +1,7 @@
 .stats {
     background-color: #E5E5E5;
     position: relative;
-    top: -100px;
+    top: -120px;
     height:0px; 
     background:rgb(0, 0, 0, 0.3); 
     /* margin-right: 10px; */
@@ -30,8 +30,15 @@
     text-align: center;
 }
 
+.stats p.name {
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
 .stats .edit_stats {
-    margin-left:5px;
+    margin-left:10px;
+    width:100%;
 }
 
 .stats p button {
@@ -40,8 +47,6 @@
     width:fit-content;
     height: fit-content;
     margin: 0px;
-    margin-right: 5px;
-    margin-left: 20px;
     padding: 0px;
     border:none;
     box-shadow: none;
@@ -53,13 +58,14 @@
 
 .stats p:nth-child(2){
     margin-bottom: 5px;
-    color:#BFBFBF
+    color:#BFBFBF;
 }
 
 p i{
     font-size:25px;
     color:#BFBFBF;
     margin-top:7px;
+    margin-left: 5px;
     opacity: 1;
 }
 
@@ -82,6 +88,8 @@ p button i{
 .stats span {
     font-size:20px;
     font-weight: bold;
+    margin-left:5px;
+    margin-right:5px;
     
 }
 
@@ -89,3 +97,4 @@ button:focus {
     outline: 0px;
     border: 0px;
 }
+

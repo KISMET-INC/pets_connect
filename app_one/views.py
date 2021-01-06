@@ -356,7 +356,7 @@ def process_follow(request,image_id,user_to_follow_id,location):
     session_user.save()
     user_to_follow.save()
 
-    return redirect (f'/profile/{user_to_follow.id}/0/0')
+    return redirect (f'/explore/{session_user.id}/0/0')
 
 #=============================================##
 # process_follow()
