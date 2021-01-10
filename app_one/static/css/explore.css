@@ -86,15 +86,6 @@ img.cropped {
     
 }
 
-/*******************************/
-/*  MEDIA BREAKPOINT 425px         
-/*******************************/
-@media (max-width: 425px){
-.dimage {
-    width:100%
-}
-}
-
 
 
 
