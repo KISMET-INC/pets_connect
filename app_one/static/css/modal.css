@@ -24,6 +24,13 @@
     height: 450px;
 }
 
+.modal .fa-times {
+    position: absolute;
+    right: 0px;
+    margin:10px; 
+    font-size:20px;
+    z-index: 2;
+}
 .cropped2 {
     width:100.2%;
     border: none;
@@ -179,7 +186,9 @@
 /*******************************/
 @media (max-width: 769px){
 
-
+    .modal {
+        height: 900px;
+    }
     .modal-content {
         width: 100%;
         /* height:fit-content; */
@@ -212,7 +221,7 @@
         position:sticky;
     }
 
-    .modal .left p:nth-child(3), p:nth-child(4){
+    .modal .left p:nth-child(4), p:nth-child(5){
         visibility: hidden;
         position: absolute;
     }

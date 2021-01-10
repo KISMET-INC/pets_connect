@@ -5,8 +5,14 @@
     
 }
 
+nav .dropdown {
+    display: none
+}
+
+
 nav i {
     font-size: 25px;
+    color:#55AAAA;
 }
 /* CANVAS NAV BAR */
 nav {
@@ -51,6 +57,33 @@ nav h2 {
 }
 
 @media (max-width: 426px){
+    nav button {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        color: black;
+        margin: 0px;
+        position: relative;
+        right: 0;
+    }
+    nav .dropdown {
+        display: flex;
+        justify-content: flex-end;
+        align-items: right;
+        text-align: left;
+    }
+
+    nav .dropdown-menu  {
+        min-width: 100px;
+    }
+    nav .dropdown-menu a {
+        text-align: left;
+        color: #55AAAA;
+    }
+
+    nav .horizontal {
+        display:none;
+    }
     nav h2 {
         font-size: 35px;
     }

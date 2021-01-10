@@ -2,7 +2,7 @@
 @import 'post.css';
 @import 'stats.css';
 
-nav .fa-users::before {
+nav .fa-users::before, nav a.bulletin{
     color:#E5E5E5;
 }
 

@@ -3,7 +3,7 @@
 @import 'image.css';
 
 
-nav .fa-user::before {
+nav .fa-user::before, nav a.profile {
     color:#E5E5E5;
 }
 
