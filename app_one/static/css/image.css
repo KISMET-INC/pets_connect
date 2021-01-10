@@ -1,5 +1,17 @@
 @import 'stats.css';
 
+.dimage .stats h2 {
+    position: relative;
+    height: 0px;
+    color:#BFBFBF;
+    text-align:center;
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    padding: 0px;
+}
+
+
 .dimage {
     background-color: black;
     margin:1px;

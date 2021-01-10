@@ -7,6 +7,15 @@
     var heart = false;
     var selfclick = false;
 
+    window.onpopstate = function(event) {
+         $('#comment_modal').modal('hide');
+    };
+
+    $('.modal-body .left .fa-times').click (function(){
+        $('#comment_modal').modal('hide');
+    })
+
+
     // Check for mobile device
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
@@ -102,6 +111,7 @@
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var title = $(this).attr('title');
+            var stats = `#stat${img_id}`
             heart = true;
         
             if(title == 'Pet Loves'){

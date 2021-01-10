@@ -2,7 +2,16 @@
     <nav>
         <div>
             <h2>PetsConnect</h2>
-            <div>
+            <div class="dropdown">
+                <button type="button" data-toggle="dropdown"><i class= 'fas fa-bars'></i></button>
+                <ul class="dropdown-menu">
+                  <li><a class = 'explore' href = '/explore/{{session_user.id}}/0/0'>Explore</a></li>
+                  <li><a class = 'bulletin' href = '/bulletin/{{session_user.id}}/0/0'>Bulletin Board</a></li>
+                  <li><a class = 'profile' href = '/profile/{{session_user.id}}/0/0'>Your Profile</a></li>
+                  <li><a class = 'logout' href = '/logout'>Sign Out</a></li>
+                </ul>
+            </div>
+            <div class = 'horizontal'>
                 
                 <a href = '/explore/{{session_user.id}}/0/0'><i class="fas fa-compass" data-placement="bottom" title= 'Explore' ></i></a>
                 <a href = '/bulletin/{{session_user.id}}/0/0'><i class="fas fa-users" data-placement="bottom" title= 'Bulletin' ></i></a>

@@ -1,11 +1,12 @@
 @import 'modal.css';
 @import 'stats.css';
+@import 'image.css';
 
 .stats {
     display: none;
 }
 
-nav .fa-compass::before {
+nav .fa-compass::before, nav a.explore{
     color:#E5E5E5;
 }
 
@@ -93,6 +94,7 @@ img.cropped {
 .dimage {
     width:90%;
     margin: 0 auto;
+    margin-bottom:2px;
 }
 }
 

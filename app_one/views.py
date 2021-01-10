@@ -144,6 +144,10 @@ def profile(request, user_id, image_id, modal_trigger):
         current_image = 0
     images = Image.objects.filter(user = user_id).order_by("-created_at");
 
+    heart_sum = 0
+    for image in images:
+        heart_sum += image.loves.count()
+
     context = {
 
         'upload_pet_form': UploadPetForm(),
@@ -154,7 +158,8 @@ def profile(request, user_id, image_id, modal_trigger):
         'icon': 'fas fa-table',
         'title': 'explore',
         'location': 'profile',
-        'trigger': modal_trigger
+        'trigger': modal_trigger,
+        'heart_sum': heart_sum,
     }
     return render(request,'profile.html',context)
 
