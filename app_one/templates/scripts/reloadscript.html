@@ -5,45 +5,48 @@
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
     var heart = false;
+    var selfclick = false;
 
     // Check for mobile device
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
         $('body').on('click', '.dimage', function(){
             $(".opacity").css('opacity', '.99');
-            $('.dimage').css('opacity', '1')
-            $(`${stats}`).hide()
-
-                var id = $(this).attr('id');
-                var stats = `#stat${id}`
-                var img = `.open_modal${id}`
-                
-                if(heart == false){
-                    if( $(`${img}`).css('opacity') != '1') {
-                        $( `${img}`).css('opacity', '1')
-                        $(`${stats}`).hide()
-                    } else {
-                        $( `${img}`).css('opacity', '.6')
-                        $(`${stats}`).show()
-                    }
+            
+            var id = $(this).attr('id');
+            var stats = `#stat${id}`
+            var img = `.open_modal${id}`
+            console.log(heart)
+            
+            if(heart == false && selfclick == false){
+                console.log($(`${img}`).css('opacity'))
+                if( $(`${img}`).css('opacity') != '1') {
+                    $(`${img}`).css('opacity', '1')
+                    $(`${stats}`).hide()
+                } else {
+                    $('img').css('opacity', '1');
+                    $('.stats').hide()
+                    $(`${img}`).css('opacity', '.6')
+                    $(`${stats}`).show()
                 }
-                        
+            }
+                    
+            // Return URL with image ID to push for loading modal
+            if ('{{clicked_user}}' != ''){
+                loadurl = `/${url_location}/{{clicked_user.id}}/${img_id}`
+            } else {
+                loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+            }
 
-                        // Return URL with image ID to push for loading modal
-                        if ('{{clicked_user}}' != ''){
-                            loadurl = `/${url_location}/{{clicked_user.id}}/${img_id}`
-                        } else {
-                            loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
-                        }
-
-                        // COMMENT ICON needs different opacity. Will DRY UP later
-                        $( `${img}x`).css('opacity', '1') 
-                        .click(function(){
-                            window.history.pushState({}, '', loadurl+'/1')
-                            window.location.reload()          
-                        });
-                
+            // COMMENT ICON needs different opacity. Will DRY UP later
+            $( `${img}x`).css('opacity', '1') 
+            .click(function(){
+                window.history.pushState({}, '', loadurl+'/1')
+                window.location.reload()          
             });
+                
+        });
+
     }else{
     // false for not mobile device
         $( '.dimage' )
@@ -78,10 +81,10 @@
 
         });
 
-    //*********************************************//
-    // ON MOUSEOUT
-    // Return image to normal opacity and hide stats
-    //*********************************************//
+    // //*********************************************//
+    // // ON MOUSEOUT
+    // // Return image to normal opacity and hide stats
+    // //*********************************************//
         $( ".dimage" )
         .mouseleave(function() {
             var id = $(this).attr('id');
@@ -101,6 +104,12 @@
             var title = $(this).attr('title');
             heart = true;
         
+            if(title == 'Pet Loves'){
+                heart = false;
+                $(`${img}`).css('opacity', '.6')
+                $(`${stats}`).show()
+            }
+
             if(title != 'Pet Loves'){
 
                 $.ajax({
@@ -110,11 +119,11 @@
                 })
                 .done(function(data){
                     if(url_location != 'bulletin'){
-                        $(`#replace${img_id}`).html(data); 
-                        heart = false;               
+                        $(`#replace${img_id}`).html(data);             
                     } else {
                         $(`#post${img_id}`).html(data);  
                     }
+                    heart = false;   
                 })
                 .fail(function(data){
                     console.log("Error in fetching data");
@@ -128,6 +137,7 @@
             var img_id = $(this).attr('id');
             var url_location = '{{location}}'
             var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
+            var selfclick = true;
             window.history.pushState({}, '', loadurl)
             window.location.reload();
         })
