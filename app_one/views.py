@@ -325,13 +325,14 @@ def process_heart(request,image_id,location):
         this_image.loves.add(session_user) 
     
     this_image.save();
-    context = {
-        'image': this_image,
-        'session_user': session_user
-    }
-    return render(request,'modules/stats.html', context)
+
+    if location == 'bulletin':
+        return redirect(f'/updated_post/{this_image.id}')
+
+    return redirect(f'/updated_stats/{this_image.id}')
 
 def updated_stats(request, image_id):
+    print('im here in updated stats')
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
     context = {
@@ -339,6 +340,9 @@ def updated_stats(request, image_id):
         'session_user': session_user
     }
     return render(request,'modules/stats.html', context)
+
+
+
 
 
 
@@ -356,7 +360,7 @@ def process_follow(request,image_id,user_to_follow_id,location):
     session_user.save()
     user_to_follow.save()
 
-    return redirect (f'/profile/{user_to_follow.id}/0/0')
+    return redirect (f'/explore/{session_user.id}/0/0')
 
 #=============================================##
 # process_follow()

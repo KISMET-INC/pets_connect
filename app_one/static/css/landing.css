@@ -48,7 +48,7 @@
 }
 
 .light h2 {
-    font-size: 70px;
+    font-size: 60px;
     font-family: 'Damion', cursive;
 }
 
@@ -155,7 +155,7 @@
     }
 
     .light p:nth-child(3) {
-        color: blue;
+        
         text-align: center;
         margin-top:20px;
         width: 100%;
@@ -174,7 +174,7 @@
     }
 
     .bottom div {
-        border: 1px solid grey; 
+       
         margin: 0 auto; 
         min-height: 225px;
         width: 45%;
@@ -203,7 +203,7 @@
     }
 
     .light h2 {
-        font-size: 24px;
+        font-size: 50px;
     }
     .bottom h2 {
         text-align: center;
@@ -214,6 +214,6 @@
         width: 90%;
         min-height: unset;
         margin-bottom: 20px;
-        border: 1px solid blue;   
+       
     }
 }
