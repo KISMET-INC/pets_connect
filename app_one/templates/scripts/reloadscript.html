@@ -4,23 +4,30 @@
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
+    var heart = false;
 
     // Check for mobile device
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
         $('body').on('click', '.dimage', function(){
+            $(".opacity").css('opacity', '.99');
+            $('dimage').css('opacity', '1')
+            $(`${stats}`).hide()
+
                 var id = $(this).attr('id');
                 var stats = `#stat${id}`
                 var img = `.open_modal${id}`
                 
-
+                if(heart == false){
                     if( $(`${img}`).css('opacity') != '1') {
                         $( `${img}`).css('opacity', '1')
                         $(`${stats}`).hide()
                     } else {
                         $( `${img}`).css('opacity', '.6')
                         $(`${stats}`).show()
-                        $(".opacity").css('opacity', '.99');
+                    }
+                }
+                        
 
                         // Return URL with image ID to push for loading modal
                         if ('{{clicked_user}}' != ''){
@@ -35,10 +42,6 @@
                             window.history.pushState({}, '', loadurl+'/1')
                             window.location.reload()          
                         });
-
-
-
-                    }
                 
             });
     }else{
@@ -85,17 +88,18 @@
             var stats = `#stat${id}`
             var img = `.open_modal${id}`
 
-           $( `${img}`).css('opacity', '1')
+            $( `${img}`).css('opacity', '1')
             $(`${stats}`).hide()
         });
     } // END DEVICE DEPENDENT INSTRUCTIONS
 
-        
+        // HEART //
         $('body').on('click', '.fa-heart', function(){
             var url_location = '{{location}}'
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var title = $(this).attr('title');
+            heart = true;
         
             if(title != 'Pet Loves'){
 
@@ -107,8 +111,7 @@
                 .done(function(data){
                     if(url_location != 'bulletin'){
                         $(`#replace${img_id}`).html(data); 
-                        $( `${img}`).css('opacity', '.6')
-                        $(`${stats}`).show()                   
+                        heart = false;               
                     } else {
                         $(`#post${img_id}`).html(data);  
                     }
