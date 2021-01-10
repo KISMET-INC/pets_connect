@@ -78,6 +78,7 @@ nav h2 {
     }
     nav .dropdown-menu a {
         text-align: left;
+        font-size: 16px;
         color: #55AAAA;
     }
 

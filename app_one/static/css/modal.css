@@ -187,24 +187,25 @@
 @media (max-width: 769px){
 
     .modal {
-        height: 900px;
+        
     }
     .modal-content {
         width: 100%;
+
         /* height:fit-content; */
     }
-
+    
     .modal-dialog {
         margin: 0 auto; 
         margin-top:50px;    
-        height:900px;
         width:90%;
+        margin-bottom: 100px;
         
     }
     .modal form {
         width:100%;
     }
-
+    
     .modal-body {
         width: 100%;
         display: flex;
@@ -212,6 +213,7 @@
         height:100%;
         margin: 0 auto;
         padding-bottom:20px;
+        
     }
 
     .modal .left {
