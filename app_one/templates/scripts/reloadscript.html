@@ -30,23 +30,23 @@
                     $(`${stats}`).show()
                 }
             }
-                        
+                    
+            // Return URL with image ID to push for loading modal
+            if ('{{clicked_user}}' != ''){
+                loadurl = `/${url_location}/{{clicked_user.id}}/${img_id}`
+            } else {
+                loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
+            }
 
-                        // // Return URL with image ID to push for loading modal
-                        // if ('{{clicked_user}}' != ''){
-                        //     loadurl = `/${url_location}/{{clicked_user.id}}/${img_id}`
-                        // } else {
-                        //     loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
-                        // }
-
-                        // // COMMENT ICON needs different opacity. Will DRY UP later
-                        // $( `${img}x`).css('opacity', '1') 
-                        // .click(function(){
-                        //     window.history.pushState({}, '', loadurl+'/1')
-                        //     window.location.reload()          
-                        // });
-                
+            // COMMENT ICON needs different opacity. Will DRY UP later
+            $( `${img}x`).css('opacity', '1') 
+            .click(function(){
+                window.history.pushState({}, '', loadurl+'/1')
+                window.location.reload()          
             });
+                
+        });
+
     }else{
     // false for not mobile device
         $( '.dimage' )
