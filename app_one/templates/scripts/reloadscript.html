@@ -9,7 +9,6 @@
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
         $('body').on('click', '.dimage', function(){
-            console.log('were here')
                 var id = $(this).attr('id');
                 var stats = `#stat${id}`
                 var img = `.open_modal${id}`
@@ -30,9 +29,6 @@
                             loadurl = `/${url_location}/{{session_user.id}}/${img_id}`
                         }
 
-                        // Decreases the opacity of the image.
-                        $( `${img}`)
-                        .css('opacity', '.6')
                         // COMMENT ICON needs different opacity. Will DRY UP later
                         $( `${img}x`).css('opacity', '1') 
                         .click(function(){
@@ -100,6 +96,7 @@
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var title = $(this).attr('title');
+        
             if(title != 'Pet Loves'){
 
                 $.ajax({
@@ -109,7 +106,9 @@
                 })
                 .done(function(data){
                     if(url_location != 'bulletin'){
-                        $(`#replace${img_id}`).html(data);                    
+                        $(`#replace${img_id}`).html(data); 
+                        $( `${img}`).css('opacity', '.6')
+                        $(`${stats}`).show()                   
                     } else {
                         $(`#post${img_id}`).html(data);  
                     }
