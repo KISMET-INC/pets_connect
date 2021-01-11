@@ -60,7 +60,7 @@ img.cropped {
 /*******************************/
 @media (max-width: 1025px){
     .dimage {
-        width:33%;
+        width:32.5%;
     }
 
 }
@@ -72,11 +72,11 @@ img.cropped {
 
     .dashboard {
         justify-content: left;
-        width:90%;
+        width:100%;
     }
 
     .dimage{
-        width:48%;
+        width:48.5%;
     }
     .stats {
         display:none
@@ -84,19 +84,30 @@ img.cropped {
     .cropped {
         height:auto;
     }
-    
+
+    .dimage .stats h2 {
+        font-size: 14px;
+    }
+    .dimage .stats p , .dimage .stats a {
+        font-size: 14px;
+    }
+
+    .dimage .stats p:nth-child(2) {
+        display:none;
+    }
+
+ 
 }
 
 /*******************************/
 /*  MEDIA BREAKPOINT 425px         
 /*******************************/
 @media (max-width: 425px){
-.dimage {
-    width:90%;
-    margin: 0 auto;
-    margin-bottom:2px;
-}
-}
+    .dashboard {
+        width:100%;
+    }
+
+} 
 
 
 
