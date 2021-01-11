@@ -11,6 +11,8 @@
          $('#comment_modal').modal('hide');
     };
 
+    
+
     $('.modal-body .left .fa-times').click (function(){
         $('#comment_modal').modal('hide');
     })
@@ -184,8 +186,6 @@
             var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
             window.history.pushState({}, '', loadurl)
             window.location.reload();
-
-
         })
 
 //*********************************************//
@@ -206,8 +206,10 @@ if ('{{trigger}}' == '1'){
 // show the modal containing the information on the image
 //******************************************************//
 
-    if (image != 0 ){
-        $('#comment_modal').modal('show');       
+    if (image != 0 ){      
+        $('#comment_modal').modal('show');
+        var d = $('.comments');
+        d.scrollTop(d.prop("scrollHeight"));
     }
             
 

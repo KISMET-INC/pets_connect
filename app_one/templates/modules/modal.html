@@ -7,7 +7,7 @@
             <div class="modal-body">
 
                 <div class ='left'>
-                    <i class="fas fa-times"></i>
+                    <i class="fas fa-times close_modal"></i>
                     <img class="cropped2" src = {{image.pet_img.url}}>
                     <div class = 'stats'>
                        {% include 'modules/stats.html' %}
@@ -25,16 +25,16 @@
                 </div>
                 
                     {% if image.comments.all.count == 0 %}
-                    <div class = 'no_comments'>
+                        <div class = 'no_comments'>
                     {% else %}
-                    <div class = 'comments'>
-
+                        <div class = 'comments'>
                     {% with component='modal' %}
-                    {% for comment in image.comments.all reversed %}
+                    {% for comment in image.comments.all %}
                         {% include 'modules/single_comment.html' %}
                     {% endfor %}
                     {% endwith %}
                     {% endif %}
+                    <h2 id='bottom'></h2>
                 </div>       
 
                 </div>

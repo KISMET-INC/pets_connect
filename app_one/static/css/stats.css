@@ -1,7 +1,7 @@
 .stats {
     background-color: #E5E5E5;
     position: relative;
-    top: -140px;
+    top: -130px;
     height:0px; 
     background:rgb(0, 0, 0, 0.3); 
     /* margin-right: 10px; */
@@ -59,6 +59,7 @@
 .stats p:nth-child(2){
     margin-bottom: 5px;
     color:#BFBFBF;
+    font-size:16px;
 }
 
 p i{
