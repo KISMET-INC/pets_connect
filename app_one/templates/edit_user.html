@@ -17,10 +17,18 @@
         <div id="interface_block_one" class='edit_user'>
             <div class = 'heading'>
                 <div class = 'profile_info'>
+                    
                     {% with user=session_user %}
                         {% include 'modules/user_img.html' %}
                     {% endwith %}
+                    
+                    {% if session_user.user_name != 'guest' %}
+                    <form enctype="multipart/form-data" action="/process_edit_user" method="post"></form>
+                    {% else %}
                     <form enctype="multipart/form-data" action="/process_edit_user" method="post">
+                    <p>As a guest you are not allowed to edit these fields</p>
+                    {% endif %}
+                        <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
                         <input type= 'text' value = '{{session_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{session_user.email}}' name = 'email'> 

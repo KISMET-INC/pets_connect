@@ -5,7 +5,14 @@
 .stats {
     display: none;
 }
-
+.dimage .edit_stats a {
+    display:none;
+}
+.stats .self_stats {
+    position: relative;
+    top:60px;
+        
+}
 nav .fa-compass::before, nav a.explore{
     color:#E5E5E5;
 }
@@ -45,6 +52,8 @@ img.cropped {
     width: 100%;
     border-radius: 5px 5px 5px 5px;
 }
+
+
 
 /*******************************/
 /*  MEDIA BREAKPOINT 1110px         
@@ -86,15 +95,15 @@ img.cropped {
     }
 
     .dimage .stats h2 {
-        font-size: 14px;
+        font-size: 16px;
     }
     .dimage .stats p , .dimage .stats a {
         font-size: 14px;
     }
 
-    .dimage .stats p:nth-child(2) {
-        display:none;
-    }
+  
+
+    
 
  
 }

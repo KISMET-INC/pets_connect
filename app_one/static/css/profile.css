@@ -42,7 +42,7 @@ nav .fa-user::before, nav a.profile {
     justify-content: space-between;
     /* position:sticky;
     top:75px; */
-    padding-top:50px;
+    padding-top:25px;
     z-index: 3;
 
 }

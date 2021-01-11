@@ -8,7 +8,7 @@
 .modal-dialog {
     width:fit-content;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 .modal-content {
@@ -21,15 +21,16 @@
     padding:0px;
     display:flex;
     width:fit-content;
-    height: 450px;
+    height:475px;
 }
 
-.modal .fa-times {
+.modal .close_modal {
     position: absolute;
     right: 0px;
     margin:10px; 
     font-size:20px;
     z-index: 2;
+    color: black;
 }
 .cropped2 {
     width:100.2%;
@@ -70,7 +71,8 @@
 
 .modal .right p.name  {
     font-family: 'Montserrat Alternates', sans-serif;
-    color:#337AB7;
+    /* color:#337AB7; */
+    color: #55AAAA;
     font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
@@ -88,6 +90,23 @@
     z-index:1
 }
 
+.modal .single_comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding:0px;
+    margin-bottom:10px;
+}
+
+.modal .single_comment .fa-times::before {
+    position:static;
+    margin:0px;
+    padding:0px;
+}
+
+.modal .single_comment a {
+   text-align:top;
+}
 .modal .left p:nth-child(2) {
     color: #BFBFBF;
 }
@@ -97,7 +116,7 @@
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: 69%;
+    height: 70%;
     width:100%;
     margin: 0 auto; 
     overflow: scroll;
@@ -105,7 +124,9 @@
 }
 
 .modal .single_comment h2 {
-    margin:0px; 
+    margin:0px;
+    width:90%;
+    
 }
 
 .modal .comments p {
@@ -116,9 +137,14 @@
     overflow-wrap: break-word;
     max-width:350px;
     margin: 0px;
+    scroll-padding-bottom: 2em;
 
 }
 
+.anchor {
+    color:red;
+    margin-top: 200px;
+}
 .modal .no_comments {
     background-color: white;
 }
@@ -162,6 +188,7 @@
     width:80%;
     margin: 0 auto; 
     margin-bottom:15px;
+    
 }
 
 .modal .stats {
@@ -186,24 +213,25 @@
 /*******************************/
 @media (max-width: 769px){
 
-    .modal {
-        
-    }
+
     .modal-content {
         width: 100%;
 
         /* height:fit-content; */
     }
+
     
     .modal-dialog {
         margin: 0 auto; 
-        margin-top:50px;    
-        width:90%;
-        margin-bottom: 100px;
-        
+        margin-top:0px;    
+        width:100%;        
     }
     .modal form {
         width:100%;
+    }
+
+    .modal .fa-times {
+        color: white;
     }
     
     .modal-body {
@@ -224,8 +252,31 @@
     }
 
     .modal .left p:nth-child(4), p:nth-child(5){
-        visibility: hidden;
-        position: absolute;
+        /* visibility: hidden; */
+        /* position: absolute; */
+    }
+
+    .modal .single_comment {
+        display:flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        
+        
+    }
+
+    .modal .single_comment h2 {
+        margin:0px;
+        padding: 0px;
+
+    }
+
+    .modal .single_comment i {
+        position: unset;
+        color: #55AAAA;
+        margin: 0px;
+        width:fit-content;
+        padding: 0px;
+    
     }
 
     .modal .right{

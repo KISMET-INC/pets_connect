@@ -125,6 +125,7 @@ input {
 }
 
 .bulletin_right {
+
     width: 40%;
     padding-left: 50px;
     display:flex;
@@ -163,7 +164,7 @@ input {
 .followers {
     width: 100%;
     top:200px;
-    height: 350px;
+    
 }
 
 .followers div:nth-child(1) {
@@ -187,7 +188,7 @@ input {
 
 .bulletin_right .footer {
     position:sticky;
-    top: 540px;
+    top: 375px;
     width:100%;
     text-align:center;
 }
@@ -197,6 +198,9 @@ input {
 }
 
 @media (max-width:1000px){
+    #interface_block_two {
+        display:unset;
+    }
     .bulletin_left {
         width: 100%;
         margin: 0 auto; 
