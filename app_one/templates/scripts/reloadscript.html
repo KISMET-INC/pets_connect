@@ -4,9 +4,10 @@
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
+    var admin_user_level= 'session_user.user_level'
     var heart = false;
     var selfclick = false;
-
+    console.log(image)
     window.onpopstate = function(event) {
          $('#comment_modal').modal('hide');
     };
@@ -148,7 +149,11 @@
             console.log('click')
             var img_id = $(this).attr('id');
             var url_location = '{{location}}'
-            var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/0`
+            if(session_user.user_level == 9){
+                var loadurl =`/${url_location}/{{clicked_user}}/${img_id}/1`
+            } else {
+                var loadurl =`/${url_location}/{{session_user.id}}/${img_id}/1`
+            }
             var selfclick = true;
             window.history.pushState({}, '', loadurl)
             window.location.reload();
@@ -221,7 +226,11 @@ if ('{{trigger}}' == '1'){
 //*********************************************//
 
     $("#comment_modal").on('hidden.bs.modal', function(e){
-            loadurl = `/${url_location}/{{session_user.id}}/0/0`
+        if(admin_user_level != 9){
+            loadurl = `/${url_location}/{{session_user.id}}/0/0/`
+        } else {
+            loadurl = `/${url_location}/{{clicked_user_user.id}}/0/0/`
+        }
             window.history.pushState({}, '', loadurl)
             $('#comment_modal').addClass('fade');
     });

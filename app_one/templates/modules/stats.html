@@ -1,5 +1,5 @@
 
-    {% if session_user == image.user %}
+    {% if session_user == image.user or session_user.user_level == 9 %}
     <p>
         <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Pet Loves"></i><span> {{image.loves.count}}</span> 
         <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> <span>{{image.comments.count}}</span>
@@ -8,6 +8,7 @@
         <a href='/process_remove_image/{{image.id}}/{{location}}'>Delete </a>
         <!-- <a href='#'>  Edit</a> -->
     </div>
+    
     
 
     {% else %}

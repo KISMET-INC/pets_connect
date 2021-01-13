@@ -24,9 +24,6 @@
         <div id="TOP_long">
             <nav>
                 <h2 >Pet's Connect</h2>
-                <a href="#">Dashboard</a>
-                <a href = '/logout'>Add Photo</a>
-                <a href='/users/edit_self'> Profile</a>
                 <a href = '/logout'>Log Off</a>
             </nav>
             
@@ -37,7 +34,7 @@
         <div id="interface_block_one">
             <div class="split_top">
                 <h2 class = 'form_title'>Manage Users - ADMIN {{request.session.user_level}}</h2>
-                <a href = '/users/new'><button type ='submit'> Add New</button></a>
+                <a href = '/register'><button type ='submit'> Add New</button></a>
             </div>
             
             <table>
@@ -53,7 +50,7 @@
                 {% for user in users %}
                 <tr>
                     <td>{{user.id}}</td>
-                    <td><a href='/users/show/{{user.id}}'>{{user.first_name}} {{user.last_name}}</a></td>
+                    <td>{{user.user_name}}</a></td>
                     <td>{{user.email}}</td>
                     <td>{{user.created_at}}</td>
 
@@ -64,7 +61,7 @@
                     {% endif %}
 
                     <!-- ADD REMOVE MESSAGE BOX -->
-                    <td><a href='/users/edit_user/{{user.id}}'>edit</a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'>remove</a></td>
+                    <td><a href='/admin_edit_user/{{user.id}}/0/0'>edit</a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'>remove</a></td>
                 </tr>
                 {% endfor %}
             </table>

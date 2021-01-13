@@ -21,11 +21,10 @@
                     {% with user=session_user %}
                         {% include 'modules/user_img.html' %}
                     {% endwith %}
-                    
                     {% if session_user.user_name != 'guest' %}
                     <form enctype="multipart/form-data" action="/process_edit_user" method="post"></form>
                     {% else %}
-                    <form enctype="multipart/form-data" action="/process_edit_user" method="post">
+                    <form>
                     <p>As a guest you are not allowed to edit these fields</p>
                     {% endif %}
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
@@ -37,8 +36,9 @@
                     </form>
                 </div>
 
-                
-
+                {%}
+                {% include 'modules/modal.html' %}
+                {% include 'scripts/reloadscript.html' %}
 
     </div>  <!-- END CANVAS -->
 </body>

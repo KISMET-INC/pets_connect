@@ -3,7 +3,6 @@ $(document).ready(function(){
     var url_location = '{{location}}'
     var image = '{{image.id}}'
     var trig = '{{trigger}}'
-    alert(image)
     
 //*********************************************//
 // TRIGGERS FOR MODAL
