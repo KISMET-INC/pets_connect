@@ -26,10 +26,6 @@ nav .fa-compass::before, nav a.explore{
 }
 
 
-button:focus {
-    outline: 0px;
-    border: 0px;
-}
 
 .dashboard {
     display:flex;
@@ -42,7 +38,7 @@ button:focus {
 .dimage {
     margin-left:2px;
     margin-bottom: 2px;
-    width: 24.8%;
+    width: 24.5%;
     border-radius: 5px;
     background-color: black;
 }

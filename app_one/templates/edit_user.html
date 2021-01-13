@@ -22,7 +22,7 @@
                         {% include 'modules/user_img.html' %}
                     {% endwith %}
                     {% if session_user.user_name != 'guest' %}
-                    <form enctype="multipart/form-data" action="/process_edit_user" method="post"></form>
+                    <form enctype="multipart/form-data" action="/process_edit_user" method="post">
                     {% else %}
                     <form>
                     <p>As a guest you are not allowed to edit these fields</p>
@@ -32,13 +32,14 @@
                         <input type= 'text' value = '{{session_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{session_user.email}}' name = 'email'> 
                         {{ user_upload_img.as_p}}
-                        <button type ='submit'> SUBMIT </button>
+                        <div>
+                            <button type ='submit'> SUBMIT </button>
+                            <a href= '/profile/{{session_user.id}}/0/1'><button>CANCEL</button></a>
+                        </div>
                     </form>
                 </div>
 
-                {%}
                 {% include 'modules/modal.html' %}
-                {% include 'scripts/reloadscript.html' %}
 
     </div>  <!-- END CANVAS -->
 </body>

@@ -21,9 +21,11 @@
             
         {% with component='post' %}
         {% with location='bulletin' %}
-            {% for comment in image.comments.all|dictsortreversed:'created_at'|slice:":3" %}
+        {% with len=image.comments.count.all %}
+            {% for comment in image.comments.all|dictsort:'created_at'|slice:"-3:" %}
                 {% include 'modules/single_comment.html' %}
             {% endfor %}
+        {% endwith %}
         {% endwith %}
         {% endwith %}
 

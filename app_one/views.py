@@ -49,6 +49,7 @@ def process_register(request):
             kristen = User.objects.get(id=2)
             new_user.is_following.add(kristen)
             kristen.being_followed.add(new_user)
+            new_user.being_followed.add(kristen)
             kristen.save()
             new_user.save()
 
@@ -409,8 +410,6 @@ def updated_stats(request, image_id):
 
 
 
-
-
 #=============================================##
 # process_follow()
 # return redirect('/')
@@ -424,6 +423,8 @@ def process_follow(request,image_id,user_to_follow_id,location):
     user_to_follow.being_followed.add(session_user);
     session_user.save()
     user_to_follow.save()
+    if location == 'profile':
+        return redirect(f'/profile/{user_to_follow_id}/0/1')
 
     return redirect (f'/explore/{session_user.id}/0/0')
 
@@ -472,5 +473,11 @@ def stop_following(request, user_id):
     clicked_user.being_followed.remove(session_user)
     session_user.save()
     clicked_user.save()
-    return redirect (f'/bulletin/{session_user.id}/0/0')
+    return redirect (f'/profile/{clicked_user.id}/0/0')
 
+#=============================================##
+# get_session_id()
+#=============================================##
+def get_session_id(request):
+    session_id = request.session['user_id']
+    return HttpResponse (session_id)

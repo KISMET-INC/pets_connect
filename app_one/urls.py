@@ -44,5 +44,6 @@ urlpatterns = [
 
 
     path('updated_stats/<int:image_id>', views.updated_stats),
-    path('updated_post/<int:image_id>', views.updated_post)
+    path('updated_post/<int:image_id>', views.updated_post),
+    path('get_session_id', views.get_session_id),
 ]

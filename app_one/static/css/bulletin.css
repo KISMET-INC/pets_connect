@@ -155,10 +155,16 @@ input {
     top: 105px;
     align-items: center;
 }
+
+.bulletin_right h2 {
+    margin-top: 0px;
+}
 .user , .followers{
     position:sticky;
     
 }
+
+
 
 
 .followers {
