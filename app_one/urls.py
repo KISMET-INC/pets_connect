@@ -39,6 +39,11 @@ urlpatterns = [
     path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>/<str:component>',views.process_delete_comment),
     path('stop_following/<int:user_id>',views.stop_following),
 
+    path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
+    path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+
+
     path('updated_stats/<int:image_id>', views.updated_stats),
-    path('updated_post/<int:image_id>', views.updated_post)
+    path('updated_post/<int:image_id>', views.updated_post),
+    path('get_session_id', views.get_session_id),
 ]

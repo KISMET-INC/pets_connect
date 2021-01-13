@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'scripts/headerlinks.html' %}
+    <title>Pets Connect</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+</head>
+<body>
+    <div id="CANVAS_long">
+        {% include 'modules/nav.html' %}
+
+
+        <div id="interface_block_one" class='edit_user'>
+
+                <div class = 'profile_info'>
+                    
+                    
+                    {% include 'modules/user_img.html' %}
+                    
+    
+                    <form enctype="multipart/form-data" action="/process_add_user" method="post">
+                
+                        <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
+                        {% csrf_token %}
+                        <input type= 'text' name = 'user_name'> 
+                        <input type= 'text' name = 'email'> 
+                        {{ user_upload_img.as_p}}
+                        <button type ='submit'> SUBMIT </button>
+                    </form>
+
+                </div>
+
+    </div>  <!-- END CANVAS -->
+</body>
+
+</html>

@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+    <script src="{% static '/js/reloadscript.js' %}"></script>   
    
 </head>
 <body>
@@ -36,7 +37,12 @@
                         {% if session_user == clicked_user %}
                             <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE </a> 
                         {% else %}
+                            {% if clicked_user in session_user.is_following.all %}
                             <a href='/stop_following/{{clicked_user.id}}'> STOP FOLLOWING </a>
+                            {% else %}
+                            <a href='/process_follow/0/{{clicked_user.id}}/profile'> FOLLOW USER</a>
+                            {% endif %}
+                            
                         {% endif %}
                     </div>
                 </div>
@@ -45,8 +51,8 @@
                 <form enctype="multipart/form-data" action = '/process_add_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
-                        <input type='text' name ='name' placeholder="Pets name..">
-                        <input name = 'desc' placeholder="Description..">
+                        <input type='text' name ='name' maxlength="10" placeholder="Pets name..">
+                        <input name = 'desc' maxlength="20" placeholder="Description..">
                         <input type="hidden" name = 'user_id' value= '{{user.id}}'>
                         {{ upload_pet_form.as_p}}           
                         <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
@@ -72,7 +78,6 @@
             </div>
 
             {% include 'modules/modal.html' %}
-            {% include 'scripts/reloadscript.html' %}
         </div> <!-- END INTERFACE -->
 
 

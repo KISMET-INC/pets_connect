@@ -9,7 +9,11 @@ nav .fa-user::before, nav a.profile {
     margin: 0 auto; 
 
 }
-
+form div {
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+}
 .heading {
     margin: 0 auto; 
     margin-bottom:20px;
@@ -89,8 +93,6 @@ form button {
     margin: 0px;
     padding: 0px;
     text-align: right;
-    width: 100%;
-    margin: 0 auto; 
 }
 
 @media (max-width:950px){

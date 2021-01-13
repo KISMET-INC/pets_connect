@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/bulletin.css' %}">
+    <script src="{% static '/js/reloadscript.js' %}"></script>   
 </head>
 <body>
     <div id="CANVAS_long">
@@ -70,6 +71,11 @@
     </div>
 
     <div class='replace_modal'>{% include 'modules/modal.html' %}</div>
-    {% include 'scripts/reloadscript.html' %}
+  
 </body>
+<script>
+
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+</script>
 </html>

@@ -49,6 +49,7 @@ def process_register(request):
             kristen = User.objects.get(id=2)
             new_user.is_following.add(kristen)
             kristen.being_followed.add(new_user)
+            new_user.being_followed.add(kristen)
             kristen.save()
             new_user.save()
 
@@ -93,7 +94,7 @@ def process_signin(request):
             request.session['user_name'] = this_user.user_name
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
-                return redirect('/explore/admin')
+                return redirect('explore/admin')
             return redirect(f'/explore/{this_user.id}/0/0')
 
 
@@ -174,6 +175,43 @@ def edit_user(request,user_id):
     }
     return render(request,'edit_user.html',context)
 
+
+#=============================================##
+# admin_edit_user()
+#
+#=============================================##
+def admin_edit_user(request,user_id,image_id,modal_trigger):
+    if image_id != 0:
+        image = Image.objects.get(id=image_id)
+    else:
+        image = image_id
+
+    context = {
+        'session_user' : User.objects.get(id=request.session['user_id']),
+        'image': image,
+        'trigger': modal_trigger,
+        'clicked_user' : User.objects.get(id=user_id),
+        'user_upload_img' : UploadUserImgForm(),
+        'location': 'admin_edit_user',
+
+    }
+    return render(request,'admin_edit_user.html',context)
+
+    
+#=============================================##
+# admin_add_user()
+#
+#=============================================##
+def admin_add_user(request):
+    context = {
+        'session_user' : User.objects.get(id=request.session['user_id']),
+        'user' : User.objects.get(id=user_id),
+        'user_upload_img' : UploadUserImgForm(),
+    }
+    return render(request,'admin_add_user.html',context)
+
+    
+
     
 #=============================================##
 # bulletin()
@@ -247,6 +285,9 @@ def process_edit_password(request):
         
     return redirect(f'/edit_user/{session_user.id}')
 
+
+    
+
 #=============================================##
 # process_edit_user()
 # return redirect('/')
@@ -262,6 +303,23 @@ def process_edit_user(request):
     session_user.save()
 
     return redirect(f'/profile/{session_user.id}/0/0')
+
+
+#=============================================##
+# process_admin_edit_user()
+# return redirect('/')
+#=============================================##
+def process_admin_edit_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    user_upload_img = UploadUserImgForm(request.POST, request.FILES)
+        
+    user.email = request.POST['email']
+    user.user_name = request.POST['user_name']
+    if request.FILES:
+        user.user_img = request.FILES['user_img']
+    user.save()
+
+    return redirect(f'/admin_edit_user/{user_id}')
 
 
 #=============================================##
@@ -283,10 +341,13 @@ def process_add_image(request):
 # return redirect('/')
 #=============================================##
 def process_remove_image(request,image_id,location):
-    session_user = request.session['user_id']
+    session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
+    this_user = User.objects.get(id = this_image.user.id)
     this_image.delete()
-    return redirect (f'/{location}/{session_user}/0/0')
+    if session_user.user_level == 9:
+        return redirect (f'/admin_edit_user/{this_user.id}')
+    return redirect (f'/{location}/{session_user.id}/0/0')
 
 #=============================================##
 # process_add_comment()
@@ -349,8 +410,6 @@ def updated_stats(request, image_id):
 
 
 
-
-
 #=============================================##
 # process_follow()
 # return redirect('/')
@@ -364,6 +423,8 @@ def process_follow(request,image_id,user_to_follow_id,location):
     user_to_follow.being_followed.add(session_user);
     session_user.save()
     user_to_follow.save()
+    if location == 'profile':
+        return redirect(f'/profile/{user_to_follow_id}/0/1')
 
     return redirect (f'/explore/{session_user.id}/0/0')
 
@@ -392,7 +453,11 @@ def process_delete_comment(request,comment_id,image_id,location,component):
     print(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_comment = Comment.objects.get(id = comment_id)
+    clicked_user = this_comment.user
     this_comment.delete();
+    if session_user.user_level == 9:
+         return redirect(f'/{location}/{clicked_user.id}/{image_id}/0')
+
     if component == 'modal':
         return redirect(f'/{location}/{session_user.id}/{image_id}/0')
     return redirect (f'/{location}/{session_user.id}/0/0')
@@ -408,5 +473,11 @@ def stop_following(request, user_id):
     clicked_user.being_followed.remove(session_user)
     session_user.save()
     clicked_user.save()
-    return redirect (f'/bulletin/{session_user.id}/0/0')
+    return redirect (f'/profile/{clicked_user.id}/0/0')
 
+#=============================================##
+# get_session_id()
+#=============================================##
+def get_session_id(request):
+    session_id = request.session['user_id']
+    return HttpResponse (session_id)

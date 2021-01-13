@@ -14,17 +14,7 @@
 
     <div id="CANVAS_long">
         <div id="TOP_long">
-            <nav>
-                <div>
-                    <h2>PetsConnect</h2>
-                    <div>
-                        <div>
-                            <a href = '/register'>Register</a>
-                            <a href = '/signin'>Sign In</a>
-                        </div>
-                    </div>
-                </div>  
-            </nav>
+              {% include 'modules/nav_landing.html' %}
         </div>
 
 
@@ -69,8 +59,8 @@
 </body>
 <script>
 
-    var images =['{% static "images/people2.jpg" %}']
+    // var images =['{% static "images/people2.jpg" %}']
 
-    $(".jumbotron").css("background-image", `url('${images[0]}')`);
+    // $(".jumbotron").css("background-image", `url('${images[0]}')`);
 </script>
 </html>
