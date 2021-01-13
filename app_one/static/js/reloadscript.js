@@ -10,8 +10,8 @@ $(document).ready(function(){
     var image = parseInt(map[3])
     var trig = map[4]
     var session_user_id = ''
-
-    
+    var heart = false;
+    var selfclick = false;
 
     $.ajax({
         cache: false,
@@ -39,15 +39,15 @@ $(document).ready(function(){
 
 
     // Check for mobile device
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
         $('body').on('click', '.dimage', function(){
+          
             $(".opacity").css('opacity', '.99');
             
-            var id = $(this).attr('id');
-            var stats = `#stat${id}`
-            var img = `.open_modal${id}`
-            console.log(heart)
+            var img_id = $(this).attr('id');
+            var img = `.open_modal${img_id}`
+            var stats = `#stat${img_id}`
             
             if(heart == false && selfclick == false){
                 console.log($(`${img}`).css('opacity'))
@@ -78,43 +78,42 @@ $(document).ready(function(){
                 
         });
 
-    }else{
-    // false for not mobile device
+   }else{
+    //false for not mobile device
         $( '.dimage' )
             .mouseenter(function() {
-                // Declare Variables needed 
+               // Declare Variables needed 
                 var img_id = $(this).attr('id');
                 var img = `.open_modal${img_id}`
                 var stats = `#stat${img_id}`
                 var replace = `#replace${img_id}`
 
-                // Sets headers to an opacity of .99  so that they will mainain
-                // their heirarchy
+                //Sets headers to an opacity of .99  so that they will mainain
+               // their heirarchy
                 $(".opacity").css('opacity', '.99');
 
-                // Return URL with image ID to push for loading modal
+                //Return URL with image ID to push for loading modal
                 if (  clicked_user_id = ''){
                     loadurl = `/${url_location}/${clicked_user_id}/${img_id}`
                 } else {
                     loadurl = `/${url_location}/${session_user_id}/${img_id}`
                 }
 
-                // Decreases the opacity of the image.
+                //Decreases the opacity of the image.
                 $( `${img}`).css('opacity', '.6')
-                // COMMENT ICON needs different opacity. Will DRY UP later
+               // COMMENT ICON needs different opacity. Will DRY UP later
                 $( `${img}x`).click(function(){
                     window.history.pushState({}, '', loadurl+'/1')
                     window.location.reload()          
                 });
 
-                // Show the stats
+               // Show the stats
                 $(`${stats}`).show()
 
-        });
-
-    // //*********************************************//
-    // // ON MOUSEOUT
-    // // Return image to normal opacity and hide stats
+            })
+    //*********************************************//
+    // ON MOUSEOUT
+    // Return image to normal opacity and hide stats
     // //*********************************************//
         $( ".dimage" )
         .mouseleave(function() {
@@ -141,7 +140,8 @@ $(document).ready(function(){
                 $(`${img}`).css('opacity', '.6')
                 $(`${stats}`).show()
             }
-
+          
+            
             if(title != 'Pet Loves'){
 
                 $.ajax({
