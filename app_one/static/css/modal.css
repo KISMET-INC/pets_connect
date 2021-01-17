@@ -110,13 +110,15 @@
 .modal .left p:nth-child(2) {
     color: #BFBFBF;
 }
-
+.modal #replace_comments {
+    height: 80%;
+}
 .modal .comments {
     border-radius: 5px;
     background-color:#EDEDED;
     text-align: left;
     padding: 15px;
-    height: 70%;
+    height: 100%;
     width:100%;
     margin: 0 auto; 
     overflow: scroll;
@@ -137,13 +139,16 @@
     overflow-wrap: break-word;
     max-width:350px;
     margin: 0px;
-    scroll-padding-bottom: 2em;
+    scroll-padding-bottom: 2em
 
 }
 
-.anchor {
+#bottom {
+    overflow-anchor: auto;
+
+    /* anchor nodes are required to have non-zero area */
+    height: 1px;
     color:red;
-    margin-top: 200px;
 }
 .modal .no_comments {
     background-color: white;

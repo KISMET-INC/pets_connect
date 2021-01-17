@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
     path('explore/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.explore),
-    path('process_add_comment/<str:location>', views.process_add_comment),
+    path('process_add_comment', views.process_add_comment),
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),
     path('process_follow/<int:image_id>/<int:user_to_follow_id>/<str:location>', views.process_follow),
     
@@ -46,4 +46,5 @@ urlpatterns = [
     path('updated_stats/<int:image_id>', views.updated_stats),
     path('updated_post/<int:image_id>', views.updated_post),
     path('get_session_id', views.get_session_id),
+    path('replace_modal/<int:image_id>', views.replace_modal),
 ]

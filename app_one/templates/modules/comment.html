@@ -1,5 +1,5 @@
 
-<form class = "post_comment" action = '\process_add_comment\{{location}}' method ='post'>
+<form class = "post_comment" action = '\process_add_comment' method ='post'>
     {% csrf_token %}
     <input class = 'form_text{{image.id}}' name = 'text' placeholder="Add a Comment..." maxlength="50">
     <input class = 'form_img_id{{image.id}}' type="hidden" name = 'image_id' value= '{{image.id}}'>

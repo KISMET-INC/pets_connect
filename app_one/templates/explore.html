@@ -26,8 +26,15 @@
                 {% endfor %}
                 
             </div>
-
+    
+    <div id='replaceModal'>
     {% include 'modules/modal.html' %} 
+    </div>
  
 </body>
+<script>
+
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+</script>
 </html>

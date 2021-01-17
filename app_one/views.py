@@ -353,7 +353,7 @@ def process_remove_image(request,image_id,location):
 # process_add_comment()
 # return redirect('/')
 #=============================================##
-def process_add_comment(request,location):
+def process_add_comment(request):
     print(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
@@ -364,7 +364,7 @@ def process_add_comment(request,location):
     }
     if request.POST['component'] == 'post':
         return render(request,'modules/post.html', context)
-    return redirect (f'/{location}/{session_user.id}/{this_image.id}/0')
+    return render(request, 'modules/modal_comments.html', context)
 
 
 def updated_post(request, image_id):
@@ -375,6 +375,16 @@ def updated_post(request, image_id):
         'session_user': session_user
     }
     return render(request,'modules/post.html', context)
+
+#=============================================##
+# replace_modal()
+# return redirect('/')
+#=============================================##
+def replace_modal(request, image_id):
+    context = {
+        'image' : Image.objects.get(id=image_id),
+    }
+    return render(request, 'modules/modal.html', context)
 
 #=============================================##
 # process_like()

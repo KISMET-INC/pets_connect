@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    
+    
+    function scrollToBottom() {
+        var elmnt = document.getElementById("bottom");
+        elmnt.scrollIntoView(false); // Bottom
+    }
 
     map = window.location.pathname.toString()
     map = map.split('/')
@@ -104,8 +110,8 @@ $(document).ready(function(){
                 $( `${img}`).css('opacity', '.6')
                // COMMENT ICON needs different opacity. Will DRY UP later
                 $( `${img}x`).click(function(){
-                    window.history.pushState({}, '', loadurl+'/1')
-                    window.location.reload()          
+                    // window.history.pushState({}, '', loadurl+'/1')
+                    // window.location.reload()          
                 });
 
                // Show the stats
@@ -163,8 +169,10 @@ $(document).ready(function(){
             
         });
 
+        //*********************************************//
+        // COMMENT ICON - ON CLICK
+        //*********************************************//
         $('body').on('click', 'p button', function(){
-
             var img_id = $(this).attr('id');
             // var url_location = '{{location}}'
             if(session_user_id == 1){
@@ -173,11 +181,34 @@ $(document).ready(function(){
                 var loadurl =`/${url_location}/${session_user_id}/${img_id}/1`
             }
             var selfclick = true;
-            window.history.pushState({}, '', loadurl)
-            window.location.reload();
-        })
+            // window.history.pushState({}, '', loadurl)
+            // window.location.reload();
+            $.ajax({
+                cache: false,
+                type:"GET",
+                url: `/replace_modal/${img_id}`,
+            })
+            .done(function(data){
 
-        $('body').on('click', '.post .post_comment button', function(e){
+                $(`#replaceModal`).html(data);
+                $('#comment_modal').modal('show');
+                $("#comment_modal").on('shown.bs.modal', function(e){
+                   
+
+                    scrollToBottom()
+                 })
+                
+            })
+            .fail(function(data){
+                console.log("Error in fetching data");
+            })
+        });
+
+        
+
+        
+
+        $('body').on('click', '.post_comment button', function(e){
             var img_id = $(this).attr('id');
             var token = '{{csrf_token}}';
             var form_id = `.form_img_id${img_id}`
@@ -190,11 +221,13 @@ $(document).ready(function(){
                 headers: { "X-CSRFToken": csrftoken },  
                 type:'POST',
                 data : { image_id :$(`${form_id}`).val(), component: $(`${form_compnt}`).val(), text: $(`${form_text}`).val()},
-                url: `/process_add_comment/${url_location}`,
+                url: `/process_add_comment`,
             })
             .done(function(data){
-                    $(`#post${img_id}`).html(data);  
-                    console.log('success')                                    
+                   $(`#post${img_id}`).html(data);  
+                    console.log('success') 
+                    $('#replace_comments').html(data)                                  
+                    // scrollToBottom()
             })
             .fail(function(data){
                 console.log("Error in fetching data");
@@ -243,6 +276,7 @@ $(document).ready(function(){
     //*********************************************//
 
     $("#comment_modal").on('hidden.bs.modal', function(e){
+        alert('click')
         if(session_user_id == 1){
             loadurl = `/${url_location}/${session_user_id}/0/0`
         } else {

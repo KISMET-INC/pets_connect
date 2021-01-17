@@ -1,6 +1,6 @@
 <!-- MODAL -->
 
-<div id="comment_modal" class="modal" role="dialog">
+<div id="comment_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -27,15 +27,10 @@
                     {% if image.comments.all.count == 0 %}
                         <div class = 'no_comments'>
                     {% else %}
-                        <div class = 'comments'>
-                    {% with component='modal' %}
-                    {% for comment in image.comments.all %}
-                        {% include 'modules/single_comment.html' %}
-                    {% endfor %}
-                    {% endwith %}
+                    <div id= 'replace_comments'>
+                        {% include 'modules/modal_comments.html' %}
+                    </div>
                     {% endif %}
-                    <h2 id='bottom'></h2>
-                </div>       
 
                 </div>
             </div>
