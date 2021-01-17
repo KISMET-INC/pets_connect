@@ -36,7 +36,7 @@ urlpatterns = [
     path('explore/admin', views.admin),
     path('process_remove_user/<int:user_id>', views.process_remove_user),
 
-    path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>/<str:component>',views.process_delete_comment),
+    path('process_delete_comment/<int:comment_id>',views.process_delete_comment),
     path('stop_following/<int:user_id>',views.stop_following),
 
     path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
@@ -44,6 +44,7 @@ urlpatterns = [
 
 
     path('updated_stats/<int:image_id>', views.updated_stats),
+    path('updated_comments/<int:image_id>', views.updated_comments),
     path('updated_post/<int:image_id>', views.updated_post),
     path('get_session_id', views.get_session_id),
     path('replace_modal/<int:image_id>', views.replace_modal),

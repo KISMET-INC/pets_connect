@@ -5,8 +5,10 @@ $(document).ready(function(){
     })
 
     function scrollToBottom() {
-        var elmnt = document.getElementById("bottom");
-        elmnt.scrollIntoView(false); // Bottom
+        if(document.body.contains(document.getElementById('bottom'))){
+            var elmnt = document.getElementById("bottom");
+            elmnt.scrollIntoView(false); // Bottom
+        }
     }
 
     map = window.location.pathname.toString()
@@ -18,6 +20,7 @@ $(document).ready(function(){
     var clicked_user_id = map[2]
     var image = parseInt(map[3])
     var trig = map[4]
+    var component = map[5]
     var session_user_id = ''
     var heart = false;
     var selfclick = false;
@@ -205,11 +208,29 @@ $(document).ready(function(){
 
         
 
-        
+        $('body').on('click', '.delete_comment', function(e){
+            var img_id = $(this).attr('id');
+            e.preventDefault()
+            $.ajax({
+                cache: false,
+                type:'GET',
+                url: `/process_delete_comment/${img_id}`,
+            })
+            .done(function(data){
+                    $(`#post${img_id}`).html(data);  
+                    console.log('success') 
+                    $('#replace_comments').html(data)                                  
+                    scrollToBottom()
+            })
+            .fail(function(data){
+                console.log("Error in fetching data");
+            })
+
+        });
 
         $('body').on('click', '.post_comment button', function(e){
             var img_id = $(this).attr('id');
-            var token = '{{csrf_token}}';
+            
             var form_id = `.form_img_id${img_id}`
             var form_text = `.form_text${img_id}`
             var form_compnt = `.form_compnt${img_id}`
@@ -223,7 +244,7 @@ $(document).ready(function(){
                 url: `/process_add_comment`,
             })
             .done(function(data){
-                   $(`#post${img_id}`).html(data);  
+                    $(`#post${img_id}`).html(data);  
                     console.log('success') 
                     $('#replace_comments').html(data)                                  
                     scrollToBottom()

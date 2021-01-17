@@ -364,9 +364,37 @@ def process_add_comment(request):
     }
     if request.POST['component'] == 'post':
         return render(request,'modules/post.html', context)
+    return redirect( f'/updated_comments/{this_image.id}')
+
+
+#=============================================##
+# process_delete_comment()
+#=============================================##
+def process_delete_comment(request,comment_id):
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_comment = Comment.objects.get(id = comment_id)
+    image_id = this_comment.image.id
+    clicked_user = this_comment.user
+    this_comment.delete();
+    return redirect(f'/updated_comments/{image_id}')
+
+#=============================================##
+# updated_comments() 
+#=============================================##
+def updated_comments(request, image_id):
+    session_user = User.objects.get(id= request.session['user_id'])
+    this_image = Image.objects.get(id = image_id)
+    print('here')
+    context = {
+        'image': this_image,
+        'session_user': session_user
+    }
     return render(request, 'modules/modal_comments.html', context)
 
 
+#=============================================##
+# updated_post()
+#=============================================##
 def updated_post(request, image_id):
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
@@ -378,17 +406,21 @@ def updated_post(request, image_id):
 
 #=============================================##
 # replace_modal()
-# return redirect('/')
 #=============================================##
 def replace_modal(request, image_id):
     context = {
         'image' : Image.objects.get(id=image_id),
+        'session_user' : User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'modules/modal.html', context)
 
+
+
+
+
+
 #=============================================##
-# process_like()
-# return redirect('/')
+# process_heart()
 #=============================================##
 def process_heart(request,image_id,location):
     
@@ -455,25 +487,10 @@ def comment_frame(request, image_id):
     return render(request,'comment_frame.html',context)
 
 
-#=============================================##
-# process_delete_comment()
-# return redirect('/')
-#=============================================##
-def process_delete_comment(request,comment_id,image_id,location,component):
-    print(request.POST)
-    session_user = User.objects.get(id= request.session['user_id'])
-    this_comment = Comment.objects.get(id = comment_id)
-    clicked_user = this_comment.user
-    this_comment.delete();
-    if session_user.user_level == 9:
-         return redirect(f'/{location}/{clicked_user.id}/{image_id}/0')
 
-    if component == 'modal':
-        return redirect(f'/{location}/{session_user.id}/{image_id}/0')
-    return redirect (f'/{location}/{session_user.id}/0/0')
 
 #=============================================##
-# process_add_comment()
+# stop_following()
 # return redirect('/')
 #=============================================##
 def stop_following(request, user_id):

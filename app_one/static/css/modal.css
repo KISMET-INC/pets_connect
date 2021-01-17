@@ -141,19 +141,16 @@
     margin: 0px;
     scroll-padding-bottom: 2em
 
+
 }
 
 #bottom {
     overflow-anchor: auto;
 
     /* anchor nodes are required to have non-zero area */
-    height: 100px;
+    height: .5px;
     color:red;
 }
-.modal .no_comments {
-    background-color: white;
-}
-
 .modal .scroll {
     color: grey;
     margin: 15px;

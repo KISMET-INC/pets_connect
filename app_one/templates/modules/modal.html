@@ -24,13 +24,9 @@
                     {% endwith %}
                 </div>
                 
-                    {% if image.comments.all.count == 0 %}
-                        <div class = 'no_comments'>
-                    {% else %}
-                    <div id= 'replace_comments'>
-                        {% include 'modules/modal_comments.html' %}
-                    </div>
-                    {% endif %}
+                <div id= 'replace_comments'>
+                    {% include 'modules/modal_comments.html' %}
+                </div>
 
                 </div>
             </div>
