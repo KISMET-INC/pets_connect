@@ -147,7 +147,7 @@
     overflow-anchor: auto;
 
     /* anchor nodes are required to have non-zero area */
-    height: 1px;
+    height: 100px;
     color:red;
 }
 .modal .no_comments {

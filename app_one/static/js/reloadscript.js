@@ -1,6 +1,9 @@
 $(document).ready(function(){
     
-    
+    $('body').on('click', '.close_modal', function(){
+        $('#comment_modal').modal('hide');
+    })
+
     function scrollToBottom() {
         var elmnt = document.getElementById("bottom");
         elmnt.scrollIntoView(false); // Bottom
@@ -39,9 +42,7 @@ $(document).ready(function(){
 
 
 
-    $('.modal-body .left .fa-times').click (function(){
-        $('#comment_modal').modal('hide');
-    })
+   
 
 
     // Check for mobile device
@@ -193,8 +194,6 @@ $(document).ready(function(){
                 $(`#replaceModal`).html(data);
                 $('#comment_modal').modal('show');
                 $("#comment_modal").on('shown.bs.modal', function(e){
-                   
-
                     scrollToBottom()
                  })
                 
@@ -227,7 +226,7 @@ $(document).ready(function(){
                    $(`#post${img_id}`).html(data);  
                     console.log('success') 
                     $('#replace_comments').html(data)                                  
-                    // scrollToBottom()
+                    scrollToBottom()
             })
             .fail(function(data){
                 console.log("Error in fetching data");
