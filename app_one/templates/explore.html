@@ -18,6 +18,9 @@
     
         <div id="interface_block_one">
             <div class = 'dashboard'>
+                {% if session_user.user_name == "guest" %}
+                    <p class = 'guest_message'>This is a guest account. Some features such as profile editing have been disabled. Make an account (even with a dummy email), to experience all the features Pets Connect has to offer. Enjoy your stay!</p>
+                {% endif %}
                 {% for image in images %}
                     {% include 'modules/image.html' %} 
                 {% endfor %}

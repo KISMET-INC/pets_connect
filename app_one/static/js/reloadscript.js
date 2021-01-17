@@ -88,6 +88,7 @@ $(document).ready(function(){
                 var stats = `#stat${img_id}`
                 var replace = `#replace${img_id}`
 
+
                 //Sets headers to an opacity of .99  so that they will mainain
                // their heirarchy
                 $(".opacity").css('opacity', '.99');
@@ -135,14 +136,12 @@ $(document).ready(function(){
             var stats = `#stat${img_id}`
             heart = true;
         
-            if(title == 'Pet Loves'){
+            if(title == 'Your Pet Loves'){
                 heart = false;
                 $(`${img}`).css('opacity', '.6')
                 $(`${stats}`).show()
-            }
-          
-            
-            if(title != 'Pet Loves'){
+                
+            } else {
 
                 $.ajax({
                     cache: false,

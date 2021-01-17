@@ -25,6 +25,9 @@ nav .fa-compass::before, nav a.explore{
     justify-content: center;
 }
 
+.dashboard .guest_message {
+    font-style: italic;
+}
 
 
 .dashboard {
