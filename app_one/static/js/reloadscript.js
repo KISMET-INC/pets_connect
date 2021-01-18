@@ -165,13 +165,26 @@ $(document).ready(function(){
 
                 // When modal is hidden update dimage stats
                 $("#comment_modal").on('hide.bs.modal', function(){
+                    alert(url_location)
+                    var url;
+                    if (url_location != 'bulletin'){
+                        url =  `/replace_image/${img_id}`
+                    } else {
+                        url = `/replace_post/${img_id}`
+                    }
+
                     $.ajax({
                         cache: false,
                         type:"GET",
-                        url: `/replace_image/${img_id}`,
+                        url: url,
                     })
                     .done(function(data){
-                        $(`.dashboard #${img_id}`).html(data)
+                        if (url_location != 'bulletin'){
+                            $(`.dashboard #${img_id}`).html(data)
+                        } else {
+                            $(`#post${img_id}`).html(data); 
+                        }
+                        
                     })
                     .fail(function(data){
                         console.log("Error in fetching data");
