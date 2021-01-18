@@ -71,10 +71,7 @@ nav .fa-users::before, nav a.bulletin{
 .stats p:nth-child(1){
     color: #E5E5E5;
 }
-.stats p:nth-child(2){
-    font-weight: bold;
-    margin-top:10px;
-}
+
 .stats p span {
     display:none;
 }
@@ -87,14 +84,29 @@ nav .fa-users::before, nav a.bulletin{
     display:flex;
     justify-content: space-between;
     margin-top: 10px;
+    width:100%;
+}
+
+.single_comment i.delete_comment::before {
+    margin-left: 10px;
+    color: #55AAAA;
 }
  .single_comment h2 {
     font-family: 'Montserrat Alternates', sans-serif;
     font-size:17px;
     margin: 0px;
     margin-bottom: 5px;
-    width:fit-content;
+    width:90%;
 }
+
+
+.single_comment p {
+    font-size:15px;
+    text-align: right;
+    width: 140px;
+}
+
+
 
 .single_comment span {
     font-family: Arial, Helvetica, sans-serif;

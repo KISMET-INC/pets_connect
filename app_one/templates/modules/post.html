@@ -11,13 +11,15 @@
 
         <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
 
+        <p class ='loves'>
         {% if image.loves.count == 1 %}
-            <p>{{image.loves.count}} person loves {{image.name}}!</p>
+            {{image.loves.count}} person loves {{image.name}}!</p>
         {% elif image.loves.count > 1 %}
-            <p>{{image.loves.count}} people love {{image.name}}!</p>
+            {{image.loves.count}} people love {{image.name}}!</p>
         {% else %}
-            <p>click to give this pet some love!</p>
+            <p class ='loves'>click to give this pet some love!</p>
         {% endif %}
+        </p>
             
         {% with component='from_post' %}
         {% with len=image.comments.count.all %}

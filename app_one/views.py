@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Sum
 from .models import *
@@ -75,7 +76,7 @@ def process_signin(request):
 #=============================================##
 def logout(request):
     request.session.flush()
-    return redirect('/')
+    return redirect('/signin')
 
 
 
@@ -124,6 +125,11 @@ def explore(request):
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
     }
+
+    if 'counter' not in request.session:
+        request.session['counter'] = 0
+    else :
+        request.session['counter'] += 1
 
     if request.session['user_level'] == 0:
         return render(request,'explore.html',context)
@@ -423,8 +429,8 @@ def stop_following(request, user_id):
 # get_session_id()
 #=============================================##
 def get_session_id(request):
-    session_id = request.session['user_id']
-    return HttpResponse (session_id)
+    session_user = User.objects.get(id= request.session['user_id'])
+    return JsonResponse ({'session_id': session_user.id, 'session_user_name' :session_user.user_name})
 
 
 

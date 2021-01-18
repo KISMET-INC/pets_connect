@@ -4,7 +4,7 @@ $(document).ready(function(){
     // Alert on Logout
     //*********************************************//
     $('.logout').on('click',function(){
-        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! If you did not opt into recieving an email when someone else loves your pet, come back soon to collect your  \u2661 hearts \u2661, and see the new pets that have been added! We hope to see you again soon!')
+        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 hearts \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
      })
 
     //*********************************************//
@@ -17,6 +17,11 @@ $(document).ready(function(){
             $(".comments").scrollTop($('.comments')[0].scrollHeight);
         }
     }
+
+    $('.close_guest_message').on('click', function(){
+
+            $('.guest_message').remove()
+    })
 
     //*********************************************//
     // Close Modal on 'x' click
@@ -42,23 +47,26 @@ $(document).ready(function(){
     $(".opacity").css('opacity', '.99');
     var heart = false;
     var selfclick = false;  //may not need
-    var session_user_id = ''
+    var session_user = ''
 
     //*********************************************//
     // Pull Session_user_id from database
     //*********************************************//
-    $.ajax({
-        cache: false,
-        type:"GET",
-        url: `/get_session_id`,
-    })
-    .done(function(data){
-        session_user_id = data                 
-    })
-    .fail(function(data){
-        console.log("Error in fetching data");
-    });
+    function get_session_id(){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_session_id`,
+        })
+        .done(function(data){
+            session_user =  data           
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
 
+    get_session_id()
 
     //*********************************************//
     // MOBILE DEVICE 
@@ -123,9 +131,11 @@ $(document).ready(function(){
             var img = `.open_modal${img_id}`
             var title = $(this).attr('title');
             var stats = `#stat${img_id}`
+            get_session_id()
+            console.log(session_user)
             
             // Stops the ability to like your own pet
-            if(title == 'Your Pet Loves'){
+            if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
                 heart = false;
                 $(`${img}`).css('opacity', '.6')
                 $(`${stats}`).show()
