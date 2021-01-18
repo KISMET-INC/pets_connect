@@ -21,11 +21,11 @@ class UserManager(models.Manager):
         if post['pass'] != post['confirm']:
             errors['passmatch'] = 'Passwords do no match'
         # check password length
-        if len(post['pass']) < 2:
-            errors['passlen'] = 'Password must be at least 2 characters'
+        if len(post['pass']) < 5:
+            errors['passlen'] = 'Password must be at least 5 characters'
         
-        if len(post['first']) < 2:
-            errors['first'] = 'First Name bust be at least 2 characters'
+        if len(post['first']) < 5:
+            errors['first'] = 'First Name bust be at least 5 characters'
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
@@ -47,11 +47,11 @@ class UserManager(models.Manager):
         # empty error dictionary
         errors = {}
 
-        if len(post['pass']) < 2:
-            errors['passlen'] = 'Password must be at least 2 characters'
+        if len(post['pass']) < 5:
+            errors['passlen'] = 'Password must be at least 5 characters'
         
-        if len(post['email']) < 2:
-            errors['email'] = 'Email must be at least 2 characters and include @ sign'
+        if len(post['email']) < 5:
+            errors['email'] = 'Email must be at least 5 characters and include @ sign'
 
         # check unique email address
         this_user = User.objects.filter(email = postData['email'])

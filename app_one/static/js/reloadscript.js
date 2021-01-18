@@ -1,15 +1,16 @@
 $(document).ready(function(){
 
+     //*********************************************//
+    // Alert on Logout
+    //*********************************************//
+    $('.logout').on('click',function(){
+        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! If you did not opt into recieving an email when someone else loves your pet, come back soon to collect your  \u2661 hearts \u2661, and see the new pets that have been added! We hope to see you again soon!')
+     })
+
     //*********************************************//
     // scrollToBottom()
     // When called scrolls into view element with id 'bottom'
     //*********************************************//
-    function scrollToBottom2() {
-        if(document.body.contains(document.getElementById('bottom'))){
-            var elmnt = document.getElementById("bottom");
-            elmnt.scrollIntoView(true); // Bottom
-        }
-    }
 
     function scrollToBottom() {
         if(document.body.contains(document.getElementById('bottom'))){

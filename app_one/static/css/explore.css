@@ -27,6 +27,9 @@ nav .fa-compass::before, nav a.explore{
 
 .dashboard .guest_message {
     font-style: italic;
+    padding: 30px;
+    font-size: 14px;
+    outline: 2px dotted black;
 }
 
 

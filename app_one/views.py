@@ -44,9 +44,9 @@ def process_register(request):
             request.session['user_id'] = new_user.id
             request.session['user_name'] = new_user.user_name
             request.session['user_level'] = new_user.user_level
-            return redirect(f'/explore/{new_user.id}/0/0')
+            return redirect(f'/explore')
 
-        return redirect(f'/explore/{new_user.id}/0/0')
+        return redirect(f'/explore')
 
 #=============================================##
 # process_signin()
@@ -67,7 +67,7 @@ def process_signin(request):
             request.session['user_level'] = this_user.user_level
             if this_user.user_level == 9:
                 return redirect('explore/admin')
-            return redirect(f'/explore/{this_user.id}/0/0')
+            return redirect(f'/explore')
 
 
 #=============================================##

@@ -219,9 +219,7 @@
 
 
     .modal-content {
-        width: 100%;
-
-        /* height:fit-content; */
+        width:70%;
     }
 
     
@@ -311,4 +309,11 @@
         border-radius: 5px 5px 0px 0px;
     }
 
+}
+
+@media (max-width:767px){
+    .modal-content {
+        width:100%;
+
+    }
 }
