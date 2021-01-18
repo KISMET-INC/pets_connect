@@ -1,6 +1,8 @@
-@import 'modal.css';
 @import 'stats.css';
 @import 'image.css';
+@import 'modal.css';
+@import 'single_comment.css';
+
 
 .stats {
     display: none;
