@@ -240,7 +240,9 @@
     }
 
  
-    
+    .modal .close_modal {
+        font-size :30px;
+    }
     .modal-dialog {
         margin: 0 auto; 
         margin-top:0px;    

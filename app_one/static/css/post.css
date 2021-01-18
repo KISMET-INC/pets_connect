@@ -8,9 +8,9 @@ img {
     margin-top:10px;
 }
 .stats div {
-    width:90%;
     display:flex;
-    align-items: center;
+    align-items: top;
+    width:100%;
 }
 
 .comment_form {
@@ -27,3 +27,7 @@ img {
     background-color: transparent;  
 }
 
+.stats .loves {
+    font-family: 'Montserrat Alternates', sans-serif;
+    
+}

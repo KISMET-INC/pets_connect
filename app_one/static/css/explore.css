@@ -10,11 +10,7 @@
 .dimage .edit_stats a {
     display:none;
 }
-.stats .self_stats {
-    position: relative;
-    top:60px;
-        
-}
+
 nav .fa-compass::before, nav a.explore{
     color:#E5E5E5;
 }
@@ -30,10 +26,13 @@ nav .fa-compass::before, nav a.explore{
 .dashboard .guest_message {
     font-style: italic;
     padding: 30px;
+    margin-bottom: 20px;
     font-size: 14px;
     outline: 2px dotted black;
 }
-
+.dashboard .guest_message h2 {
+   font-size: 18px;
+}
 
 .dashboard {
     display:flex;
