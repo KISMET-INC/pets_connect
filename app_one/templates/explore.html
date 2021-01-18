@@ -22,7 +22,9 @@
                     <p class = 'guest_message'>This is a guest account. Some features such as profile editing have been disabled. Make an account (even with a dummy email), to experience all the features Pets Connect has to offer. Enjoy your stay!</p>
                 {% endif %}
                 {% for image in images %}
+                <div id = {{image.id}} class = 'dimage'>
                     {% include 'modules/image.html' %} 
+                </div>
                 {% endfor %}
                 
             </div>
@@ -33,8 +35,6 @@
 
 </body>
 <script>
-
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
 </script>
 </html>

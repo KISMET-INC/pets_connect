@@ -1,0 +1,9 @@
+
+<form class = "comment_form">
+    {% csrf_token %}
+    <p>{{component}}</p>
+    <input class = 'form_text{{image.id}}{{component}}' name = 'text' placeholder="Add a Comment..." maxlength="50">
+    <input class = 'form_img_id{{image.id}}{{component}}' type="hidden" name = 'image_id' value= '{{image.id}}'>
+    <input class = 'form_compnt{{image.id}}{{component}}' type="hidden" name = 'component' value= '{{component}}'>
+    <button id ='{{image.id}}' comp='{{component}}' type ='submit'> POST </button>
+</form>

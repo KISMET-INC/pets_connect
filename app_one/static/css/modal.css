@@ -95,6 +95,8 @@
     justify-content: space-between;
     align-items: flex-start;
     padding:0px;
+    width: 90%;
+    margin: 0px;
     margin-bottom:10px;
 }
 
@@ -111,7 +113,7 @@
     color: #BFBFBF;
 }
 .modal #replace_comments {
-    height: 80%;
+    height: 70%;
 }
 .modal .comments {
     border-radius: 5px;
@@ -119,7 +121,7 @@
     text-align: left;
     padding: 15px;
     height: 100%;
-    width:100%;
+    width:90%;
     margin: 0 auto; 
     overflow: scroll;
     vertical-align: baseline;
@@ -127,8 +129,7 @@
 
 .modal .single_comment h2 {
     margin:0px;
-    width:90%;
-    
+    width:220px;
 }
 
 .modal .comments p {
@@ -174,7 +175,7 @@
     width: 75%;
 }
 
-.post_comment button {
+.comment_form button {
     margin:0px;
     background-color: white;
     border: none;
@@ -183,7 +184,7 @@
     text-align: right;
 }
 
-.post_comment {
+.comment_form {
     background-color: white;
     padding: 3px;
     display: flex;

@@ -48,7 +48,7 @@
                 </div>
 
                 {% if session_user == clicked_user %}
-                <form enctype="multipart/form-data" action = '/process_add_image' method ='post'>
+                <form enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
                         <input type='text' name ='name' maxlength="10" placeholder="Pets name..">
@@ -71,16 +71,25 @@
                 {% with location='profile' %}
                 {% with user_id=clicked_user.id %}
                 {% for image in images %}
-                    {%include 'modules/image.html' %}
+                <div id = {{image.id}} class = 'dimage'>
+                    {% include 'modules/image.html' %} 
+                </div>
                 {% endfor %}
                 {% endwith %}
                 {% endwith %}
             </div>
 
-            {% include 'modules/modal.html' %}
+            <div id='replaceModal'>
+                {% include 'modules/modal.html' %} 
+            </div>
         </div> <!-- END INTERFACE -->
 
 
     </div>  <!-- END CANVAS -->
 </body>
+
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
+
 </html>
