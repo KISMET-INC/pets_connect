@@ -9,8 +9,6 @@ from .views import *
 
 urlpatterns = [
 
-    # path('',views.landing),
-
     path('', views.landing),
     path('register', views.register),
     path('signin', views.signin),
@@ -18,32 +16,47 @@ urlpatterns = [
     path('process_signin', views.process_signin),
     path('logout', views.logout),
 
-
-
-    path('profile/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.profile),
-    path('edit_user/<int:user_id>', views.edit_user),
-    path('process_add_image', views.process_add_image),
-    path('process_remove_image/<int:image_id>/<str:location>', views.process_remove_image),
-    path('process_edit_user', views.process_edit_user),
-    path('process_edit_password', views.process_edit_password),
-
+    
+    # Views
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
-    path('explore/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.explore),
-    path('process_add_comment/<str:location>', views.process_add_comment),
+    path('explore', views.explore),
+    path('edit_user/<int:user_id>', views.edit_user),
+    path('profile/<int:user_id>', views.profile),
+    
+    # Image Proceses
+    path('process_add_pet_image', views.process_add_pet_image),
+    path('process_remove_image/<int:image_id>', views.process_remove_image),
+    
+    # User Proceses
+    path('process_edit_user', views.process_edit_user),
+    path('process_remove_user/<int:user_id>', views.process_remove_user),
+    
+    # Comment Processes
+    path('process_delete_comment/<int:comment_id>/<str:component>',views.process_delete_comment),
+    path('process_add_comment', views.process_add_comment),
+    
+    # Stat Processes
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),
     path('process_follow/<int:image_id>/<int:user_to_follow_id>/<str:location>', views.process_follow),
     
-    path('explore/admin', views.admin),
-    path('process_remove_user/<int:user_id>', views.process_remove_user),
-
-    path('process_delete_comment/<int:comment_id>/<int:image_id>/<str:location>/<str:component>',views.process_delete_comment),
     path('stop_following/<int:user_id>',views.stop_following),
 
-    path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
-    path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+    # Ajax - replace HTML
+    path('replace_stats/<int:image_id>', views.replace_stats),
+    path('replace_comments/<int:image_id>', views.replace_comments),
+    path('replace_post/<int:image_id>', views.replace_post),
+    path('replace_modal/<int:image_id>', views.replace_modal),
+    path('replace_image/<int:image_id>', views.replace_image),
 
-
-    path('updated_stats/<int:image_id>', views.updated_stats),
-    path('updated_post/<int:image_id>', views.updated_post),
+    # Ajax  -get info from database
     path('get_session_id', views.get_session_id),
+
+    # Admin
+    path('explore/admin', views.admin),
+    path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
+   # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+
+    # not using yet
+    path('process_edit_password', views.process_edit_password),
+
 ]

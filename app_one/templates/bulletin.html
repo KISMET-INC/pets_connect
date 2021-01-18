@@ -25,7 +25,9 @@
                 <div class = 'posts'>
                     {% for image in images %}
                     {% if session_user in image.user.being_followed.all %}
-                            <div id='post{{image.id}}'>{% include 'modules/post.html' %}</div>
+                            <div id='post{{image.id}}'>
+                                {% include 'modules/post.html' %}
+                            </div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -69,8 +71,11 @@
             </div>
         </div>
     </div>
-
-    <div class='replace_modal'>{% include 'modules/modal.html' %}</div>
+    {% with component='from_modal' %}
+    <div id='replaceModal'>
+        {% include 'modules/modal.html' %} 
+    </div>
+    {% endwith %}
   
 </body>
 <script>

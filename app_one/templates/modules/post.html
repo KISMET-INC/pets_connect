@@ -19,13 +19,13 @@
             <p>click to give this pet some love!</p>
         {% endif %}
             
-        {% with component='post' %}
-        {% with location='bulletin' %}
+        {% with component='from_post' %}
         {% with len=image.comments.count.all %}
+        
             {% for comment in image.comments.all|dictsort:'created_at'|slice:"-3:" %}
                 {% include 'modules/single_comment.html' %}
             {% endfor %}
-        {% endwith %}
+
         {% endwith %}
         {% endwith %}
 
@@ -33,9 +33,10 @@
             <h3>{{image.comments.count}} total comments </h3>
         {% endif %}
 
-        {% with component='post' %}
-            {% include 'modules/comment.html' %}
+        {% with component='from_post' %}
+            {% include 'modules/comment_form.html' %}
         {% endwith %}
+        
 
     </div>
 </div>

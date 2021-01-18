@@ -13,13 +13,7 @@ img {
     align-items: center;
 }
 
-iframe {
-    border:none;
-    margin-top:10px;
-    height:175px;
-}
-
-.post_comment {
+.comment_form {
     border: none;
     border-top:1px solid black;
     border-radius: 0px;
@@ -29,6 +23,7 @@ iframe {
   
 }
 
-.post_comment button {
+.comment_form button {
     background-color: transparent;  
 }
+

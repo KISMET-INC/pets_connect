@@ -113,7 +113,7 @@ input {
 }
 .following {
     display:flex;
-    height:140px;
+    height:125px;
     border:1px solid grey;
     min-width: 70px;
     padding:15px;
@@ -206,8 +206,7 @@ input {
 
 @media (max-width:767px){
     #interface_block_two {
-        width: 90%;
-   
+        width: 60%;
     }
     .bulletin_left {
         width: 100%;
@@ -218,8 +217,23 @@ input {
     }
 }
 
+
 @media (max-width: 1050px){
     .user:nth-child(1) img, .followers p{
+        display:none;
+    }
+}
+
+
+@media (max-width:501px){
+    #interface_block_two {
+        width: 90%;
+    }
+    .bulletin_left {
+        width: 100%;
+        margin: 0 auto; 
+    }
+    .bulletin_right{
         display:none;
     }
 }

@@ -1,9 +1,9 @@
 <div class = 'person'>
     <div class = 'outline'>
         {% if image.user.id != none %}
-            <a href = '/profile/{{image.user.id}}/0/1'>
+            <a href = '/profile/{{image.user.id}}'>
         {% else %}
-            <a href = '/profile/{{user.id}}/0/1'>
+            <a href = '/profile/{{user.id}}'>
         {% endif %}
                 {% include 'modules/user_img.html' %}
             </a>

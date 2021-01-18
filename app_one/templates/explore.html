@@ -18,13 +18,23 @@
     
         <div id="interface_block_one">
             <div class = 'dashboard'>
+                {% if session_user.user_name == "guest" %}
+                    <p class = 'guest_message'>This is a guest account. Some features, such as profile editing and comment deleting, have been disabled. Make an account (even with dummy information), to experience all the features Pets Connect has to offer. Enjoy your stay!</p>
+                {% endif %}
                 {% for image in images %}
+                <div id = {{image.id}} class = 'dimage'>
                     {% include 'modules/image.html' %} 
+                </div>
                 {% endfor %}
                 
             </div>
 
-    {% include 'modules/modal.html' %} 
- 
+    <div id='replaceModal'>
+        {% include 'modules/modal.html' %} 
+    </div>
+
 </body>
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
 </html>

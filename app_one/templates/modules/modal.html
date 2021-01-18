@@ -1,6 +1,6 @@
 <!-- MODAL -->
 
-<div id="comment_modal" class="modal" role="dialog">
+<div id="comment_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -19,23 +19,14 @@
                 <div class= 'right'>
                 <div class = top>
                     <p class = 'name'>{{image.name}}</p>
-                    {% with component='modal' %}
-                        {% include 'modules/comment.html' %}
+                    {% with component='from_modal' %}
+                        {% include 'modules/comment_form.html' %}
                     {% endwith %}
                 </div>
                 
-                    {% if image.comments.all.count == 0 %}
-                        <div class = 'no_comments'>
-                    {% else %}
-                        <div class = 'comments'>
-                    {% with component='modal' %}
-                    {% for comment in image.comments.all %}
-                        {% include 'modules/single_comment.html' %}
-                    {% endfor %}
-                    {% endwith %}
-                    {% endif %}
-                    <h2 id='bottom'></h2>
-                </div>       
+                <div id= 'replace_comments'>
+                    {% include 'modules/modal_comments.html' %}
+                </div>
 
                 </div>
             </div>
