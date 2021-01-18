@@ -4,10 +4,16 @@ $(document).ready(function(){
     // scrollToBottom()
     // When called scrolls into view element with id 'bottom'
     //*********************************************//
-    function scrollToBottom() {
+    function scrollToBottom2() {
         if(document.body.contains(document.getElementById('bottom'))){
             var elmnt = document.getElementById("bottom");
             elmnt.scrollIntoView(true); // Bottom
+        }
+    }
+
+    function scrollToBottom() {
+        if(document.body.contains(document.getElementById('bottom'))){
+            $(".comments").scrollTop($('.comments')[0].scrollHeight);
         }
     }
 
@@ -163,14 +169,16 @@ $(document).ready(function(){
                     scrollToBottom()
                 })
 
-                // When modal is hidden update dimage stats
+                //*********************************************//
+                // WHEN MODAL IS HIDDEN update background elements
+                //*********************************************//
                 $("#comment_modal").on('hide.bs.modal', function(){
-                    alert(url_location)
                     var url;
-                    if (url_location != 'bulletin'){
-                        url =  `/replace_image/${img_id}`
-                    } else {
+
+                    if (url_location == 'bulletin'){
                         url = `/replace_post/${img_id}`
+                    } else {
+                        url =  `/replace_image/${img_id}`
                     }
 
                     $.ajax({
@@ -179,10 +187,11 @@ $(document).ready(function(){
                         url: url,
                     })
                     .done(function(data){
-                        if (url_location != 'bulletin'){
-                            $(`.dashboard #${img_id}`).html(data)
-                        } else {
+
+                        if (url_location == 'bulletin'){
                             $(`#post${img_id}`).html(data); 
+                        } else {
+                            $(`.dashboard #${img_id}`).html(data)
                         }
                         
                     })
