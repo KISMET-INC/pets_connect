@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'scripts/headerlinks.html' %}
-    <title>Pets Connect</title>
+    <title>Pets Connect - Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/profile.css' %}">
@@ -51,10 +51,19 @@
                 <form enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
-                        <input type='text' name ='name' maxlength="10" placeholder="Pets name..">
+                        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name..">
                         <input name = 'desc' maxlength="20" placeholder="Description..">
                         <input type="hidden" name = 'user_id' value= '{{user.id}}'>
                         {{ upload_pet_form.as_p}}           
+                        
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %} 
+                        
                         <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
                 </form>
             

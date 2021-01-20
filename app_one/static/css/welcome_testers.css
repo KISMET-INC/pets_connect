@@ -1,0 +1,31 @@
+
+i {
+    color: var(--blue1);
+    font-size: 18px;
+}
+
+p, li {
+    margin-bottom: 20px;
+}
+
+
+body {
+    margin-bottom: 100px;
+}
+
+
+img {
+    margin-bottom: 50px;   
+}
+
+h2 {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+hr {
+    margin-top: 50px;
+}
+.dashboard {
+    width: 90%;
+}

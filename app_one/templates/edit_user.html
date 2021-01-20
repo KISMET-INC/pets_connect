@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'scripts/headerlinks.html' %}
-    <title>Pets Connect</title>
+    <title>Pets Connect - Edit User</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/edit_user.css' %}">
@@ -31,13 +31,22 @@
                         {% csrf_token %}
                         <input type= 'text' value = '{{session_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{session_user.email}}' name = 'email'> 
+                        <input type= 'hidden' value = '{{session_user.email}}' name = 'current_email'> 
                         {{ user_upload_img.as_p}}
                         <div>
                             <button type ='submit'> SUBMIT </button>
                             <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>
                         </div>
                     </form>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} 
                 </div>
+                
 
                 {% include 'modules/modal.html' %}
 

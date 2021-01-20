@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
+    <title>Pets Connect - Register</title>
     {% include 'scripts/headerlinks.html' %}
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
@@ -37,10 +37,10 @@
                     {% csrf_token %}
 
                     <label for = 'email'>Email Address </label> 
-                    <input name = 'email' type = 'email'placeholder='ex: ksm@gmail.com'>
+                    <input name = 'email' type = 'email'placeholder='ex: ksanmartin@petsconnect.com'>
 
                     <label for = 'first'>Username </label> 
-                    <input name = 'first' type = 'text' maxlength="15" placeholder='ex: ksm'>
+                    <input name = 'first' type = 'text' maxlength="15" placeholder='ex: ksanmartin'>
 
                     <label for = 'pass'>Password </label>
                     <input name = 'pass' type = 'password'>

@@ -108,6 +108,12 @@ def admin(request):
     return render(request,'admin.html',context)
     
 
+#=============================================##
+# welcome-testers()
+#=============================================##
+def welcome_testers(request):
+    return render(request, 'welcome_testers.html')
+
 
 #=============================================##
 # explore()
@@ -152,9 +158,6 @@ def profile(request, user_id):
         'session_user': session_user,
         'clicked_user' : User.objects.get(id=user_id),
         'images': images,
-        'icon': 'fas fa-table',
-        'title': 'explore',
-        'location': 'profile',
         'heart_sum': heart_sum,
     }
     return render(request,'profile.html',context)
@@ -174,17 +177,25 @@ def edit_user(request,user_id):
 # process_edit_user()
 #=============================================##
 def process_edit_user(request):
-    session_user = User.objects.get(id=request.session['user_id'])
-    user_upload_img = UploadUserImgForm(request.POST, request.FILES)
-        
-    session_user.email = request.POST['email']
-    session_user.user_name = request.POST['user_name']
 
-    if request.FILES:
-        session_user.user_img = request.FILES['user_img']
-    session_user.save()
+    errors = User.objects.basic_validator_edit_user(request.POST)
 
-    return redirect(f'/profile/{session_user.id}')
+    if len(errors) > 0:
+        for value in errors.values():
+            messages.error(request,value)
+        return redirect(f'/edit_user/{request.session["user_id"]}')
+    else: 
+        session_user = User.objects.get(id=request.session['user_id'])
+        user_upload_img = UploadUserImgForm(request.POST, request.FILES)
+            
+        session_user.email = request.POST['email']
+        session_user.user_name = request.POST['user_name']
+
+        if request.FILES:
+            session_user.user_img = request.FILES['user_img']
+        session_user.save()
+
+        return redirect(f'/profile/{session_user.id}')
 
 
 
@@ -251,6 +262,13 @@ def bulletin(request,user_id,image_id, modal_trigger):
 # return redirect('/')
 #=============================================##
 def process_add_pet_image(request):
+    
+    errors = Image.objects.basic_validator_add_pet(request.POST, request.FILES)
+
+    if len(errors) > 0:
+        for value in errors.values():
+            messages.error(request,value)
+        return redirect(f'/profile/{request.session["user_id"]}')
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
     session_user = User.objects.get(id=request.session['user_id'])
@@ -278,14 +296,16 @@ def process_remove_image(request,image_id):
 def process_add_comment(request):
     print('post request')
     print(request.POST)
+    errors = Image.objects.basic_validator_add_comment(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
-    new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
+    if len(errors) < 1:
+        new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
     context = {
         'image': this_image,
         'session_user': session_user
     }
-    #hidden form field
+        #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
     return redirect( f'/replace_comments/{this_image.id}')

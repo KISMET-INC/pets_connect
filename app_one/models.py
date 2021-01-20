@@ -82,19 +82,17 @@ class UserManager(models.Manager):
 
         return errors
 
-    
     #=============================================##
     # basic_validator SPECIFIC edit_user
     # validates the data for user registration
     #=============================================##
     def basic_validator_edit_user(self, postData):
         post = postData
-        print(postData)
         # empty error dictionary
         errors = {}
 
-        if len(post['first']) < 2:
-            errors['first'] = 'First Name bust be at least 2 characters'
+        if len(post['user_name']) < 2:
+            errors['user_name'] = 'Username must be at least 2 characters'
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
@@ -105,6 +103,39 @@ class UserManager(models.Manager):
         if len(users) > 0:
             if post['current_email'] != users[0].email:
                 errors['email_in_use'] = 'Email already in use'
+
+        return errors
+
+class PetManager(models.Manager):
+    #=============================================##
+    # Add Pet Validations
+    #=============================================##
+    def basic_validator_add_pet(self, postData, postFiles):
+        post = postData
+        print(postFiles)
+       
+        # empty error dictionary
+        errors = {}
+
+        if len(post['name']) < 1:
+            errors['name'] = 'A name is required'
+        
+        if 'pet_img' not in postFiles:
+            errors['image'] = 'An image is required' 
+
+        return errors
+
+
+    #=============================================##
+    # Add Pet Validations
+    #=============================================##
+    def basic_validator_add_comment(self, postData):
+        post = postData
+        # empty error dictionary
+        errors = {}
+
+        if len(post['text']) < 1:
+            errors['text'] = 'A comment cannot be empty'
 
         return errors
         
@@ -134,6 +165,7 @@ class User(models.Model):
 class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = PetManager()
 
     pet_img = ResizedImageField(size=[500, 500], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)

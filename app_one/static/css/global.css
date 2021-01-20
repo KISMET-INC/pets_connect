@@ -1,6 +1,17 @@
 /* CANVAS AND  NAV BAR  LONG */
 @import "nav.css";
 
+:root {
+    --blue1: #55AAAA;
+    --blue2: #1e90ff;
+    --gray1: #BFBFBF;
+    --gray2: #E5E5E5;
+  }
+
+  .messages li {
+      color:red;
+  }
+
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px;
