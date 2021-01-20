@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+
+     //*********************************************//
+    // Set starting variables
+    //*********************************************//
+    $(".opacity").css('opacity', '.99');
+    var heart = false;
+    var selfclick = false;  //may not need
+    var session_user = '';
+    var image_list = []
+
      //*********************************************//
     // Alert on Logout
     //*********************************************//
@@ -17,6 +27,10 @@ $(document).ready(function(){
             $(".comments").scrollTop($('.comments')[0].scrollHeight);
         }
     }
+
+    //*********************************************//
+    // Close guest Message
+    //*********************************************//
 
     $('.close_guest_message').on('click', function(){
 
@@ -41,13 +55,7 @@ $(document).ready(function(){
     var clicked_user_id = map[2]
     var image = parseInt(map[3])
 
-    //*********************************************//
-    // Set starting variables
-    //*********************************************//
-    $(".opacity").css('opacity', '.99');
-    var heart = false;
-    var selfclick = false;  //may not need
-    var session_user = ''
+   
 
     //*********************************************//
     // Pull Session_user_id from database
@@ -66,7 +74,25 @@ $(document).ready(function(){
         });
     }
 
-    get_session_id()
+
+     //*********************************************//
+    // Pull Image List from database
+    //*********************************************//
+    function get_image_list(user_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_image_list/${user_id}`,
+        })
+        .done(function(data){
+            image_list =  data           
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+
 
     //*********************************************//
     // MOBILE DEVICE 
@@ -162,6 +188,49 @@ $(document).ready(function(){
             
         }); // END PROCESS HEART CLICKS
 
+        //*********************************************//
+        // Process Follow Clicks
+        //*********************************************//
+        $('body').on('click', '.fa-podcast', function(){
+            heart = true;
+            var user_id = $(this).attr('user_id');
+            var img_id = $(this).attr('image_id');
+            get_session_id()
+            get_image_list(user_id)
+            console.log(session_user)
+            
+            // // Stops the ability to like your own pet
+            // if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
+            //     heart = false;
+            //     $(`${img}`).css('opacity', '.6')
+            //     $(`${stats}`).show()
+                
+            // } else {
+                // Process adding heart to image
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: `/process_follow/${user_id}/${img_id}`,
+                })
+                .done(function(data){
+                    console.log(image_list.images.length)
+                    if(url_location != 'bulletin'){
+                        for(var i = 0; i <  image_list.images.length; i++){
+                            
+                            $(`#replace${image_list.images[i]}`).html(data)
+                        }
+                    
+                    } else {
+                        $(`#post${img_id}`).html(data);  
+                    }
+                    heart = false;   
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                })
+            //}
+            
+        }); // END PROCESS FOLLOW CLICKS
         //*********************************************//
         // COMMENT ICON - ON CLICK
         //*********************************************//

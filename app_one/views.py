@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
+from django.template import Context, loader
 from django.contrib import messages
 from django.db.models import Sum
 from .models import *
@@ -395,6 +396,17 @@ def replace_stats(request, image_id):
     }
     return render(request,'modules/stats.html', context)
 
+#=============================================##
+# replace stats
+#=============================================##
+def get_image_list(request, user_id):
+    user_images = User.objects.get(id=user_id).images.all()
+    image_list = []
+    for image in user_images:
+        image_list.append(image.id)
+
+    return JsonResponse ({'images': image_list})
+
 
 #=============================================##
 # replace image
@@ -416,19 +428,25 @@ def replace_image(request, image_id):
 # process_follow()
 # return redirect('/')
 #=============================================##
-def process_follow(request,image_id,user_to_follow_id,location):
-
+def process_follow(request,user_to_follow_id,image_id):
+    print(image_id)
     session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
 
-    session_user.is_following.add(user_to_follow);
-    user_to_follow.being_followed.add(session_user);
+    if user_to_follow not in session_user.is_following.all():
+        session_user.is_following.add(user_to_follow)
+        user_to_follow.being_followed.add(session_user)
+    else: 
+        session_user.is_following.remove(user_to_follow)
+        user_to_follow.being_followed.remove(session_user)
+
     session_user.save()
     user_to_follow.save()
-    if location == 'profile':
+
+    if image_id == '0':
         return redirect(f'/profile/{user_to_follow_id}')
 
-    return redirect (f'/explore')
+    return redirect (f'/replace_stats/{user_to_follow.id}')
 
 
 #=============================================##
@@ -436,6 +454,7 @@ def process_follow(request,image_id,user_to_follow_id,location):
 # return redirect('/')
 #=============================================##
 def stop_following(request, user_id):
+    print('stop follow')
     session_user = User.objects.get(id= request.session['user_id'])
     clicked_user = User.objects.get(id= user_id)
     session_user.is_following.remove(clicked_user)

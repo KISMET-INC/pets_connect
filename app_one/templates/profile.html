@@ -38,9 +38,9 @@
                             <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE </a> 
                         {% else %}
                             {% if clicked_user in session_user.is_following.all %}
-                            <a href='/stop_following/{{clicked_user.id}}'> STOP FOLLOWING </a>
+                            <a href='/process_follow/{{clicked_user.id}}/0'> STOP FOLLOWING </a>
                             {% else %}
-                            <a href='/process_follow/0/{{clicked_user.id}}/profile'> FOLLOW USER</a>
+                            <a href='/process_follow/{{clicked_user.id}}/0'> FOLLOW USER</a>
                             {% endif %}
                             
                         {% endif %}
