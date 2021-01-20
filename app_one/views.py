@@ -371,7 +371,18 @@ def replace_modal(request, image_id):
         'session_user' : User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'modules/modal.html', context)
-
+#=============================================##
+# get_heart_sum()
+#=============================================##
+def get_heart_sum(request,image_id):
+    print('getting heart sum')
+    image = Image.objects.get(id=image_id)
+    user = image.user
+    sum = 0
+    for image in user.images.all():
+        sum+=len(image.loves.all())
+    
+    return HttpResponse (sum);
 
 #=============================================##
 # process_heart()

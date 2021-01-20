@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
 
-     //*********************************************//
+    //*********************************************//
     // Set starting variables
     //*********************************************//
     $(".opacity").css('opacity', '.99');
     var heart = false;
     var selfclick = false;  //may not need
     var session_user = '';
-    var image_list = []
-
+    var image_list = [];
+    var heart_sum = 0;
 
     //*********************************************//
     // Get URL Route variables
@@ -94,6 +94,27 @@ $(document).ready(function(){
     }
 
     //*********************************************//
+    // Pull Heart Sum from DB
+    //*********************************************//
+    function get_heart_sum(img_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_heart_sum/${img_id}`,
+        })
+        .done(function(data){
+            heart_sum =  data 
+            $('.heart_sum').html(data)
+            console.log(heart_sum)
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+
+    //*********************************************//
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
@@ -144,7 +165,9 @@ $(document).ready(function(){
                 $( `${img}`).css('opacity', '1')
                 $(`${stats}`).hide()
             });
-        }  // END DEVICE DEPENDENT INSTRUCTIONS
+        }  
+        
+        // END DEVICE DEPENDENT INSTRUCTIONS
 
 
         //*********************************************//
@@ -157,7 +180,6 @@ $(document).ready(function(){
             var title = $(this).attr('title');
             var stats = `#stat${img_id}`
             get_session_id()
-            console.log(session_user)
             
             // Stops the ability to like your own pet
             if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
@@ -173,10 +195,11 @@ $(document).ready(function(){
                     url: `/process_heart/${img_id}/${url_location}`,
                 })
                 .done(function(data){
-                    if(url_location != 'bulletin'){
-                        $(`#replace${img_id}`).html(data);             
-                    } else {
+                    if(url_location == 'bulletin'){
                         $(`#post${img_id}`).html(data);  
+                    } else {
+                        $(`#replace${img_id}`).html(data); 
+                        get_heart_sum(img_id)          
                     }
                     heart = false;   
                 })
@@ -195,7 +218,6 @@ $(document).ready(function(){
             var user_id = $(this).attr('user_id');
             var img_id = $(this).attr('image_id');
             get_session_id()
-            get_image_list(user_id)
             
             $.ajax({
                 cache: false,

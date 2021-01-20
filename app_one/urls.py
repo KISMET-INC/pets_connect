@@ -41,7 +41,6 @@ urlpatterns = [
     
     # Ajax - replace HTML
     path('replace_stats/<int:image_id>', views.replace_stats),
-    path('get_image_list/<int:user_id>', views.get_image_list),
     path('replace_comments/<int:image_id>', views.replace_comments),
     path('replace_post/<int:image_id>', views.replace_post),
     path('replace_modal/<int:image_id>', views.replace_modal),
@@ -49,6 +48,8 @@ urlpatterns = [
 
     # Ajax  -get info from database
     path('get_session_id', views.get_session_id),
+    path('get_image_list/<int:user_id>', views.get_image_list),
+    path('get_heart_sum/<int:image_id>', views.get_heart_sum),
 
     # Admin
     path('explore/admin', views.admin),

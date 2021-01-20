@@ -33,7 +33,7 @@
                         <p>Followers <b>{{clicked_user.being_followed.all.count}}</b> |
                             Following <b>{{clicked_user.is_following.all.count}} </b> |
                             Posts <b>{{clicked_user.images.all.count}} </b> | 
-                            Hearts: <b>{{heart_sum}}</b></p>
+                            Hearts: <b><span class = 'heart_sum'>{{heart_sum}}</span></b></span></p>
                         {% if session_user == clicked_user %}
                             <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE </a> 
                         {% else %}
