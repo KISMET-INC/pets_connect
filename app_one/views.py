@@ -6,6 +6,10 @@ from django.db.models import Sum
 from .models import *
 import bcrypt
 from .forms import *
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import _thread
 
 #=============================================##
 # process_register()
@@ -376,7 +380,7 @@ def process_heart(request,image_id,location):
         this_image.loves.add(session_user) 
     
     this_image.save();
-
+    send_email(session_user.user_name, this_image.user.user_name, this_image.name, 'LOVED')
     if location == 'bulletin':
         return redirect(f'/replace_post/{this_image.id}')
 
@@ -422,8 +426,6 @@ def replace_image(request, image_id):
     return render(request,'modules/image.html', context)
 
 
-
-
 #=============================================##
 # process_follow()
 # return redirect('/')
@@ -432,6 +434,7 @@ def process_follow(request,user_to_follow_id,image_id):
     print(image_id)
     session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
+    send_email(user_to_follow,'follow')
 
     if user_to_follow not in session_user.is_following.all():
         session_user.is_following.add(user_to_follow)
@@ -449,20 +452,6 @@ def process_follow(request,user_to_follow_id,image_id):
     return redirect (f'/replace_stats/{user_to_follow.id}')
 
 
-#=============================================##
-# stop_following()
-# return redirect('/')
-#=============================================##
-def stop_following(request, user_id):
-    print('stop follow')
-    session_user = User.objects.get(id= request.session['user_id'])
-    clicked_user = User.objects.get(id= user_id)
-    session_user.is_following.remove(clicked_user)
-    clicked_user.being_followed.remove(session_user)
-    session_user.save()
-    clicked_user.save()
-    return redirect (f'/profile/{clicked_user.id}')
-
 
 #=============================================##
 # get_session_id()
@@ -472,8 +461,72 @@ def get_session_id(request):
     return JsonResponse ({'session_id': session_user.id, 'session_user_name' :session_user.user_name})
 
 
+#=============================================##
+# send _email()
+#=============================================##
+def send_email(session_user, clicked_user, image, action):
 
+    def setup_email_thread():
     
+        server.starttls(context = context) #Secure the connection
+        server.login (sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        print('Success')
+
+    smtp_server = "smtp.gmail.com"
+    port = 587 #For starttls
+    password = 'PassioN12345'
+
+    sender_email = "petsconnect2021@gmail.com"
+    receiver_email = "petsconnect2021@gmail.com"
+
+    message = MIMEMultipart("alternative")
+    message["Subject"] = action
+    message["From"] = sender_email
+    message["To"] = receiver_email
+
+    text = """\
+    hi, " + user_email + "
+    {action}
+    """
+
+    html = """\
+    <html>
+    <body>
+        <h2>""" + session_user + """
+        """ + action +""" """ + clicked_user + """'s  image </h2>
+    </body>
+    </html>
+    """
+    
+    # Convert message types into MIMETEXT
+    part1 = MIMEText(text,'plain')
+    part2 = MIMEText(html, 'html')
+
+    # Attach to message object
+    message.attach(part1)
+    message.attach(part2)
+
+    context = ssl.create_default_context()
+    server = smtplib.SMTP(smtp_server, port)
+    
+    # Threaded function
+    def sendEmail_thread():
+        
+        server.starttls(context = context) #Secure the connection
+        server.login (sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        print('Success')
+
+    try:
+        # Create new thread
+        _thread.start_new_thread(sendEmail_thread,())
+
+    except Exception as e:
+        print("error sending email")
+
+
+
 #=============================================##
 # process_edit_password()
 # NOT BEING USED YET

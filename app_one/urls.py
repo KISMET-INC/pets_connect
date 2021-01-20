@@ -39,8 +39,6 @@ urlpatterns = [
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),
     path('process_follow/<int:user_to_follow_id>/<image_id>', views.process_follow),
     
-    path('stop_following/<int:user_id>',views.stop_following),
-
     # Ajax - replace HTML
     path('replace_stats/<int:image_id>', views.replace_stats),
     path('get_image_list/<int:user_id>', views.get_image_list),
