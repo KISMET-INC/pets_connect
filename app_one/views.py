@@ -50,6 +50,8 @@ def process_register(request):
             request.session['user_id'] = new_user.id
             request.session['user_name'] = new_user.user_name
             request.session['user_level'] = new_user.user_level
+            send_email(session_user = new_user, action = 'REGISTERED')
+
             return redirect(f'/explore')
 
         return redirect(f'/explore')
@@ -71,6 +73,8 @@ def process_signin(request):
             request.session['user_id'] = this_user.id
             request.session['user_name'] = this_user.user_name
             request.session['user_level'] = this_user.user_level
+            send_email(session_user = this_user, action = 'SIGNED IN')
+
             if this_user.user_level == 9:
                 return redirect('explore/admin')
             return redirect(f'/explore')
@@ -279,6 +283,7 @@ def process_add_pet_image(request):
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
+    send_email(session_user = session_user, action = 'SHARED', image = this_image)
 
     return redirect (f'/profile/{session_user.id}')
 
@@ -306,6 +311,8 @@ def process_add_comment(request):
     this_image = Image.objects.get(id = request.POST['image_id'])
     if len(errors) < 1:
         new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
+        send_email(session_user = session_user, action = 'COMMENTED', clicked_user = this_image.user, image = this_image, comment=new_comment)
+
     context = {
         'image': this_image,
         'session_user': session_user
@@ -377,10 +384,10 @@ def process_heart(request,image_id,location):
     if session_user in this_image.loves.all():
         this_image.loves.remove(session_user) 
     else:
+        send_email(session_user = session_user, action = 'LOVED', clicked_user = this_image.user, image = this_image)
         this_image.loves.add(session_user) 
     
     this_image.save();
-    send_email(session_user.user_name, this_image.user.user_name, this_image.name, 'LOVED')
     if location == 'bulletin':
         return redirect(f'/replace_post/{this_image.id}')
 
@@ -464,54 +471,83 @@ def get_session_id(request):
 #=============================================##
 # send _email()
 #=============================================##
-def send_email(session_user, clicked_user, image, action):
+def send_email(session_user, action, clicked_user = None, image = None, comment = None):
+
+    html_body = ""
+    text_body = ""
+    subject = action
+    def img_info(text_body):
+        string = """ <h2>""" + text_body + """ </h2>
+        <p> Name:""" + image.name +""" </p>
+        <p> Image ID:  """ + str(image.id) + """ </p>
+        <a href = http://localhost:8000""" + image.pet_img.url +  """>"""+ image.pet_img.url + """</a> """
+        return string
+        
+    if action == 'LOVED':
+        text_body =  f"{session_user.user_name} LOVED {clicked_user.user_name}'s image!"
+        html_body =  img_info(text_body)
+
+    if action == 'COMMENTED':
+        text_body =  f"{session_user.user_name} COMMENTED ON {clicked_user.user_name}'s image!"
+        html_body =  img_info(text_body) + """
+        <p><b> """ + session_user.user_name +"""</b> said ' """ + comment.text + """ '</p>
+        """
+
+    if action =='SIGNED IN':
+        text_body =  f"{session_user.user_name} SIGNED IN!"
+        html_body =  """ 
+        <h2>""" + text_body + """ </h2>
+        """
+    if action =='REGISTERED':
+        text_body =  f"{session_user.user_name} REGISTERED A NEW ACCOUNT!"
+        html_body =  """ 
+        <h2>""" + text_body + """ </h2>
+        """
+
+    if action =='SHARED':
+        text_body =  f"{session_user.user_name} SHARED A PET!"
+        html_body =  """ 
+        <h2>""" + text_body + """ </h2>
+        <p> Name:""" + image.name +""" </p>
+        <p> Image ID:  """ + str(image.id) + """ </p>
+        <p> """ + image.pet_img.url +  """</p>
+        """
 
     def setup_email_thread():
-    
-        server.starttls(context = context) #Secure the connection
-        server.login (sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-        print('Success')
 
-    smtp_server = "smtp.gmail.com"
-    port = 587 #For starttls
-    password = 'PassioN12345'
+        smtp_server = "smtp.gmail.com"
+        port = 587 #For starttls
+        password = 'PassioN12345'
 
-    sender_email = "petsconnect2021@gmail.com"
-    receiver_email = "petsconnect2021@gmail.com"
+        sender_email = "petsconnect2021@gmail.com"
+        receiver_email = "petsconnect2021@gmail.com"
 
-    message = MIMEMultipart("alternative")
-    message["Subject"] = action
-    message["From"] = sender_email
-    message["To"] = receiver_email
+        message = MIMEMultipart("alternative")
+        message["Subject"] = subject
+        message["From"] = sender_email
+        message["To"] = receiver_email
 
-    text = """\
-    hi, " + user_email + "
-    {action}
-    """
+        text = """\
+            """ + text_body
 
-    html = """\
-    <html>
-    <body>
-        <h2>""" + session_user + """
-        """ + action +""" """ + clicked_user + """'s  image </h2>
-    </body>
-    </html>
-    """
-    
-    # Convert message types into MIMETEXT
-    part1 = MIMEText(text,'plain')
-    part2 = MIMEText(html, 'html')
+        html = """\
+        <html>
+        <body>
+        """ + html_body + """      
+        </body>
+        </html>
+        """
+        
+        # Convert message types into MIMETEXT
+        part1 = MIMEText(text,'plain')
+        part2 = MIMEText(html, 'html')
 
-    # Attach to message object
-    message.attach(part1)
-    message.attach(part2)
+        # Attach to message object
+        message.attach(part1)
+        message.attach(part2)
 
-    context = ssl.create_default_context()
-    server = smtplib.SMTP(smtp_server, port)
-    
-    # Threaded function
-    def sendEmail_thread():
+        context = ssl.create_default_context()
+        server = smtplib.SMTP(smtp_server, port)
         
         server.starttls(context = context) #Secure the connection
         server.login (sender_email, password)
@@ -520,7 +556,7 @@ def send_email(session_user, clicked_user, image, action):
 
     try:
         # Create new thread
-        _thread.start_new_thread(sendEmail_thread,())
+        _thread.start_new_thread(setup_email_thread,())
 
     except Exception as e:
         print("error sending email")

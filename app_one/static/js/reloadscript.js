@@ -339,6 +339,7 @@ $(document).ready(function(){
                     $('#replace_comments').html(data)                                  
                     scrollToBottom()
                 }
+                $(`${form_text}`).val("")
             })
             .fail(function(data){
                 console.log("Error in fetching data");
