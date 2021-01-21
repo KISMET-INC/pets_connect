@@ -60,19 +60,17 @@
 p i {
     font-size:25px;
     color:#BFBFBF;
-    margin-top:7px;
     margin-right: 0px;
     opacity: 1;
 }
 
 p button i{
-    margin-right:8px;
-    font-size: 22px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 8px;
+    font-size: 23px;
 }
 
-.stats i.fas::before {
-    color:#BFBFBF;
-}
 
 .stats i.loved::before{
     color: #55AAAA;
@@ -83,6 +81,8 @@ p button i{
 }
 
 .stats span {
+    margin-left: 3px;
+    margin-bottom: 12px;
     font-size:20px;
     font-weight: bold;
 }

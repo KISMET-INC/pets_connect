@@ -2,7 +2,7 @@
     {% if session_user == image.user and session_user.id != 4 or session_user.user_level == 9 %}
     <p>
         <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Your Pet Loves"></i><span>{{image.loves.count}}</span> 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> <span>{{image.comments.count}}</span>
+        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button><span>{{image.comments.count}}</span>
     </p>
     <div class = 'edit_stats'>
         <a href='/process_remove_image/{{image.id}}'>Delete</a>
@@ -17,9 +17,9 @@
         {% endif %}
 
         {% if session_user in image.loves.all %}
-        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart loved" title="You Already Love {{image.name}}"></i></a><span class = 'loved'> {{image.loves.count}}</span>
+        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart loved" title="You Already Love {{image.name}}"></i></a><span class = 'loved'>{{image.loves.count}}</span>
         {% else %}
-        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Send {{image.name}} Your Love"></i></a><span> {{image.loves.count}}</span>
+        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Send {{image.name}} Your Love"></i></a><span>{{image.loves.count}}</span>
         {% endif %}
 
         <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button><span>{{image.comments.count}}</span>
