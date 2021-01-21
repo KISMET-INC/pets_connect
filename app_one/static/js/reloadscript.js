@@ -261,6 +261,7 @@ $(document).ready(function(){
             var user_id = $(this).attr('user_id');
             var img_id = $(this).attr('image_id');
             get_session_id()
+            get_image_list(user_id)
             
             $.ajax({
                 cache: false,

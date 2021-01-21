@@ -238,13 +238,11 @@ def process_edit_user(request):
 def process_admin_edit_user(request,user_id):
 
     errors = User.objects.basic_validator_edit_user(request.POST)
-    print(errors)
     if len(errors) > 1:
         for value in errors.values():
             messages.error(request,value)
         return redirect(f'/admin_edit_user/{user_id}/0/0')
     else:
-        print(request.POST)
         clicked_user = User.objects.get(id=user_id)
         user_upload_img = UploadUserImgForm(request.POST, request.FILES)
 
@@ -358,8 +356,6 @@ def process_remove_image(request,image_id):
 # process_add_comment()
 #=============================================##
 def process_add_comment(request):
-    print('post request')
-    print(request.POST)
     errors = Image.objects.basic_validator_add_comment(request.POST)
     session_user = User.objects.get(id= request.session['user_id'])
     this_image = Image.objects.get(id = request.POST['image_id'])
@@ -387,7 +383,6 @@ def process_delete_comment(request,comment_id,component):
     clicked_user = this_comment.user
     this_comment.delete();
     if component == 'from_post':
-        print(image_id)
         return redirect(f'/replace_post/{image_id}')
     return redirect(f'/replace_comments/{image_id}')
 
@@ -425,11 +420,11 @@ def replace_modal(request, image_id):
         'session_user' : User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'modules/modal.html', context)
+
 #=============================================##
 # get_heart_sum()
 #=============================================##
 def get_heart_sum(request,image_id):
-    print('getting heart sum')
     image = Image.objects.get(id=image_id)
     user = image.user
     sum = 0
@@ -463,7 +458,6 @@ def process_heart(request,image_id,location):
 # replace stats
 #=============================================##
 def replace_stats(request, image_id):
-    print('im here in updated stats')
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
     context = {
@@ -488,7 +482,6 @@ def get_image_list(request, user_id):
 # replace image
 #=============================================##
 def replace_image(request, image_id):
-    print('im here in updated stats')
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
     context = {
@@ -503,7 +496,6 @@ def replace_image(request, image_id):
 # return redirect('/')
 #=============================================##
 def process_follow(request,user_to_follow_id,image_id):
-    print(image_id)
     session_user = User.objects.get(id= request.session['user_id'])
     user_to_follow = User.objects.get(id= user_to_follow_id)
     send_email(user_to_follow,'follow')
@@ -537,12 +529,14 @@ def get_session_id(request):
 #=============================================##
 def get_more_images(request):
     request.session['page_num'] += 1
-    
-    print(request.session['page_num'])
     image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page',request.session['page_num'])
     paginator = Paginator(image_list,request.session['loads'])
     request.session['loads'] += 12
+
+    print(request.session['loads'])
+    print(request.session['page_num'])
+
     try:
         images2 = paginator.page(page)
     except PageNotAnInteger:
@@ -636,8 +630,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         server.starttls(context = context) #Secure the connection
         server.login (sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
-        print('Success')
-
+     
     try:
         # Create new thread
         _thread.start_new_thread(setup_email_thread,())

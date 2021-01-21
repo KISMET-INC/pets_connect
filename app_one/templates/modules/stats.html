@@ -5,17 +5,14 @@
         <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button> <span>{{image.comments.count}}</span>
     </p>
     <div class = 'edit_stats'>
-        <a href='/process_remove_image/{{image.id}}'>Delete </a>
-        <!-- <a href='#'>  Edit</a> -->
+        <a href='/process_remove_image/{{image.id}}'>Delete</a>
     </div>
     
     
 
     {% else %}
     <p>
-        {% if session_user in image.user.being_followed.all %}
-    
-        {% else %}
+        {% if session_user not in image.user.being_followed.all %}
         <a><i image_id={{image.id}} user_id={{image.user.id}} data-placement="bottom" class="fas fa-podcast" title ="Follow {{image.user.user_name}}"></i></a><span>{{image.user.being_followed.count}}</span>
         {% endif %}
 

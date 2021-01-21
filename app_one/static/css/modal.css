@@ -46,7 +46,7 @@
 .modal .left {
     text-align: center;
     border-radius: 5px 5px 0px 0px;
-    background-color: #E5E5E5;
+    background-color: var(--gray2);
     padding: 0px;
     padding-bottom: 10px;
     width: 50%;
@@ -123,7 +123,7 @@
 }
 .modal .comments {
     border-radius: 5px;
-    background-color:#DEDEDE;
+    background-color: var(--gray2);
     text-align: left;
     padding: 15px;
     height: 95%;
@@ -234,6 +234,9 @@
 /*******************************/
 @media (max-width: 769px){
 
+    .modal .single_comment i {
+        font-size:20px;
+    }
 
     .modal-content {
         width:90%;
@@ -273,10 +276,6 @@
         position:sticky;
     }
 
-    .modal .left p:nth-child(4), p:nth-child(5){
-        /* visibility: hidden; */
-        /* position: absolute; */
-    }
 
     .modal .single_comment {
         display:flex;
@@ -290,8 +289,6 @@
         margin:0px;
         padding: 0px;
         width:100%;
-
-
     }
 
     .modal .single_comment i {
