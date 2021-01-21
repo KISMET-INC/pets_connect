@@ -180,8 +180,7 @@ $(document).ready(function(){
     // Mousover / Mouseout Behavior
     //*********************************************//
     } else {
-        $( '.dimage' )
-            .mouseenter(function() {
+        $('body').on('mouseover', '.dimage', function(){
                 
                // Declare Variables needed 
                 var img_id = $(this).attr('id');
@@ -191,7 +190,7 @@ $(document).ready(function(){
                 $(`${stats}`).show()
             })
 
-            .mouseleave(function() {
+            .on('mouseleave', '.dimage', function(){
                 var id = $(this).attr('id');
                 var stats = `#stat${id}`
                 var img = `.open_modal${id}`

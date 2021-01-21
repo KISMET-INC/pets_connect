@@ -524,6 +524,7 @@ def get_more_images(request):
         print(request.session['page_num'])
 
     else:
+        request.session['loads'] += cycles;
         print('deleting')
         return HttpResponse("none")
 
@@ -543,7 +544,7 @@ def get_more_images(request):
     except EmptyPage:
         images2 = paginator.page(paginator.num_pages)
 
-    return render(request, 'modules/dashboard.html', {'images2': images2})
+    return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
 #=============================================##
 # send _email()
 #=============================================##
