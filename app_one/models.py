@@ -165,15 +165,15 @@ class User(models.Model):
 class Image(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = PetManager()
 
     pet_img = ResizedImageField(size=[500, 500], crop=['middle', 'center'], quality=100, force_format='png', upload_to='images/') 
     name = models.CharField(max_length=25)
     desc = models.CharField(max_length=5)
 
+    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
     loves = models.ManyToManyField(User, related_name="loves")
     likes = models.ManyToManyField(User, related_name="likes")
-    user = models.ForeignKey(User, related_name= "images", on_delete = models.CASCADE)
+    objects = PetManager()
     ## IMAGE.COMMENTS (bucket)
 
 

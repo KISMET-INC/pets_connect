@@ -1,8 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from django.template import Context, loader
+from django import template
+from django.template.response import TemplateResponse
 from django.contrib import messages
 from django.db.models import Sum
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 import bcrypt
 from .forms import *
@@ -17,13 +20,13 @@ import _thread
 def process_register(request):
     post = request.POST
     errors = User.objects.basic_validator(post)
-    
-    
+
+
     if len(errors) > 0:
         for value in errors.values():
             messages.error(request,value)
         return redirect('/register')
-    
+
     else :
         hash = bcrypt.hashpw(post['pass'].encode(), bcrypt.gensalt()).decode()
         user_level = 0
@@ -32,12 +35,12 @@ def process_register(request):
         if len(users) < 1:
             user_level = 9
 
-        
+
         new_user = User.objects.create(user_name=post['first'], password = hash, email = post['email'], user_level= user_level)
 
         if new_user.user_level == 9:
             return redirect('/explore/admin')
-        
+
         if new_user.user_level != 9:
             kristen = User.objects.get(id=2)
             new_user.is_following.add(kristen)
@@ -67,7 +70,7 @@ def process_signin(request):
         for value in errors.values():
             messages.error(request,value)
         return redirect('/signin')
-    
+
     else:
             this_user = User.objects.get(id = user[0].id)
             request.session['user_id'] = this_user.id
@@ -115,7 +118,7 @@ def admin(request):
         'users': User.objects.all()
     }
     return render(request,'admin.html',context)
-    
+
 
 #=============================================##
 # welcome-testers()
@@ -130,8 +133,25 @@ def welcome_testers(request):
 def explore(request):
 
     if 'user_id' not in request.session:
-        return redirect('/signin')    
+        return redirect('/signin')
+    
+    if 'loads' not in request.session:
+        request.session['loads'] = 4
+
     current_user = User.objects.get(id=request.session['user_id'])
+
+    image_list = Image.objects.all()
+    page = request.GET.get('page')
+
+    paginator = Paginator(image_list, request.session['loads'])
+    try:
+        images2 = paginator.page(page)
+    except PageNotAnInteger:
+        images2 = paginator.page(1)
+    except EmptyPage:
+        images2 = paginator.page(paginator.num_pages)
+
+
     context = {
         'session_user': current_user,
         'users' : User.objects.all(),
@@ -139,7 +159,9 @@ def explore(request):
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
+        'images2': images2,
     }
+
 
     if 'counter' not in request.session:
         request.session['counter'] = 0
@@ -180,7 +202,7 @@ def edit_user(request,user_id):
         'user_upload_img' : UploadUserImgForm(),
     }
     return render(request,'edit_user.html',context)
-    
+
 
 #=============================================##
 # process_edit_user()
@@ -193,10 +215,10 @@ def process_edit_user(request):
         for value in errors.values():
             messages.error(request,value)
         return redirect(f'/edit_user/{request.session["user_id"]}')
-    else: 
+    else:
         session_user = User.objects.get(id=request.session['user_id'])
         user_upload_img = UploadUserImgForm(request.POST, request.FILES)
-            
+
         session_user.email = request.POST['email']
         session_user.user_name = request.POST['user_name']
 
@@ -271,7 +293,7 @@ def bulletin(request,user_id,image_id, modal_trigger):
 # return redirect('/')
 #=============================================##
 def process_add_pet_image(request):
-    
+
     errors = Image.objects.basic_validator_add_pet(request.POST, request.FILES)
 
     if len(errors) > 0:
@@ -338,7 +360,7 @@ def process_delete_comment(request,comment_id,component):
     return redirect(f'/replace_comments/{image_id}')
 
 #=============================================##
-# replace_comments() 
+# replace_comments()
 #=============================================##
 def replace_comments(request, image_id):
     session_user = User.objects.get(id= request.session['user_id'])
@@ -381,23 +403,23 @@ def get_heart_sum(request,image_id):
     sum = 0
     for image in user.images.all():
         sum+=len(image.loves.all())
-    
+
     return HttpResponse (sum);
 
 #=============================================##
 # process_heart()
 #=============================================##
 def process_heart(request,image_id,location):
-    
+
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
 
     if session_user in this_image.loves.all():
-        this_image.loves.remove(session_user) 
+        this_image.loves.remove(session_user)
     else:
         send_email(session_user = session_user, action = 'LOVED', clicked_user = this_image.user, image = this_image)
-        this_image.loves.add(session_user) 
-    
+        this_image.loves.add(session_user)
+
     this_image.save();
     if location == 'bulletin':
         return redirect(f'/replace_post/{this_image.id}')
@@ -457,7 +479,7 @@ def process_follow(request,user_to_follow_id,image_id):
     if user_to_follow not in session_user.is_following.all():
         session_user.is_following.add(user_to_follow)
         user_to_follow.being_followed.add(session_user)
-    else: 
+    else:
         session_user.is_following.remove(user_to_follow)
         user_to_follow.being_followed.remove(session_user)
 
@@ -478,7 +500,50 @@ def get_session_id(request):
     session_user = User.objects.get(id= request.session['user_id'])
     return JsonResponse ({'session_id': session_user.id, 'session_user_name' :session_user.user_name})
 
+#=============================================##
+# get_more_images()
+#=============================================##
+def get_more_images(request):
+    image_list = Image.objects.all()
+    cycles = 4
+    paginator = Paginator(image_list, cycles)
 
+
+    # if 'page_num' in request.session:
+    #     del request.session['page_num']
+
+    if 'page_num' not in request.session:
+        request.session['page_num'] = 2
+        print('New Num')
+        print(request.session['page_num'])
+
+    elif paginator.page(request.session['page_num']).has_next():
+        request.session['page_num'] += 1
+        request.session['loads'] += cycles;
+        print('adding to')
+        print(request.session['page_num'])
+
+    else:
+        print('deleting')
+        return HttpResponse("none")
+
+    
+    
+
+    #     request.session['page_num'] += 1
+
+    # print(request.session['page_num'])
+
+    page = request.GET.get('page',request.session['page_num'])
+
+    try:
+        images2 = paginator.page(page)
+    except PageNotAnInteger:
+        images2 = paginator.page(1)
+    except EmptyPage:
+        images2 = paginator.page(paginator.num_pages)
+
+    return render(request, 'modules/dashboard.html', {'images2': images2})
 #=============================================##
 # send _email()
 #=============================================##
@@ -493,7 +558,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         <p> Image ID:  """ + str(image.id) + """ </p>
         <a href = http://localhost:8000""" + image.pet_img.url +  """>"""+ image.pet_img.url + """</a> """
         return string
-        
+
     if action == 'LOVED':
         text_body =  f"{session_user.user_name} LOVED {clicked_user.user_name}'s image!"
         html_body =  img_info(text_body)
@@ -506,18 +571,18 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
     if action =='SIGNED IN':
         text_body =  f"{session_user.user_name} SIGNED IN!"
-        html_body =  """ 
+        html_body =  """
         <h2>""" + text_body + """ </h2>
         """
     if action =='REGISTERED':
         text_body =  f"{session_user.user_name} REGISTERED A NEW ACCOUNT!"
-        html_body =  """ 
+        html_body =  """
         <h2>""" + text_body + """ </h2>
         """
 
     if action =='SHARED':
         text_body =  f"{session_user.user_name} SHARED A PET!"
-        html_body =  """ 
+        html_body =  """
         <h2>""" + text_body + """ </h2>
         <p> Name:""" + image.name +""" </p>
         <p> Image ID:  """ + str(image.id) + """ </p>
@@ -544,11 +609,11 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         html = """\
         <html>
         <body>
-        """ + html_body + """      
+        """ + html_body + """
         </body>
         </html>
         """
-        
+
         # Convert message types into MIMETEXT
         part1 = MIMEText(text,'plain')
         part2 = MIMEText(html, 'html')
@@ -559,7 +624,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
         context = ssl.create_default_context()
         server = smtplib.SMTP(smtp_server, port)
-        
+
         server.starttls(context = context) #Secure the connection
         server.login (sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
@@ -588,6 +653,5 @@ def process_edit_password(request):
         session_user = User.objects.get(id=request.POST['user_id'])
         session_user.password = request.POST['pass']
 
-        
+
     return redirect(f'/edit_user/{session_user.id}')
-   

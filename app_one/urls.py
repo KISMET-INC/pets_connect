@@ -50,7 +50,7 @@ urlpatterns = [
     path('get_session_id', views.get_session_id),
     path('get_image_list/<int:user_id>', views.get_image_list),
     path('get_heart_sum/<int:image_id>', views.get_heart_sum),
-
+    path('get_more_images', views.get_more_images),
     # Admin
     path('explore/admin', views.admin),
     path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),

@@ -23,6 +23,40 @@ $(document).ready(function(){
     var image = parseInt(map[3])
 
 
+    $(window).scroll(function() {
+        console.log($(window).scrollTop() )
+        console.log($(document).height() - $(window).height() )
+        if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
+           getmore()
+        }
+
+        
+    });
+
+    function getmore() {
+        alert('hi')
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_more_images`,
+        })
+        .done(function(data){
+            console.log('back')
+            console.log(data)
+            if (data != 'none'){
+
+                $(`.dashboard`).append(data);        
+            }
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+    
+
+
+
      //*********************************************//
     // Alert on Logout
     //*********************************************//
