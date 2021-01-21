@@ -96,6 +96,9 @@ class UserManager(models.Manager):
         
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
+        
+        if len(post['pass']) < 5:
+            errors['pass'] = 'Password must be at least 5 characters'
 
         # check unique email address
         users = User.objects.filter(email = postData['email'])

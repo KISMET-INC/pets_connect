@@ -140,7 +140,7 @@ def explore(request):
 
     current_user = User.objects.get(id=request.session['user_id'])
 
-    image_list = Image.objects.all()
+    image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page')
 
     paginator = Paginator(image_list, request.session['loads'])
@@ -228,6 +228,30 @@ def process_edit_user(request):
 
         return redirect(f'/profile/{session_user.id}')
 
+#=============================================##
+# process_edit_user()
+#=============================================##
+def process_admin_edit_user(request,user_id):
+
+    errors = User.objects.basic_validator_edit_user(request.POST)
+
+    if len(errors) > 0:
+        for value in errors.values():
+            messages.error(request,value)
+        return redirect(f'/edit_user/{request.session["user_id"]}')
+    else:
+        session_user = User.objects.get(id=user_id)
+        user_upload_img = UploadUserImgForm(request.POST, request.FILES)
+
+        session_user.email = request.POST['email']
+        session_user.user_name = request.POST['user_name']
+        session_user.password = request.POST['password']
+
+        if request.FILES:
+            session_user.user_img = request.FILES['user_img']
+        session_user.save()
+
+        return redirect(f'/profile/{session_user.id}')
 
 
 #=============================================##
@@ -504,7 +528,7 @@ def get_session_id(request):
 # get_more_images()
 #=============================================##
 def get_more_images(request):
-    image_list = Image.objects.all()
+    image_list = Image.objects.order_by("-created_at")
     cycles = 4
     paginator = Paginator(image_list, cycles)
 
@@ -524,7 +548,7 @@ def get_more_images(request):
         print(request.session['page_num'])
 
     else:
-        request.session['loads'] += cycles;
+        request.session['loads'] += cycles*2;
         print('deleting')
         return HttpResponse("none")
 

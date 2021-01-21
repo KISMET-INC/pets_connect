@@ -30,6 +30,7 @@
                         {% csrf_token %}
                         <input type= 'text' value = '{{clicked_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{clicked_user.email}}' name = 'email'> 
+                        <input type= 'password' name = 'pass'> 
                         {{ user_upload_img.as_p}}
                         <button type ='submit'> SUBMIT </button>
                     </form>

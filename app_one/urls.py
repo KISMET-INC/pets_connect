@@ -54,6 +54,7 @@ urlpatterns = [
     # Admin
     path('explore/admin', views.admin),
     path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
+    
    # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
 
     # not using yet

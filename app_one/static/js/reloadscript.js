@@ -27,14 +27,21 @@ $(document).ready(function(){
         console.log($(window).scrollTop() )
         console.log($(document).height() - $(window).height() )
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
-           getmore()
+            getmore()
+         
+           
         }
 
         
     });
 
+    
+    //*********************************************//
+    // get more images
+    //*********************************************//
+
     function getmore() {
-        alert('hi')
+
         $.ajax({
             cache: false,
             type:"GET",
@@ -45,17 +52,25 @@ $(document).ready(function(){
             console.log(data)
             if (data != 'none'){
 
-                $(`.dashboard`).append(data);        
+                $(`.dashboard`).append(data);
+                        
             }
                 
         })
         .fail(function(data){
             console.log("Error in fetching data");
         });
+
     }
     
 
-
+    
+    // $(document).ajaxStart(function(){
+    //     $('.loader').show();
+    //   });
+    //   $(document).ajaxStop(function(){
+    //     $('.loader').hide();
+    //   });
 
      //*********************************************//
     // Alert on Logout
