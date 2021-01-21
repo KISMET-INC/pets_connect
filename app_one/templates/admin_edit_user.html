@@ -23,17 +23,26 @@
                     {% include 'modules/user_img.html' %}
                     {% endwith %}
                     
-    
+   
                     <form enctype="multipart/form-data" action="/process_admin_edit_user/{{clicked_user.id}}" method="post">
                 
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
                         <input type= 'text' value = '{{clicked_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{clicked_user.email}}' name = 'email'> 
-                        <input type= 'password' name = 'pass'> 
+                        <input type= 'text' name = 'pass'> 
+                        <input type= 'hidden' value = '{{clicked_user.email}}' name = 'current_email'> 
+
                         {{ user_upload_img.as_p}}
                         <button type ='submit'> SUBMIT </button>
                     </form>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} 
 
                 </div>
 

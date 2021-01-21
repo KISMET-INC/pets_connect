@@ -97,7 +97,7 @@ class UserManager(models.Manager):
         if len(post['email']) < 1:
             errors['email_format'] = 'Email must be correct format'
         
-        if len(post['pass']) < 5:
+        if len(post['pass']) > 0 and len(post['pass']) < 5:
             errors['pass'] = 'Password must be at least 5 characters'
 
         # check unique email address
@@ -106,7 +106,7 @@ class UserManager(models.Manager):
         if len(users) > 0:
             if post['current_email'] != users[0].email:
                 errors['email_in_use'] = 'Email already in use'
-
+       
         return errors
 
 class PetManager(models.Manager):

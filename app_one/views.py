@@ -136,12 +136,16 @@ def explore(request):
         return redirect('/signin')
     
     if 'loads' not in request.session:
-        request.session['loads'] = 4
+        request.session['loads'] = 12
+    if 'page_num' not in request.session:
+        request.session['page_num'] = 1
 
+    print(request.session['loads'])
+    print(request.session['page_num'])
     current_user = User.objects.get(id=request.session['user_id'])
 
     image_list = Image.objects.order_by("-created_at")
-    page = request.GET.get('page')
+    page = request.GET.get('page',request.session['page_num'])
 
     paginator = Paginator(image_list, request.session['loads'])
     try:
@@ -234,24 +238,28 @@ def process_edit_user(request):
 def process_admin_edit_user(request,user_id):
 
     errors = User.objects.basic_validator_edit_user(request.POST)
-
-    if len(errors) > 0:
+    print(errors)
+    if len(errors) > 1:
         for value in errors.values():
             messages.error(request,value)
-        return redirect(f'/edit_user/{request.session["user_id"]}')
+        return redirect(f'/admin_edit_user/{user_id}/0/0')
     else:
-        session_user = User.objects.get(id=user_id)
+        print(request.POST)
+        clicked_user = User.objects.get(id=user_id)
         user_upload_img = UploadUserImgForm(request.POST, request.FILES)
 
-        session_user.email = request.POST['email']
-        session_user.user_name = request.POST['user_name']
-        session_user.password = request.POST['password']
+        clicked_user.email = request.POST['email']
+        clicked_user.user_name = request.POST['user_name']
+
+        hash = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
+        clicked_user.password = hash
 
         if request.FILES:
-            session_user.user_img = request.FILES['user_img']
-        session_user.save()
+            clicked_user.user_img = request.FILES['user_img']
+        
+        clicked_user.save()
 
-        return redirect(f'/profile/{session_user.id}')
+    return redirect(f'/explore/admin')
 
 
 #=============================================##
@@ -528,45 +536,20 @@ def get_session_id(request):
 # get_more_images()
 #=============================================##
 def get_more_images(request):
+    request.session['page_num'] += 1
+    
+    print(request.session['page_num'])
     image_list = Image.objects.order_by("-created_at")
-    cycles = 4
-    paginator = Paginator(image_list, cycles)
-
-
-    # if 'page_num' in request.session:
-    #     del request.session['page_num']
-
-    if 'page_num' not in request.session:
-        request.session['page_num'] = 2
-        print('New Num')
-        print(request.session['page_num'])
-
-    elif paginator.page(request.session['page_num']).has_next():
-        request.session['page_num'] += 1
-        request.session['loads'] += cycles;
-        print('adding to')
-        print(request.session['page_num'])
-
-    else:
-        request.session['loads'] += cycles*2;
-        print('deleting')
-        return HttpResponse("none")
-
-    
-    
-
-    #     request.session['page_num'] += 1
-
-    # print(request.session['page_num'])
-
     page = request.GET.get('page',request.session['page_num'])
-
+    paginator = Paginator(image_list,request.session['loads'])
+    request.session['loads'] += 12
     try:
         images2 = paginator.page(page)
     except PageNotAnInteger:
         images2 = paginator.page(1)
     except EmptyPage:
         images2 = paginator.page(paginator.num_pages)
+        return HttpResponse("none")
 
     return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
 #=============================================##

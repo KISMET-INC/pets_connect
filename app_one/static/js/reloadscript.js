@@ -28,11 +28,9 @@ $(document).ready(function(){
         console.log($(document).height() - $(window).height() )
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
             getmore()
-         
-           
+
         }
 
-        
     });
 
     
@@ -41,7 +39,6 @@ $(document).ready(function(){
     //*********************************************//
 
     function getmore() {
-
         $.ajax({
             cache: false,
             type:"GET",
@@ -62,8 +59,6 @@ $(document).ready(function(){
         });
 
     }
-    
-
     
     // $(document).ajaxStart(function(){
     //     $('.loader').show();
