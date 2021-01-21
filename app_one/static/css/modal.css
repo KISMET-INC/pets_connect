@@ -24,7 +24,7 @@
     padding:0px;
     display:flex;
     width: 750px;
-    height:450px;
+    height:470px;
 }
 
 .modal .close_modal {
@@ -203,9 +203,14 @@
 }
 
 
-.modal .left p:nth-child(4) {
+.modal .left p:nth-child(4), p:nth-child(5) {
+    margin-bottom: 0px;
     font-family: 'Montserrat Alternates', sans-serif;
 
+}
+
+.modal .left p:nth-child(5) {
+   font-size: 19px;
 }
 
 

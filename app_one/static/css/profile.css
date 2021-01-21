@@ -70,7 +70,7 @@ nav .fa-user::before, nav a.profile {
 }
 
 
-form {
+form .share_pet {
     width:30%;
     display:flex;
     flex-direction: column;
@@ -79,7 +79,7 @@ form {
     background-color: white;
 }
 
-input {
+.share_pet input {
     width:100%;
     align-self: left;
     margin-bottom: 10px;
@@ -94,7 +94,7 @@ input {
 }
 
 
-button {
+.share_pet button {
     box-shadow: none;
     border: none;
     background-color:white; 
@@ -105,7 +105,7 @@ button {
 }
 
 
-form button {
+form .share_pet button {
     margin: 0px;
     padding: 0px;
     text-align: right;

@@ -48,7 +48,7 @@
                 </div>
 
                 {% if session_user == clicked_user %}
-                <form enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
+                <form class="share_pet" enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
                         <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name..">
