@@ -21,11 +21,13 @@ urlpatterns = [
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
     path('explore', views.explore),
     path('edit_user/<int:user_id>', views.edit_user),
+    path('edit_image/<int:image_id>', views.edit_image),
     path('profile/<int:user_id>', views.profile),
     
     # Image Proceses
     path('process_add_pet_image', views.process_add_pet_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
+    path('process_edit_image', views.process_edit_image),
     
     # User Proceses
     path('process_edit_user', views.process_edit_user),
@@ -57,7 +59,9 @@ urlpatterns = [
     path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
     
    # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
-
+    path('search', views.search),
+    path('get_followers_list', views.get_followers_list),
+    path('get_all_users_list', views.get_all_users_list),
     # not using yet
     path('process_edit_password', views.process_edit_password),
 

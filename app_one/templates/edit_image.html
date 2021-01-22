@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'scripts/headerlinks.html' %}
+    <title>Pets Connect - Edit Pet</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/edit_user.css' %}">
+</head>
+<body>
+    <div id="CANVAS_long">
+        {% include 'modules/nav.html' %}
+
+
+        <div id="interface_block_one" class='edit_image'>
+            <div class = 'heading'>
+                <div class = 'profile_info'>
+                    
+                    <img width = '300' style="margin-right: 50px"src= {{image.pet_img.url}}>
+                    {% if session_user.user_name != 'guest' %}
+                    <form enctype="multipart/form-data" action="/process_edit_image" method="post">
+                    {% else %}
+                    <form>
+                    <p>As a guest you are not allowed to edit these fields</p>
+                    {% endif %}
+                        <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
+                        {% csrf_token %}
+                        <label for ='name'>Pet Name</label>
+                        <input type= 'text' value = '{{image.name}}' name = 'name'> 
+                        <label for ='desc'>Tell Us About Your Pet!</label>
+                        <input maxlength= '50' type= 'text' value = '{{image.desc}}' name = 'text'> 
+                        <input type= 'hidden' value = '{{image.id}}' name = 'image_id'>
+                        <div>
+                            <button type ='submit'> SUBMIT </button>
+                            <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>
+                        </div>
+                    </form>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} 
+                </div>
+                
+
+                {% include 'modules/modal.html' %}
+
+    </div>  <!-- END CANVAS -->
+</body>
+
+</html>

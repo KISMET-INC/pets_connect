@@ -33,6 +33,73 @@ $(document).ready(function(){
 
     });
 
+    //*********************************************//
+    // Search
+    //*********************************************//
+    $('.search').on('click', function(e){
+
+        var user_email = $('.search_email').val()
+        console.log(user_email)
+        e.preventDefault()
+
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { user_email : user_email},
+            url: `/search`,
+        })
+        .done(function(data){
+            console.log(data)
+            if(data == 'None'){
+                $('.error').html("Email Not Found")
+            } else {
+                window.location.href = data  
+            }
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+
+    })
+
+     //*********************************************//
+    // WHEN Search Modal is shown insert correct querylist
+    //*********************************************//
+
+        $('.search_btn').on('click', function(){
+            url='';
+            if($(this).html() == 'All Pet Owners'){
+                $('.modal-title').html("Search All Pet Owners")
+                url = "/get_all_users_list"
+            } else {
+                $('.modal-title').html("Search Your Followers")
+                url = "/get_followers_list"
+            }
+
+            $("#search_modal").on('show.bs.modal', function(){
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: url,
+                })
+                .done(function(data){
+                        $(`#search_modal .modal-body`).html(data);     
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                });
+            })
+
+        })
+
+    //*********************************************//
+    // WHEN MODAL IS HIDDEN update background elements
+    //*********************************************//
+    $("#search_modal").on('hide.bs.modal', function(){
+        $('.error').html("")
+    })
+
     
     //*********************************************//
     // get more images

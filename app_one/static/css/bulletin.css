@@ -6,11 +6,23 @@ nav .fa-users::before, nav a.bulletin{
     color:#E5E5E5;
 }
 
+.btn {
+    margin-bottom: 20px;
+}
+
+.person .user_email {
+    display:none;
+}
+
+#search_modal .person .user_email {
+    display:unset;
+}
 #interface_block_two {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin: 0 auto; 
+    margin: 0 auto;
+    padding-top: 20px;
 }
 
 .bulletin_left {
@@ -40,7 +52,7 @@ nav .fa-users::before, nav a.bulletin{
 }
 
 .post {
-    margin-top: 50px;
+    margin-bottom: 50px;
     border:1px solid grey;
 }
 .posts .user_img, .followers .person .user_img{
@@ -87,7 +99,7 @@ nav .fa-users::before, nav a.bulletin{
     width:100%;
 }
 
-.single_comment i.delete_comment::before {
+.single_comment i.delete_comment::before, i.edit_comment::before{
     margin-left: 10px;
     color: #55AAAA;
 }
@@ -133,6 +145,7 @@ input {
     border-radius: 5px;
     flex-wrap:wrap;
     overflow: scroll;
+    margin-bottom: 50px;
 
 }
 
@@ -154,12 +167,12 @@ input {
 
 
 
-.bulletin_right p{
-    margin: 0px;
+.bulletin_right .session_user div p{
+    font-size:16px;
 }
 
-.bulletin_right .followers .user_img {
-    margin-left:0px;
+.bulletin_right .user div {
+    width: 30%;
 }
 
 .user {
@@ -168,9 +181,13 @@ input {
     align-items: center;
 }
 
-.bulletin_right h2 {
+.bulletin_right h2, .session_user div p {
+    font-size: 25px;
+    font-family: 'Montserrat Alternates', sans-serif;
     margin-top: 0px;
 }
+
+
 .user , .followers{
     position:sticky;
     
@@ -203,6 +220,11 @@ input {
     display:none;
 }
 
+.bulletin_right .session_user .user_img{
+    width: 80px;
+    height: 80px
+}
+
 
 .bulletin_right .footer {
     display: none;
@@ -218,7 +240,7 @@ input {
 
 @media (max-width:767px){
     #interface_block_two {
-        width: 60%;
+        width: 70%;
     }
     .bulletin_left {
         width: 100%;
@@ -230,11 +252,38 @@ input {
 }
 
 
-@media (max-width: 1050px){
-    .user:nth-child(1) img, .followers p{
-        display:none;
+@media (max-width: 1200px){
+
+    .session_user {
+        display:flex;
+        flex-direction: column;
+        top: 75px;
     }
+
+    .followers {
+        top: 255px;
+    }
+
+   
+
+    .followers .heading p {
+       display:none;
+    }
+
+    .session_user div {
+        text-align:center;
+        width: 100%;
+    }
+    .bulletin_right .user div {
+        width: 100%;
+    }
+
+.bulletin_right .session_user .user_img {
+    width: 90px;
+    height: 90px;
 }
+}
+
 
 
 @media (max-width:501px){

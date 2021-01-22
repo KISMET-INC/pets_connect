@@ -308,14 +308,21 @@ def bulletin(request,user_id,image_id, modal_trigger):
         'url' : f'/user/bulletin/{user_id}/{image_id}',
         'image': current_image,
         'images': Image.objects.order_by("-created_at"),
-        'location': 'bulletin',
-        'trigger': modal_trigger,
+        'users': User.objects.all(),
         'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
     }
     return render(request,'bulletin.html',context)
 
 
-
+#=============================================##
+# edit_pet VIEW()
+#=============================================##
+def edit_image(request,image_id):
+    context = {
+        'image': Image.objects.get(id=image_id),
+        'session_user': User.objects.get(id=request.session['user_id']),
+    }
+    return render(request,'edit_image.html', context)
 
 
 #=============================================##
@@ -350,6 +357,25 @@ def process_remove_image(request,image_id):
     this_image.delete()
     if session_user.user_level == 9:
         return redirect (f'/admin_edit_user/{this_user.id}')
+    return redirect (f'/profile/{session_user.id}')
+
+#=============================================##
+# process_edit_image()
+#=============================================##
+def process_edit_image(request):
+    errors = Image.objects.basic_validator_edit_pet(request.POST)
+    if len(errors) > 0:
+        for value in errors.values():
+            messages.error(request,value)
+        return redirect(f'/edit_image/{request.POST["image_id"]}')
+
+    session_user = User.objects.get(id=request.session['user_id'])
+    this_image = Image.objects.get(id=request.POST['image_id'])
+    this_image.desc = request.POST['text']
+    this_image.name = request.POST['name']
+    this_image.save()
+    # if session_user.user_level == 9:
+    #     return redirect (f'/admin_edit_user/{this_user.id}')
     return redirect (f'/profile/{session_user.id}')
 
 #=============================================##
@@ -546,6 +572,33 @@ def get_more_images(request):
         return HttpResponse("none")
 
     return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
+
+#=============================================##
+# search users
+#=============================================##
+def search(request):
+    print(request.POST)
+    user_search = User.objects.filter(email=request.POST['user_email'])
+    
+    if len(user_search) > 0 :
+        find_user = user_search[0]
+        return HttpResponse(f'/profile/{find_user.id}')
+        
+    return HttpResponse(None)
+
+
+def get_followers_list(request):
+    context = {
+        'users': User.objects.get(id=request.session['user_id']).being_followed.all(),
+    }
+    print(context['users'])
+    return render(request, 'modules/followers_modal.html', context)
+
+def get_all_users_list(request):
+    context = {
+        'users': User.objects.all()
+    }
+    return render(request, 'modules/users_modal.html', context)
 #=============================================##
 # send _email()
 #=============================================##
@@ -637,6 +690,8 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
     except Exception as e:
         print("error sending email")
+
+
 
 
 

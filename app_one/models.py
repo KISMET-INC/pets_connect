@@ -116,7 +116,6 @@ class PetManager(models.Manager):
     def basic_validator_add_pet(self, postData, postFiles):
         post = postData
         print(postFiles)
-       
         # empty error dictionary
         errors = {}
 
@@ -128,17 +127,16 @@ class PetManager(models.Manager):
 
         return errors
 
+     #=============================================##
+    # EDIT Pet Validations
+    #=============================================##
+    def basic_validator_edit_pet(self, postData):
 
-    #=============================================##
-    # Add Pet Validations
-    #=============================================##
-    def basic_validator_add_comment(self, postData):
-        post = postData
         # empty error dictionary
         errors = {}
 
-        if len(post['text']) < 1:
-            errors['text'] = 'A comment cannot be empty'
+        if len(postData['name']) < 1:
+            errors['name'] = 'A name is required'
 
         return errors
         
