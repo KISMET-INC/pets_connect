@@ -70,7 +70,7 @@ nav .fa-user::before, nav a.profile {
 }
 
 
-form .share_pet {
+form.share_pet {
     width:30%;
     display:flex;
     flex-direction: column;
@@ -78,6 +78,8 @@ form .share_pet {
     box-shadow: none;
     background-color: white;
 }
+
+
 
 .share_pet input {
     width:100%;
@@ -101,9 +103,13 @@ form .share_pet {
     color:#555555;
     font-size: 16px;
     font-family: 'Montserrat Alternates', sans-serif;
+    align-self: flex-end;
 
 }
 
+.profile_info div h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
 
 form .share_pet button {
     margin: 0px;

@@ -11,6 +11,8 @@
     align-items: top;
     vertical-align: top;
     width: 103%;
+    border:none;
+    margin-left:-10px;
 }
 .single_comment form {
     display:flex;
@@ -31,3 +33,4 @@
     resize: none;
     border:none;
 }
+
