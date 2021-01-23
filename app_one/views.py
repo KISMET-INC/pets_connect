@@ -115,7 +115,8 @@ def register(request):
 #=============================================##
 def admin(request):
     context = {
-        'users': User.objects.all()
+        'users': User.objects.exclude(id=1).exclude(id=2),
+        'session_user': User.objects.get(id=request.session['user_id']) 
     }
     return render(request,'admin.html',context)
 
@@ -209,26 +210,31 @@ def edit_user(request,user_id):
 #=============================================##
 # process_edit_user()
 #=============================================##
-def process_edit_user(request):
-
+def process_edit_user(request,user_id):
+    session_user = User.objects.get(id=request.session['user_id'])
+    user = User.objects.get(id=user_id)
     errors = User.objects.basic_validator_edit_user(request.POST)
 
     if len(errors) > 0:
         for value in errors.values():
             messages.error(request,value)
+        if session_user.user_level == 9:
+            return redirect(f'/admin_edit_user/{user_id}')
         return redirect(f'/edit_user/{request.session["user_id"]}')
     else:
-        session_user = User.objects.get(id=request.session['user_id'])
+        
         user_upload_img = UploadUserImgForm(request.POST, request.FILES)
 
-        session_user.email = request.POST['email']
-        session_user.user_name = request.POST['user_name']
+        user.email = request.POST['email']
+        user.user_name = request.POST['user_name']
 
         if request.FILES:
-            session_user.user_img = request.FILES['user_img']
-        session_user.save()
-
+            user.user_img = request.FILES['user_img']
+        user.save()
+        if session_user.user_level == 9:
+            return redirect(f'/admin_edit_user/{user_id}')
         return redirect(f'/profile/{session_user.id}')
+            
 
 #=============================================##
 # process_edit_user()
@@ -261,20 +267,12 @@ def process_admin_edit_user(request,user_id):
 #=============================================##
 # admin_edit_user() VIEW
 #=============================================##
-def admin_edit_user(request,user_id,image_id,modal_trigger):
-    if image_id != 0:
-        image = Image.objects.get(id=image_id)
-    else:
-        image = image_id
+def admin_edit_user(request,user_id):
 
     context = {
         'session_user' : User.objects.get(id=request.session['user_id']),
-        'image': image,
-        'trigger': modal_trigger,
         'clicked_user' : User.objects.get(id=user_id),
         'user_upload_img' : UploadUserImgForm(),
-        'location': 'admin_edit_user',
-
     }
     return render(request,'admin_edit_user.html',context)
 
@@ -287,7 +285,9 @@ def admin_edit_user(request,user_id,image_id,modal_trigger):
 def process_remove_user(request, user_id):
     this_user = User.objects.get(id = user_id)
     this_user.delete()
-    return redirect('/explore/0')
+    if request.session['user_id'] == 1:
+        return redirect('/explore/admin')
+    return redirect('/explore')
 
 
 
@@ -372,8 +372,8 @@ def process_edit_image(request):
     this_image.desc = request.POST['text']
     this_image.name = request.POST['name']
     this_image.save()
-    # if session_user.user_level == 9:
-    #     return redirect (f'/admin_edit_user/{this_user.id}')
+    if session_user.user_level == 9:
+        return redirect (f'/edit_image/{this_image.id}')
     return redirect (f'/profile/{session_user.id}')
 
 #=============================================##
@@ -584,7 +584,11 @@ def get_more_images(request):
 #=============================================##
 def search(request):
 
-    user_search = User.objects.filter(email=request.POST['user_email'])
+    if request.POST['list'] == 'users':
+        user_search = User.objects.filter(email=request.POST['user_email'])
+    else:
+        users_followers=User.objects.get(id=request.session['user_id']).being_followed.all()
+        user_search = User.objects.filter(email=request.POST['user_email'])
     
     if len(user_search) > 0 :
         find_user = user_search[0]

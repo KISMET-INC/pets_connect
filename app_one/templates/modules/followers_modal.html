@@ -1,4 +1,4 @@
-<div class = "users_modal">
+<div user_id = '{{session_user.id}}' list ='followers' class = "users_modal">
   {% for user in users %}
   {% include 'modules/person.html' %}
   {% endfor %}

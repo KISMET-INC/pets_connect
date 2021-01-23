@@ -32,7 +32,7 @@
                     <td>{{user.email}}</td>
 
                     <!-- ADD REMOVE MESSAGE BOX -->
-                    <td><a href='/edit_user/{{user.id}}'><i class = 'fas fa-pen'></i></a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'><i class='fas fa-times'></a></td>
+                    <td><a href='/admin_edit_user/{{user.id}}'><i class = 'fas fa-pen'></i></a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'><i class='fas fa-times'></a></td>
                 </tr>
                 {% endfor %}
             </table>

@@ -90,15 +90,17 @@ $(document).ready(function(){
     //*********************************************//
     $('.search').on('click', function(e){
 
-        var user_email = $('.search_email').val()
-        console.log(user_email)
         e.preventDefault()
+        var user_email = $('.search_email').val()
+        var list = $('#search_modal .users_modal').attr('list')
+        var user_id = $('#search_modal .users_modal').attr('user_id')
+        
 
         $.ajax({
             cache: false,
             headers: { "X-CSRFToken": csrftoken },  
             type:'POST',
-            data : { user_email : user_email},
+            data : { user_email : user_email, list: list, user_id: user_id},
             url: `/search`,
         })
         .done(function(data){
