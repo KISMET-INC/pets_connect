@@ -1,7 +1,7 @@
 <div class= 'single_comment'>
     <form class = "eform{{comment.id}} comm_edit hide_form">
         <textarea class='edit_comment_text_{{comment.id}} com_form' type = 'text'>{{comment.text}}</textarea>
-        <div>
+        <div class = 'edit_actions'>
             <input comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_btn' type = 'submit' value =Edit>
             <input comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_cancel' type = 'submit' value =X>
         </div>

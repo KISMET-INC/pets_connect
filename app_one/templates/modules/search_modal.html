@@ -7,12 +7,12 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title"></h4>
+          <div class = 'error'></div>
           <form>
             {% csrf_token %}
             <input class= 'search_email' type = 'text' placeholder='search' name = 'email'>
             <button class='search btn btn-info btn-lg'>Search</button>
           </form>
-          <div class = 'error'></div>
         </div>
         <div class="modal-body">
         </div>

@@ -178,7 +178,7 @@
     height:40px;
     resize:none;
     border:none;
-    width: 100%;
+    width: 90%;
 }
 
 .single_comment input:nth-child(2) ,.single_comment input:nth-child(3){
@@ -191,6 +191,7 @@
     height: 53px;
     margin-left:3px;
     margin-right:3px;
+    color:gray;
 }
 
 
@@ -206,6 +207,8 @@
 .comment_form {
     background-color: white;
     padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     width:80%;
     margin: 0 auto; 

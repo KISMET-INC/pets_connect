@@ -140,8 +140,6 @@ def explore(request):
     if 'page_num' not in request.session:
         request.session['page_num'] = 1
 
-    print(request.session['loads'])
-    print(request.session['page_num'])
     current_user = User.objects.get(id=request.session['user_id'])
 
     image_list = Image.objects.order_by("-created_at")
@@ -398,7 +396,7 @@ def process_add_comment(request):
 # process_edit_comment()
 #=============================================##
 def process_edit_comment(request,comment_id):
-    print(request.POST)
+
     errors = Image.objects.basic_validator_add_comment(request.POST)
     if len(errors) < 1:
         session_user = User.objects.get(id= request.session['user_id'])
@@ -406,7 +404,6 @@ def process_edit_comment(request,comment_id):
         this_comment = Comment.objects.get(id = comment_id)
         this_comment.text = request.POST['text'] 
         this_comment.save()
-   
         #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
@@ -572,9 +569,6 @@ def get_more_images(request):
     paginator = Paginator(image_list,request.session['loads'])
     request.session['loads'] += 12
 
-    print(request.session['loads'])
-    print(request.session['page_num'])
-
     try:
         images2 = paginator.page(page)
     except PageNotAnInteger:
@@ -589,7 +583,7 @@ def get_more_images(request):
 # search users
 #=============================================##
 def search(request):
-    print(request.POST)
+
     user_search = User.objects.filter(email=request.POST['user_email'])
     
     if len(user_search) > 0 :
@@ -603,7 +597,7 @@ def get_followers_list(request):
     context = {
         'users': User.objects.get(id=request.session['user_id']).being_followed.all(),
     }
-    print(context['users'])
+ 
     return render(request, 'modules/followers_modal.html', context)
 
 def get_all_users_list(request):
@@ -695,7 +689,6 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         server.starttls(context = context) #Secure the connection
         server.login (sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
-     
     try:
         # Create new thread
         _thread.start_new_thread(setup_email_thread,())

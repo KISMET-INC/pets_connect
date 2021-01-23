@@ -2,7 +2,6 @@ $(document).ready(function(){
     $('.comm_edit').hide()
 
     $('body').on('click', '.fa-pen', function(e){
-        alert('click')
         var comment_id = $(this).attr('id')
         $(`.comm_text`).show()
         $(`.comm_edit`).hide()
@@ -13,7 +12,6 @@ $(document).ready(function(){
     })
 
     $('body').on('click', '.edit_comment_cancel', function(e){
-        alert('cancel')
         e.preventDefault()
         var comment_id = $(this).attr('comm_id')
         $(`.comm_text`).show()
@@ -26,7 +24,6 @@ $(document).ready(function(){
         var image_id = $(this).attr('img_id')
         var new_comment = $(`.edit_comment_text_${comment_id}`).val()
         var component = $(this).attr('comp')
-        alert (new_comment)
         $.ajax({
             cache: false,
             headers: { "X-CSRFToken": csrftoken },  

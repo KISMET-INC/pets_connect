@@ -131,7 +131,7 @@ input {
     height:40px;
     width:100%;
     margin: 0 auto; 
-    padding-right:70px;
+    /* padding-right:70px; */
     background-color:transparent;
     border:none;
 }
@@ -193,8 +193,10 @@ input {
     
 }
 
-
-
+.btn-info {
+    background-color: var(--blue1);
+    border: none;
+}
 
 .followers {
     width: 100%;

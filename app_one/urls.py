@@ -59,7 +59,7 @@ urlpatterns = [
     path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
     path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
     
-   # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+    # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
     path('search', views.search),
     path('get_followers_list', views.get_followers_list),
     path('get_all_users_list', views.get_all_users_list),
