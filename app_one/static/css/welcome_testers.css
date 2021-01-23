@@ -5,7 +5,7 @@ i {
 }
 
 p, li {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 
@@ -28,4 +28,34 @@ hr {
 }
 .dashboard {
     width: 90%;
+    margin: 0 auto;
+}
+
+img.sharepet{
+    width:50%
+}
+
+img {
+    width:100%;
+    border: 1px solid gray;
+}
+
+img.header_image{
+    height:auto;
+    border:none;
+    margin-bottom: 50px;
+}
+
+#interface_block_one {
+    width:100%;
+}
+ol {
+    width:80%;
+    margin: 0 auto;
+
+}
+
+h2 {
+    font-family: 'Montserrat Alternates', sans-serif; 
+    margin-bottom: 20px; 
 }

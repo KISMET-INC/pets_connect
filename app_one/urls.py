@@ -30,7 +30,7 @@ urlpatterns = [
     path('process_edit_image', views.process_edit_image),
     
     # User Proceses
-    path('process_edit_user', views.process_edit_user),
+    path('process_edit_user/<int:user_id>', views.process_edit_user),
     path('process_remove_user/<int:user_id>', views.process_remove_user),
     
     # Comment Processes
@@ -56,7 +56,7 @@ urlpatterns = [
     path('get_more_images', views.get_more_images),
     # Admin
     path('explore/admin', views.admin),
-    path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
+    path('admin_edit_user/<int:user_id>', views.admin_edit_user),
     path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
     
     # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
