@@ -70,3 +70,21 @@
     width:100%; 
     padding-left: 10px;
 }
+
+@media (max-width: 725px){
+    #search_modal .modal-dialog {
+        width:300px;
+    }
+
+    #search_modal .person .user_email {
+        font-size: 13px;
+    }
+
+    .users_modal .person {
+        margin:10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

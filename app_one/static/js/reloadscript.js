@@ -1,23 +1,28 @@
 $(document).ready(function(){
     $('.comm_edit').hide()
-
     $('body').on('click', '.fa-pen', function(e){
         var comment_id = $(this).attr('id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
         $(`.comm_text`).show()
         $(`.comm_edit`).hide()
-
+        
         $(`.eform${comment_id}`).css('display','flex').show()
         $(`.single_comment #comment${comment_id}`).hide()
+
+        $('body').on('click', '.edit_comment_cancel', function(e){
+            e.preventDefault()
+            var comment_id = $(this).attr('comm_id')
+            $(`.comm_text`).show()
+            
+            $(`.edit_comment_text_${comment_id}`).val(new_comment)
+            $(`.eform${comment_id}`).hide()
+    
+            $(`.single_comment #comment${comment_id}`).show()
+        })
         
     })
 
-    $('body').on('click', '.edit_comment_cancel', function(e){
-        e.preventDefault()
-        var comment_id = $(this).attr('comm_id')
-        $(`.comm_text`).show()
-        $(`.eform${comment_id}`).hide()
-        $(`.single_comment #comment${comment_id}`).show()
-    })
+ 
     $('body').on('click', '.edit_comment_btn', function(e){
         e.preventDefault()
         var comment_id = $(this).attr('comm_id')
