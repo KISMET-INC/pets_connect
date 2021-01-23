@@ -12,15 +12,18 @@
     margin-bottom: 20px;
     width: 75px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    
     margin: 5px;
+    display:inline-block
 }
 
 .person div:nth-child(2){
     display:flex;
     flex-direction:column;
     text-align:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .person .user_email {

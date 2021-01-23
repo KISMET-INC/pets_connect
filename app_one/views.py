@@ -157,11 +157,11 @@ def explore(request):
     context = {
         'session_user': current_user,
         'users' : User.objects.all(),
-        'images' : Image.objects.order_by("-created_at"),
+        'images2' : Image.objects.order_by("-created_at"),
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
-        'images2': images2,
+        'images': images2,
     }
 
 
@@ -200,7 +200,7 @@ def profile(request, user_id):
 #=============================================##
 def edit_user(request,user_id):
     context = {
-        'session_user' : User.objects.get(id=request.session['user_id']),
+        'session_user' : User.objects.get(id=user_id),
         'user_upload_img' : UploadUserImgForm(),
     }
     return render(request,'edit_user.html',context)
@@ -548,7 +548,7 @@ def process_follow(request,user_to_follow_id,image_id):
     if image_id == '0':
         return redirect(f'/profile/{user_to_follow_id}')
 
-    return redirect (f'/replace_stats/{user_to_follow.id}')
+    return redirect (f'/replace_stats/{image_id}')
 
 
 

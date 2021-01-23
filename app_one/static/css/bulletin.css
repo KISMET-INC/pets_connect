@@ -143,7 +143,6 @@ input {
     padding:15px;
     padding-bottom: 20px;
     border-radius: 5px;
-    flex-wrap:wrap;
     overflow: scroll;
     margin-bottom: 50px;
 
@@ -250,6 +249,11 @@ input {
     }
     .bulletin_right{
         display:none;
+    }
+
+    .single_comment i {
+        font-size: 25px;
+        margin-bottom: 10px;
     }
 }
 
