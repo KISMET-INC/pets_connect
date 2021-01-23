@@ -112,6 +112,7 @@ form button {
     .profile_info{
         display:flex;
         flex-direction: column;
+        width:90%;
     }
 
     .user_img {

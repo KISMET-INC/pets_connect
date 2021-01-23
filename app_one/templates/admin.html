@@ -1,50 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include 'scripts/headerlinks.html'%}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
-
-    <!-- Remember to include jQuery :) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Pets Connect - Explore</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'global.css' %}">
-    <link rel="stylesheet" href="{% static 'admin.css' %}">
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/admin.css' %}">
+    <script src="{% static '/js/reloadscript.js' %}"></script>   
+  
 </head>
 <body>
 
+    <div class = 'loader'></div>
     <div id="CANVAS_long">
-        <div id="TOP_long">
-            <nav>
-                <h2 >Pet's Connect</h2>
-                <a href = '/logout'>Log Off</a>
-            </nav>
-            
-        </div>
-            </div>
-
-
+        {% include 'modules/nav.html' %}
         <div id="interface_block_one">
-            <div class="split_top">
-                <h2 class = 'form_title'>Manage Users - ADMIN {{request.session.user_level}}</h2>
-                <a href = '/register'><button type ='submit'> Add New</button></a>
-            </div>
-            
             <table>
                 <tr>
-                    <th class= "id">id</th>
-                    <th class = 'name'>name</th>
-                    <th class = 'email'>email</th>
-                    <th class= "created_at">created_at</th>
-                    <th class = 'level'>level</th>
-                    <th class = 'actions'>actions</th>
+                    <th class= "id">#</th>
+                    <th class = 'name'>User Name</th>
+                    <th class = 'email'>Email</th>
+                    <th class = 'actions'>Actions</th>
                 </tr>
 
                 {% for user in users %}
@@ -52,37 +30,15 @@
                     <td>{{user.id}}</td>
                     <td>{{user.user_name}}</a></td>
                     <td>{{user.email}}</td>
-                    <td>{{user.created_at}}</td>
-
-                    {% if user.user_level == 9 %}
-                    <td>admin</td>
-                    {% else %}
-                    <td>normal</td>
-                    {% endif %}
 
                     <!-- ADD REMOVE MESSAGE BOX -->
-                    <td><a href='/admin_edit_user/{{user.id}}/0/0'>edit</a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'>remove</a></td>
+                    <td><a href='/edit_user/{{user.id}}'><i class = 'fas fa-pen'></i></a><span> | </span><a href='/process_remove_user/{{user.id}}' id='manual-ajax'><i class='fas fa-times'></a></td>
                 </tr>
                 {% endfor %}
             </table>
-        </div> <!-- END INTERFACE -->
+                
+            </div>
 
-        <!-- <div id="ex1" class="modal">
-            <p>Thanks for clicking. That felt good.</p>
-            <a href="users/remove_user/2" >Yes</a>
-            <a href="#" rel="modal:close">No</a>
-          </div> -->
-
-
-    </div>  <!-- END CANVAS -->
-    <script>
-        $('#manual-ajax').click(function(event) {
-            event.preventDefault();
-             this.blur(); // Manually remove focus from clicked link.
-            $.get(this.href, function() {
-                alert( "Load was performed." );
-            });
-        });
-    </script>
+    
 </body>
-</html>>
+</html>
