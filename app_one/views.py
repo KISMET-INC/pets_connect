@@ -651,10 +651,10 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         """
 
     def setup_email_thread():
-
+        pw = open("app_one\pw.txt", "r")
         smtp_server = "smtp.gmail.com"
         port = 587 #For starttls
-        password = 'PassioN12345'
+        password = pw.read()
 
         sender_email = "petsconnect2021@gmail.com"
         receiver_email = "petsconnect2021@gmail.com"
