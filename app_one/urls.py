@@ -36,6 +36,7 @@ urlpatterns = [
     # Comment Processes
     path('process_delete_comment/<int:comment_id>/<str:component>',views.process_delete_comment),
     path('process_add_comment', views.process_add_comment),
+    path('process_edit_comment/<int:comment_id>',views.process_edit_comment),
     
     # Stat Processes
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),

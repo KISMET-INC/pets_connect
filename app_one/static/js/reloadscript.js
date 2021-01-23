@@ -1,5 +1,53 @@
 $(document).ready(function(){
+    $('.comm_edit').hide()
 
+    $('body').on('click', '.fa-pen', function(e){
+        alert('click')
+        var comment_id = $(this).attr('id')
+        $(`.comm_text`).show()
+        $(`.comm_edit`).hide()
+
+        $(`.eform${comment_id}`).css('display','flex').show()
+        $(`.single_comment #comment${comment_id}`).hide()
+        
+    })
+
+    $('body').on('click', '.edit_comment_cancel', function(e){
+        alert('cancel')
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        $(`.comm_text`).show()
+        $(`.eform${comment_id}`).hide()
+        $(`.single_comment #comment${comment_id}`).show()
+    })
+    $('body').on('click', '.edit_comment_btn', function(e){
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        var image_id = $(this).attr('img_id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component = $(this).attr('comp')
+        alert (new_comment)
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { text : new_comment, component : component, image_id : image_id},
+            url: `/process_edit_comment/${comment_id}`,
+        })
+        .done(function(data){
+            if( component == 'from_post'){
+                $(`#post${image_id}`).html(data);   
+            } else {
+                $('#replace_comments').html(data)                                  
+                //scrollToBottom()
+            }
+            //$(`${form_text}`).val("")
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        })
+        
+    });
 
     //*********************************************//
     // Set starting variables
@@ -32,6 +80,8 @@ $(document).ready(function(){
         }
 
     });
+
+
 
     //*********************************************//
     // Search
@@ -368,6 +418,8 @@ $(document).ready(function(){
 
                 $(`#replaceModal`).html(data);
                 $('#comment_modal').modal('show');
+
+
                 $("#comment_modal").on('shown.bs.modal', function(){
                     scrollToBottom()
                 })

@@ -111,7 +111,18 @@ class UserManager(models.Manager):
 
 class PetManager(models.Manager):
     #=============================================##
-    # Add Pet Validations
+    # Add Coment Validations
+    #=============================================##
+    def basic_validator_add_comment(self, postData):
+        # empty error dictionary
+        errors = {}
+
+        if len(postData['text']) < 1:
+            errors['comment'] = 'A comment is required'
+        return errors
+
+    #=============================================##
+    # Add Comment Validations
     #=============================================##
     def basic_validator_add_pet(self, postData, postFiles):
         post = postData
@@ -127,7 +138,7 @@ class PetManager(models.Manager):
 
         return errors
 
-     #=============================================##
+    #=============================================##
     # EDIT Pet Validations
     #=============================================##
     def basic_validator_edit_pet(self, postData):

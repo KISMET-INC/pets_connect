@@ -389,16 +389,28 @@ def process_add_comment(request):
         new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
         send_email(session_user = session_user, action = 'COMMENTED', clicked_user = this_image.user, image = this_image, comment=new_comment)
 
-    context = {
-        'image': this_image,
-        'session_user': session_user
-    }
         #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
     return redirect( f'/replace_comments/{this_image.id}')
 
-
+#=============================================##
+# process_edit_comment()
+#=============================================##
+def process_edit_comment(request,comment_id):
+    print(request.POST)
+    errors = Image.objects.basic_validator_add_comment(request.POST)
+    if len(errors) < 1:
+        session_user = User.objects.get(id= request.session['user_id'])
+        this_image = Image.objects.get(id=request.POST['image_id'])
+        this_comment = Comment.objects.get(id = comment_id)
+        this_comment.text = request.POST['text'] 
+        this_comment.save()
+   
+        #hidden form field
+    if request.POST['component'] == 'from_post':
+        return redirect(f'/replace_post/{this_image.id}')
+    return redirect( f'/replace_comments/{this_image.id}')
 #=============================================##
 # process_delete_comment()
 #=============================================##
