@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signin</title>
+    <title>Pets Connect - Sign in</title>
     {% include 'scripts/headerlinks.html' %}
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
@@ -36,10 +36,10 @@
                     {% csrf_token %}
 
                     <label for = 'email'>Email Address </label> 
-                    <input name = 'email' type = 'email' value='guest@guest.com'>
+                    <input name = 'email' type = 'email' value='ksanmartin909@gmail.com'>
 
-                    <label for = 'pass'>Password </label> 
-                    <input name = 'pass' type = 'password'>
+                    <label for = 'pass' >Password </label> 
+                    <input name = 'pass' type = 'password' value="1234567890">
                     
                     <div>
                         <button class="btn btn-primary btn-lg" type ='submit'> Sign In </button>

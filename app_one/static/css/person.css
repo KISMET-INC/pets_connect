@@ -15,10 +15,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 5px;
-   
-   
 }
 
+.person div:nth-child(2){
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+}
+
+.person .user_email {
+    font-family: var(--baseFont);
+}
 .person .outline {
     border-radius: 100px;
     padding: 5px;

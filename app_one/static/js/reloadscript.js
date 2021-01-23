@@ -1,4 +1,185 @@
 $(document).ready(function(){
+    $('.comm_edit').hide()
+
+    $('body').on('click', '.fa-pen', function(e){
+        var comment_id = $(this).attr('id')
+        $(`.comm_text`).show()
+        $(`.comm_edit`).hide()
+
+        $(`.eform${comment_id}`).css('display','flex').show()
+        $(`.single_comment #comment${comment_id}`).hide()
+        
+    })
+
+    $('body').on('click', '.edit_comment_cancel', function(e){
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        $(`.comm_text`).show()
+        $(`.eform${comment_id}`).hide()
+        $(`.single_comment #comment${comment_id}`).show()
+    })
+    $('body').on('click', '.edit_comment_btn', function(e){
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        var image_id = $(this).attr('img_id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component = $(this).attr('comp')
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { text : new_comment, component : component, image_id : image_id},
+            url: `/process_edit_comment/${comment_id}`,
+        })
+        .done(function(data){
+            if( component == 'from_post'){
+                $(`#post${image_id}`).html(data);   
+            } else {
+                $('#replace_comments').html(data)                                  
+                //scrollToBottom()
+            }
+            //$(`${form_text}`).val("")
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        })
+        
+    });
+
+    //*********************************************//
+    // Set starting variables
+    //*********************************************//
+    $(".opacity").css('opacity', '.99');
+    var heart = false;
+    var selfclick = false;  //may not need
+    var session_user = '';
+    var image_list = [];
+    var heart_sum = 0;
+
+    //*********************************************//
+    // Get URL Route variables
+    //*********************************************//
+    map = window.location.pathname.toString()
+    map = map.split('/')
+    console.log(map)
+
+    var url_location = map[1]
+    var clicked_user_id = map[2]
+    var image = parseInt(map[3])
+
+
+    $(window).scroll(function() {
+        console.log($(window).scrollTop() )
+        console.log($(document).height() - $(window).height() )
+        if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
+            getmore()
+
+        }
+
+    });
+
+
+
+    //*********************************************//
+    // Search
+    //*********************************************//
+    $('.search').on('click', function(e){
+
+        var user_email = $('.search_email').val()
+        console.log(user_email)
+        e.preventDefault()
+
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { user_email : user_email},
+            url: `/search`,
+        })
+        .done(function(data){
+            console.log(data)
+            if(data == 'None'){
+                $('.error').html("Email Not Found")
+            } else {
+                window.location.href = data  
+            }
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+
+    })
+
+     //*********************************************//
+    // WHEN Search Modal is shown insert correct querylist
+    //*********************************************//
+
+        $('.search_btn').on('click', function(){
+            url='';
+            if($(this).html() == 'All Pet Owners'){
+                $('.modal-title').html("Search All Pet Owners")
+                url = "/get_all_users_list"
+            } else {
+                $('.modal-title').html("Search Your Followers")
+                url = "/get_followers_list"
+            }
+
+            $("#search_modal").on('show.bs.modal', function(){
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: url,
+                })
+                .done(function(data){
+                        $(`#search_modal .modal-body`).html(data);     
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                });
+            })
+
+        })
+
+    //*********************************************//
+    // WHEN MODAL IS HIDDEN update background elements
+    //*********************************************//
+    $("#search_modal").on('hide.bs.modal', function(){
+        $('.error').html("")
+    })
+
+    
+    //*********************************************//
+    // get more images
+    //*********************************************//
+
+    function getmore() {
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_more_images`,
+        })
+        .done(function(data){
+            console.log('back')
+            console.log(data)
+            if (data != 'none'){
+
+                $(`.dashboard`).append(data);
+                        
+            }
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+
+    }
+    
+    // $(document).ajaxStart(function(){
+    //     $('.loader').show();
+    //   });
+    //   $(document).ajaxStop(function(){
+    //     $('.loader').hide();
+    //   });
 
      //*********************************************//
     // Alert on Logout
@@ -18,6 +199,10 @@ $(document).ready(function(){
         }
     }
 
+    //*********************************************//
+    // Close guest Message
+    //*********************************************//
+
     $('.close_guest_message').on('click', function(){
 
             $('.guest_message').remove()
@@ -30,24 +215,6 @@ $(document).ready(function(){
         $('#comment_modal').modal('hide');
     })
 
-    //*********************************************//
-    // Get URL Route variables
-    //*********************************************//
-    map = window.location.pathname.toString()
-    map = map.split('/')
-    console.log(map)
-
-    var url_location = map[1]
-    var clicked_user_id = map[2]
-    var image = parseInt(map[3])
-
-    //*********************************************//
-    // Set starting variables
-    //*********************************************//
-    $(".opacity").css('opacity', '.99');
-    var heart = false;
-    var selfclick = false;  //may not need
-    var session_user = ''
 
     //*********************************************//
     // Pull Session_user_id from database
@@ -66,7 +233,44 @@ $(document).ready(function(){
         });
     }
 
-    get_session_id()
+
+    //*********************************************//
+    // Pull Image List from database
+    //*********************************************//
+    function get_image_list(user_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_image_list/${user_id}`,
+        })
+        .done(function(data){
+            image_list =  data           
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+    //*********************************************//
+    // Pull Heart Sum from DB
+    //*********************************************//
+    function get_heart_sum(img_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_heart_sum/${img_id}`,
+        })
+        .done(function(data){
+            heart_sum =  data 
+            $('.heart_sum').html(data)
+            console.log(heart_sum)
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
 
     //*********************************************//
     // MOBILE DEVICE 
@@ -100,8 +304,7 @@ $(document).ready(function(){
     // Mousover / Mouseout Behavior
     //*********************************************//
     } else {
-        $( '.dimage' )
-            .mouseenter(function() {
+        $('body').on('mouseover', '.dimage', function(){
                 
                // Declare Variables needed 
                 var img_id = $(this).attr('id');
@@ -111,7 +314,7 @@ $(document).ready(function(){
                 $(`${stats}`).show()
             })
 
-            .mouseleave(function() {
+            .on('mouseleave', '.dimage', function(){
                 var id = $(this).attr('id');
                 var stats = `#stat${id}`
                 var img = `.open_modal${id}`
@@ -119,7 +322,9 @@ $(document).ready(function(){
                 $( `${img}`).css('opacity', '1')
                 $(`${stats}`).hide()
             });
-        }  // END DEVICE DEPENDENT INSTRUCTIONS
+        }  
+        
+        // END DEVICE DEPENDENT INSTRUCTIONS
 
 
         //*********************************************//
@@ -132,7 +337,6 @@ $(document).ready(function(){
             var title = $(this).attr('title');
             var stats = `#stat${img_id}`
             get_session_id()
-            console.log(session_user)
             
             // Stops the ability to like your own pet
             if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
@@ -148,10 +352,11 @@ $(document).ready(function(){
                     url: `/process_heart/${img_id}/${url_location}`,
                 })
                 .done(function(data){
-                    if(url_location != 'bulletin'){
-                        $(`#replace${img_id}`).html(data);             
-                    } else {
+                    if(url_location == 'bulletin'){
                         $(`#post${img_id}`).html(data);  
+                    } else {
+                        $(`#replace${img_id}`).html(data); 
+                        get_heart_sum(img_id)          
                     }
                     heart = false;   
                 })
@@ -161,6 +366,40 @@ $(document).ready(function(){
             }
             
         }); // END PROCESS HEART CLICKS
+
+        //*********************************************//
+        // Process Follow Clicks
+        //*********************************************//
+        $('body').on('click', '.fa-podcast', function(){
+            heart = true;
+            var user_id = $(this).attr('user_id');
+            var img_id = $(this).attr('image_id');
+            get_session_id()
+            get_image_list(user_id)
+            
+            $.ajax({
+                cache: false,
+                type:"GET",
+                url: `/process_follow/${user_id}/${img_id}`,
+            })
+            .done(function(data){
+                if(url_location != 'bulletin'){
+                    for(var i = 0; i <  image_list.images.length; i++){
+                        
+                        $(`#replace${image_list.images[i]}`).html(data)
+                    }
+                } else {
+                    $(`#post${img_id}`).html(data);  
+                }
+                heart = false;   
+            })
+            .fail(function(data){
+                console.log("Error in fetching data");
+            })
+            
+            
+        }); // END PROCESS FOLLOW CLICKS
+
 
         //*********************************************//
         // COMMENT ICON - ON CLICK
@@ -176,6 +415,8 @@ $(document).ready(function(){
 
                 $(`#replaceModal`).html(data);
                 $('#comment_modal').modal('show');
+
+
                 $("#comment_modal").on('shown.bs.modal', function(){
                     scrollToBottom()
                 })
@@ -280,6 +521,7 @@ $(document).ready(function(){
                     $('#replace_comments').html(data)                                  
                     scrollToBottom()
                 }
+                $(`${form_text}`).val("")
             })
             .fail(function(data){
                 console.log("Error in fetching data");

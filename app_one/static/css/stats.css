@@ -9,7 +9,6 @@
     z-index: 1;
 }
 
-
 .stats p, .edit_stats {
     color:#BFBFBF;
     text-align: center;
@@ -36,10 +35,6 @@
 
 }
 
-.stats .edit_stats {
-    margin-left:10px;
-    width:100%;
-}
 
 .stats p button {
     background-color: transparent;
@@ -62,21 +57,20 @@
     font-size:16px;
 }
 
-p i{
+p i {
     font-size:25px;
     color:#BFBFBF;
-    margin-top:7px;
-    margin-left: 5px;
+    margin-right: 0px;
     opacity: 1;
 }
 
 p button i{
-    font-size: 22px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 8px;
+    font-size: 23px;
 }
 
-.stats i.fas::before {
-    color:#BFBFBF;
-}
 
 .stats i.loved::before{
     color: #55AAAA;
@@ -87,11 +81,10 @@ p button i{
 }
 
 .stats span {
+    margin-left: 3px;
+    margin-bottom: 12px;
     font-size:20px;
     font-weight: bold;
-    margin-left:5px;
-    margin-right:5px;
-    
 }
 
 button:focus {

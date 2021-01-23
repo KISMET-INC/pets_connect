@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'scripts/headerlinks.html' %}
-    <title>Pets Connect</title>
+    <title>Pets Connect - Bulletin Board</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/bulletin.css' %}">
@@ -16,13 +16,19 @@
         <div id="interface_block_two">
 
             <div class = 'bulletin_left'>
+                <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">All Pet Owners</button>
+                <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">Your Followers</button>
+                
+                <p><b>You Follow:</b></p>
                 <div class = 'following'>
                     {% for user in session_user.is_following.all %}
                         {% include 'modules/person.html' %}
                     {% endfor %}
                 </div>
 
+
                 <div class = 'posts'>
+                    <p><b>Their Pets:</b></p>
                     {% for image in images %}
                     {% if session_user in image.user.being_followed.all %}
                             <div id='post{{image.id}}'>
@@ -34,7 +40,7 @@
             </div>
 
             <div class = 'bulletin_right'>
-                <div class = 'user'>
+                <div class = 'user session_user'>
                     {% with user=session_user %}
                         {% include 'modules/person.html' %}
                     {% endwith %}
@@ -43,10 +49,10 @@
                         <p>{{session_user.email}}</p>
                     </div>
                 </div>
-
+               
                 <div class = 'followers'>
 
-                    <div>
+                    <div class= 'heading'>
                         <h3>Followers</h3>                
                         <p>You have {{session_user.being_followed.all.count}} followers</p>
                     </div>
@@ -76,7 +82,8 @@
         {% include 'modules/modal.html' %} 
     </div>
     {% endwith %}
-  
+
+    {% include 'modules/search_modal.html' %}  
 </body>
 <script>
 

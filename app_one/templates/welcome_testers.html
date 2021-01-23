@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'scripts/headerlinks.html'%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Connect - Welcome Testers!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/global.css' %}">
+    <link rel="stylesheet" href="{% static '/css/welcome_testers.css' %}">
+  
+</head>
+<body>
+
+    <div id="CANVAS_long">
+        {% include 'modules/nav_landing.html' %}
+    
+        <div id="interface_block_one">
+            <div class = 'dashboard'>
+                <h2> Welcome Alpha Testers!</h2>
+                <img style= 'height: 170px' src= "{% static '/images/catnphone1.jpg' %}">
+                <img style= 'height: 170px' src= "{% static '/images/dogphone.jpg' %}">
+                <img style= 'height: 170px' src= "{% static '/images/ferretcomputer.jpg' %}">
+                <p><b>Thank you for being the first line of people to share your pets with me through my app, Pets-Connect.com. </b> As a junior developer, this is a project for my web development portfolio, but in reality, it is so much more than that! It is a way for me to indulge in one of my biggest passions, PETS! I love talking about pets, looking at pictures of pets, and just plain interacting with other pet lovers like myself! Therefore this is more than just a portfolio project and I will be monitoring the app and loving and commenting on your photos as they come in!</p>
+                <p>As alpha testers or as I like to call you, <b>'thank you for the favor' testers </b>;), I will ask you to hit on a few specific features of the app in order to test the functionality and bulk up the user database. Listed below are the things I ask of you and the whole process should not take you more than a couple of minutes:</p>
+                <hr>
+                <ol>
+                    <li><b>REGISTER A NEW ACCOUNT</b> - USE A DUMMY EMAIL AND PASSWORD! Please make the email and password something you will remember, but nothing that is tied to any of your other private accounts. I suggest something like: jsmith@petsconnect.com for email and something similar for the username. Although I have followed all of the steps on my end to ensure the security of the information you enter I have not yet fully upgraded the site to HTTPS, therefore it could potentially be vulnerabe to a cyber attack... so PLEASE DO NOT INPUT ANY SENSITIVE INFORMATION INTO THE APP until I can get this completed.</li>
+
+                    <li><b>ADD A PROFILE IMAGE </b> -  ( a random image is ok) Once logged in, click on the profile icon on the nav bar (  <i class ='fas fa-user'></i>  ) then click the EDIT PROFILE link and upload a picture for your profile image.  It can be a picture of you (preferably) or a picture of something random (but preferably NOT a pet)</li>
+                    <img style= 'width: 900px' src= "{% static '/images/profile.jpg' %}">
+
+                    <li><b>SHARE A PHOTO OF YOUR PET!</b> - Click the go back button or the  (  <i class ='fas fa-user'></i>  ) again. On this main profile page, share as many pictures of your pets as you would like! The more the merrier! Please share at least one. If you sign back in later, this profile page is the easiest place to see the comments and hearts your pets have collected.</li>
+                    <img style= 'width: 300px' src= "{% static '/images/sharepet.jpg' %}">
+
+                    <li><b>FOLLOW, LOVE, and COMMENT on at least one pet.</b> -  Click on the explore icon: (  <i class ='fas fa-compass'></i>  ) to navigate to the explore page. Here you will find all of the pictures that have been shared! Choose a picture you like and love the pet (  <i class ='fas fa-heart'></i>  ), follow the user  ( <i class ='fas fa-podcast'></i>  ) and leave a comment ( <i class = 'fas fa-comment-alt'></i> ). These don't need to all be on the same picture, but they can be. You can of course interact with as many photos as you like! Note: You can comment on your own photo but you cannot add a heart to your own  photo...we already know you love your pet ;)</li>
+                    <img style= 'width: 900px' src= "{% static '/images/explore.jpg' %}">
+                    
+                    <li><b>CHECK OUT THE BULLETIN BOARD </b>:  Click the bulletin board icon ( <i class = 'fas fa-users'></i> ). Here is a direct line to the user/users you follow. If they post any more photos, they will show up here. You can see who you are following and also see who follows you! Click on a person and go directly to their account, see their posts, and potentially stop or start following them. My account automatically follows every new user and every new user automatically follows me... it seemed fitting! :D  However, you can unfollow me if you like, it wont hurt my feelings!</li>
+                    <img style= 'width: 900px' src= "{% static '/images/bulletin.jpg' %}">
+                </ol>
+                <p><b>That's it! </b> Thank you for taking the time to try out my app and even more so, thank you for sharing your pets with me! I will be loving and commenting back (as will the other alpha testers) so feel free to check back in to collect your hearts and read the comments.<b> Also, letting me know any suggestions you have, or bugs you discovered, will be greatly appreciated! You can email me your feedback at <a href='mailto:petsconnect2021@gmail.com'>petsconnect2021@gmail.com</a></b></p>
+                    
+                <p>The code for this project can be viewed at <a target="_blank" href= 'https://github.com/KISMET-INC/pets_connect'> https://github.com/KISMET-INC/pets_connect </a></p>
+                    
+                <h2>Start Browsing. Start Sharing. Start Connecting!</h2>
+
+                <a target="_blank" class="btn btn-primary btn-lg start" href="/register" role="button">Start Here</a>
+            </div>
+
+    
+
+</body>
+
+</html>

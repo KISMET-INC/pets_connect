@@ -1,4 +1,5 @@
 @import 'stats.css';
+@import 'single_comment.css';
 
 
 
@@ -24,7 +25,7 @@
     padding:0px;
     display:flex;
     width: 750px;
-    height:450px;
+    height:470px;
 }
 
 .modal .close_modal {
@@ -46,7 +47,7 @@
 .modal .left {
     text-align: center;
     border-radius: 5px 5px 0px 0px;
-    background-color: #E5E5E5;
+    background-color: var(--gray2);
     padding: 0px;
     padding-bottom: 10px;
     width: 50%;
@@ -102,6 +103,8 @@
     margin-bottom:10px;
 }
 
+
+
 .modal .single_comment i {
     color: #55AAAA;
     margin-left: 10px;
@@ -111,6 +114,7 @@
     margin:0px;
     padding:0px;
 }
+
 
 .modal .single_comment a {
    text-align:top;
@@ -123,7 +127,7 @@
 }
 .modal .comments {
     border-radius: 5px;
-    background-color:#DEDEDE;
+    background-color: var(--gray2);
     text-align: left;
     padding: 15px;
     height: 95%;
@@ -171,12 +175,25 @@
 }
 
 .modal input {
-    padding-left: 10px;
     height:40px;
     resize:none;
     border:none;
-    width: 75%;
+    width: 90%;
 }
+
+.single_comment input:nth-child(2) ,.single_comment input:nth-child(3){
+    vertical-align: top;
+    
+}
+
+
+.single_comment input:nth-child(1) {
+    height: 53px;
+    margin-left:3px;
+    margin-right:3px;
+    color:gray;
+}
+
 
 .comment_form button {
     margin:0px;
@@ -190,6 +207,8 @@
 .comment_form {
     background-color: white;
     padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     width:80%;
     margin: 0 auto; 
@@ -203,11 +222,27 @@
 }
 
 
-.modal .left p:nth-child(4) {
+.modal .left p:nth-child(4), p:nth-child(5) {
+    margin-bottom: 0px;
     font-family: 'Montserrat Alternates', sans-serif;
 
 }
 
+.modal .left p:nth-child(5) {
+   font-size: 19px;
+}
+.single_comment input:nth-child(2) {
+    width: 60px;
+    height: 53px;
+    color:grey;
+}
+
+.single_comment input:nth-child(3){
+    color:grey;
+    padding-right: 5px;
+    padding-left: 5px;
+    
+}
 
 .modal .single_comment h2 {
     margin:0px;
@@ -222,11 +257,13 @@
 
 .modal .single_comment div {
     display: flex;
-    width:100%;
     justify-content: space-between;
     align-items: flex-start;
+    
 }
-
+.modal .single_comment div.comm_text{
+    width: 100%;
+}
 
 
 /*******************************/
@@ -234,6 +271,9 @@
 /*******************************/
 @media (max-width: 769px){
 
+    .modal .single_comment i {
+        font-size:20px;
+    }
 
     .modal-content {
         width:90%;
@@ -273,10 +313,6 @@
         position:sticky;
     }
 
-    .modal .left p:nth-child(4), p:nth-child(5){
-        /* visibility: hidden; */
-        /* position: absolute; */
-    }
 
     .modal .single_comment {
         display:flex;
@@ -290,19 +326,28 @@
         margin:0px;
         padding: 0px;
         width:100%;
-
-
     }
 
     .modal .single_comment i {
         position: unset;
         color: #55AAAA;
-        margin: 0px;
         width:fit-content;
         padding: 0px;
     
     }
 
+    .modal .single_comment textarea {
+        width: 70%;
+    }
+
+    .modal .single_comment .edit_comment_btn {
+        width: 50px;
+    }
+
+
+    .single_comment .edit_comment_cancel {
+        width: 30px;
+    }
     .modal .right{
         height:fit-content;
         padding-left:20px;

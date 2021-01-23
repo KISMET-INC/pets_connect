@@ -1,6 +1,7 @@
 @import 'stats.css';
 
 .dimage .stats h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
     position: relative;
     height: 0px;
     color:#BFBFBF;
@@ -10,7 +11,6 @@
     margin-bottom: 25px;
     padding: 0px;
 }
-
 
 .dimage {
     background-color: black;

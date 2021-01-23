@@ -86,6 +86,16 @@ button {
 
 }
 
+.heading {
+    width: 90%;
+    display: unset
+}
+li {
+    margin: 0 auto;
+    width: 300px;
+    color:red;
+}
+
 p button i {
     font-size:17px;
 }

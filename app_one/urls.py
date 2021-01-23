@@ -15,17 +15,19 @@ urlpatterns = [
     path('process_register', views.process_register),
     path('process_signin', views.process_signin),
     path('logout', views.logout),
-
+    path('welcome_testers', views.welcome_testers),
     
     # Views
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
     path('explore', views.explore),
     path('edit_user/<int:user_id>', views.edit_user),
+    path('edit_image/<int:image_id>', views.edit_image),
     path('profile/<int:user_id>', views.profile),
     
     # Image Proceses
     path('process_add_pet_image', views.process_add_pet_image),
     path('process_remove_image/<int:image_id>', views.process_remove_image),
+    path('process_edit_image', views.process_edit_image),
     
     # User Proceses
     path('process_edit_user', views.process_edit_user),
@@ -34,13 +36,12 @@ urlpatterns = [
     # Comment Processes
     path('process_delete_comment/<int:comment_id>/<str:component>',views.process_delete_comment),
     path('process_add_comment', views.process_add_comment),
+    path('process_edit_comment/<int:comment_id>',views.process_edit_comment),
     
     # Stat Processes
     path('process_heart/<int:image_id>/<str:location>', views.process_heart),
-    path('process_follow/<int:image_id>/<int:user_to_follow_id>/<str:location>', views.process_follow),
+    path('process_follow/<int:user_to_follow_id>/<image_id>', views.process_follow),
     
-    path('stop_following/<int:user_id>',views.stop_following),
-
     # Ajax - replace HTML
     path('replace_stats/<int:image_id>', views.replace_stats),
     path('replace_comments/<int:image_id>', views.replace_comments),
@@ -50,12 +51,18 @@ urlpatterns = [
 
     # Ajax  -get info from database
     path('get_session_id', views.get_session_id),
-
+    path('get_image_list/<int:user_id>', views.get_image_list),
+    path('get_heart_sum/<int:image_id>', views.get_heart_sum),
+    path('get_more_images', views.get_more_images),
     # Admin
     path('explore/admin', views.admin),
     path('admin_edit_user/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.admin_edit_user),
-   # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
-
+    path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+    
+    # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+    path('search', views.search),
+    path('get_followers_list', views.get_followers_list),
+    path('get_all_users_list', views.get_all_users_list),
     # not using yet
     path('process_edit_password', views.process_edit_password),
 
