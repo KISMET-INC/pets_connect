@@ -392,9 +392,9 @@ $(document).ready(function(){
             .done(function(data){
                 if(url_location != 'bulletin'){
                     for(var i = 0; i <  image_list.images.length; i++){
-                        
-                        $(`#replace${image_list.images[i]}`).html(data)
+                        $(`.hide_icon${image_list.images[i]}`).hide()
                     }
+                    $(`#replace${img_id}`).html(data)
                 } else {
                     $(`#post${img_id}`).html(data);  
                 }
