@@ -158,11 +158,11 @@ def explore(request):
     context = {
         'session_user': current_user,
         'users' : User.objects.all(),
-        'images2' : Image.objects.order_by("-created_at"),
+        'images' : Image.objects.order_by("-created_at"),
         'location': 'explore',
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
-        'images': images2,
+        'images2': images2,
     }
 
 
@@ -588,7 +588,7 @@ def search(request):
         user_search = User.objects.filter(email=request.POST['user_email'])
     else:
         users_followers=User.objects.get(id=request.session['user_id']).being_followed.all()
-        user_search = User.objects.filter(email=request.POST['user_email'])
+        user_search = users_followers.filter(email=request.POST['user_email'])
     
     if len(user_search) > 0 :
         find_user = user_search[0]
@@ -601,7 +601,7 @@ def get_followers_list(request):
     context = {
         'users': User.objects.get(id=request.session['user_id']).being_followed.all(),
     }
- 
+
     return render(request, 'modules/followers_modal.html', context)
 
 def get_all_users_list(request):

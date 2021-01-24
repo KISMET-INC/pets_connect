@@ -20,13 +20,13 @@ nav .fa-users::before, nav a.bulletin{
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     padding-top: 20px;
 }
 
 .bulletin_left {
-    width:60%;
+    width:50%;
     
 }
 .bulletin_left .following .person div.outline {
