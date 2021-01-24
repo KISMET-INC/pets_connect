@@ -211,6 +211,7 @@ def edit_user(request,user_id):
 # process_edit_user()
 #=============================================##
 def process_edit_user(request,user_id):
+    
     session_user = User.objects.get(id=request.session['user_id'])
     user = User.objects.get(id=user_id)
     errors = User.objects.basic_validator_edit_user(request.POST)

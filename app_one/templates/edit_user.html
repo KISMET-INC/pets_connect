@@ -22,7 +22,7 @@
                         {% include 'modules/user_img.html' %}
                     {% endwith %}
                     {% if session_user.user_name != 'guest' %}
-                    <form enctype="multipart/form-data" action="/process_edit_user" method="post">
+                    <form enctype="multipart/form-data" action="/process_edit_user/{{session_user.id}}" method="post">
                     {% else %}
                     <form>
                     <p>As a guest you are not allowed to edit these fields</p>
@@ -32,6 +32,7 @@
                         <input type= 'text' value = '{{session_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{session_user.email}}' name = 'email'> 
                         <input type= 'hidden' value = '{{session_user.email}}' name = 'current_email'>
+                        <input type= 'text' placeholder='Change Password' name = 'pass'>
                         {{ user_upload_img.as_p}}
                         <div>
                             <button type ='submit'> SUBMIT </button>
