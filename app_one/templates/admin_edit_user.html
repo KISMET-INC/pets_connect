@@ -21,15 +21,12 @@
             <div class = 'heading'>
                 <div class = 'profile_info'>
                     
+                    <form enctype="multipart/form-data" action="/process_edit_user/{{clicked_user.id}}" method="post">
                     {% with user=clicked_user %}
                         {% include 'modules/user_img.html' %}
                     {% endwith %}
-                    {% if clicked_user.user_name != 'guest' %}
-                    <form enctype="multipart/form-data" action="/process_edit_user/{{clicked_user.id}}" method="post">
-                    {% else %}
-                    <form>
-                    <p>As a guest you are not allowed to edit these fields</p>
-                    {% endif %}
+        
+                    
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
                         <input type= 'text' value = '{{clicked_user.user_name}}' name = 'user_name'> 
@@ -42,6 +39,11 @@
                             <a href= '/profile/{{clicked_user.id}}'><button type='button'>CANCEL</button></a>
                         </div>
                     </form>
+                </div>
+
+
+           
+                    
                     {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
@@ -49,14 +51,22 @@
                         {% endfor %}
                     </ul>
                     {% endif %} 
-                </div>
 
-        
+                <form class="share_pet" enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
+                    <h3>Share Your Pet</h3>
+                    {% csrf_token %}     
+                        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
+                        <input name = 'desc' maxlength="50" placeholder="Description">
+                        <input type="hidden" name = 'user_id' value= '{{clicked_user.id}}'>
+                        {{ upload_pet_form.as_p}}           
+                        
+                        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
+                </form>
             <h3>{{clicked_user.user_name}}'s Pets</h3>
             <div class = 'dashboard'>
                 {% with location='profile' %}
                 {% with user_id=clicked_user.id %}
-                {% for image in clicked_user.images.all %}
+                {% for image in clicked_user.images.all|dictsortreversed:'created_at' %}
                 <div id = {{image.id}} class = 'dimage'>
                     {% include 'modules/image.html' %} 
                 </div>

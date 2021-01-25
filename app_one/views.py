@@ -152,6 +152,7 @@ def explore(request):
     except PageNotAnInteger:
         images2 = paginator.page(1)
     except EmptyPage:
+        pass
         images2 = paginator.page(paginator.num_pages)
 
 
@@ -274,6 +275,8 @@ def admin_edit_user(request,user_id):
         'session_user' : User.objects.get(id=request.session['user_id']),
         'clicked_user' : User.objects.get(id=user_id),
         'user_upload_img' : UploadUserImgForm(),
+        'upload_pet_form': UploadPetForm(),
+
     }
     return render(request,'admin_edit_user.html',context)
 
@@ -329,21 +332,25 @@ def edit_image(request,image_id):
 # return redirect('/')
 #=============================================##
 def process_add_pet_image(request):
-
     errors = Image.objects.basic_validator_add_pet(request.POST, request.FILES)
+    session_user = User.objects.get(id=request.session['user_id'])
+    user = User.objects.get(id=request.POST['user_id'])
 
     if len(errors) > 0:
         for value in errors.values():
             messages.error(request,value)
-        return redirect(f'/profile/{request.session["user_id"]}')
+        if session_user.user_level == 9:
+            return redirect (f'/admin_edit_user/{user.id}')
+        return redirect(f'/profile/{request.POST["user_id"]}')
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
-    session_user = User.objects.get(id=request.session['user_id'])
-    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = session_user, name = request.POST['name'], desc = request.POST['desc'] )
+    this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = user, name = request.POST['name'], desc = request.POST['desc'] )
     this_image.save()
-    send_email(session_user = session_user, action = 'SHARED', image = this_image)
+    send_email(session_user = user, action = 'SHARED', image = this_image)
+    if session_user.user_level == 9:
+        return redirect (f'/admin_edit_user/{user.id}')
 
-    return redirect (f'/profile/{session_user.id}')
+    return redirect (f'/profile/{user.id}')
 
 
 #=============================================##
@@ -575,7 +582,6 @@ def get_more_images(request):
     except PageNotAnInteger:
         images2 = paginator.page(1)
     except EmptyPage:
-        images2 = paginator.page(paginator.num_pages)
         return HttpResponse("none")
 
     return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})

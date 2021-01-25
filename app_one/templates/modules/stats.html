@@ -14,7 +14,7 @@
     {% else %}
     <p>
         {% if session_user not in image.user.being_followed.all %}
-        <a><i image_id={{image.id}} user_id={{image.user.id}} data-placement="bottom" class="fas fa-podcast" title ="Follow {{image.user.user_name}}"></i></a><span>{{image.user.being_followed.count}}</span>
+        <a><i image_id={{image.id}} user_id={{image.user.id}} data-placement="bottom" class="fas fa-podcast hide_icon{{image.id}}" title ="Follow {{image.user.user_name}}"></i></a><span  class= 'hide_icon{{image.id}}'>{{image.user.being_followed.count}}</span>
         {% endif %}
 
         {% if session_user in image.loves.all %}
