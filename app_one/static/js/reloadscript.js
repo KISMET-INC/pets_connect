@@ -70,17 +70,11 @@ $(document).ready(function(){
 
     var url_location = map[1]
     var clicked_user_id = map[2]
-    var image = parseInt(map[3])
-
 
     $(window).scroll(function() {
-        console.log($(window).scrollTop() )
-        console.log($(document).height() - $(window).height() )
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
-            getmore()
-
+            get_more_images()
         }
-
     });
 
 
@@ -159,18 +153,17 @@ $(document).ready(function(){
     // get more images
     //*********************************************//
 
-    function getmore() {
+    function get_more_images() {
+
         $.ajax({
             cache: false,
             type:"GET",
             url: `/get_more_images`,
         })
         .done(function(data){
-            console.log('back')
-            console.log(data)
             if (data != 'none'){
 
-                $(`.dashboard`).append(data);
+                $(`#get_more`).append(data);
                         
             }
                 
@@ -181,12 +174,12 @@ $(document).ready(function(){
 
     }
     
-    // $(document).ajaxStart(function(){
-    //     $('.loader').show();
-    //   });
-    //   $(document).ajaxStop(function(){
-    //     $('.loader').hide();
-    //   });
+    $(document).ajaxStart(function(){
+        $('.loader').show();
+    });
+    $(document).ajaxStop(function(){
+    $('.loader').hide();
+    });
 
      //*********************************************//
     // Alert on Logout

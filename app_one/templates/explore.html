@@ -17,7 +17,7 @@
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_one">
-            <div class = 'dashboard'>
+            <div id='get_more' class = 'dashboard'>
                 {% if session_user.user_name == "guest" and request.session.counter == 0 %}
                 <div class = 'guest_message'>
                     <p>This is a guest account. Some features, such as profile editing and comment deleting, have been disabled. To experience all of the features Pets Connect has to offer, make an account (with dummy information) and enjoy your stay! </p>
