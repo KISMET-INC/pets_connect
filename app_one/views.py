@@ -616,6 +616,8 @@ def get_all_users_list(request):
         'users': User.objects.all()
     }
     return render(request, 'modules/users_modal.html', context)
+
+
 #=============================================##
 # send _email()
 #=============================================##
