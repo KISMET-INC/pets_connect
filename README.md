@@ -4,6 +4,9 @@ Pets Connect is a social media network that connects pet owners from around the 
 
 
 # Screenshots
-![alt](/readme_images/pets_connect01.jpg)
-![alt](/readme_images/collection.modal.jpg)
-![alt](/readme_images/dashboard.modal.jpg)
+### Explore
+![alt](app_one\static\images\explore.jpg)
+### Bulletin Board
+![alt](app_one\static\images\bulletin.jpg)
+### Profile
+![alt](app_one\static\images\profile.jpg)
