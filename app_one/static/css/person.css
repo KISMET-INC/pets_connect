@@ -39,3 +39,8 @@
     margin: 0px;
     text-decoration: none;
 }
+
+.user_info a {
+    text-decoration: none;
+    color: black;
+}

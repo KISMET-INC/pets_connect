@@ -6,10 +6,17 @@
             <a href = '/profile/{{user.id}}'>
         {% endif %}
                 {% include 'modules/user_img.html' %}
-            </a>
+            </a>        
         </div>
+        
         <div class = 'user_info'>
-            <p>{{user.user_name}}</p>
-            <p class = 'user_email'>{{user.email}}</p>
+            {% if image.user.id != none %}
+                <a href = '/profile/{{image.user.id}}'>
+            {% else %}
+                <a href = '/profile/{{user.id}}'>
+            {% endif %}
+                <p>{{user.user_name}}</p>
+                <p class = 'user_email'>{{user.email}}</p>
+            </a>
         </div>
     </div>

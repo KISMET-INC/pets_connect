@@ -8,16 +8,23 @@
                 <a href = '/explore/admin'><i class="fas fa-compass" data-placement="bottom" title= 'Explore' ></i></a>
                 <a href = '/logout'><i class="fas fa-arrow-alt-circle-right" data-placement="bottom" title= 'Sign Out' ></i></a>
             </div>
+            <div class="dropdown">
+                <button type="button" data-toggle="dropdown"><i class= 'fas fa-bars'></i></button>
+                <ul class="dropdown-menu">
+                    <li><a class = 'explore' href = '/explore/admin'>Explore</a></li>
+                    <li><a class = 'logout' href = '/logout'>Sign Out</a></li>
+                </ul>
+            </div>
             {% else  %}
 
 
             <div class="dropdown">
                 <button type="button" data-toggle="dropdown"><i class= 'fas fa-bars'></i></button>
                 <ul class="dropdown-menu">
-                  <li><a class = 'explore' href = '/explore'>Explore</a></li>
-                  <li><a class = 'bulletin' href = '/bulletin/{{session_user.id}}/0/0'>Bulletin Board</a></li>
-                  <li><a class = 'profile' href = '/profile/{{session_user.id}}'>Your Profile</a></li>
-                  <li><a class = 'logout' href = '/logout'>Sign Out</a></li>
+                    <li><a class = 'explore' href = '/explore'>Explore</a></li>
+                    <li><a class = 'bulletin' href = '/bulletin/{{session_user.id}}/0/0'>Bulletin Board</a></li>
+                    <li><a class = 'profile' href = '/profile/{{session_user.id}}'>Your Profile</a></li>
+                    <li><a class = 'logout' href = '/logout'>Sign Out</a></li>
                 </ul>
             </div>
             <div class = 'horizontal'>

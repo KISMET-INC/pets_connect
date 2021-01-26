@@ -1,26 +1,31 @@
 
 <div id = {{image.id}} class = 'post'>
-
-    {% with user=image.user %}
+    <div class = 'header'>
+        {% with user=image.user %}
         {% include 'modules/person.html' %}
-    {% endwith %}
-
+        {% endwith %}
+        <p id = 'desc'>"{{image.desc}}"</p>
+    </div>
+    
     <img src = '{{image.pet_img.url}}'>
-
     <div id = '{{image.id}}' class = 'stats'>
+        
 
         <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
 
         <p class ='loves'>
-        {% if image.loves.count == 1 %}
-            {{image.loves.count}} person loves {{image.name}}!</p>
-        {% elif image.loves.count > 1 %}
-            {{image.loves.count}} people love {{image.name}}!</p>
-        {% else %}
-            <p class ='loves'>click to give this pet some love!</p>
-        {% endif %}
-        </p>
             
+            {% if image.loves.count == 1 %}
+            {{image.loves.count}} person loves {{image.name}}!</p>
+            {% elif image.loves.count > 1 %}
+            {{image.loves.count}} people love {{image.name}}!</p>
+            {% else %}
+            <p class ='loves'>click to give this pet some love!</p>
+            {% endif %}
+        </p>
+        
+        
+        
         {% with component='from_post' %}
         {% with len=image.comments.count.all %}
         
@@ -34,7 +39,7 @@
         {% if image.comments.count > 3 %}
             <h3>{{image.comments.count}} total comments </h3>
         {% endif %}
-
+       
         {% with component='from_post' %}
             {% include 'modules/comment_form.html' %}
         {% endwith %}
