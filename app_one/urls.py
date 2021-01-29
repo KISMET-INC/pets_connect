@@ -15,7 +15,7 @@ urlpatterns = [
     path('process_register', views.process_register),
     path('process_signin', views.process_signin),
     path('logout', views.logout),
-    path('welcome_testers', views.welcome_testers),
+    path('welcome', views.welcome_testers),
     
     # Views
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
