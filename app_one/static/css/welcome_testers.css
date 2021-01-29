@@ -1,3 +1,7 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
 
 i {
     color: var(--blue1);
@@ -55,7 +59,25 @@ ol {
 
 }
 
-h2 {
+h1 {
+    
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+ul li {
+    text-align: center;
+    list-style-type: none;
     font-family: 'Montserrat Alternates', sans-serif; 
-    margin-bottom: 20px; 
+    font-size: 30px;
+    margin-bottom: 5px; 
+}
+
+    ul li a {
+        margin-top: 30px;
+    }
+
+.github {
+    margin-top: 30px;
+    text-align: center;
 }
