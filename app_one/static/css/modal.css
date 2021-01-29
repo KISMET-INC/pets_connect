@@ -245,6 +245,7 @@
 }
 
 .modal .single_comment h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
     margin:0px;
     width: fit-content;
     font-size: 15px;

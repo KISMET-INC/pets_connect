@@ -5,7 +5,10 @@
 }
 
 
-
+.single_comment h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    
+}
 .single_comment .comm_edit {
     display: none;
     align-items: top;

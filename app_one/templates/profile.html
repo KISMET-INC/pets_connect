@@ -56,13 +56,13 @@
                         <input type="hidden" name = 'user_id' value= '{{user.id}}'>
                         {{ upload_pet_form.as_p}}           
                         
-                        {% if messages %}
                         <ul class="messages">
-                            {% for message in messages %}
+                        {% for message in messages %}
+                            {% if messages %}
                                 <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                            {% endfor %}
+                            {% endif %} 
+                        {% endfor %}
                         </ul>
-                        {% endif %} 
                         
                         <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
                 </form>
