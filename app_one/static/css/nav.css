@@ -1,22 +1,15 @@
-#TOP_long {
+
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+
+
+#NAV_BAR {
     position: sticky;
     top: 0px;
     z-index: 10;
-    
-}
-
-nav .dropdown {
-    display: none
-}
-
-
-nav i {
-    font-size: 25px;
-    color:#55AAAA;
-}
-/* CANVAS NAV BAR */
-nav {
-
     background-color: white;
     height: 75px;
     display:flex;
@@ -27,17 +20,58 @@ nav {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-nav a {
-    margin-left: 10px;
-    width: 100%;
-    font-weight: bold;
-    font-size:13px;
-    text-align: right;
-}
 
-nav div {
+.nav_menus {
+    margin: auto;
+    width:80%;
     display:flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+    .nav_menus h2 {
+        margin: 0px;
+        font-family: 'Damion', cursive;
+        font-size: 50px;
+    }
+  ul.horizontal_menu {
+    
+        display:flex;
+        justify-content: space-between;
+        width: 200px;
+        margin:0px;
+    }   
+        .horizontal_menu li {
+            list-style-type: none;
+            font-weight: bold;
+        }
+
+        .horizontal_menu a {
+            font-size: 13px;
+            color: var(--blue1);
+            text-decoration:none;
+        }
+        .horizontal_menu li a i {
+            font-size: 25px;
+        }
+
+
+    nav menu.dropdown-menu a {
+        width: 100%;
+        font-weight: bold;
+        font-size:13px;
+        text-align: right;
+    }
+
+        menu.dropdown i.fa-bars::before {
+            font-size: 30px;
+            color:#55AAAA;
+        }
+/* CANVAS NAV BAR */
+
+
+nav menu.dropdown {
+    display:none;
     align-items:center;
     width:80%;
 
@@ -49,12 +83,12 @@ nav div div{
     
 }
 
-
-nav h2 {
-    margin: 0px;
-    font-family: 'Damion', cursive;
-    font-size: 50px;
+@media (max-width: 600px){
+    ul.horizontal_menu {
+        width: 150px;
+    }
 }
+
 
 @media (max-width: 426px){
     nav button {
@@ -66,29 +100,25 @@ nav h2 {
         position: relative;
         right: 0;
     }
-    nav .dropdown {
+    nav menu.dropdown {
         display: flex;
         justify-content: flex-end;
         align-items: right;
         text-align: left;
     }
 
-    nav .dropdown-menu  {
+    menu .dropdown-menu a {
         min-width: 100px;
-    }
-    nav .dropdown-menu a {
         text-align: left;
         font-size: 16px;
         color: #55AAAA;
     }
 
-    nav .horizontal {
+    ul.horizontal_menu {
         display:none;
     }
-    nav h2 {
-        font-size: 40px;
-    }
-    nav i:before {
+
+    .nav_menus i:before {
         font-size:30px
     }
     nav div div {
