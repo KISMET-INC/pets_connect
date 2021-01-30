@@ -708,6 +708,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
     except Exception as e:
         print("error sending email")
+        return redirect(f'/error')
 
 
 
