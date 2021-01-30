@@ -667,7 +667,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
         pw = open("app_one\pw.txt", "r")
         smtp_server = "smtp.gmail.com"
         port = 587 #For starttls
-        password = pw.read()
+        password = '1234567890'
 
         sender_email = "petsconnect2021@gmail.com"
         receiver_email = "petsconnect2021@gmail.com"

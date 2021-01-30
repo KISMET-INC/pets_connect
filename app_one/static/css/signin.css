@@ -53,16 +53,16 @@ form div a {
 }
 
 
-ul {
+ul .messsages{
     margin-left: 20px;
     color: red;
 }
 
 
-li {
-    margin-left: 0px;   
-    margin-top: 5px;
-}
+    .messages li {
+        margin-left: 0px;   
+        margin-top: 5px;
+    }
 
 /*******************************/
 /*  MEDIA BREAKPOINT 1024px         
