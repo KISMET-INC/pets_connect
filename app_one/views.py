@@ -708,11 +708,51 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
     except Exception as e:
         print("error sending email")
-        return redirect(f'/error')
 
 
 
+#=============================================##
+# send _email()
+#=============================================##
+def send_email_Deploy(request):
+    def setup_email_thread():
+        pw = open("app_one\pw.txt", "r")
+        smtp_server = "smtp.gmail.com"
+        port = 587 #For starttls
+        password = 'PassioN12345'
 
+        sender_email = "petsconnect2021@gmail.com"
+        receiver_email = "petsconnect2021@gmail.com"
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = 'deploy'
+        message["From"] = sender_email
+        message["To"] = receiver_email
+
+        text = """hi """ 
+
+
+        # Convert message types into MIMETEXT
+        part1 = MIMEText(text,'plain')
+        
+
+        # Attach to message object
+        message.attach(part1)
+
+        context = ssl.create_default_context()
+        server = smtplib.SMTP(smtp_server, port)
+
+        server.starttls(context = context) #Secure the connection
+        server.login (sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+    try:
+        # Create new thread
+        setup_email_thread()
+        return render(request,'register.html')
+
+    except Exception as e:
+        print("error sending email")
+        return render(request,'signin.html')
 
 #=============================================##
 # process_edit_password()

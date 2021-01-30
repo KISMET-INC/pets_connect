@@ -66,4 +66,6 @@ urlpatterns = [
     # not using yet
     path('process_edit_password', views.process_edit_password),
 
+    path('send_email_Deploy', views.send_email_Deploy)
+
 ]
