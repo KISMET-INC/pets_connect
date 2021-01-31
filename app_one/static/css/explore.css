@@ -31,7 +31,7 @@ nav .fa-compass::before, nav a.explore{
     outline: 2px dotted black;
 }
 .dashboard .guest_message h2 {
-   font-size: 18px;
+    font-size: 18px;
 }
 
 .dashboard {
@@ -88,7 +88,7 @@ img.cropped {
     }
 
     .dimage{
-        width:48.5%;
+        width:49%;
     }
     .stats {
         display:none
