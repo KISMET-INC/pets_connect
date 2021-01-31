@@ -1,0 +1,136 @@
+@import 'stats.css';
+
+nav .fa-user::before, nav a.profile {
+    color:#E5E5E5;
+}
+
+#interface_block_one {
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto; 
+
+}
+form div {
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.heading {
+    margin: 0 auto; 
+    margin-bottom:20px;
+    width: 100%;
+    height:fit-content;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* position:sticky;
+    top:75px; */
+    padding-top:50px;
+    z-index: 3;
+}
+.profile_info {
+    display:flex;
+    width:70%;
+    align-items: center;
+    margin: 0 auto;
+
+    margin-bottom: 25px;
+    
+}
+.profile_info p, .profile_info a,.profile_info b{
+    font-size: 16px;
+}
+.user_img {
+    width:200px;
+    height: 200px;
+    background-color: #E5E5E5;
+    border-radius: 100px;
+    margin-right: 50px;  
+}
+
+
+form {
+    width:60%;
+    display:flex;
+    flex-direction: column;
+    margin-top:40px;
+    border: 0px;
+    box-shadow: none;
+    background-color: white;
+}
+
+input#id_user_img {
+    height:40px;
+    margin-left:-10px; 
+}
+
+input {
+    width:100%;
+    align-self: left;
+    margin-bottom: 10px;
+    height: 40px;
+    padding-left:10px;
+    margin-top:10px;
+}
+
+p input{
+    height:20px;
+}
+button {
+    box-shadow: none;
+    border: none;
+    background-color:white; 
+    color:#555555;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+.heading {
+    width: 90%;
+    display: unset
+}
+li {
+    margin: 0 auto;
+    width: 300px;
+    color:red;
+}
+
+p button i {
+    font-size:17px;
+}
+form button {
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+}
+
+@media (max-width:950px){
+    .heading{
+        padding: 0px;
+    }
+    .profile_info{
+        display:flex;
+        flex-direction: column;
+        width:90%;
+    }
+
+    .user_img {
+        margin: 0px;
+    }
+
+    form {
+        margin-top: 50px;
+        width:100%;
+    }
+
+}
+
+@media (max-width:700px){
+    #interface_block_one {
+        width: 100%;
+    }
+
+}

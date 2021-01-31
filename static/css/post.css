@@ -1,0 +1,55 @@
+@import 'modal.css';
+@import 'stats.css';
+
+img {
+    width:100%;
+}
+.post.stats {
+    margin-top:10px;
+}
+.stats div {
+    display:flex;
+    align-items: top;
+    width:100%;
+}
+
+.comment_form {
+    border: none;
+    border-top:1px solid black;
+    border-radius: 0px;
+    box-shadow: none;
+    background-color:transparent;
+    width: 100%;
+  
+}
+
+.comment_form button {
+    background-color: transparent;  
+}
+
+.stats .loves {
+    font-family: 'Montserrat Alternates', sans-serif;
+    
+}
+
+.single_comment .edit_actions {
+    width: 20%;
+}
+
+.single_comment textarea {
+    width: 80%;
+}
+
+#desc {
+    font-family: 'Montserrat Alternates', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color:var(--blue1);
+    margin: 0px;
+}
+
+.post .header {
+    display:flex;
+    align-items: center;
+}

@@ -1,0 +1,83 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+i {
+    color: var(--blue1);
+    font-size: 18px;
+}
+
+p, li {
+    margin-bottom: 30px;
+}
+
+
+body {
+    margin-bottom: 100px;
+}
+
+
+img {
+    margin-bottom: 50px;   
+}
+
+h2 {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+hr {
+    margin-top: 50px;
+}
+.dashboard {
+    width: 90%;
+    margin: 0 auto;
+}
+
+img.sharepet{
+    width:50%
+}
+
+img {
+    width:100%;
+    border: 1px solid gray;
+}
+
+img.header_image{
+    height:auto;
+    border:none;
+    margin-bottom: 50px;
+}
+
+#interface_block_one {
+    width:100%;
+}
+ol {
+    width:80%;
+    margin: 0 auto;
+
+}
+
+h1 {
+    
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+ul li {
+    text-align: center;
+    list-style-type: none;
+    font-family: 'Montserrat Alternates', sans-serif; 
+    font-size: 30px;
+    margin-bottom: 5px; 
+}
+
+    ul li a {
+        margin-top: 30px;
+    }
+
+.github {
+    margin-top: 30px;
+    text-align: center;
+}

@@ -1,0 +1,38 @@
+#interface_block_one {
+    margin-top:50px;
+    width: 90%;
+}
+
+table {
+    width: 90%;
+}
+tr {
+    height: 40px;
+}
+
+
+/* td:nth-child(1) {
+    width: 10px;
+}
+td:nth-child(2) {
+    width: 30px;
+} */
+
+
+@media (max-width:550px){
+    td:nth-child(2), th:nth-child(2){
+        display:none;
+    }
+
+    tr:nth-child(1), td:nth-child(1){
+        width: 40px;
+    }
+}
+
+i {
+    font-size:20px;
+}
+
+form {
+    
+}

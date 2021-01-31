@@ -1,0 +1,94 @@
+.stats {
+    background-color: #E5E5E5;
+    position: relative;
+    top: -130px;
+    height:0px; 
+    background:rgb(0, 0, 0, 0.3); 
+    /* margin-right: 10px; */
+    width: 100%;
+    z-index: 1;
+}
+
+.stats p, .edit_stats {
+    color:#BFBFBF;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.stats div a {
+    width: fit-content;
+}
+
+.stats p.name , .stats div a  {
+    font-family: 'Montserrat Alternates', sans-serif;   
+    font-size: 16px;
+    color: #BFBFBF;
+    text-align: center;
+}
+
+.stats p.name {
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+
+.stats p button {
+    background-color: transparent;
+    display:inline-block;
+    width:fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    border:none;
+    box-shadow: none;
+    text-align: center;
+    color:#BFBFBF;
+    font-family:unset;
+}
+
+
+.stats p:nth-child(2){
+    margin-bottom: 5px;
+    color:#BFBFBF;
+    font-size:16px;
+}
+
+p i {
+    font-size:25px;
+    color:#BFBFBF;
+    margin-right: 0px;
+    opacity: 1;
+}
+
+p button i{
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 8px;
+    font-size: 23px;
+}
+
+
+.stats i.loved::before{
+    color: #55AAAA;
+}
+
+.loved {
+    color: #55AAAA;
+}
+
+.stats span {
+    margin-left: 3px;
+    margin-bottom: 12px;
+    font-size:20px;
+    font-weight: bold;
+}
+
+button:focus {
+    outline: 0px;
+    border: 0px;
+}
+

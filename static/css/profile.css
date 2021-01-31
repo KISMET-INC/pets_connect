@@ -1,0 +1,214 @@
+@import 'modal.css';
+@import 'stats.css';
+@import 'image.css';
+
+
+nav .fa-user::before, nav a.profile {
+    color:#E5E5E5;
+}
+
+.stats {
+    display: none;
+    padding: 0px;
+}
+
+.stats p.name {
+    display:none;
+}
+
+.dimage {
+    width:24.5%;
+}
+
+#interface_block_one {
+    width: 80%;
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto; 
+
+}
+#TOP_long {
+    background-color: white;
+    margin: 0px;
+}
+
+.heading {
+    margin: 0 auto; 
+    margin-bottom:20px;
+    width: 100%;
+    height:fit-content;
+    background-color: white;
+    display:flex;
+    justify-content: space-between;
+    /* position:sticky;
+    top:75px; */
+    padding-top:25px;
+    z-index: 3;
+
+}
+
+
+.profile_info {
+    display:flex;
+    align-items: center;
+    margin-bottom: 25px;
+    
+}
+.profile_info h2:nth-child(2) {
+    font-size: 20px;
+
+}
+.profile_info p, .profile_info a,.profile_info b{
+    font-size: 16px;
+}
+.user_img {
+    width:200px;
+    height: 200px;
+    background-color: #E5E5E5;
+    border-radius: 100px;
+    margin-right: 50px;  
+}
+
+
+form.share_pet {
+    width:30%;
+    display:flex;
+    flex-direction: column;
+    border: 0px;
+    box-shadow: none;
+    background-color: white;
+}
+
+
+
+.share_pet input {
+    width:100%;
+    align-self: left;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+
+
+.stats i.fa-trash::before {
+    color:#555555;
+    
+}
+
+
+.share_pet button {
+    box-shadow: none;
+    border: none;
+    background-color:white; 
+    color:#555555;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    align-self: flex-end;
+
+}
+
+.profile_info div h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+form .share_pet button {
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+    width: 100%;
+    margin: 0 auto; 
+}
+
+
+.dashboard {
+    display:flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: right;
+}
+
+.dashboard h3 {
+    display:block;
+}
+
+
+
+
+
+button i {
+    font-size:25px;
+    
+}
+
+
+.edit_profile_info {
+    display:flex;
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1025         
+/*******************************/
+@media (max-width: 1025px){
+
+    .heading {
+        display:flex;
+        flex-direction: column;
+    }
+    .profile_info {
+        width:fit-content;
+        margin: 0 auto;
+    }
+
+    form.share_pet{
+        margin: 0 auto;
+        width:100%;
+        position:sticky;
+        top:300px;
+    }
+    .dimage {
+        width:49.5%;
+    }
+}
+
+
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 765px         
+/*******************************/
+@media (max-width: 765px){
+    form {
+        width:100%;
+    }
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 700px         
+/*******************************/
+@media (max-width: 700px){
+    .heading div h2{
+        display:none;
+    }
+
+    .profile_info {
+        display:unset;
+        text-align: center;
+    }
+
+    .profile_info .user_img {
+
+        width:200px;
+        margin: 0 auto;
+
+    }
+
+    .profile_info p, .profile_info a {
+        margin-top:20px;
+    }
+
+    .dimage {
+        width:100%
+    }
+}
+

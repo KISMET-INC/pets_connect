@@ -1,0 +1,74 @@
+.users_modal {
+    display:flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 100%;
+    background-color:var(--gray1);
+}
+
+
+.users_modal .person {
+    display:flex;
+    width: fit-content;
+    align-items: center;
+    width: 75%;
+    height: 100px;
+    overflow: unset;
+    margin: 0 auto;
+    margin-bottom:10px;
+}
+#users_modal .person p {
+    font-family: 'Montserrat Alternates', sans-serif;
+    margin-right: 10px;
+}
+
+#users_modal .modal-dialog {
+    width: 400px;
+    height: 500px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#users_modal .modal-body {
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#users_modal form {
+    margin:0 auto;
+    border: none;
+    display:flex;
+    margin-top: 10px;
+}
+#users_modal input {
+    width: 90%;
+}
+
+#users_modal button.search {
+    margin-left: 10px;
+    margin-bottom: 0px;
+    padding: 5px 7px;
+}
+
+#users_modal .error {
+    text-align: center;
+    margin-left: -80px;
+    margin-top: 10px;
+    color: teal;
+}
+
+#users_modal .modal-content {
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+#users_modal .modal-title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    text-align:center;
+}
+
+#users_modal input {
+    border: 2px solid gray;
+    width:100%; 
+}
+

@@ -1,0 +1,15 @@
+#right_main, #left_main{
+    border:none
+}
+
+
+
+label.form_label {
+    display:block;
+    width:100%;
+}
+.form_row_button {
+    width: 70%;
+    /* border: 1px solid blue; */
+    margin-bottom: 20px;
+}

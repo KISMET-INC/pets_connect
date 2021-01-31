@@ -1,0 +1,238 @@
+#interface_block_one {
+    width: 80%;
+    margin-top:40px;
+    
+    
+}
+
+.jumbotron {
+    background-size:cover;
+    margin-bottom: 10px;
+    background-image: url('/static/images/people2.jpg')
+}
+
+
+.light {
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 80%;
+    margin: 0 auto; 
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.light div {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    align-items: center;
+}
+
+
+.light p {
+    margin-bottom: 0px;
+}
+
+.light p:nth-child(2){
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+
+.light p:nth-child(3){
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}
+.light div a:nth-child(2){
+    align-self:flex-end;
+}
+
+.light h2 {
+    font-size: 60px;
+    font-family: 'Damion', cursive;
+}
+
+.bottom {
+    display:flex;
+    justify-content: space-between  ;
+}
+
+.bottom div {
+    width: 30%;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.bottom p {
+    font-size: 12px;
+}
+.bottom h2{
+    text-align:left;
+    font-size: 15px;   
+    padding-bottom: 10px;
+    color: #149DDD;
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 769px
+/***************************** */
+
+@media (max-width: 769px){
+    #TOP_long {
+        margin-bottom: 0px;
+    }
+
+    .jumbotron {
+        background-size: stretch;
+    }
+    #interface_block_one {
+        width: 100%
+    }
+    .bottom {
+        padding-left: 40px;
+        padding-right: 40px;
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+    }
+    .bottom div {
+        width: 50%;
+    }
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 426px
+/***************************** */
+@media (max-width: 426px){
+    .jumbotron {
+        background-repeat: no-repeat;
+        background-image: url('/static/images/mobile_jumbotron.jpg');
+        padding-left: 0px;
+        padding-right: 0px;   
+    }
+
+    #TOP_long {
+        margin-bottom: 0px;
+    }
+
+    body {
+        background-color: #E9ECEF
+    }
+
+    .jumbotron {
+        background-size:auto;
+    }
+
+    .light {
+        z-index: 1;
+        margin: 0px;
+        padding-bottom: 30px;
+        box-shadow: none;
+        width:90%;
+        border-radius: 10px 10px 10px 10px;
+        margin: 0 auto; 
+        
+    }
+
+    .light h2 {
+        text-align: center;
+    }
+
+    .light p:nth-child(2){
+        display: none;
+    }
+    .light div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: unset;
+    }
+
+    .light a:nth-child(2) {
+        width: 100%;
+        margin-top:20px;
+        text-align: center;
+    }
+
+    .light p {
+        font-size: 14px;
+        margin-top:20px
+    }
+
+    .light p:nth-child(3) {
+        
+        text-align: center;
+        margin-top:20px;
+        width: 100%;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .bottom {
+        background-color:white;
+        width: 100%;
+        border-radius: 10px;
+        margin: 0 auto;
+        padding-top: 50px;
+    }
+
+    .bottom div {
+       
+        margin: 0 auto; 
+        min-height: 225px;
+        width: 45%;
+        margin-left: 3px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 20px;
+
+    }
+
+    .bottom h2 {
+        text-align: center;
+    }
+
+    .bottom div {
+        margin: 0 auto; 
+        width: 90%;
+        min-height: unset;
+        margin-bottom: 20px;
+       
+    }
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 376px
+/***************************** */
+
+@media (max-width: 376px){
+   
+    #TOP_long {
+        margin-bottom: 0px;
+    }
+
+    .light {
+        padding: 20px;
+    }
+
+
+    .light h2 {
+        font-size: 40px;
+    }
+    .bottom h2 {
+        text-align: center;
+    }
+
+    .bottom div {
+        margin: 0 auto; 
+        width: 100%;
+        min-height: unset;
+        margin-bottom: 20px;
+       
+    }
+}
