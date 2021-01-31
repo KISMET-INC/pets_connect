@@ -716,7 +716,7 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 #=============================================##
 def send_email_Deploy(request):
     def setup_email_thread():
-        pw = open("app_one\pw.txt", "r")
+        # pw = open("app_one\pw.txt", "r")
         smtp_server = "smtp.gmail.com"
         port = 587 #For starttls
         password = 'PassioN12345'
@@ -752,7 +752,10 @@ def send_email_Deploy(request):
 
     except Exception as e:
         print("error sending email")
-        return render(request,'test.html', e)
+        context = {
+            'error':e
+        }
+        return render(request,'test.html', context )
 
 #=============================================##
 # process_edit_password()
