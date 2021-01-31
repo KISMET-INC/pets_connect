@@ -26,6 +26,7 @@
 #search_modal .modal-dialog {
     width: 400px;
     height: 610px;
+    margin-top: 2%;
     border-radius: 10px 10px 10px 10px;
 }
 

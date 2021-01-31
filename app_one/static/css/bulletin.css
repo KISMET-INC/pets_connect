@@ -29,18 +29,27 @@ nav .fa-users::before, nav a.bulletin{
     width:50%;
     
 }
-.bulletin_left .following .person div.outline {
-    display:flex;
-    justify-content: center;
-    border: 2px solid teal;
+    .bulletin_left .following .person div.outline {
+        display:flex;
+        justify-content: center;
+        border: 2px solid teal;
 
-}
+    }
 
-.bulletin_left .post .person{
-    display:flex;
-    align-items: center;
-    width:200px;
-}
+    .bulletin_left .post .person{
+        display:flex;
+        align-items: center;
+        width:200px;
+    }
+
+    .bulletin_left .search_btn_grp{
+        width:100%;
+    }
+        .search_btn_grp button {
+            width: 100%;
+            font-size: 17px;
+        }
+
 
 .bulletin_right .followers .person {
     width:75px;
@@ -195,6 +204,7 @@ input {
 .btn-info {
     background-color: var(--blue1);
     border: none;
+    
 }
 
 .followers {
