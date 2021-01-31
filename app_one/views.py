@@ -176,6 +176,24 @@ def explore(request):
         return render(request,'explore.html',context)
     return render(request,'admin.html',context)
 
+#=============================================##
+# get_more_images()
+#=============================================##
+def get_more_images(request):
+    request.session['page_num'] += 1
+    image_list = Image.objects.order_by("-created_at")
+    page = request.GET.get('page',request.session['page_num'])
+    paginator = Paginator(image_list,request.session['loads'])
+    request.session['loads'] += 24
+
+    try:
+        images2 = paginator.page(page)
+    except PageNotAnInteger:
+        images2 = paginator.page(1)
+    except EmptyPage:
+        return HttpResponse("none")
+
+    return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
 
 #=============================================##
 # profile()
@@ -545,24 +563,6 @@ def get_session_id(request):
     session_user = User.objects.get(id= request.session['user_id'])
     return JsonResponse ({'session_id': session_user.id, 'session_user_name' :session_user.user_name})
 
-#=============================================##
-# get_more_images()
-#=============================================##
-def get_more_images(request):
-    request.session['page_num'] += 1
-    image_list = Image.objects.order_by("-created_at")
-    page = request.GET.get('page',request.session['page_num'])
-    paginator = Paginator(image_list,request.session['loads'])
-    request.session['loads'] += 24
-
-    try:
-        images2 = paginator.page(page)
-    except PageNotAnInteger:
-        images2 = paginator.page(1)
-    except EmptyPage:
-        return HttpResponse("none")
-
-    return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
 
 #=============================================##
 # search users
