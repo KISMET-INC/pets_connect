@@ -752,7 +752,7 @@ def send_email_Deploy(request):
 
     except Exception as e:
         print("error sending email")
-        return render(request,'text.html', e)
+        return render(request,'test.html', e)
 
 #=============================================##
 # process_edit_password()
