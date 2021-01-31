@@ -120,7 +120,7 @@ $(document).ready(function(){
 
         $('.search_btn').on('click', function(){
             url='';
-            if($(this).html() == 'All Pet Owners'){
+            if($(this).html() == 'Search All Pet Owners'){
                 $('.modal-title').html("Search All Pet Owners")
                 url = "/get_all_users_list"
             } else {
