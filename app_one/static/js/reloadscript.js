@@ -245,7 +245,6 @@ $(document).ready(function(){
     // OPEN LOADER ON AJAX START
     //*********************************************//
     // $(document).ajaxStart(function(){
-    //     $('.loader').show();
     // });
     // $(document).ajaxStop(function(){
     // $('.loader').hide();
