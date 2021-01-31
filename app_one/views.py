@@ -719,7 +719,7 @@ def send_email_Deploy(request):
         pw = open("app_one/pw.txt", "r")
         smtp_server = "smtp.gmail.com"
         port = 587 #For starttls
-        password = pw
+        password = pw.readlines()
 
         sender_email = "petsconnect2021@gmail.com"
         receiver_email = "petsconnect2021@gmail.com"
