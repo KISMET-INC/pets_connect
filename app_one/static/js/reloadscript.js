@@ -255,7 +255,7 @@ $(document).ready(function(){
     // Alert on Logout
     //*********************************************//
     $('.logout').on('click',function(){
-        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 HEARTS \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
+        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 HEARTSS \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
      })
 
     //*********************************************//

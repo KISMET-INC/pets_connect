@@ -137,7 +137,7 @@ def explore(request):
         return redirect('/signin')
     
     if 'loads' not in request.session:
-        request.session['loads'] = 12
+        request.session['loads'] = 24
     if 'page_num' not in request.session:
         request.session['page_num'] = 1
 
@@ -553,7 +553,7 @@ def get_more_images(request):
     image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page',request.session['page_num'])
     paginator = Paginator(image_list,request.session['loads'])
-    request.session['loads'] += 12
+    request.session['loads'] += 24
 
     try:
         images2 = paginator.page(page)
