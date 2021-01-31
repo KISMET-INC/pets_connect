@@ -121,3 +121,14 @@ menu.dropdown {
         }
 
 }
+
+/*******************************/
+/*  MEDIA BREAKPOINT 281px         
+/*******************************/
+@media (max-width: 281px){
+    .nav_menus h2 {
+        font-size: 40px;
+    }
+    
+
+} 

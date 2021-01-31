@@ -104,11 +104,7 @@ img.cropped {
         font-size: 14px;
     }
 
-  
 
-    
-
- 
 }
 
 /*******************************/
@@ -118,6 +114,18 @@ img.cropped {
     .dashboard {
         width:100%;
     }
+
+} 
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 281px         
+/*******************************/
+@media (max-width: 281px){
+    .dimage{
+        width:100%
+    }
+    
 
 } 
 
