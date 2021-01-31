@@ -229,6 +229,9 @@ def process_edit_user(request,user_id):
 
         user.email = request.POST['email']
         user.user_name = request.POST['user_name']
+        if 'pass' in request.POST:
+            hash = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
+            user.password = hash
 
         if request.FILES:
             user.user_img = request.FILES['user_img']
@@ -238,32 +241,7 @@ def process_edit_user(request,user_id):
         return redirect(f'/profile/{session_user.id}')
             
 
-#=============================================##
-# process_edit_user()
-#=============================================##
-def process_admin_edit_user(request,user_id):
 
-    errors = User.objects.basic_validator_edit_user(request.POST)
-    if len(errors) > 1:
-        for value in errors.values():
-            messages.error(request,value)
-        return redirect(f'/admin_edit_user/{user_id}/0/0')
-    else:
-        clicked_user = User.objects.get(id=user_id)
-        user_upload_img = UploadUserImgForm(request.POST, request.FILES)
-
-        clicked_user.email = request.POST['email']
-        clicked_user.user_name = request.POST['user_name']
-
-        hash = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
-        clicked_user.password = hash
-
-        if request.FILES:
-            clicked_user.user_img = request.FILES['user_img']
-        
-        clicked_user.save()
-
-    return redirect(f'/explore/admin')
 
 
 #=============================================##
@@ -711,51 +689,6 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
 
 
-#=============================================##
-# send _email()
-#=============================================##
-def send_email_Deploy(request):
-    def setup_email_thread():
-        pw = open("app_one/pw.txt", "r")
-        smtp_server = "smtp.gmail.com"
-        port = 587 #For starttls
-        password = pw.read()
-
-        sender_email = "petsconnect2021@gmail.com"
-        receiver_email = "petsconnect2021@gmail.com"
-
-        message = MIMEMultipart("alternative")
-        message["Subject"] = 'deploy'
-        message["From"] = sender_email
-        message["To"] = receiver_email
-
-        text = """hi """ 
-
-
-        # Convert message types into MIMETEXT
-        part1 = MIMEText(text,'plain')
-        
-
-        # Attach to message object
-        message.attach(part1)
-
-        context = ssl.create_default_context()
-        server = smtplib.SMTP(smtp_server, port)
-
-        server.starttls(context = context) #Secure the connection
-        server.login (sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-    try:
-        # Create new thread
-        setup_email_thread()
-        return render(request,'register.html')
-
-    except Exception as e:
-        print("error sending email")
-        context = {
-            'error':e
-        }
-        return render(request,'test.html', context )
 
 #=============================================##
 # process_edit_password()

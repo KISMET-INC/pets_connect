@@ -57,15 +57,14 @@ urlpatterns = [
     # Admin
     path('explore/admin', views.admin),
     path('admin_edit_user/<int:user_id>', views.admin_edit_user),
-    path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
     
-    # path('process_admin_edit_user/<int:user_id>', views.process_admin_edit_user),
+    # User Search 
     path('search', views.search),
     path('get_followers_list', views.get_followers_list),
     path('get_all_users_list', views.get_all_users_list),
+
     # not using yet
     path('process_edit_password', views.process_edit_password),
 
-    path('send_email_Deploy', views.send_email_Deploy)
 
 ]

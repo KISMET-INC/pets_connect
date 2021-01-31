@@ -1,55 +1,5 @@
 $(document).ready(function(){
-    $('.comm_edit').hide()
-    $('body').on('click', '.fa-pen', function(e){
-        var comment_id = $(this).attr('id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
-        $(`.comm_text`).show()
-        $(`.comm_edit`).hide()
-        
-        $(`.eform${comment_id}`).css('display','flex').show()
-        $(`.single_comment #comment${comment_id}`).hide()
 
-        $('body').on('click', '.edit_comment_cancel', function(e){
-            e.preventDefault()
-            var comment_id = $(this).attr('comm_id')
-            $(`.comm_text`).show()
-            
-            $(`.edit_comment_text_${comment_id}`).val(new_comment)
-            $(`.eform${comment_id}`).hide()
-    
-            $(`.single_comment #comment${comment_id}`).show()
-        })
-        
-    })
-
- 
-    $('body').on('click', '.edit_comment_btn', function(e){
-        e.preventDefault()
-        var comment_id = $(this).attr('comm_id')
-        var image_id = $(this).attr('img_id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
-        var component = $(this).attr('comp')
-        $.ajax({
-            cache: false,
-            headers: { "X-CSRFToken": csrftoken },  
-            type:'POST',
-            data : { text : new_comment, component : component, image_id : image_id},
-            url: `/process_edit_comment/${comment_id}`,
-        })
-        .done(function(data){
-            if( component == 'from_post'){
-                $(`#post${image_id}`).html(data);   
-            } else {
-                $('#replace_comments').html(data)                                  
-                //scrollToBottom()
-            }
-            //$(`${form_text}`).val("")
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        })
-        
-    });
 
     //*********************************************//
     // Set starting variables
@@ -63,10 +13,11 @@ $(document).ready(function(){
 
     //*********************************************//
     // Get URL Route variables
+    // Split URL string to extract useful variables into
+    // an array 
     //*********************************************//
     map = window.location.pathname.toString()
     map = map.split('/')
-    console.log(map)
 
     var url_location = map[1]
     var clicked_user_id = map[2]
@@ -77,206 +28,10 @@ $(document).ready(function(){
         }
     });
 
-
-
-    //*********************************************//
-    // Search
-    //*********************************************//
-    $('.search').on('click', function(e){
-
-        e.preventDefault()
-        var user_email = $('.search_email').val()
-        var list = $('#search_modal .users_modal').attr('list')
-        var user_id = $('#search_modal .users_modal').attr('user_id')
-        
-
-        $.ajax({
-            cache: false,
-            headers: { "X-CSRFToken": csrftoken },  
-            type:'POST',
-            data : { user_email : user_email, list: list, user_id: user_id},
-            url: `/search`,
-        })
-        .done(function(data){
-            console.log(data)
-            if(data == 'None'){
-                $('.error').html("Email Not Found")
-            } else {
-                window.location.href = data  
-            }
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-
-    })
-
-     //*********************************************//
-    // WHEN Search Modal is shown insert correct querylist
-    //*********************************************//
-
-        $('.search_btn').on('click', function(){
-            url='';
-            if($(this).html() == 'All Pet Owners'){
-                $('.modal-title').html("Search All Pet Owners")
-                url = "/get_all_users_list"
-            } else {
-                $('.modal-title').html("Search Your Followers")
-                url = "/get_followers_list"
-            }
-
-            $("#search_modal").on('show.bs.modal', function(){
-                $.ajax({
-                    cache: false,
-                    type:"GET",
-                    url: url,
-                })
-                .done(function(data){
-                        $(`#search_modal .modal-body`).html(data);     
-                })
-                .fail(function(data){
-                    console.log("Error in fetching data");
-                });
-            })
-
-        })
-
-    //*********************************************//
-    // WHEN MODAL IS HIDDEN update background elements
-    //*********************************************//
-    $("#search_modal").on('hide.bs.modal', function(){
-        $('.error').html("")
-    })
-
-    
-    //*********************************************//
-    // get more images
-    //*********************************************//
-
-    function get_more_images() {
-
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_more_images`,
-        })
-        .done(function(data){
-            if (data != 'none'){
-
-                $(`#get_more`).append(data);
-                        
-            }
-                
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-
-    }
-    
-    $(document).ajaxStart(function(){
-        $('.loader').show();
-    });
-    $(document).ajaxStop(function(){
-    $('.loader').hide();
-    });
-
-     //*********************************************//
-    // Alert on Logout
-    //*********************************************//
-    $('.logout').on('click',function(){
-        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 hearts \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
-     })
-
-    //*********************************************//
-    // scrollToBottom()
-    // When called scrolls into view element with id 'bottom'
-    //*********************************************//
-
-    function scrollToBottom() {
-        if(document.body.contains(document.getElementById('bottom'))){
-            $(".comments").scrollTop($('.comments')[0].scrollHeight);
-        }
-    }
-
-    //*********************************************//
-    // Close guest Message
-    //*********************************************//
-
-    $('.close_guest_message').on('click', function(){
-
-            $('.guest_message').remove()
-    })
-
-    //*********************************************//
-    // Close Modal on 'x' click
-    //*********************************************//
-    $('body').on('click', '.close_modal', function(){
-        $('#comment_modal').modal('hide');
-    })
-
-
-    //*********************************************//
-    // Pull Session_user_id from database
-    //*********************************************//
-    function get_session_id(){
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_session_id`,
-        })
-        .done(function(data){
-            session_user =  data           
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-    }
-
-
-    //*********************************************//
-    // Pull Image List from database
-    //*********************************************//
-    function get_image_list(user_id){
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_image_list/${user_id}`,
-        })
-        .done(function(data){
-            image_list =  data           
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-    }
-
-    //*********************************************//
-    // Pull Heart Sum from DB
-    //*********************************************//
-    function get_heart_sum(img_id){
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_heart_sum/${img_id}`,
-        })
-        .done(function(data){
-            heart_sum =  data 
-            $('.heart_sum').html(data)
-            console.log(heart_sum)
-                
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-    }
-
-
     //*********************************************//
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
-
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         $('body').on('click', '.dimage', function(){
 
@@ -327,6 +82,260 @@ $(document).ready(function(){
         // END DEVICE DEPENDENT INSTRUCTIONS
 
 
+    //*********************************************//
+    // Search
+    //*********************************************//
+    $('.search').on('click', function(e){
+
+        e.preventDefault()
+        var user_email = $('.search_email').val()
+        var list = $('#search_modal .users_modal').attr('list')
+        var user_id = $('#search_modal .users_modal').attr('user_id')
+        
+
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { user_email : user_email, list: list, user_id: user_id},
+            url: `/search`,
+        })
+        .done(function(data){
+            console.log(data)
+            if(data == 'None'){
+                $('.error').html("Email Not Found")
+            } else {
+                window.location.href = data  
+            }
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+
+    })
+
+    //*********************************************//
+    // WHEN Search Modal is shown insert correct querylist
+    //*********************************************//
+
+        $('.search_btn').on('click', function(){
+            url='';
+            if($(this).html() == 'All Pet Owners'){
+                $('.modal-title').html("Search All Pet Owners")
+                url = "/get_all_users_list"
+            } else {
+                $('.modal-title').html("Search Your Followers")
+                url = "/get_followers_list"
+            }
+
+            $("#search_modal").on('show.bs.modal', function(){
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: url,
+                })
+                .done(function(data){
+                        $(`#search_modal .modal-body`).html(data);     
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                });
+            })
+
+        })
+    
+    
+
+    //*********************************************//
+    // On EDIT ICON CLICK
+    // Show Edit Input - Hide comment elements behind
+    //*********************************************//
+    $('body').on('click', '.fa-pen', function(e){
+        var comment_id = $(this).attr('id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        //Reset and show all comments and hide all inputs when
+        //user clicks another comment
+        $(`.comm_text`).show()
+        $(`.comm_edit`).hide()
+        
+        $(`.eform${comment_id}`).css('display','flex').show()
+        $(`.single_comment #comment${comment_id}`).hide()
+
+        // On CANCEL CLICK - re-show text / hide edit input
+        $('body').on('click', '.edit_comment_cancel', function(e){
+            e.preventDefault()
+            var comment_id = $(this).attr('comm_id')
+            $(`.comm_text`).show()
+            
+            $(`.edit_comment_text_${comment_id}`).val(new_comment)
+            $(`.eform${comment_id}`).hide()
+    
+            $(`.single_comment #comment${comment_id}`).show()
+        })
+        
+    })
+
+    //*********************************************//
+    // On EDIT COMMENT SUBMIT BUTTON CLICK
+    //*********************************************//
+    $('body').on('click', '.edit_comment_btn', function(e){
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        var image_id = $(this).attr('img_id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component = $(this).attr('comp')
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { text : new_comment, component : component, image_id : image_id},
+            url: `/process_edit_comment/${comment_id}`,
+        })
+        .done(function(data){
+            if( component == 'from_post'){
+                $(`#post${image_id}`).html(data);   
+            } else {
+                $('#replace_comments').html(data)                                  
+                scrollToBottom()
+            }
+            $(`${form_text}`).val("")
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        })
+    });
+
+    //*********************************************//
+    // Hide COMMENT EDIT INPUTS on load
+    //*********************************************//
+    $('.comm_edit').hide()
+
+    //*********************************************//
+    // WHEN SEARCH MODAL IS HIDDEN clear previous errors
+    //*********************************************//
+    $("#search_modal").on('hide.bs.modal', function(){
+        $('.error').html("")
+    })
+
+    
+    //*********************************************//
+    // get more images
+    //*********************************************//
+    function get_more_images() {
+
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_more_images`,
+        })
+        .done(function(data){
+            if (data != 'none'){
+
+                $(`#get_more`).append(data);
+                        
+            }
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+
+    }
+    //*********************************************//
+    // OPEN LOADER ON AJAX START
+    //*********************************************//
+    // $(document).ajaxStart(function(){
+    //     $('.loader').show();
+    // });
+    // $(document).ajaxStop(function(){
+    // $('.loader').hide();
+    // });
+
+    //*********************************************//
+    // Alert on Logout
+    //*********************************************//
+    $('.logout').on('click',function(){
+        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 HEARTS \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
+     })
+
+    //*********************************************//
+    // scrollToBottom()
+    // When called scrolls into view element with id 'bottom'
+    //*********************************************//
+    function scrollToBottom() {
+        if(document.body.contains(document.getElementById('bottom'))){
+            $(".comments").scrollTop($('.comments')[0].scrollHeight);
+        }
+    }
+
+    //*********************************************//
+    // Close guest Message
+    //*********************************************//
+    $('.close_guest_message').on('click', function(){
+            $('.guest_message').remove()
+    });
+
+    //*********************************************//
+    // Close Modal on 'x' click
+    //*********************************************//
+    $('body').on('click', '.close_modal', function(){
+        $('#comment_modal').modal('hide');
+    });
+
+    //*********************************************//
+    // Pull Session_user_id from database
+    //*********************************************//
+    function get_session_id(){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_session_id`,
+        })
+        .done(function(data){
+            session_user =  data           
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+    //*********************************************//
+    // Pull Image List from database
+    //*********************************************//
+    function get_image_list(user_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_image_list/${user_id}`,
+        })
+        .done(function(data){
+            image_list =  data           
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+    //*********************************************//
+    // Pull Heart Sum from DB
+    //*********************************************//
+    function get_heart_sum(img_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_heart_sum/${img_id}`,
+        })
+        .done(function(data){
+            heart_sum =  data 
+            $('.heart_sum').html(data)
+            console.log(heart_sum)
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
         //*********************************************//
         // Process Heart Clicks
         //*********************************************//
@@ -366,6 +375,7 @@ $(document).ready(function(){
             }
             
         }); // END PROCESS HEART CLICKS
+
 
         //*********************************************//
         // Process Follow Clicks
@@ -465,6 +475,7 @@ $(document).ready(function(){
             var img_id = $(this).attr('img');
             var component = $(this).attr('comp')
             var url;
+
             if ( $(this).hasClass( "from_post" )){
                 url = `/process_delete_comment/${comment_id}/from_post`
             } else {
@@ -476,14 +487,11 @@ $(document).ready(function(){
                 type:'GET',
                 url: url,
             })
-            .done(function(data){
-                
-                if (component == 'from_post'){
-            
-                    $(`#post${img_id}`).html(data); 
+            .done(function(data){   
 
-                } else {
-                    
+                if (component == 'from_post'){ 
+                    $(`#post${img_id}`).html(data); 
+                } else {    
                     $('#replace_comments').html(data)                                  
                     scrollToBottom()
                 }
@@ -499,7 +507,7 @@ $(document).ready(function(){
         // Process ADD COMMENT on POST Click
         //*********************************************//
         $('body').on('click', '.comment_form button', function(e){
-           e.preventDefault()
+            e.preventDefault()
             var img_id = $(this).attr('id');
             var component = $(this).attr('comp')
             // get informatin from form classes

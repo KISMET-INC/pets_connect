@@ -106,7 +106,7 @@ class UserManager(models.Manager):
         if len(users) > 0:
             if post['current_email'] != users[0].email:
                 errors['email_in_use'] = 'Email already in use'
-       
+                
         return errors
 
 class PetManager(models.Manager):
