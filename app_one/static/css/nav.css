@@ -102,8 +102,11 @@ menu.dropdown {
         }
     
         ul.dropdown-menu {
-            min-width: 150px;
+            min-width: 130px;
             left:-110px;
+            top:51px;
+            background:rgba(255, 255, 255, 0.9);
+
         }
     
         ul.dropdown-menu a {
