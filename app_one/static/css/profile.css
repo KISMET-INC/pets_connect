@@ -4,7 +4,7 @@
 
 
 nav .fa-user::before, nav a.profile {
-    color:#E5E5E5;
+    color:gray;
 }
 
 .stats {

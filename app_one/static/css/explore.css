@@ -12,7 +12,7 @@
 }
 
 nav .fa-compass::before, nav a.explore{
-    color:#E5E5E5;
+    color:grey;
 }
 
 #interface_block_one{

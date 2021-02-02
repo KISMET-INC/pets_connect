@@ -98,7 +98,7 @@ menu.dropdown {
 
         menu.dropdown i.fa-bars::before {
             font-size: 30px;
-            color:#55AAAA;
+            color: var(--blue1);
         }
     
         ul.dropdown-menu {
@@ -112,7 +112,8 @@ menu.dropdown {
         ul.dropdown-menu a {
             text-align: right;
             font-size: 16px;
-            color: #55AAAA;
+            color:var(--blue1);
+            margin-top:0px;
         }
 
         ul.signin {

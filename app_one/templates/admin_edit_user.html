@@ -19,7 +19,9 @@
 
         <div id="interface_block_one" class='edit_user'>
             <div class = 'heading'>
+                
                 <div class = 'profile_info'>
+                    
                     
                     <form enctype="multipart/form-data" action="/process_edit_user/{{clicked_user.id}}" method="post">
                     {% with user=clicked_user %}
@@ -29,6 +31,7 @@
                     
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
+                        <p><b>Created on:</b> {{clicked_user.created_at}}</p>
                         <input type= 'text' value = '{{clicked_user.user_name}}' name = 'user_name'> 
                         <input type= 'text' value = '{{clicked_user.email}}' name = 'email'> 
                         <input type= 'text' placeholder="Change Password" name = 'pass'> 
