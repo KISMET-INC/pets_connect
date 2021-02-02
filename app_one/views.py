@@ -118,7 +118,7 @@ def register(request):
 #=============================================##
 def admin(request):
     context = {
-        'users': User.objects.exclude(id=1).exclude(id=2),
+        'users': User.objects.exclude(id=1),
         'session_user': User.objects.get(id=request.session['user_id']) 
     }
     return render(request,'admin.html',context)

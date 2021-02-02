@@ -39,6 +39,10 @@ img.sharepet{
     width:50%
 }
 
+img.bar_menu{
+    width:40%
+}
+
 img {
     width:100%;
     border: 1px solid gray;
@@ -80,4 +84,9 @@ ul li {
 .github {
     margin-top: 30px;
     text-align: center;
+}
+
+span {
+    font-weight: bold;
+    color: var(--blue1)
 }
