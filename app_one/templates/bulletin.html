@@ -22,7 +22,7 @@
                 </div>
                 <p><b>You Follow:</b></p>
                 <div class = 'following'>
-                    {% for user in session_user.is_following.all %}
+                    {% for user in session_user.is_following.all|dictsortreversed:'updated_at' %}
                         {% include 'modules/person.html' %}
                     {% endfor %}
                 </div>
@@ -55,7 +55,7 @@
 
                     <div class= 'heading'>
                         <h3>Followers</h3>                
-                        <p>You have {{session_user.being_followed.all.count}} followers</p>
+                        <a class = 'search_btn' data-toggle="modal" data-target="#search_modal">See all {{session_user.being_followed.all.count}} followers</a>
                     </div>
                     
                     {% for user in session_user.being_followed.all|slice:":5" %}

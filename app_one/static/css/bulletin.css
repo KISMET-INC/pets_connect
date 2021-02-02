@@ -146,11 +146,11 @@ input {
 }
 .following {
     display:flex;
-    height:125px;
+    flex-wrap: wrap;
+    height:140px;
     border:1px solid grey;
     min-width: 70px;
-    padding:15px;
-    padding-bottom: 20px;
+    padding:10px;
     border-radius: 5px;
     overflow: scroll;
     margin-bottom: 50px;
@@ -212,6 +212,18 @@ input {
     top:220px;
     
 }
+.heading {
+    margin-bottom: 20px;
+}
+    .heading a.search_btn{
+        text-decoration: underline;
+        color: var(--blue1);
+        cursor: pointer;
+    }
+
+    .heading h3, .heading a {
+        margin:0px;
+    }
 
 .followers div:nth-child(1) {
     display: flex;
@@ -223,10 +235,7 @@ input {
 .followers .person {
     margin: 0px;
 }
-.bulletin_right .user .person .user_img {
-    margin: 0px;
-    margin-right: 20px;
-}
+
 .bulletin_right .user .person p {
     display:none;
 }
@@ -270,6 +279,10 @@ input {
 
 @media (max-width: 1200px){
 
+    .bulletin_right {
+        width: 50%;
+    }
+
     .session_user {
         display:flex;
         flex-direction: column;
@@ -278,9 +291,14 @@ input {
 
     .followers {
         top: 255px;
-    }
+    }  
 
-   
+    .followers .heading {
+        flex-direction: column;
+    }
+    .followers .heading h3{
+        display:none;
+    }
 
     .followers .heading p {
        display:none;

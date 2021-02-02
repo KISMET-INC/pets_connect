@@ -3,7 +3,6 @@
     flex-direction: column;
     overflow: scroll;
     width: 100%;
-    height: 600px;
     background-color:var(--gray1);
     padding-top: 20px;
 }
@@ -22,6 +21,11 @@
     font-family: 'Montserrat Alternates', sans-serif;
     margin-right: 10px;
 }
+
+#search_modal .person p {
+    text-align:left;
+}
+
 
 #search_modal .modal-dialog {
     width: 400px;
