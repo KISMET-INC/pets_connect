@@ -83,7 +83,7 @@ $(document).ready(function(){
 
 
     //*********************************************//
-    // Search
+    // Start USER SEARCH on search button press
     //*********************************************//
     $('.search').on('click', function(e){
 
@@ -209,6 +209,18 @@ $(document).ready(function(){
     // Hide COMMENT EDIT INPUTS on load
     //*********************************************//
     $('.comm_edit').hide()
+
+    //*********************************************//
+    // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
+    //*********************************************//
+    if (url_location == 'profile'){
+        $('.following_stat').hide()
+        $('.fa-podcast').hide()
+    } else {
+        $('.following_stat').show()
+        $('.fa-podcast').show()
+    }
+
 
     //*********************************************//
     // WHEN SEARCH MODAL IS HIDDEN clear previous errors

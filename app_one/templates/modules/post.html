@@ -4,7 +4,9 @@
         {% with user=image.user %}
         {% include 'modules/person.html' %}
         {% endwith %}
-        <p id = 'desc'>"{{image.desc}}"</p>
+        {% if image.desc %}
+            <p id = 'desc'>"{{image.desc}}"</p>
+        {% endif %}
     </div>
     
     <img src = '{{image.pet_img.url}}'>

@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
+import datetime
 import bcrypt
 from .forms import *
 import smtplib, ssl
@@ -29,33 +30,34 @@ def process_register(request):
 
     else :
         hash = bcrypt.hashpw(post['pass'].encode(), bcrypt.gensalt()).decode()
-        user_level = 0
 
         users = User.objects.all()
+
         if len(users) < 1:
             user_level = 9
+        else:
+            user_level = 0
 
 
         new_user = User.objects.create(user_name=post['first'], password = hash, email = post['email'], user_level= user_level)
 
-        if new_user.user_level == 9:
-            return redirect('/explore/admin')
-
-        if new_user.user_level != 9:
-            kristen = User.objects.get(id=2)
+        request.session['user_id'] = new_user.id
+        request.session['user_name'] = new_user.user_name
+        request.session['user_level'] = new_user.user_level
+        send_email(session_user = new_user, action = 'REGISTERED')
+        
+        creator_email = 'ksanmartin909@gmail.com'
+        if new_user.user_level != 9 and new_user.email != creator_email:
+            kristen = User.objects.get(email=creator_email)
             new_user.is_following.add(kristen)
             kristen.being_followed.add(new_user)
             new_user.being_followed.add(kristen)
+            kristen.is_following.add(new_user)
             kristen.save()
             new_user.save()
 
-        if user_level not in request.session:
-            request.session['user_id'] = new_user.id
-            request.session['user_name'] = new_user.user_name
-            request.session['user_level'] = new_user.user_level
-            send_email(session_user = new_user, action = 'REGISTERED')
-
-            return redirect(f'/explore')
+        if new_user.user_level == 9:
+            return redirect('/explore/admin')
 
         return redirect(f'/explore')
 
@@ -77,7 +79,8 @@ def process_signin(request):
             request.session['user_name'] = this_user.user_name
             request.session['user_level'] = this_user.user_level
             send_email(session_user = this_user, action = 'SIGNED IN')
-
+            print(this_user.created_at)
+            print(this_user.updated_at)
             if this_user.user_level == 9:
                 return redirect('explore/admin')
             return redirect(f'/explore')
@@ -142,7 +145,7 @@ def explore(request):
         request.session['page_num'] = 1
 
     current_user = User.objects.get(id=request.session['user_id'])
-
+    
     image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page',request.session['page_num'])
 
@@ -305,8 +308,8 @@ def bulletin(request,user_id,image_id, modal_trigger):
         'selected_user': User.objects.get(id=user_id),
         'url' : f'/user/bulletin/{user_id}/{image_id}',
         'image': current_image,
-        'images': Image.objects.order_by("-created_at"),
-        'users': User.objects.all(),
+        'images': Image.objects.order_by("-updated_at"),
+        'users': User.objects.order_by("updated_at"),
         'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
     }
     return render(request,'bulletin.html',context)
@@ -391,6 +394,11 @@ def process_add_comment(request):
         new_comment = Comment.objects.create(text = request.POST['text'], image = this_image, user= session_user)
         send_email(session_user = session_user, action = 'COMMENTED', clicked_user = this_image.user, image = this_image, comment=new_comment)
 
+        session_user.updated_at = datetime.now()
+        this_image.updated_at = datetime.now()
+        this_image.save()
+        session_user.save()
+
         #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
@@ -408,6 +416,11 @@ def process_edit_comment(request,comment_id):
         this_comment = Comment.objects.get(id = comment_id)
         this_comment.text = request.POST['text'] 
         this_comment.save()
+        session_user.updated_at = datetime.now()
+        this_image.updated_at = datetime.now()
+        this_image.save()
+        session_user.save()
+        print(session_user.updated_at)
         #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
@@ -545,6 +558,9 @@ def process_follow(request,user_to_follow_id,image_id):
     else:
         session_user.is_following.remove(user_to_follow)
         user_to_follow.being_followed.remove(session_user)
+
+    session_user.updated_at = datetime.now()
+    user_to_follow.updated_at = datetime.now()
 
     session_user.save()
     user_to_follow.save()
