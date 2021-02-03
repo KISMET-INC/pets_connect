@@ -1,12 +1,41 @@
+.single_comment {
+    display:flex;
+    padding: 0px;
+    margin: 5px 0px 5px 0px;
+
+}
+
 .single_comment p:nth-child(1){
     width: 100%;
     color: red;
     display: block;
 }
 
+.single_comment a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.single_comment .edit_actions {
+    display:flex;
+    justify-content: space-around;
+    width: 16%;
+    
+}
+    .single_comment .edit_actions i {
+        height: 100%;
+        color: var(--blue1);
+        font-size:20px;
+    }
+
+
 
 .single_comment h2 {
     font-family: 'Montserrat Alternates', sans-serif;
+    margin: 0px;
+    padding: 0px;
     
 }
 .single_comment .comm_edit {
@@ -16,6 +45,13 @@
     width: 103%;
     border:none;
     margin-left:-10px;
+}
+
+.single_comment .comm_text {
+    display:flex;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
 }
 .single_comment form {
     display:flex;
@@ -32,7 +68,7 @@
 
 .single_comment textarea {
     padding: 5px;
-    width: 218px;
+    width: 80%;
     resize: none;
     border:none;
 }

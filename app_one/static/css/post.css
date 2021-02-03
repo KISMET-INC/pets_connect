@@ -32,11 +32,7 @@ img {
     
 }
 
-.single_comment .edit_actions {
-    width: 20%;
-}
-
-.single_comment textarea {
+_comment textarea {
     width: 80%;
 }
 

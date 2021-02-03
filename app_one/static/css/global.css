@@ -9,12 +9,20 @@
     --gray1: #BFBFBF;
     --gray2: #E5E5E5;
     --baseFont: Verdana, Geneva, Tahoma, sans-serif;
-   
-  }
 
-  .messages li {
-      color:red;
-  }
+    }
+
+    label {
+        display:none;
+    }
+
+    label.show_label{
+        display:unset;
+    }
+
+    .messages li {
+        color:red;
+    }
 
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;

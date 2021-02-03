@@ -9,7 +9,7 @@
         {% endif %}
     </div>
     
-    <img src = '{{image.pet_img.url}}'>
+    <img src = '{{image.pet_img.url}}' alt='pet image'>
     <div id = '{{image.id}}' class = 'stats'>
         
 
@@ -41,7 +41,7 @@
         {% if image.comments.count > 3 %}
             <h3>{{image.comments.count}} total comments </h3>
         {% endif %}
-       
+
         {% with component='from_post' %}
             {% include 'modules/comment_form.html' %}
         {% endwith %}

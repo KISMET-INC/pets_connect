@@ -25,7 +25,6 @@
 .stats p.name , .stats div a  {
     font-family: 'Montserrat Alternates', sans-serif;   
     font-size: 16px;
-    color: #BFBFBF;
     text-align: center;
 }
 
@@ -80,13 +79,20 @@ p button i{
     color: #55AAAA;
 }
 
-.stats span {
+/* .stats span {
     margin-left: 3px;
     margin-bottom: 12px;
     font-size:20px;
     font-weight: bold;
-}
+} */
 
+.stats .statnums span {
+    margin-left: 3px;
+    margin-bottom: 12px;
+    font-size:20px;
+    font-weight: bold;
+
+}
 button:focus {
     outline: 0px;
     border: 0px;

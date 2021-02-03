@@ -153,13 +153,16 @@ $(document).ready(function(){
     $('body').on('click', '.fa-pen', function(e){
         var comment_id = $(this).attr('id')
         var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component =$(this).attr('comp')
         //Reset and show all comments and hide all inputs when
         //user clicks another comment
         $(`.comm_text`).show()
         $(`.comm_edit`).hide()
         
-        $(`.eform${comment_id}`).css('display','flex').show()
-        $(`.single_comment #comment${comment_id}`).hide()
+
+        $(`.eform${comment_id}${component}` ).css('display','flex').show()
+        
+        $(`.single_comment #comment${comment_id}${component}`).hide()
 
         // On CANCEL CLICK - re-show text / hide edit input
         $('body').on('click', '.edit_comment_cancel', function(e){
@@ -167,10 +170,10 @@ $(document).ready(function(){
             var comment_id = $(this).attr('comm_id')
             $(`.comm_text`).show()
             
-            $(`.edit_comment_text_${comment_id}`).val(new_comment)
-            $(`.eform${comment_id}`).hide()
+            $(`.edit_comment_text_${comment_id}${component}`).val(new_comment)
+            $(`.eform${comment_id}${component}`).hide()
     
-            $(`.single_comment #comment${comment_id}`).show()
+            $(`.single_comment #comment${comment_id}${component}`).show()
         })
         
     })
@@ -182,8 +185,9 @@ $(document).ready(function(){
         e.preventDefault()
         var comment_id = $(this).attr('comm_id')
         var image_id = $(this).attr('img_id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
         var component = $(this).attr('comp')
+        var new_comment = $(`.edit_comment_text_${comment_id}${component}`).val()
+        console.log(new_comment)
         $.ajax({
             cache: false,
             headers: { "X-CSRFToken": csrftoken },  

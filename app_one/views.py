@@ -421,6 +421,7 @@ def process_edit_comment(request,comment_id):
         this_image.save()
         session_user.save()
         print(session_user.updated_at)
+        print(this_comment.text)
         #hidden form field
     if request.POST['component'] == 'from_post':
         return redirect(f'/replace_post/{this_image.id}')
@@ -702,7 +703,6 @@ def send_email(session_user, action, clicked_user = None, image = None, comment 
 
     except Exception as e:
         print("error sending email")
-
 
 
 

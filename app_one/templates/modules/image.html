@@ -1,6 +1,6 @@
 
 
-    <img id = 'img{{image.id}}' class = 'cropped open_modal{{image.id}}' src ={{image.pet_img.url}}>
+    <img id = 'img{{image.id}}' class = 'cropped open_modal{{image.id}}' src ={{image.pet_img.url}} alt='pet image'>
     <div id = 'stat{{image.id}}' class = 'stats' >
         {% if session_user != image.user %}
             <h2>"{{image.name}}"</h2>

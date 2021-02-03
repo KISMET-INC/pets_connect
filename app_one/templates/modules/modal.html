@@ -8,13 +8,15 @@
 
                 <div class ='left'>
                     <i class="fas fa-times close_modal"></i>
-                    <img class="cropped2" src = {{image.pet_img.url}}>
+                    <img class="cropped2" src = {{image.pet_img.url}} alt='pet image'>
                     <div class = 'stats'>
-                       {% include 'modules/stats.html' %}
+                        {% include 'modules/stats.html' %}
                     </div>
                     <p>Posted by:</p>
                     <p>{{image.user.user_name}}</p>
-                    <p>"{{image.desc}}"</p>
+                    {% if image.desc %}
+                        <p>"{{image.desc}}"</p>
+                    {% endif %}
                 </div>
 
                 <div class= 'right'>
