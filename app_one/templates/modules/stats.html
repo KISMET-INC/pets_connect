@@ -1,4 +1,4 @@
-
+    <section  id = 'replace{{image.id}}'>
     {% if session_user == image.user and session_user.email != 'guest@petsconnect.com' or session_user.user_level == 9 %}
     <p class = 'statnums'>
         <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Your Pet Loves"></i><span>{{image.loves.count}}</span> 
@@ -26,6 +26,7 @@
         <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button><span>{{image.comments.count}}</span>
     </p>
     {% endif %}
+    </section>
 
     
 

@@ -1,17 +1,14 @@
 
-
-    <img id = 'img{{image.id}}' class = 'cropped open_modal{{image.id}}' src ={{image.pet_img.url}} alt='pet image'>
-    <div id = 'stat{{image.id}}' class = 'stats' >
+<article class = 'dimage' id = {{image.id}} >
+    <img  class = 'cropped open_modal{{image.id}}' id = 'img{{image.id}}'  src ={{image.pet_img.url}} alt='pet image'>
+    <aside  class = 'stats' id = 'stat{{image.id}}' >
         {% if session_user != image.user %}
             <h2>"{{image.name}}"</h2>
             <p class = 'name'>{{image.desc}}</p>
-            <div id = 'replace{{image.id}}' >
                 {% include 'modules/stats.html' %}
-            </div>
         {% else %}
             <h2 class = 'self_stats'>"{{image.name}}"</h2>
-            <div id = 'replace{{image.id}}' class= 'self_stats' >
                 {% include 'modules/stats.html' %}
-            </div>
         {% endif %}
-    </div>
+    </aside>
+</article>

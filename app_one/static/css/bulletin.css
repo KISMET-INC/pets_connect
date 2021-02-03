@@ -100,40 +100,6 @@ nav .fa-users::before, nav a.bulletin{
     font-size: 14px;
 }
 
-/* .single_comment {
-    display:flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    width:100%;
-}
-
-.single_comment i.delete_comment::before, i.edit_comment::before{
-    margin-left: 10px;
-    color: #55AAAA;
-}
- .single_comment h2 {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size:17px;
-    margin: 0px;
-    margin-bottom: 5px;
-    width:90%;
-}
-
-
-.single_comment p {
-    font-size:15px;
-    text-align: right;
-    width: 140px;
-}
-
-
-
-.single_comment span {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:16px;
-    font-weight:normal;
-} */
-
 
 input {
     height:40px;
@@ -213,6 +179,9 @@ input {
 }
 .heading {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
     .heading a.search_btn{
         text-decoration: underline;
@@ -224,11 +193,7 @@ input {
         margin:0px;
     }
 
-.followers div:nth-child(1) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 
 
 .followers .person {

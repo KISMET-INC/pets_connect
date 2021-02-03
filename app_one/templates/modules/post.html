@@ -1,51 +1,57 @@
 
-<div id = {{image.id}} class = 'post'>
-    <div class = 'header'>
+<article class = 'post' id = post{{image.id}} >
+
+    <header class = 'header'>
+        <!-- Person -->
         {% with user=image.user %}
-        {% include 'modules/person.html' %}
+            {% include 'modules/person.html' %}
         {% endwith %}
+
+        <!-- Picture Description (if available) -->
         {% if image.desc %}
             <p id = 'desc'>"{{image.desc}}"</p>
         {% endif %}
-    </div>
-    
-    <img src = '{{image.pet_img.url}}' alt='pet image'>
-    <div id = '{{image.id}}' class = 'stats'>
-        
+    </header>
+    <main>    
+        <img src = '{{image.pet_img.url}}' alt='pet image'>
+        <aside class = 'stats' id = '{{image.id}}' >
+            {% include 'modules/stats.html' %}
 
-        <div id='replace{{image.id}}'>{% include 'modules/stats.html' %}</div>
+            <!-- Show 'How Many Loves' -->
+            <p class ='loves'>
+                {% if image.loves.count == 1 %}
+                    {{image.loves.count}} person loves {{image.name}}!
 
-        <p class ='loves'>
+                {% elif image.loves.count > 1 %}
+                    {{image.loves.count}} people love {{image.name}}!
+
+                {% else %}
+                    click to give this pet some love!
+                    
+                {% endif %}
+            </p>
             
-            {% if image.loves.count == 1 %}
-            {{image.loves.count}} person loves {{image.name}}!</p>
-            {% elif image.loves.count > 1 %}
-            {{image.loves.count}} people love {{image.name}}!</p>
-            {% else %}
-            <p class ='loves'>click to give this pet some love!</p>
+            <!-- Show Lastest 3 Comments (if available) -->
+            {% with component='from_post' %}
+            {% with len=image.comments.count.all %}
+            
+                {% for comment in image.comments.all|dictsort:'created_at'|slice:"-3:" %}
+                    {% include 'modules/single_comment.html' %}
+                {% endfor %}
+
+            {% endwith %}
+            {% endwith %}
+
+            <!-- Show 'Total Comments Number' (if available)-->
+            {% if image.comments.count > 3 %}
+                <h3>{{image.comments.count}} total comments </h3>
             {% endif %}
-        </p>
-        
-        
-        
-        {% with component='from_post' %}
-        {% with len=image.comments.count.all %}
-        
-            {% for comment in image.comments.all|dictsort:'created_at'|slice:"-3:" %}
-                {% include 'modules/single_comment.html' %}
-            {% endfor %}
 
-        {% endwith %}
-        {% endwith %}
+            <!-- Add Comment Form -->
+            {% with component='from_post' %}
+                {% include 'modules/comment_form.html' %}
+            {% endwith %}       
+        </aside>
+    </main>
 
-        {% if image.comments.count > 3 %}
-            <h3>{{image.comments.count}} total comments </h3>
-        {% endif %}
-
-        {% with component='from_post' %}
-            {% include 'modules/comment_form.html' %}
-        {% endwith %}
-        
-
-    </div>
-</div>
+</article>
