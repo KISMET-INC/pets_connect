@@ -15,7 +15,7 @@
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
 
-            <section class = 'bulletin_left'>
+            <section class = 'left_side'>
                 <article class = 'search_btn_grp'>
                     <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">Search All Pet Owners</button>
                     <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">Search Your Followers</button>
@@ -42,7 +42,7 @@
                 </main>
             </section>
 
-            <section class = 'bulletin_right'>
+            <section class = 'right_side'>
                 <header class = 'user session_user'>
                     {% with user=session_user %}
                         {% include 'modules/person.html' %}
@@ -62,7 +62,7 @@
                     {% for user in session_user.being_followed.all|slice:":5" %}
                     <article class = 'user'>
                         {% include 'modules/person.html' %}
-                        <div>
+                        <div class = 'follower_info'>
                             <h2>{{user.user_name}}</h2>
                             <p>follows you</p>
                         </div>
@@ -70,11 +70,6 @@
                     {% endfor %}
 
                 </main>
-
-                <footer class = 'footer'>
-                    <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
-                    <p>© 2020 PETSCONNECT </p>
-                </footer>
 
             </section>
         </div>
