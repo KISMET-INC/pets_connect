@@ -1,8 +1,8 @@
-<div class = 'comments'>
+<ul id= 'replace_comments'class = 'comments'>
     {% with component='from_modal' %}
     {% for comment in image.comments.all %}
         {% include 'modules/single_comment.html' %}
     {% endfor %}
     {% endwith %}
-    <h2 id='bottom'></h2>
-</div>      
+    <li><h2 id='bottom'></h2></li>
+</ul> 

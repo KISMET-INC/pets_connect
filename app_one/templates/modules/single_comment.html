@@ -1,4 +1,4 @@
-<div class= 'single_comment'>
+<li class= 'single_comment'>
     <!-- EDIT FORM -->
     <form class = "eform{{comment.id}}{{component}} comm_edit hide_form ">
         <textarea class='edit_comment_text_{{comment.id}}{{component}}' type = 'text'>{{comment.text}}</textarea>
@@ -12,7 +12,7 @@
     </form>
     <!-- COMMENT TEXT -->
     <div id=comment{{comment.id}}{{component}} class = 'comm_text' title= 'posted : {{comment.created_at}}'> 
-        <h2><a href = '/profile/{{comment.user.id}}' >{{comment.user.user_name}}: </a><span>{{comment.text}}</span></h2>
+        <p><a href = '/profile/{{comment.user.id}}' >{{comment.user.user_name}}: </a><span>{{comment.text}}</span></p>
 
         <div class = 'edit_actions'>
             {% if comment.user == session_user  or session_user.user_level == 9%}
@@ -26,4 +26,4 @@
         {% endif %}
 
     </div>
-</div>
+</li>

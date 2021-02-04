@@ -90,10 +90,10 @@ nav .fa-users::before, nav a.bulletin{
     width:fit-content;
 }
 .stats p:nth-child(1){
-    color: #E5E5E5;
+    /* color: #E5E5E5; */
 }
 
-.stats p span {
+.stats p.statnums i span {
     display:none;
 }
 .stats h2 {

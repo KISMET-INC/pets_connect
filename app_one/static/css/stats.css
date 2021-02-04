@@ -1,41 +1,86 @@
-.stats {
-    background-color: #E5E5E5;
+ul.stats_bar {
+    list-style-type: none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width:100%;
+    padding: 0px 0px 10px 0px;
+
+}
+.stat_icon i, .stat_num p, .stat_icon button {
+    color:#BFBFBF;
+    font-size: 25px;
+    height:auto;
+    margin: 0px;
+    background-color:transparent;
+    border: none;
+}
+
+.stat_num {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.stat_num p {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.stat_icon button {
+    width:fit-content;
+}
+
+
+.stats_bar .loved i::before, .stats_bar .loved p  {
+    color: #55AAAA;
+}
+
+
+.stats_board {
     position: relative;
     top: -130px;
-    height:0px; 
-    background:rgb(0, 0, 0, 0.3); 
+    height:0px;  
     /* margin-right: 10px; */
     width: 100%;
     z-index: 1;
 }
 
-.stats p, .edit_stats {
-    color:#BFBFBF;
+.stats_board header {
+    padding-top: 20px;
+}
+.stats_board header h1 {
+    font-family: 'Montserrat Alternates', sans-serif;   
+    margin: 0px;
     text-align: center;
-    width: 100%;
+    color:#BFBFBF;
     font-size: 20px;
     margin: 0px;
     padding: 0px;
 }
 
-.stats div a {
+.stats_board header h2 {
+        font-family: 'Montserrat Alternates', sans-serif;   
+        margin: 5px 0px;
+        color:#BFBFBF;
+        font-size:16px;
+        text-align:center;
+    }
+
+
+
+
+.stats_board div a {
     width: fit-content;
 }
 
-.stats p.name , .stats div a  {
-    font-family: 'Montserrat Alternates', sans-serif;   
-    font-size: 16px;
-    text-align: center;
-}
 
-.stats p.name {
+.stats_board p.name {
     padding-left: 5px;
     padding-right: 5px;
 
 }
 
 
-.stats p button {
+.stats_board p button {
     background-color: transparent;
     display:inline-block;
     width:fit-content;
@@ -47,13 +92,6 @@
     text-align: center;
     color:#BFBFBF;
     font-family:unset;
-}
-
-
-.stats p:nth-child(2){
-    margin-bottom: 5px;
-    color:#BFBFBF;
-    font-size:16px;
 }
 
 p i {
@@ -71,22 +109,16 @@ p button i{
 }
 
 
-.stats i.loved::before{
-    color: #55AAAA;
-}
 
-.loved {
-    color: #55AAAA;
-}
 
-/* .stats span {
+/* .stats_board span {
     margin-left: 3px;
     margin-bottom: 12px;
     font-size:20px;
     font-weight: bold;
 } */
 
-.stats .statnums span {
+.stats_board .statnums span {
     margin-left: 3px;
     margin-bottom: 12px;
     font-size:20px;

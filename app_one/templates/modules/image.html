@@ -1,14 +1,6 @@
 
 <article class = 'dimage' id = {{image.id}} >
     <img  class = 'cropped open_modal{{image.id}}' id = 'img{{image.id}}'  src ={{image.pet_img.url}} alt='pet image'>
-    <aside  class = 'stats' id = 'stat{{image.id}}' >
-        {% if session_user != image.user %}
-            <h2>"{{image.name}}"</h2>
-            <p class = 'name'>{{image.desc}}</p>
-                {% include 'modules/stats.html' %}
-        {% else %}
-            <h2 class = 'self_stats'>"{{image.name}}"</h2>
-                {% include 'modules/stats.html' %}
-        {% endif %}
-    </aside>
+    {% include 'modules/stats.html' %}
+
 </article>

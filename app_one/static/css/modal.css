@@ -2,7 +2,6 @@
 @import 'single_comment.css';
 
 
-
 .modal {
     width: 100%;
     
@@ -74,80 +73,35 @@
     display: none;
 }
 
-.modal .right p.name  {
+.modal header .pet_name  {
     font-family: 'Montserrat Alternates', sans-serif;
     /* color:#337AB7; */
     color: #55AAAA;
     font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
+    margin-top: 0px;
     margin-bottom: 10px;
     text-align:center;
     height: 45px;
     background-color: white;
 }
 
-.modal .right .top {
+.modal header {
     position:sticky;
-    top: 10px;
+    top: 15px;
     background-color: white;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     z-index:1
 }
 
-/* .modal .single_comment {
-    
-    padding:0px;
-    width: 100%;
-    margin: 0px;
-    margin-bottom:10px;
-}
-
-
-
-
-.modal .single_comment .fa-times::before {
-    position:static;
-    margin:0px;
-    padding:0px;
-}
-
-
-.modal .single_comment a {
-   text-align:top;
-} */
 .modal .left p:nth-child(2) {
     color: #BFBFBF;
 }
 .modal #replace_comments {
     height: 70%;
 }
-.modal .comments {
-    border-radius: 5px;
-    background-color: var(--gray2);
-    text-align: left;
-    padding: 15px;
-    height: 95%;
-    width:90%;
-    margin: 0 auto; 
-    overflow: scroll;
-    vertical-align: baseline;
-}
 
-
-.modal .comments p {
-    color: grey;
-    font-size: 12px;
-    padding: 0px;
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    max-width:350px;
-    margin: 0px;
-    scroll-padding-bottom: 2em;
-    text-align:right;
-
-
-}
 
 #bottom {
     overflow-anchor: auto;

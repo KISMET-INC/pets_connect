@@ -4,7 +4,7 @@
 @import 'single_comment.css';
 
 
-.stats {
+.stats_board {
     display: none;
 }
 .dimage .edit_stats a {

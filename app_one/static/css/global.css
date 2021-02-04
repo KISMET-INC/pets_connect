@@ -1,7 +1,7 @@
 /* CANVAS AND  NAV BAR  LONG */
 @import "nav.css";
 @import "search_modal.css";
-
+@import "modal_comments.css";
 
 :root {
     --blue1: #55AAAA;
@@ -24,11 +24,16 @@
         color:red;
     }
 
+    #replace_comments {
+        list-style-type: none;
+    }
+
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px;
     padding: 0px;
     font-size: 15px;
+    outline: 1px dotted red;
 
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */

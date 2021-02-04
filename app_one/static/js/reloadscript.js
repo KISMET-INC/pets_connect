@@ -218,11 +218,9 @@ $(document).ready(function(){
     // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
     //*********************************************//
     if (url_location == 'profile'){
-        $('.following_stat').hide()
-        $('.fa-podcast').hide()
+        $('.following').hide()
     } else {
-        $('.following_stat').show()
-        $('.fa-podcast').show()
+        $('.following').show()
     }
 
 
@@ -379,7 +377,7 @@ $(document).ready(function(){
                     if(url_location == 'bulletin'){
                         $(`#post${img_id}`).replaceWith(data);  
                     } else {
-                        $(`#replace${img_id}`).replaceWith(data); 
+                        $(`#stat${img_id}`).replaceWith(data); 
                         get_heart_sum(img_id)          
                     }
                     heart = false;   
@@ -429,7 +427,7 @@ $(document).ready(function(){
         //*********************************************//
         // COMMENT ICON - ON CLICK
         //*********************************************//
-        $('body').on('click', 'p button', function(){
+        $('body').on('click', '.comment_button button', function(){
             var img_id = $(this).attr('id');
             $.ajax({
                 cache: false,
@@ -522,6 +520,7 @@ $(document).ready(function(){
         // Process ADD COMMENT on POST Click
         //*********************************************//
         $('body').on('click', '.comment_form button', function(e){
+            alert('click')
             e.preventDefault()
             var img_id = $(this).attr('id');
             var component = $(this).attr('comp')

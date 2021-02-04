@@ -1,15 +1,11 @@
 .single_comment {
     display:flex;
     padding: 0px;
-    margin: 5px 0px 5px 0px;
+    margin: 15px 0px 15px 0px;
+    vertical-align: middle;
 
 }
 
-.single_comment p:nth-child(1){
-    width: 100%;
-    color: red;
-    display: block;
-}
 
 .single_comment a {
     text-decoration: none;
@@ -17,6 +13,7 @@
     font-weight: bold;
     font-family: 'Montserrat Alternates', sans-serif;
 }
+
 
 .single_comment .edit_actions {
     display:flex;
@@ -32,16 +29,16 @@
 
 
 
-.single_comment h2 {
+.single_comment p {
     font-family: 'Montserrat Alternates', sans-serif;
     margin: 0px;
     padding: 0px;
-    
+    max-width:260px;
 }
 .single_comment .comm_edit {
     display: none;
     align-items: top;
-    vertical-align: top;
+    vertical-align: middle;
     width: 103%;
     border:none;
     margin-left:-10px;
