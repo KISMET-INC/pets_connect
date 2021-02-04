@@ -10,7 +10,7 @@ ul.stats_bar {
 }
 .stat_icon i, .stat_num p, .stat_icon button {
     color:#BFBFBF;
-    font-size: 25px;
+    font-size: 20px;
     height:auto;
     margin: 0px;
     background-color:transparent;
