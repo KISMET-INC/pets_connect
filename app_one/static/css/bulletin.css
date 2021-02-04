@@ -16,7 +16,9 @@ header h3, header a {
     margin:0px;
 }
 
-
+.stats_board {
+    display: flex;
+}
 .user , .followers{
     position:sticky;
     
@@ -31,13 +33,16 @@ header h3, header a {
 .session_user .user_img{
     width: 80px;
     height: auto;
+    border: none;
 }
 
-.user_img {
-    width:60px;
-    height:auto;
+.session_user .person {
+    width:fit-content;
 }
 
+.person {
+    width: 16%;
+}
 .person .user_email {
     display:none;
 }
@@ -76,7 +81,7 @@ input {
 }
 
 .left_side {
-    width:50%;  
+    width:55%;  
 }
     .following {
         display:flex;
@@ -90,10 +95,9 @@ input {
         margin-bottom: 50px;
     }
 
-    .left_side .following .person div.outline {
-        display:flex;
-        justify-content: center;
-        border: 2px solid teal;
+    .left_side .post .user_img {
+        border:none;
+        width: 60px;
     }
 
     .left_side .post .person{
@@ -153,6 +157,7 @@ input {
         }
             .followers .person .user_img{
                 width:50px;
+                border:none;
                 height:auto;
             }
 
@@ -167,9 +172,13 @@ input {
                 }
 
 
-@media (max-width:767px){
+@media (max-width:769px){
     #interface_block_two {
         width: 70%;
+    }
+
+    .person{
+        width:17%;
     }
     .left_side {
         width: 100%;
@@ -195,7 +204,6 @@ input {
     .session_user {
         display:flex;
         flex-direction: column;
-        top: 75px;
     }
 
     .followers {
@@ -233,6 +241,11 @@ input {
     #interface_block_two {
         width: 90%;
     }
+
+    .person{
+        width:20%;
+    }
+
     .left_side {
         width: 100%;
         margin: 0 auto; 
@@ -240,4 +253,27 @@ input {
     .right_side{
         display:none;
     }
+}
+
+
+@media (max-width:426px){
+    .person{
+        width:20%;
+    }
+
+
+}
+
+@media (max-width:326px){
+    .person{
+        width:28%;
+    }
+
+}
+
+@media (max-width:281px){
+    .person{
+        width:27%;
+    }
+
 }

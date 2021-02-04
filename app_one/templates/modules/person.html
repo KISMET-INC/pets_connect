@@ -1,5 +1,5 @@
 <article class = 'person'>
-    <div class = 'outline'>
+    
         {% if image.user.id != none %}
             <a href = '/profile/{{image.user.id}}'>
         {% else %}
@@ -7,7 +7,7 @@
         {% endif %}
                 {% include 'modules/user_img.html' %}
             </a>        
-        </div>
+
         
         {% if image.user.id != none %}
             <a class = 'user_info' href = '/profile/{{image.user.id}}'>

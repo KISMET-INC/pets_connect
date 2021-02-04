@@ -27,14 +27,15 @@
     #replace_comments {
         list-style-type: none;
     }
-
+    .stats_board {
+        display: none;
+    }
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px;
     padding: 0px;
     font-size: 15px;
-    outline: 1px dotted red;
-
+    /* outline: 1px dotted red; */
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */

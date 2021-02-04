@@ -82,9 +82,9 @@
                 {% with location='profile' %}
                 {% with user_id=clicked_user.id %}
                 {% for image in images %}
-                <div id = {{image.id}} class = 'dimage'>
+
                     {% include 'modules/image.html' %} 
-                </div>
+                
                 {% endfor %}
                 {% endwith %}
                 {% endwith %}

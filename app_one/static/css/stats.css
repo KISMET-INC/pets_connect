@@ -112,12 +112,14 @@ p button i{
 
 
 
-/* .stats_board span {
-    margin-left: 3px;
-    margin-bottom: 12px;
-    font-size:20px;
-    font-weight: bold;
-} */
+.stats_board .edit_stats {
+    text-align: center;
+    margin-left: -10px;
+}
+.stats_board .edit_stats a {
+        color: var(--gray1);
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
 
 .stats_board .statnums span {
     margin-left: 3px;
