@@ -520,7 +520,7 @@ def replace_stats(request, image_id):
     return render(request,'modules/stats.html', context)
 
 #=============================================##
-# replace stats
+# get image list
 #=============================================##
 def get_image_list(request, user_id):
     user_images = User.objects.get(id=user_id).images.all()

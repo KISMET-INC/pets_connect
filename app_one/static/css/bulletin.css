@@ -17,7 +17,7 @@ header h3, header a {
 }
 
 .stats_board {
-    display: flex;
+    display: unset;
 }
 .user , .followers{
     position:sticky;
