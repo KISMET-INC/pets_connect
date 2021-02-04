@@ -215,9 +215,9 @@ $(document).ready(function(){
     //*********************************************//
     $('.comm_edit').hide()
 
-    if (url_location != 'bulletin'){
-        $('.stats_board').hide()
-    }
+    // if (url_location != 'bulletin'){
+    //     $('.stats_board').css('display', 'flex')
+    // }
     
 
     

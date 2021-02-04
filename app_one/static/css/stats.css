@@ -10,7 +10,7 @@ ul.stats_bar {
 }
 .stat_icon i, .stat_num p, .stat_icon button {
     color:#BFBFBF;
-    font-size: 20px;
+    font-size: 21px;
     height:auto;
     margin: 0px;
     background-color:transparent;
@@ -38,7 +38,7 @@ ul.stats_bar {
 
 .stats_board {
     position: relative;
-    top: -130px;
+    top: -135px;
     height:0px;  
     /* margin-right: 10px; */
     width: 100%;
@@ -60,9 +60,10 @@ ul.stats_bar {
 
 .stats_board header h2 {
         font-family: 'Montserrat Alternates', sans-serif;   
-        margin: 5px 0px;
+        margin: 5px 0px 0px 0px;
+        padding: 3px;
         color:#BFBFBF;
-        font-size:16px;
+        font-size:14px;
         text-align:center;
     }
 
