@@ -27,7 +27,10 @@
     #replace_comments {
         list-style-type: none;
     }
-  
+
+    .stats_board {
+        display:none;
+    }
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px;
