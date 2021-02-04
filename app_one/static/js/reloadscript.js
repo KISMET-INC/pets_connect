@@ -533,7 +533,6 @@ $(document).ready(function(){
         // Process ADD COMMENT on POST Click
         //*********************************************//
         $('body').on('click', '.comment_form button', function(e){
-            alert('click')
             e.preventDefault()
             var img_id = $(this).attr('id');
             var component = $(this).attr('comp')
