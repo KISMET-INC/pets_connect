@@ -32,15 +32,18 @@ $(document).ready(function(){
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         $('body').on('click', '.dimage', function(){
 
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var stats = `#stat${img_id}`
-            
+            console.log('click image')
+            console.log(heart)
+            $('.stats_board').hide()
             // if heart was not clicked toggle dimage opacity and stat show
-            if(heart == false && selfclick == false){
+            if(heart == false){
+                console.log('enter toggle')
                 if( $(`${img}`).css('opacity') != '1') {
                     $(`${img}`).css('opacity', '1')
                     $(`${stats}`).hide()
@@ -58,26 +61,26 @@ $(document).ready(function(){
     // FOR DESKTOP AND LAPTOP
     // Mousover / Mouseout Behavior
     //*********************************************//
-    } else {
-        $('body').on('mouseover', '.dimage', function(){
+    // } else {
+    //     $('body').on('mouseover', '.dimage', function(){
                 
-               // Declare Variables needed 
-                var img_id = $(this).attr('id');
-                var img = `.open_modal${img_id}`
-                var stats = `#stat${img_id}` 
-                $( `${img}`).css('opacity', '.6')
-                $(`${stats}`).show()
-            })
+    //            // Declare Variables needed 
+    //             var img_id = $(this).attr('id');
+    //             var img = `.open_modal${img_id}`
+    //             var stats = `#stat${img_id}` 
+    //             $( `${img}`).css('opacity', '.6')
+    //             $(`${stats}`).show()
+    //         })
 
-            .on('mouseleave', '.dimage', function(){
-                var id = $(this).attr('id');
-                var stats = `#stat${id}`
-                var img = `.open_modal${id}`
+    //         .on('mouseleave', '.dimage', function(){
+    //             var id = $(this).attr('id');
+    //             var stats = `#stat${id}`
+    //             var img = `.open_modal${id}`
 
-                $( `${img}`).css('opacity', '1')
-                $(`${stats}`).hide()
-            });
-        }  
+    //             $( `${img}`).css('opacity', '1')
+    //             $(`${stats}`).hide()
+    //         });
+    //     }  
         
         // END DEVICE DEPENDENT INSTRUCTIONS
 
@@ -359,14 +362,14 @@ $(document).ready(function(){
             var title = $(this).attr('title');
             var stats = `#stat${img_id}`
             get_session_id()
-            
+            console.log('heart click')
             // Stops the ability to like your own pet
-            if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
-                heart = false;
-                $(`${img}`).css('opacity', '.6')
-                $(`${stats}`).show()
+            // if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
+            //     heart = false;
+            //     $(`${img}`).css('opacity', '.6')
+            //     $(`${stats}`).show()
                 
-            } else {
+            // } else {
                 // Process adding heart to image
                 $.ajax({
                     cache: false,
@@ -374,18 +377,20 @@ $(document).ready(function(){
                     url: `/process_heart/${img_id}/${url_location}`,
                 })
                 .done(function(data){
+                    console.log('return data')
                     if(url_location == 'bulletin'){
                         $(`#post${img_id}`).replaceWith(data);  
                     } else {
                         $(`#stat${img_id}`).replaceWith(data); 
-                        get_heart_sum(img_id)          
+                        get_heart_sum(img_id)
+                        //$(`#stat${img_id}`).show()          
                     }
                     heart = false;   
                 })
                 .fail(function(data){
                     console.log("Error in fetching data");
                 })
-            }
+            
             
         }); // END PROCESS HEART CLICKS
 
