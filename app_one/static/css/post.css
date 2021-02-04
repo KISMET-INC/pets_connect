@@ -4,23 +4,59 @@
 img {
     width:100%;
 }
-.post.stats {
-    margin-top:10px;
+.post aside.post_stats  {
+    background-color: var(--gray2);
+    padding:20px 20px 10px 20px;
 }
-.stats div {
-    display:flex;
-    align-items: top;
-    width:100%;
+/* OVERRIDE STATS CSS */
+.post .stats_board {
+    background-color: var(--gray2);
+    height:35px;
+    position:static;
 }
 
-.comment_form {
+    .post .stat_num , .post .stats_board header{
+        display:none;
+    }
+    .post ul.stats_bar {
+        justify-content: flex-start;
+        
+    }
+
+    .post .stat_icon i {
+        margin-right:15px;
+        font-size: 27px;
+    
+    }
+
+    .post .loves {
+        font-family: 'Montserrat Alternates', sans-serif;
+        color:var(--gray1);
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /* OVERRIDE SINGLE COMMENT */
+    .single_comment {
+        margin: 10px 0px;
+    }
+        .single_comment p {
+            max-width: 440px;
+        }
+
+
+    .post h3 {
+        margin: 15px 0px 10px 0px;
+    }
+
+.post .comment_form {
     border: none;
     border-top:1px solid black;
     border-radius: 0px;
     box-shadow: none;
     background-color:transparent;
     width: 100%;
-  
+
 }
 
 .comment_form button {
