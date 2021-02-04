@@ -4,9 +4,7 @@
 @import 'single_comment.css';
 
 
-.stats {
-    display: none;
-}
+
 .dimage .edit_stats a {
     display:none;
 }

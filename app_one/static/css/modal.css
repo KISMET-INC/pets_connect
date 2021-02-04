@@ -2,7 +2,6 @@
 @import 'single_comment.css';
 
 
-
 .modal {
     width: 100%;
     
@@ -74,83 +73,35 @@
     display: none;
 }
 
-.modal .right p.name  {
+.modal header .pet_name  {
     font-family: 'Montserrat Alternates', sans-serif;
     /* color:#337AB7; */
     color: #55AAAA;
     font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
+    margin-top: 0px;
     margin-bottom: 10px;
     text-align:center;
     height: 45px;
     background-color: white;
 }
 
-.modal .right .top {
+.modal header {
     position:sticky;
-    top: 10px;
+    top: 15px;
     background-color: white;
     padding-bottom: 20px;
-    z-index:1
+    z-index:1;
 }
 
-.modal .single_comment {
-    
-    padding:0px;
-    width: 100%;
-    margin: 0px;
-    margin-bottom:10px;
-}
-
-
-
-.modal .single_comment i {
-    color: #55AAAA;
-    margin-left: 10px;
-}
-.modal .single_comment .fa-times::before {
-    position:static;
-    margin:0px;
-    padding:0px;
-}
-
-
-.modal .single_comment a {
-   text-align:top;
-}
 .modal .left p:nth-child(2) {
     color: #BFBFBF;
 }
 .modal #replace_comments {
     height: 70%;
 }
-.modal .comments {
-    border-radius: 5px;
-    background-color: var(--gray2);
-    text-align: left;
-    padding: 15px;
-    height: 95%;
-    width:90%;
-    margin: 0 auto; 
-    overflow: scroll;
-    vertical-align: baseline;
-}
 
-
-.modal .comments p {
-    color: grey;
-    font-size: 12px;
-    padding: 0px;
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    max-width:350px;
-    margin: 0px;
-    scroll-padding-bottom: 2em;
-    text-align:right;
-
-
-}
 
 #bottom {
     overflow-anchor: auto;
@@ -181,29 +132,6 @@
     width: 90%;
 }
 
-.single_comment input:nth-child(2) ,.single_comment input:nth-child(3){
-    vertical-align: top;
-    
-}
-
-
-.single_comment input:nth-child(1) {
-    height: 53px;
-    margin-left:3px;
-    margin-right:3px;
-    color:gray;
-}
-
-
-.comment_form button {
-    margin:0px;
-    background-color: white;
-    border: none;
-    box-shadow: none;
-    color: grey;
-    text-align: right;
-}
-
 .comment_form {
     background-color: white;
     padding: 3px;
@@ -212,9 +140,17 @@
     display: flex;
     width:80%;
     margin: 0 auto; 
-    margin-bottom:15px;
-    
 }
+    .comment_form button {
+        margin:0px;
+        background-color: white;
+        border: none;
+        box-shadow: none;
+        color: grey;
+        text-align: right;
+    }
+
+
 
 .modal .stats {
     align-items: center;
@@ -229,43 +165,8 @@
 }
 
 .modal .left p:nth-child(5) {
-   font-size: 19px;
+    font-size: 19px;
 }
-.single_comment input:nth-child(2) {
-    width: 60px;
-    height: 53px;
-    color:grey;
-}
-
-.single_comment input:nth-child(3){
-    color:grey;
-    padding-right: 5px;
-    padding-left: 5px;
-    
-}
-
-.modal .single_comment h2 {
-    font-family: 'Montserrat Alternates', sans-serif;
-    margin:0px;
-    width: fit-content;
-    font-size: 15px;
-    display: inline-block;
-    width:90%;
-}
-.modal .single_comment h2 span {
-   width:80%;
-}
-
-.modal .single_comment div {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    
-}
-.modal .single_comment div.comm_text{
-    width: 100%;
-}
-
 
 /*******************************/
 /*  MEDIA BREAKPOINT 768px  

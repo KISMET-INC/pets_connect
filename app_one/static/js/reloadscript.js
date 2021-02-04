@@ -153,13 +153,16 @@ $(document).ready(function(){
     $('body').on('click', '.fa-pen', function(e){
         var comment_id = $(this).attr('id')
         var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component =$(this).attr('comp')
         //Reset and show all comments and hide all inputs when
         //user clicks another comment
         $(`.comm_text`).show()
         $(`.comm_edit`).hide()
         
-        $(`.eform${comment_id}`).css('display','flex').show()
-        $(`.single_comment #comment${comment_id}`).hide()
+
+        $(`.eform${comment_id}${component}` ).css('display','flex').show()
+        
+        $(`.single_comment #comment${comment_id}${component}`).hide()
 
         // On CANCEL CLICK - re-show text / hide edit input
         $('body').on('click', '.edit_comment_cancel', function(e){
@@ -167,10 +170,10 @@ $(document).ready(function(){
             var comment_id = $(this).attr('comm_id')
             $(`.comm_text`).show()
             
-            $(`.edit_comment_text_${comment_id}`).val(new_comment)
-            $(`.eform${comment_id}`).hide()
+            $(`.edit_comment_text_${comment_id}${component}`).val(new_comment)
+            $(`.eform${comment_id}${component}`).hide()
     
-            $(`.single_comment #comment${comment_id}`).show()
+            $(`.single_comment #comment${comment_id}${component}`).show()
         })
         
     })
@@ -182,8 +185,9 @@ $(document).ready(function(){
         e.preventDefault()
         var comment_id = $(this).attr('comm_id')
         var image_id = $(this).attr('img_id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
         var component = $(this).attr('comp')
+        var new_comment = $(`.edit_comment_text_${comment_id}${component}`).val()
+        console.log(new_comment)
         $.ajax({
             cache: false,
             headers: { "X-CSRFToken": csrftoken },  
@@ -193,9 +197,9 @@ $(document).ready(function(){
         })
         .done(function(data){
             if( component == 'from_post'){
-                $(`#post${image_id}`).html(data);   
+                $(`#post${image_id}`).replaceWith(data);   
             } else {
-                $('#replace_comments').html(data)                                  
+                $('#replace_comments').replaceWith(data)                                  
                 scrollToBottom()
             }
             $(`${form_text}`).val("")
@@ -214,11 +218,9 @@ $(document).ready(function(){
     // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
     //*********************************************//
     if (url_location == 'profile'){
-        $('.following_stat').hide()
-        $('.fa-podcast').hide()
+        $('.following').hide()
     } else {
-        $('.following_stat').show()
-        $('.fa-podcast').show()
+        $('.following').show()
     }
 
 
@@ -267,7 +269,7 @@ $(document).ready(function(){
     //*********************************************//
     $('.logout').on('click',function(){
         alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 HEARTS \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
-     })
+    })
 
     //*********************************************//
     // scrollToBottom()
@@ -373,9 +375,9 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     if(url_location == 'bulletin'){
-                        $(`#post${img_id}`).html(data);  
+                        $(`#post${img_id}`).replaceWith(data);  
                     } else {
-                        $(`#replace${img_id}`).html(data); 
+                        $(`#stat${img_id}`).replaceWith(data); 
                         get_heart_sum(img_id)          
                     }
                     heart = false;   
@@ -425,7 +427,7 @@ $(document).ready(function(){
         //*********************************************//
         // COMMENT ICON - ON CLICK
         //*********************************************//
-        $('body').on('click', 'p button', function(){
+        $('body').on('click', '.comment_button button', function(){
             var img_id = $(this).attr('id');
             $.ajax({
                 cache: false,
@@ -462,9 +464,9 @@ $(document).ready(function(){
                     .done(function(data){
 
                         if (url_location == 'bulletin'){
-                            $(`#post${img_id}`).html(data); 
+                            $(`#post${img_id}`).replaceWith(data); 
                         } else {
-                            $(`.dashboard #${img_id}`).html(data)
+                            $(`.dashboard #${img_id}`).replaceWith(data)
                         }
                         
                     })
@@ -501,9 +503,9 @@ $(document).ready(function(){
             .done(function(data){   
 
                 if (component == 'from_post'){ 
-                    $(`#post${img_id}`).html(data); 
+                    $(`#post${img_id}`).replaceWith(data); 
                 } else {    
-                    $('#replace_comments').html(data)                                  
+                    $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
                 }
             })
@@ -518,6 +520,7 @@ $(document).ready(function(){
         // Process ADD COMMENT on POST Click
         //*********************************************//
         $('body').on('click', '.comment_form button', function(e){
+            alert('click')
             e.preventDefault()
             var img_id = $(this).attr('id');
             var component = $(this).attr('comp')
@@ -535,9 +538,9 @@ $(document).ready(function(){
             })
             .done(function(data){
                 if( $(`${form_compnt}`).val() == 'from_post'){
-                    $(`#post${img_id}`).html(data);   
+                    $(`#post${img_id}`).replaceWith(data);   
                 } else {
-                    $('#replace_comments').html(data)                                  
+                    $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
                 }
                 $(`${form_text}`).val("")

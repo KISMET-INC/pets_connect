@@ -50,9 +50,11 @@
                 {% if session_user == clicked_user %}
                 <form class="share_pet" enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
                     <h3>Share Your Pet</h3>
-                    {% csrf_token %}     
-                        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name..">
-                        <input name = 'desc' maxlength="50" placeholder="Description..">
+                    {% csrf_token %}
+                        <label for ='name'>Enter Pet Name</label>     
+                        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
+                        <label for = 'desc'>Describe the Photo</label>  
+                        <input name = 'desc' maxlength="50" placeholder="Description">
                         <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
                         {{ upload_pet_form.as_p}}           
                         
@@ -80,9 +82,9 @@
                 {% with location='profile' %}
                 {% with user_id=clicked_user.id %}
                 {% for image in images %}
-                <div id = {{image.id}} class = 'dimage'>
+
                     {% include 'modules/image.html' %} 
-                </div>
+                
                 {% endfor %}
                 {% endwith %}
                 {% endwith %}

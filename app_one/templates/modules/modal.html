@@ -1,4 +1,4 @@
-<!-- MODAL -->
+
 
 <div id="comment_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -6,36 +6,32 @@
         <div class="modal-content">
             <div class="modal-body">
 
-                <div class ='left'>
+                <section class ='left'>
                     <i class="fas fa-times close_modal"></i>
-                    <img class="cropped2" src = {{image.pet_img.url}}>
+                    <img class="cropped2" src = {{image.pet_img.url}} alt='pet image'>
                     <div class = 'stats'>
-                       {% include 'modules/stats.html' %}
+                        {% include 'modules/stats.html' %}
                     </div>
                     <p>Posted by:</p>
                     <p>{{image.user.user_name}}</p>
-                    <p>"{{image.desc}}"</p>
-                </div>
+                    {% if image.desc %}
+                        <p>"{{image.desc}}"</p>
+                    {% endif %}
+                </section>
 
-                <div class= 'right'>
-                <div class = top>
-                    <p class = 'name'>{{image.name}}</p>
-                    {% with component='from_modal' %}
-                        {% include 'modules/comment_form.html' %}
-                    {% endwith %}
-                </div>
-                
-                <div id= 'replace_comments'>
+                <section class= 'right'>
+                    <header class = top>
+                        <h1 class = 'pet_name'>{{image.name}}</h1>
+                        {% with component='from_modal' %}
+                            {% include 'modules/comment_form.html' %}
+                        {% endwith %}
+                    </header>
+                    
                     {% include 'modules/modal_comments.html' %}
-                </div>
 
-                </div>
+
+                </section>
             </div>
         </div> 
     </div>
 </div>
-<!-- END MODAL -->
-
-<script>
-
-</script>

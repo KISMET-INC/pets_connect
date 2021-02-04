@@ -1,6 +1,7 @@
 
 <form class = "comment_form">
     {% csrf_token %}
+    <label for='text'> Add a Comment</label>
     <input class = 'form_text{{image.id}}{{component}}' name = 'text' placeholder="Add a Comment..." maxlength="50">
     <input class = 'form_img_id{{image.id}}{{component}}' type="hidden" name = 'image_id' value= '{{image.id}}'>
     <input class = 'form_compnt{{image.id}}{{component}}' type="hidden" name = 'component' value= '{{component}}'>

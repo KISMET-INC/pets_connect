@@ -1,31 +1,44 @@
-
-    {% if session_user == image.user and session_user.email != 'guest@petsconnect.com' or session_user.user_level == 9 %}
-    <p>
-        <i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Your Pet Loves"></i><span>{{image.loves.count}}</span> 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comments"></i></button><span>{{image.comments.count}}</span>
-    </p>
-    <div class = 'edit_stats'>
-        <a href='/edit_image/{{image.id}}'>Edit |</a>
-        <a href='/process_remove_image/{{image.id}}'>Delete</a>
-    </div>
-    
-    
-
-    {% else %}
-    <p>
-        {% if session_user not in image.user.being_followed.all %}
-        <a><i image_id={{image.id}} user_id={{image.user.id}} data-placement="bottom" class="fas fa-podcast hide_icon{{image.id}}" title ="Follow {{image.user.user_name}}"></i></a><span  class= 'hide_icon{{image.id}} following_stat'>{{image.user.being_followed.count}}</span>
+<aside class = 'stats_board' id = 'stat{{image.id}}' >
+    <header>
+        <h1>"{{image.name}}"</h1>
+        {% if image.desc %}
+            <h2 class = 'name'>{{image.desc}}</h2>
         {% endif %}
-
-        {% if session_user in image.loves.all %}
-        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart loved" title="You Already Love {{image.name}}"></i></a><span class = 'loved'>{{image.loves.count}}</span>
+    </header>
+        <ul class = 'stats_bar'>
+        {% if session_user == image.user and session_user.email != 'guest@petsconnect.com' or session_user.user_level == 9 %}
+            <li class = 'stat_icon'><i class="fas fa-heart" id={{image.id}} title="Your Pet Loves"></i></li>
+            <li class= 'stat_num'><p >{{image.loves.count}}</p></li> 
+            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
+            <li class = 'stat_num'><p>{{image.comments.count}}</p></li>
+        </ul>
+            <section class = 'edit_stats'>
+                <a href='/edit_image/{{image.id}}'>Edit |</a>
+                <a href='/process_remove_image/{{image.id}}'>Delete</a>
+            </section>
+        
         {% else %}
-        <a><i id={{image.id}} data-placement="bottom" class="fas fa-heart" title="Send {{image.name}} Your Love"></i></a><span>{{image.loves.count}}</span>
-        {% endif %}
 
-        <button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i data-placement="bottom" class="fas fa-comment-alt" title ="Comment"></i></button><span>{{image.comments.count}}</span>
-    </p>
+            {% if session_user not in image.user.being_followed.all %}
+                <li class ='stat_icon following hide_icon{{image.id}}' ><i class = ' fas fa-podcast' image_id={{image.id}} user_id={{image.user.id}} " title ="Follow {{image.user.user_name}}"></i></li>
+
+                <li class = 'stat_num following hide_icon{{image.id}}' ><p>{{image.user.being_followed.count}}</p></li>
+            {% endif %}
+
+            {% if session_user in image.loves.all %}
+                <li class = 'stat_icon loved'><i id={{image.id}} class="fas fa-heart" title="You Already Love {{image.name}}"></i>
+                <li class = 'stat_num loved'><p>{{image.loves.count}}</p></li>
+            {% else %}
+                <li class = stat_icon><i id={{image.id}} class="fas fa-heart" title="Send {{image.name}} Your Love"></i>
+                <li class = 'stat_num'><p>{{image.loves.count}}</p></li>
+            {% endif %}
+
+            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title ="Comment"></i></button>
+            <li class = 'stat_num'><p >{{image.comments.count}}</p></li>
+
     {% endif %}
+</ul>
+</aside>
 
     
 

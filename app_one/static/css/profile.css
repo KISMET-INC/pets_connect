@@ -7,15 +7,6 @@ nav .fa-user::before, nav a.profile {
     color:gray;
 }
 
-.stats {
-    display: none;
-    padding: 0px;
-}
-
-.stats p.name {
-    display:none;
-}
-
 .dimage {
     width:24.5%;
 }

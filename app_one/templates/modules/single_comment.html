@@ -1,19 +1,29 @@
-<div class= 'single_comment'>
-    <form class = "eform{{comment.id}} comm_edit hide_form">
-        <textarea class='edit_comment_text_{{comment.id}} com_form' type = 'text'>{{comment.text}}</textarea>
+<li class= 'single_comment'>
+    <!-- EDIT FORM -->
+    <form class = "eform{{comment.id}}{{component}} comm_edit hide_form ">
+        <textarea class='edit_comment_text_{{comment.id}}{{component}}' type = 'text'>{{comment.text}}</textarea>
+
         <div class = 'edit_actions'>
-            <input comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_btn' type = 'submit' value =Edit>
-            <input comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_cancel' type = 'submit' value =X>
+            <label for='edit_comment'> Edit Your Comment</label>
+            <i name = 'edit_comment' comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_btn fas fa-check'></i>
+            <label for='cancel'> Cancel</label>
+            <i name='cancel' comm_id={{comment.id}} img_id={{image.id}} comp= {{component}} class='edit_comment_cancel fas fa-times'></i>
         </div>
     </form>
-    <div id=comment{{comment.id}} class = 'comm_text'>
-        <h2>{{comment.user.user_name}}: <span>{{comment.text}}</span></h2>
-        {% if comment.user == session_user  or session_user.user_level == 9%}
-        <i id='{{comment.id}}' img='{{image.id}}' comp={{component}} class="{{component}} fas fa-times delete_comment"></i>        
-    <i id='{{comment.id}}' img='{{image.id}}' comp={{component}} class="{{component}} fas fa-pen edit_comment"></i>        
-    {% endif %}
-    {% if component == 'from_modal' %}
-    <!-- <p>{{comment.created_at|date:"M d Y h:i A" }}</p> -->
-    {% endif %}
+    <!-- COMMENT TEXT -->
+    <div id=comment{{comment.id}}{{component}} class = 'comm_text' title= 'posted : {{comment.created_at}}'> 
+        <p><a href = '/profile/{{comment.user.id}}' >{{comment.user.user_name}}: </a><span>{{comment.text}}</span></p>
+
+        <div class = 'edit_actions'>
+            {% if comment.user == session_user  or session_user.user_level == 9%}
+                <i id='{{comment.id}}' img='{{image.id}}' comp={{component}} class="{{component}} fas fa-pen edit_comment"></i>        
+                <i id='{{comment.id}}' img='{{image.id}}' comp={{component}} class="{{component}} fas fa-times delete_comment"></i>        
+            {% endif %}
+        </div>
+
+        {% if component == 'from_modal' %}
+        <!-- <p>{{comment.created_at|date:"M d Y h:i A" }}</p> -->
+        {% endif %}
+
     </div>
-</div>
+</li>

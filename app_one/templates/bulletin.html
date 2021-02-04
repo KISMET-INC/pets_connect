@@ -15,33 +15,35 @@
         {% include 'modules/nav.html' %}
         <div id="interface_block_two">
 
-            <div class = 'bulletin_left'>
-                <div class = 'search_btn_grp'>
+            <section class = 'left_side'>
+                <article class = 'search_btn_grp'>
                     <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">Search All Pet Owners</button>
                     <button type="button" class="btn btn-info btn-lg search_btn" data-toggle="modal" data-target="#search_modal">Search Your Followers</button>
-                </div>
-                <p><b>You Follow:</b></p>
-                <div class = 'following'>
-                    {% for user in session_user.is_following.all|dictsortreversed:'updated_at' %}
-                        {% include 'modules/person.html' %}
-                    {% endfor %}
-                </div>
+                </article>
+                <section>
+                    <h3><b>You Follow:</b></h3>
+                    <section class = 'following'>
+                        {% for user in session_user.is_following.all|dictsortreversed:'updated_at' %}
+                            {% include 'modules/person.html' %}
+                        {% endfor %}
+                    </section>
+                </section>
 
 
-                <div class = 'posts'>
-                    <p><b>Their Pets:</b></p>
+                <main class = 'posts'>
+                    <h3><b>Their Pets:</b></h3>
                     {% for image in images %}
                     {% if session_user in image.user.being_followed.all %}
-                            <div id='post{{image.id}}'>
-                                {% include 'modules/post.html' %}
-                            </div>
+                            
+                        {% include 'modules/post.html' %}
+                            
                         {% endif %}
                     {% endfor %}
-                </div>
-            </div>
+                </main>
+            </section>
 
-            <div class = 'bulletin_right'>
-                <div class = 'user session_user'>
+            <section class = 'right_side'>
+                <header class = 'user session_user'>
                     {% with user=session_user %}
                         {% include 'modules/person.html' %}
                     {% endwith %}
@@ -49,36 +51,30 @@
                         <h2>{{session_user.user_name}}</h2>
                         <p>{{session_user.email}}</p>
                     </div>
-                </div>
-               
-                <div class = 'followers'>
+                </header>
+                <main class = 'followers'>
 
-                    <div class= 'heading'>
+                    <header class= 'heading'>
                         <h3>Followers</h3>                
                         <a class = 'search_btn' data-toggle="modal" data-target="#search_modal">See all {{session_user.being_followed.all.count}} followers</a>
-                    </div>
+                    </header>
                     
                     {% for user in session_user.being_followed.all|slice:":5" %}
-                    <div class = 'user'>
+                    <article class = 'user'>
                         {% include 'modules/person.html' %}
-                        <div>
+                        <div class = 'follower_info'>
                             <h2>{{user.user_name}}</h2>
                             <p>follows you</p>
                         </div>
-                    </div>
+                    </article>
                     {% endfor %}
 
-                </div>
+                </main>
 
-                <div class = 'footer'>
-                    <p>About | Help | Press | API | Jobs | Privacy | Terms | Locations | Top Accounts | Hashtags</p>
-                    <p>© 2020 PETSCONNECT </p>
-                </div>
-
-            </div>
+            </section>
         </div>
     </div>
-    {% with component='from_modal' %}
+    {% with component='modal' %}
     <div id='replaceModal'>
         {% include 'modules/modal.html' %} 
     </div>

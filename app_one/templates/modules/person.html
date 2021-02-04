@@ -1,5 +1,5 @@
-<div class = 'person'>
-    <div class = 'outline'>
+<article class = 'person'>
+    
         {% if image.user.id != none %}
             <a href = '/profile/{{image.user.id}}'>
         {% else %}
@@ -7,16 +7,14 @@
         {% endif %}
                 {% include 'modules/user_img.html' %}
             </a>        
-        </div>
+
         
-        <div class = 'user_info'>
-            {% if image.user.id != none %}
-                <a href = '/profile/{{image.user.id}}'>
-            {% else %}
-                <a href = '/profile/{{user.id}}'>
-            {% endif %}
-                <p>{{user.user_name}}</p>
-                <p class = 'user_email'>{{user.email}}</p>
-            </a>
-        </div>
-    </div>
+        {% if image.user.id != none %}
+            <a class = 'user_info' href = '/profile/{{image.user.id}}'>
+        {% else %}
+            <a class = 'user_info' href = '/profile/{{user.id}}'>
+        {% endif %}
+            <p>{{user.user_name}}</p>
+            <p class = 'user_email'>{{user.email}}</p>
+        </a> 
+    </article>
