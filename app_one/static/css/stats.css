@@ -116,6 +116,7 @@ p button i{
 .stats_board .edit_stats {
     text-align: center;
     margin-left: -10px;
+    margin-top: -15px;
 }
 .stats_board .edit_stats a {
         color: var(--gray1);
