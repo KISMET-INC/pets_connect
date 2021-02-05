@@ -251,8 +251,9 @@ def process_edit_user(request,user_id):
         user.email = request.POST['email']
         user.user_name = request.POST['user_name']
         if 'pass' in request.POST:
-            hash = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
-            user.password = hash
+            if len (request.POST['pass']) > 5:
+                hash = bcrypt.hashpw(request.POST['pass'].encode(), bcrypt.gensalt()).decode()
+                user.password = hash
 
         if request.FILES:
             user.user_img = request.FILES['user_img']

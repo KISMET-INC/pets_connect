@@ -44,8 +44,6 @@
                     </form>
                 </div>
 
-
-           
                     
                     {% if messages %}
                     <ul class="messages">
@@ -59,7 +57,7 @@
                     <h3>Share Your Pet</h3>
                     {% csrf_token %}     
                         <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
-                        <input name = 'desc' maxlength="50" placeholder="Description">
+                        <input name = 'desc' maxlength="50" placeholder="Tell us about the photo!">
                         <input type="hidden" name = 'user_id' value= '{{clicked_user.id}}'>
                         {{ upload_pet_form.as_p}}           
                         

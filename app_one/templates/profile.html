@@ -54,7 +54,7 @@
                         <label for ='name'>Enter Pet Name</label>     
                         <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
                         <label for = 'desc'>Describe the Photo</label>  
-                        <input name = 'desc' maxlength="50" placeholder="Description">
+                        <input name = 'desc' maxlength="50" placeholder="Tell us about the photo!">
                         <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
                         {{ upload_pet_form.as_p}}           
                         
