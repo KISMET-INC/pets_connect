@@ -16,7 +16,8 @@ class UserManager(models.Manager):
         print(postData)
         # empty error dictionary
         errors = {}
-
+        if post['key'] != 'WelcomeFriend!':
+            errors['key'] = ' Permission Key Incorrect. You must request a permission key to register an account'
         # check password and confirm password match
         if post['pass'] != post['confirm']:
             errors['passmatch'] = 'Passwords do no match'
@@ -131,7 +132,7 @@ class PetManager(models.Manager):
         errors = {}
 
         if len(post['name']) < 1:
-            errors['name'] = 'A name is required'
+            errors['name'] = 'A pet name is required'
         
         if 'pet_img' not in postFiles:
             errors['image'] = 'An image is required' 

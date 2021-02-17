@@ -1,0 +1,31 @@
+<form class="share_pet" enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
+
+    <section class = 'left'>
+        <h3>Share Your Pet</h3>
+    {% csrf_token %}
+        <label for ='name'>Enter Pet Name</label>     
+        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
+        {% if session_user.email == 'guest@petsconnect.com'%}
+        <label for = 'desc'>Tell us your name</label>  
+        <input name = 'desc' maxlength="50" placeholder="Tell us your name!">
+        {% else %}
+        <label for = 'desc'>Describe the Photo</label>  
+        <input name = 'desc' maxlength="50" placeholder="Tell us about the photo!">
+        {% endif %}
+        <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
+        <input type='hidden' name = 'location' value='{{location}}'>
+         {{ upload_pet_form.as_p}}
+      
+        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
+    </section>
+    <section class = 'right'>
+        <ul class="messages">
+        {% for message in messages %}
+            {% if messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endif %} 
+        {% endfor %}
+        </ul>
+    </section>
+        
+</form>

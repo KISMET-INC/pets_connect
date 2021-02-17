@@ -16,36 +16,48 @@
         {% include 'modules/nav_landing.html' %}
 
         <div id="interface_block_one">
-            
-                <h2>Register</h2>
-                <form action="/process_register"method="post">
-                    {% csrf_token %}
+            <form action="/process_register"method="post">
+                <label for = 'key'>Permission Key </label> 
+                <input name = 'key' type = 'password'>
+                <p style='color: red'>Due to a large amount of empty accounts being created, in order to create your own account, please email <a href='mailto:ksanmartin909@gmail.com'>ksanmartin909@gmail.com</a> to have a permission key emailed to you. Thank you! </p>
+                <hr>
+                <div id= main>
+                    <section class = 'right'>
+                        <h2>Register</h2>
+                            {% csrf_token %}
 
-                    <label for = 'email'>Email Address </label> 
-                    <input name = 'email' type = 'email'placeholder='ksanmartin@petsconnect.com'>
+                            <label for = 'email'>Email Address </label> 
+                            <input name = 'email' type = 'email'placeholder='ksanmartin@petsconnect.com'>
 
-                    <label for = 'first'>Username </label> 
-                    <input name = 'first' type = 'text' maxlength="15" placeholder=' ksanmartin'>
+                            <label for = 'first'>Username </label> 
+                            <input name = 'first' type = 'text' maxlength="15" placeholder=' ksanmartin'>
 
-                    <label for = 'pass'>Password </label>
-                    <input name = 'pass' type = 'password'>
-                
-                    <label for = 'confirm'>Confirm Password </label> 
-                    <input name = 'confirm' type = 'password'>
-                    <div>
-                        <button class="btn btn-primary btn-lg"  type ='submit'> Register </button>
-                        <a href = "/signin">Already have an account? Sign In</a>
-                    </div>
+                            <label for = 'pass'>Password </label>
+                            <input name = 'pass' type = 'password'>
+                        
+                            <label for = 'confirm'>Confirm Password </label> 
+                            <input name = 'confirm' type = 'password'>
+                            <div>
+                                <button class="btn btn-primary btn-lg"  type ='submit'> Register </button>
+                                <a href = "/signin">Sign in as a Guest!</a>
+                                <a href='/welcome'><b>Brief overview of features? Visit the Welcome Testers Page<b></a>
+                            </div>
+
+                    </section>
+                    <section class = 'left'>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+    
+
+                    </section>
+                </div>
                 </form>  
             
-                    {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
                 
         </div> <!-- END INTERFACE -->
 

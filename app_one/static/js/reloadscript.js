@@ -9,6 +9,23 @@ $(document).ready(function(){
     var session_user = '';
     var image_list = [];
     var heart_sum = 0;
+    var quotes = [
+    ["Dogs are not our whole lives, but they make our lives whole.", 'Roger Caras'], 
+    ['Some angels choose fur instead of wings','Unknown'],
+    ['Our perfect companions never have fewer than four feet','Collete'],
+    ['Heartbeat at my feet','Unknown'],
+    ["Until one has loved an aimal a part of one's soul remains unawakened",'Anatole France'],
+    ["Dogs eat.<br>Cats dine.",'Ann Taylor'],
+    ["When I am feeling low, all I have to do is watch my cats and my courage returns",'Charles Bukowski'],
+]
+
+var quote_colors = [
+    ['hsl(253, 45%, 60%)','hsl(253, 45%, 90%)'],
+    ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
+    ['hsl(23,100%, 60%)','hsl(23,100%, 90%)'],
+    ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
+]
+
 
     //*********************************************//
     // Get URL Route variables
@@ -26,6 +43,21 @@ $(document).ready(function(){
             get_more_images()
         }
     });
+
+    var color_blocks = ($('.color_block2').length)
+    for(var i = 0; i<color_blocks; i++){
+        var rand = Math.floor(Math.random()*quotes.length)
+        var randcolnum = Math.floor(Math.random()*quote_colors.length)
+        var randColor = quote_colors[randcolnum]
+        console.log(randColor)
+        console.log(randcolnum)
+        var randStr = quotes[rand][0]
+        var cite = quotes[rand][1]
+        $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
+        $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
+        $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
+
+    }
 
     //*********************************************//
     // MOBILE DEVICE 

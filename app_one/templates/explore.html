@@ -17,16 +17,38 @@
         {% include 'modules/nav.html' %}
         <div id="interface_block_one">
             <div id='get_more' class = 'dashboard'>
+                <aside class = 'icons'>
+                    <div>
+                        <i class ='fas fa-heart'></i><p>Love a Pet</p>
+                        <i class ='fas fa-podcast'></i><p>Follow a User</p> 
+                    </div>
+                    <div>
+                        <i class ='fas fa-comment-alt'></i><p>Comment</p>
+                        <i class ='fas fa-users'></i><p>Your followers</p>
+                    </div>
+                    <div>
+                        <i class ='fas fa-compass'></i><p>Browse Pets</p>  
+                        <i class ='fas fa-user'></i><p>Edit Profile</p>
+                    </div>
+                </aside>
+                <div class = 'guest_message'>
+                        {% with location='explore' %}   
+                        {% include 'modules/share_pet.html' %}
+                        {% endwith %}
+                </div>
                 {% if session_user.user_name == "guest" and request.session.counter == 0 %}
                 <div class = 'guest_message'>
-                    <p>This is a guest account. Some features, such as profile editing and comment deleting, have been disabled. To experience all of the features Pets Connect has to offer, make an account (with dummy information) and enjoy your stay! </p>
+                    <p>This is a guest account. Some features, such as profile editing and comment deleting, have been disabled. To experience all of the features Pets Connect has to offer, make an account (with dummy information) and enjoy your stay!
+                        <br>
+                    </p>
                     <h2 class='close_guest_message'>Close</h2>
                 </div> 
                 {% endif %}
-
+                {% with num=randomNumbers|random %}
                 {% for image in images2 %}
                     {% include 'modules/image.html' %} 
                 {% endfor %}
+                {% endwith %}
                 
             </div>
 

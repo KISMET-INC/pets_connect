@@ -14,6 +14,7 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import _thread
+from random import randint
 
 #=============================================##
 # process_register()
@@ -167,6 +168,8 @@ def explore(request):
         'icon': 'fas fa-cloud-upload-alt',
         'title': 'Share',
         'images2': images2,
+        'upload_pet_form': UploadPetForm(),
+        'randomNumbers': [4,5,7,9,10]
     }
 
 
@@ -341,7 +344,8 @@ def process_add_pet_image(request):
             messages.error(request,value)
         if session_user.user_level == 9:
             return redirect (f'/admin_edit_user/{user.id}')
-        return redirect(f'/profile/{request.POST["user_id"]}')
+        if request.POST['location'] == 'explore':
+            return redirect('/explore')
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = user, name = request.POST['name'], desc = request.POST['desc'] )
@@ -349,6 +353,8 @@ def process_add_pet_image(request):
     send_email(session_user = user, action = 'SHARED', image = this_image)
     if session_user.user_level == 9:
         return redirect (f'/admin_edit_user/{user.id}')
+    if request.POST['location'] == 'explore':
+        return redirect('/explore')
 
     return redirect (f'/profile/{user.id}')
 
@@ -723,3 +729,7 @@ def process_edit_password(request):
 
 
     return redirect(f'/edit_user/{session_user.id}')
+
+
+def random_number(length=1):
+    return randint(10**(length-1), (10**(length)-1))

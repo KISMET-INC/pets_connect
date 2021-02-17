@@ -2,7 +2,7 @@
 @import 'image.css';
 @import 'modal.css';
 @import 'single_comment.css';
-
+@import 'share_pet.css';
 
 
 .dimage .edit_stats a {
@@ -22,37 +22,151 @@ nav .fa-compass::before, nav a.explore{
 }
 
 .dashboard .guest_message {
+    border-radius: 5px;
+    background-color: #C6E2E2;
     font-style: italic;
-    padding: 30px;
-    margin-bottom: 20px;
     font-size: 14px;
-    outline: 2px dotted black;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px dotted var(--blue1);
+    width: 49%;
+    margin:3px;
 }
 .dashboard .guest_message h2 {
     font-size: 18px;
 }
 
+.dashboard .guest_message i::before{
+    margin-right: 4px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.dashboard aside.icons {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: var(--blue1);
+    align-items: center;
+    width: 99%;
+    margin-bottom:10px;
+}
+
+aside.icons div {
+    display:flex;
+    justify-content: space-evenly;
+    width:33%;
+}
+
+.dashboard aside.icons i {
+    color: var(--blue1);
+    font-size: 20px;
+    opacity: .5;
+}
+
+
+/*******************************/
+/*  OVERRIDE Share Pet Form       
+/*******************************/
+
+.share_pet section.right {
+    margin-top: 50px;
+    width: 30%;
+    margin-left: 20px;
+    
+}
+.share_pet {
+    display: flex;
+    width:100%;
+    font-style: normal;
+}
+
+.share_pet input {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0px;
+}
+
+.share_pet input#id_pet_img {
+    background-color: transparent;
+}
+.share_pet input#id_pet_img p input {
+    border:none;
+}
+.share_pet section.left h3 {
+    color: var(--blue1);
+    font-style: normal;
+
+}
+.share_pet section.left {
+    width: 70%;
+}
+
+
+
+.share_pet i:before, .share_pet button {
+    color: var(--blue1);
+}
+
+.share_pet button {
+    text-align: left;
+}
+
+
+
+
 .dashboard {
     display:flex;
     width:80%;
+    margin:0;
     flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: left;
 }
 
 .dimage {
+    width: 24.5%;
     margin-left:2px;
     margin-bottom: 2px;
-    width: 24.5%;
     border-radius: 5px;
-    background-color: black;
+    flex-shrink: 1;
+    margin:2px;
+}
+
+.color_block {
+    background-color: #D4FFDA;
+    border: 2px dotted #91BF98;
+    width: 49%;
+    border-radius: 5px;
+    padding: 40px 40px;
+    margin:2px;
+}
+
+.color_block2 {
+    background-color: #D4FFDA;
+    border: 2px dotted #91BF98;
+    width: 24.6%;
+    border-radius: 5px;
+    padding: 40px 40px;
+    margin:2px;
+}
+
+.color_block2 p {
+    font-size: 18px;
+    color:#91BF98;
 }
 
 
-img.cropped {
-    width: 100%;
+img.cropped2 {
+    width:100.5%;
+    height: 100.6%;
+    object-fit: cover;
+    object-position: 20% 20%;
     border-radius: 5px 5px 5px 5px;
 }
+
+
 
 
 
@@ -60,8 +174,12 @@ img.cropped {
 /*  MEDIA BREAKPOINT 1110px         
 /*******************************/
 @media (max-width: 1110px){
-    .dimage {
+    .dimage , .color_block2{
         width:24.5%
+    }
+    .color_block2 {
+        padding: 20px;
+        
     }
 }
 
@@ -69,9 +187,49 @@ img.cropped {
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
 @media (max-width: 1025px){
-    .dimage {
+    .dimage, .color_block2 {
         width:32.5%;
     }
+    .dashboard .guest_message {
+        width: 97.5%;
+        padding: 20px 40px;
+        margin-bottom:5px;
+        
+    }
+    .dashboard aside.icons p{
+        font-size:17px;
+    }
+    .dashboard aside.icons div{
+        width:50%;
+    }
+    .dashboard aside.icons div:nth-child(3){
+        display:none;
+    }
+
+    .color_block2 {
+        padding:30px;
+    }
+    .color_block2 p {
+        font-size:20px;
+    }
+   
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 1300px){
+    .share_pet h3 {
+        margin-top: 8px;
+        font-size:20px;
+    }
+    .share_pet input#id_pet_img{
+        margin:0px;
+        height:22px;
+    }
+
+    
 
 }
 
@@ -83,11 +241,18 @@ img.cropped {
     .dashboard {
         justify-content: left;
         width:100%;
+        margin-left:3px;
     }
 
-    .dimage{
-        width:49%;
+    .dimage, .color_block2{
+        width:48.5%;
     }
+    /* COLOR BLOCK */
+    .color_block2 {
+        padding: 35px;
+    }
+
+
     .stats {
         display:none
     }
@@ -102,16 +267,56 @@ img.cropped {
         font-size: 14px;
     }
 
+    .dashboard aside.icons div{
+        width:50%;
+    }
+    .dashboard aside.icons div p:nth-child(1){
+        display:none;
+    }
+
 
 }
 
 /*******************************/
+/*  MEDIA BREAKPOINT 625px         
+/*******************************/
+@media (max-width: 625px){
+    .dashboard aside.icons {
+        flex-direction: column;
+    }
+
+    .dashboard aside.icons div {
+        width:70%;
+    }
+/*******************************/
 /*  MEDIA BREAKPOINT 425px         
 /*******************************/
-@media (max-width: 425px){
+@media (max-width: 426px){
     .dashboard {
         width:100%;
     }
+    aside.icons {
+        flex-direction: column;
+    }
+
+    .dashboard aside.icons div{
+        width:100%;
+    }
+
+    .color_block2 {
+        padding: 20px;
+    }
+
+    .color_block2 p {
+        font-size: 18px;
+    }
+
+    .share_pet input#id_pet_img {
+        width: 90%;
+    }
+    
+
+
 
 } 
 
@@ -123,7 +328,8 @@ img.cropped {
     .dimage{
         width:100%
     }
-    
+
+   
 
 } 
 
