@@ -9,8 +9,14 @@
     --gray1: #BFBFBF;
     --gray2: #E5E5E5;
     --baseFont: Verdana, Geneva, Tahoma, sans-serif;
+    --monst: 'Montserrat Alternates', sans-serif;
+    --damion: 'Damion', cursive;
+    --poppins: 'Poppins', sans-serif;
+    --quicksand: 'Quicksand', sans-serif;
+}
 
-    }
+
+    
 
     label {
         display:none;
@@ -32,7 +38,7 @@
         display:none;
     }
 * {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: var(--quicksand);
     margin: 0px;
     padding: 0px;
     font-size: 15px;
@@ -78,15 +84,14 @@ a:focus {
     }
 
 
-
+/* 
 .cropped {
-    object-fit: cover;
-}
+    object-fit: fill;
+} */
 
 .cropped2 {
-
     object-fit: cover;
-    object-position: 20% 10%; /* try 20px 10px */
+    object-position: 20% 10%;
     border: 5px solid black;
 }
 

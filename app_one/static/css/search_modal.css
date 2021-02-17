@@ -1,9 +1,9 @@
 .users_modal {
-    display:flex;
     flex-direction: column;
     overflow: scroll;
     width: 100%;
     height: 95%;
+    align-items: flex-start;
     background-color:var(--gray1);
     padding-top: 20px;
     align-self: end;

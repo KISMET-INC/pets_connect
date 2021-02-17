@@ -1,6 +1,14 @@
 
-<article class = 'dimage' id = {{image.id}} >
-    <img  class = 'cropped open_modal{{image.id}}' id = 'img{{image.id}}'  src ={{image.pet_img.url}} alt='pet image'>
-    {% include 'modules/stats.html' %}
+{%if forloop.counter|divisibleby:num%}
+<h2>{{randNUm}}</h2>
+<aside class = 'color_block2' ><p><cite></cite></p></aside>
+
+{% endif %}
+
+
+<article  class = 'dimage' id = {{image.id}} >
+<img  class = 'cropped2 open_modal{{image.id}}' id = 'img{{image.id}}'  src ={{image.pet_img.url}} alt='pet image'>
+{% include 'modules/stats.html' %}
 
 </article>
+

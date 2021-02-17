@@ -1,0 +1,30 @@
+.share_pet input {
+    margin-bottom: 10px;
+    height:35px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.share_pet input#id_pet_img{
+    padding:0px;
+    margin-top: 10px;
+}
+
+.share_pet section.left {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}   
+
+.share_pet section.right {
+    margin-left: 30px;
+}
+
+.share_pet button {
+    border: none;
+    background-color: transparent;
+}
+
+.share_pet .messages li {
+    list-style: none;
+}

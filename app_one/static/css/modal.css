@@ -57,6 +57,7 @@
 .modal .left img {
     text-align: left;
     margin-bottom: 10px;
+    height: unset;
 }
 
 .modal .right {

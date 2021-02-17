@@ -23,7 +23,7 @@
 
 .nav_menus {
     margin: auto;
-    width:80%;
+    width:78%;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +32,7 @@
         margin: 0px;
         font-family: 'Damion', cursive;
         font-size: 50px;
+        color: var(--blue1)
     }
 
     

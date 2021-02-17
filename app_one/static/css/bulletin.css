@@ -6,6 +6,12 @@ nav .fa-users::before, nav a.bulletin{
     color: gray;
 }
 
+body {
+   
+}
+
+
+
 header a.search_btn{
     text-decoration: underline;
     color: var(--blue1);
@@ -75,9 +81,12 @@ input {
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 85%;
     margin: 0 auto;
     padding-top: 20px;
+    background-color: white;
+    padding:30px;
+
 }
 
 .left_side {
@@ -87,7 +96,7 @@ input {
         display:flex;
         flex-wrap: wrap;
         height:140px;
-        border:1px solid grey;
+        border:2px dotted var(--blue1);
         min-width: 70px;
         padding:10px;
         border-radius: 5px;
@@ -120,11 +129,18 @@ input {
         }
 
 
-.right_side {
+section.right_side {
+    position: relative;
+    top: -100px;
+    background-color: #D0E7E7;
     width: 40%;
-    padding-left: 50px;
+    padding-left: 20px;
+    padding-right: 30px;
     display:flex;
     flex-direction: column;
+    scroll-behavior: none;
+    border-left: 2px dotted var(--blue1);
+    border-right: 2px dotted var(--blue1);
 }
     .right_side h2 {
         font-size: 18px;
@@ -146,7 +162,10 @@ input {
         
     }
         .followers header {
+
+            color: teal;
             margin-bottom: 20px;
+            margin-left:20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -164,7 +183,7 @@ input {
             .followers .follower_info{
                 margin:0;
                 font-size: 15px;
-                color: gray;
+                color: teal;
                 height:fit-content;
             }
                 .followers .follower_info p {
@@ -174,7 +193,7 @@ input {
 
 @media (max-width:769px){
     #interface_block_two {
-        width: 70%;
+        width: 90%;
     }
 
     .person{
@@ -184,7 +203,7 @@ input {
         width: 100%;
         margin: 0 auto; 
     }
-    .right_side{
+    section.right_side{
         display:none;
     }
 
