@@ -36,14 +36,7 @@
                         {% include 'modules/share_pet.html' %}
                         {% endwith %}
                 </div>
-                {% if session_user.user_name == "guest" and request.session.counter == 0 %}
-                <div class = 'guest_message'>
-                    <p>This is a guest account. Some features, such as profile editing and comment deleting, have been disabled. To experience all of the features Pets Connect has to offer, make an account (with dummy information) and enjoy your stay!
-                        <br>
-                    </p>
-                    <h2 class='close_guest_message'>Close</h2>
-                </div> 
-                {% endif %}
+              
                 {% with num=randomNumbers|random %}
                 {% for image in images2 %}
                     {% include 'modules/image.html' %} 
