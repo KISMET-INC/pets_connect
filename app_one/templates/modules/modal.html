@@ -13,10 +13,10 @@
                         {% include 'modules/stats.html' %}
                     </div>
                     <p>Posted by:</p>
-                    <p>{{image.user.user_name}}</p>
                     {% if image.desc %}
-                        <p>"{{image.desc}}"</p>
+                    <p>{{image.desc}}</p>
                     {% endif %}
+                    <p>{{image.user.user_name}}</p>
                 </section>
 
                 <section class= 'right'>

@@ -56,8 +56,10 @@ var quote_colors = [
         $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
         $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
         $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
-
     }
+
+
+
 
     //*********************************************//
     // MOBILE DEVICE 
