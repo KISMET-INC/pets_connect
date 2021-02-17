@@ -63,7 +63,7 @@ header h3, header a {
 
 
 .post {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border:1px solid grey;
 }
 
@@ -278,6 +278,14 @@ section.right_side {
 @media (max-width:426px){
     .person{
         width:20%;
+    }
+    #interface_block_two {
+        width:100%;
+        padding: 10px;
+    }
+
+    .post p.loves {
+        font-size:15px;
     }
 
 
