@@ -81,7 +81,7 @@ input {
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
     padding-top: 20px;
     background-color: white;
@@ -134,7 +134,7 @@ section.right_side {
     top: -100px;
     background-color: #D0E7E7;
     width: 40%;
-    padding-left: 50px;
+    padding-left: 20px;
     padding-right: 30px;
     display:flex;
     flex-direction: column;
@@ -162,8 +162,10 @@ section.right_side {
         
     }
         .followers header {
+
             color: teal;
             margin-bottom: 20px;
+            margin-left:20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -191,7 +193,7 @@ section.right_side {
 
 @media (max-width:769px){
     #interface_block_two {
-        width: 70%;
+        width: 90%;
     }
 
     .person{
@@ -201,7 +203,7 @@ section.right_side {
         width: 100%;
         margin: 0 auto; 
     }
-    .right_side{
+    section.right_side{
         display:none;
     }
 
