@@ -206,12 +206,16 @@ img.cropped2 {
         margin-bottom:5px;
         
     }
+    .share_pet h3 {
+        margin-top: 0px;
+    }
     .share_pet input {
         height: 40px;
         margin-top: 10px;
     }
 
     .share_pet button  {
+        margin-top:-10px;
         font-size: 20px;
     }
 
