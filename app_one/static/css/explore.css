@@ -214,9 +214,22 @@ img.cropped2 {
         margin-top: 10px;
     }
 
+    .share_pet section.left {
+        width: 100%;
+    }
+    .share_pet section.right {
+        margin: 0px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
     .share_pet button  {
         margin-top:-10px;
         font-size: 20px;
+    }
+
+    .share_pet {
+        flex-direction: column;
     }
 
     .dashboard .share_pet i::before {

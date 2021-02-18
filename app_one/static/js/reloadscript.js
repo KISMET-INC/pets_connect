@@ -11,18 +11,28 @@ $(document).ready(function(){
     var heart_sum = 0;
     var quotes = [
     ["Dogs are not our whole lives, but they make our lives whole.", 'Roger Caras'], 
-    ['Some angels choose fur instead of wings','Unknown'],
-    ['Our perfect companions never have fewer than four feet','Collete'],
-    ['Heartbeat at my feet','Unknown'],
-    ["Until one has loved an aimal a part of one's soul remains unawakened",'Anatole France'],
+    ['Some angels choose fur instead of wings.','Unknown'],
+    ['Our perfect companions never have fewer than four feet.','Collete'],
+    ['Heartbeat at my feet.','Unknown'],
+    ["Until one has loved an aimal a part of one's soul remains unawakened.",'Anatole France'],
     ["Dogs eat.<br>Cats dine.",'Ann Taylor'],
-    ["When I am feeling low, all I have to do is watch my cats and my courage returns",'Charles Bukowski'],
+    ["An animal's eyes speack a great language.",'Martin Burber'],
+    ["I think having an animal in your life makes you a better human.",'Rachael Ray'],
+    ["Time spent with cats is never wasted.",'Sigmund Freud'],
+    ["You cannot look at a sleeping cat and feel tense.",'Jane Pauley'],
+    ["If I could be half the person my dog is, I'd be twice the human I am.",'Charles Yu'],
+    ["Pets understand humans better than humans do.",'Ruchi Prabhu'],
+    ["Sometimes, your pet picks you.",'Julie Wenzel'],
+    ["No one can feel as helpless as the owner of a sick goldfish.",'Kin Hubbard'],
+    ["Cats leave paw prints on your heart.",'Unknown'],
+    ["Heaven will never be paradise unless my cats are there waiting for me.",'Unknown'],
+    ["A kitten in the animal world is what a rosebud is in the garden.",'Robert Southey'],
+
 ]
 
 var quote_colors = [
     ['hsl(253, 45%, 60%)','hsl(253, 45%, 90%)'],
     ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
-    ['hsl(23,100%, 60%)','hsl(23,100%, 90%)'],
     ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
 ]
 
