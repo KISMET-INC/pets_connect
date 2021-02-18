@@ -132,10 +132,13 @@ class PetManager(models.Manager):
         errors = {}
 
         if len(post['name']) < 1:
-            errors['name'] = 'A pet name is required'
+            errors['name'] = 'We need your PETS name.'
+
+        if len(post['desc']) < 2:
+            errors['desc'] ='Please tell us YOUR name too.'
         
         if 'pet_img' not in postFiles:
-            errors['image'] = 'An image is required' 
+            errors['image'] = 'An image is required.' 
 
         return errors
 
