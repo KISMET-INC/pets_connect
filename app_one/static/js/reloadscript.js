@@ -401,7 +401,6 @@ var quote_colors = [
             var title = $(this).attr('title');
             var stats = `#stat${img_id}`
             get_session_id()
-            get_image_list(img_id)
             
         
             // Stops the ability to like your own pet
@@ -424,7 +423,7 @@ var quote_colors = [
                     } else {
                         $(`#stat${img_id}`).replaceWith(data); 
                         get_heart_sum(img_id)
-                        //$(`#stat${img_id}`).show()          
+                        $(`#stat${img_id}`).show()          
                     }
                     heart = false;   
                 })
