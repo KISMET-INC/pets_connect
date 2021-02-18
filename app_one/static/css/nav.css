@@ -34,6 +34,9 @@
         font-size: 50px;
         color: var(--blue1)
     }
+    .nav_menus h2 span {
+        margin-left: 15px;
+    }
 
     
 ul.horizontal_menu {

@@ -92,7 +92,7 @@ button {
     width: 90%;
     display: unset
 }
-li {
+li.messages {
     margin: 0 auto;
     width: 300px;
     color:red;

@@ -8,7 +8,16 @@
 .dimage .edit_stats a {
     display:none;
 }
-.dimage .stat_board
+
+a {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width:fit-content;
+    text-decoration: none;
+    color: unset;
+}
+
 
 nav .fa-compass::before, nav a.explore{
     color:grey;
@@ -197,7 +206,29 @@ img.cropped2 {
         margin-bottom:5px;
         
     }
+    .share_pet input {
+        height: 40px;
+        margin-top: 10px;
+    }
+
+    .share_pet button  {
+        font-size: 20px;
+    }
+
+    .dashboard .share_pet i::before {
+        font-size: 25px;
+    }
+
+    .share_pet input#id_pet_img {
+        margin-top: 15px;
+    }
+
+
+
     .dashboard aside.icons p{
+        font-size:17px;
+    }
+    .dashboard aside.icons a{
         font-size:17px;
     }
     .dashboard aside.icons div{
@@ -221,14 +252,14 @@ img.cropped2 {
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
 @media (max-width: 1300px){
-    .share_pet h3 {
+    /* .share_pet h3 {
         margin-top: 8px;
         font-size:20px;
     }
     .share_pet input#id_pet_img{
         margin:0px;
         height:22px;
-    }
+    } */
 
     
 
