@@ -169,7 +169,7 @@ def explore(request):
         'title': 'Share',
         'images2': images2,
         'upload_pet_form': UploadPetForm(),
-        'randomNumbers': [4,5,7,9,10]
+        'randomNumbers': [4,5,7]
     }
 
 
