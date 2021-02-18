@@ -16,7 +16,7 @@ $(document).ready(function(){
     ['Heartbeat at my feet.','Unknown'],
     ["Until one has loved an aimal a part of one's soul remains unawakened.",'Anatole France'],
     ["Dogs eat.<br>Cats dine.",'Ann Taylor'],
-    ["An animal's eyes speack a great language.",'Martin Burber'],
+    ["An animal's eyes speak a great language.",'Martin Burber'],
     ["I think having an animal in your life makes you a better human.",'Rachael Ray'],
     ["Time spent with cats is never wasted.",'Sigmund Freud'],
     ["You cannot look at a sleeping cat and feel tense.",'Jane Pauley'],
