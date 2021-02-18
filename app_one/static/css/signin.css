@@ -5,8 +5,15 @@
     margin-top: 50px;
     width: 70%;
     display: block;
-    margin-bottom: 50px;   
+    margin-bottom: 50px;
 }
+
+
+body{
+    background-image: url('/static/images/backdrop.jpg')
+    
+}
+
 section.right {
     width:70%;
 }
