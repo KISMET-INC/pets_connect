@@ -9,7 +9,10 @@
     align-self: end;
 }
 
-
+#search_modal .modal-header button.close {
+    font-size: 40px;
+    margin-top: -12px;
+}
 .users_modal .person {
     display:flex;
     width: fit-content;

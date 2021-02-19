@@ -137,6 +137,7 @@ section.right_side {
     padding-left: 20px;
     padding-right: 30px;
     display:flex;
+    margin-bottom: -150px;
     flex-direction: column;
     scroll-behavior: none;
     border-left: 2px dotted var(--blue1);
