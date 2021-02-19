@@ -28,6 +28,9 @@
         font-size:20px;
     }
 
+    .single_comment .edit_actions i.edit_comment_cancel {
+        margin-right:0px;
+    }
 
 
 .single_comment p {
@@ -68,5 +71,6 @@
     width: 80%;
     resize: none;
     border:none;
+    margin-right: 10px;
 }
 
