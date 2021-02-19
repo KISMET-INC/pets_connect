@@ -8,7 +8,7 @@ from .views import *
 
 urlpatterns = [
 
-    path('', views.landing),
+    path('', views.signin),
     path('register', views.register),
     path('signin', views.signin),
     path('process_register', views.process_register),
