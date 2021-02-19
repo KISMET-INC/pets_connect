@@ -615,7 +615,7 @@ def get_followers_list(request):
 
 def get_all_users_list(request):
     context = {
-        'users': User.objects.all()
+        'users': User.objects.exclude(user_level = 9)
     }
     return render(request, 'modules/users_modal.html', context)
 
