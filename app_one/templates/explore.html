@@ -31,12 +31,11 @@
                         <i class ='fas fa-compass'></i><p>Browse Pets</p>  
                     </div>
                 </aside>
-                <div class = 'guest_message'>
+               
                         {% with location='explore' %}   
                         {% include 'modules/share_pet.html' %}
                         {% endwith %}
-                </div>
-              
+           
                 {% with num=randomNumbers|random %}
                 {% for image in images2 %}
                     {% include 'modules/image.html' %} 

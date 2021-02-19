@@ -77,9 +77,9 @@ menu.dropdown {
 }
 
 /***************************************/
-/* MEDIA BREAKPOINT -  MAX-WIDTH 426px 
+/* MEDIA BREAKPOINT -  MAX-WIDTH 534px 
 /***************************************/
-@media (max-width: 426px){
+@media (max-width: 534px){
 
     .nav_menus {
         width:90%;
@@ -127,12 +127,23 @@ menu.dropdown {
 
 }
 
+/***************************************/
+/* MEDIA BREAKPOINT -  MAX-WIDTH 340px
+
+/***************************************/
+@media (max-width: 340px){
+    .nav_menus h2 {
+        font-size:40px;
+    }
+
+}
+
 /*******************************/
 /*  MEDIA BREAKPOINT 281px         
 /*******************************/
 @media (max-width: 281px){
     .nav_menus h2 {
-        font-size: 40px;
+        font-size: 35px;
     }
     
 

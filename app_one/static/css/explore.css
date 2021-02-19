@@ -31,7 +31,7 @@ nav .fa-compass::before, nav a.explore{
     justify-content: center;
 }
 
-.dashboard .guest_message {
+.dashboard .nursery_bg {
     border-radius: 5px;
     background-color: #C6E2E2;
     font-style: italic;
@@ -45,11 +45,11 @@ nav .fa-compass::before, nav a.explore{
     width: 49%;
     margin:3px;
 }
-.dashboard .guest_message h2 {
+.dashboard .nursery_bg h2 {
     font-size: 18px;
 }
 
-.dashboard .guest_message i::before{
+.dashboard .nursery_bg i::before{
     margin-right: 4px;
     margin-left: 10px;
     font-size: 20px;
@@ -200,9 +200,9 @@ img.cropped2 {
     .dimage, .color_block2 {
         width:32.5%;
     }
-    .dashboard .guest_message {
+    .dashboard .nursery_bg {
         width: 97.5%;
-        padding: 20px;
+        padding: 20px 20px;
         margin-bottom:5px;
         
     }
