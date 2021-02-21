@@ -46,7 +46,9 @@
         </div> <!-- END INTERFACE -->
 
         {%for image in images %}
-        <img style='opacity : 0' width = 1px height = 1px src = {{image.pet_img.url}}>
+        <article  class = 'dimage' id = {{image.id}} >
+            <img width = 1px src = '{image.pet_img.url}'>
+        </article>
         {% endfor %}
 
     </div>  <!-- END CANVAS -->
