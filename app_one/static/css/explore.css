@@ -4,7 +4,9 @@
 @import 'single_comment.css';
 @import 'share_pet.css';
 
-
+.preload{
+    position:absolute;
+}
 .dimage .edit_stats a {
     display:none;
 }
