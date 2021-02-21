@@ -106,7 +106,10 @@ def landing(request):
 # signin()
 #=============================================##
 def signin(request):
-    return render(request,'signin.html')
+    context = {
+        'images':Image.objects.all()
+    }
+    return render(request,'signin.html', context)
 
 #=============================================##
 # register()

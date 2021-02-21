@@ -43,11 +43,11 @@ header h3, header a {
 }
 
 .session_user .person {
-    width:fit-content;
+    width:100px;
 }
 
 .person {
-    width: 16%;
+    width: 100px;
 }
 .person .user_email {
     display:none;
