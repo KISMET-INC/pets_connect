@@ -115,7 +115,7 @@ form .share_pet button {
     display:flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: right;
+    justify-content: left;
 }
 
 .dashboard h3 {
