@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static '/css/global.css' %}">
     <link rel="stylesheet" href="{% static '/css/explore.css' %}">
     {%for image in images2 %}
-    <img class ='preload' rel = 'preload' height='1px' src = '{{image.pet_img.url}}'>
+    <img style='position:absolute; opacity:0' rel = 'preload' height='1px' src = '{{image.pet_img.url}}'>
     {% endfor %}
     <script src="{% static '/js/reloadscript.js' %}"></script>   
 
