@@ -146,4 +146,8 @@ ul.stats_bar li button {
     ul.stats_bar i , ul.stats_bar p {
         font-size: 30px;
     }
+
+    .stats_board h2.name {
+        font-size: 25px;
+    }
 }

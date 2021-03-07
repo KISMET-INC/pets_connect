@@ -137,56 +137,59 @@ var quote_colors = [
     //*********************************************//     
         function openCommentModal(){
             //alert('modal')
-            var img_id = $(this).attr('id');
-            $.ajax({
-                cache: false,
-                type:"GET",
-                url: `/replace_modal/${img_id}`,
-            })
-            .done(function(data){
+            if(heart == false){
 
-                $(`#replaceModal`).html(data);
-                $('#comment_modal').modal('show');
-
-
-                $("#comment_modal").on('shown.bs.modal', function(){
-                    scrollToBottom()
+                var img_id = $(this).attr('id');
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: `/replace_modal/${img_id}`,
                 })
+                .done(function(data){
 
-                //*********************************************//
-                // WHEN MODAL IS HIDDEN update background elements
-                //*********************************************//
-                $("#comment_modal").on('hide.bs.modal', function(){
-                    var url;
+                    $(`#replaceModal`).html(data);
+                    $('#comment_modal').modal('show');
 
-                    if (url_location == 'bulletin'){
-                        url = `/replace_post/${img_id}`
-                    } else {
-                        url =  `/replace_image/${img_id}`
-                    }
 
-                    $.ajax({
-                        cache: false,
-                        type:"GET",
-                        url: url,
+                    $("#comment_modal").on('shown.bs.modal', function(){
+                        scrollToBottom()
                     })
-                    .done(function(data){
+
+                    //*********************************************//
+                    // WHEN MODAL IS HIDDEN update background elements
+                    //*********************************************//
+                    $("#comment_modal").on('hide.bs.modal', function(){
+                        var url;
 
                         if (url_location == 'bulletin'){
-                            $(`#post${img_id}`).replaceWith(data); 
+                            url = `/replace_post/${img_id}`
                         } else {
-                            $(`.dashboard #${img_id}`).replaceWith(data)
+                            url =  `/replace_image/${img_id}`
                         }
-                        
-                    })
-                    .fail(function(data){
-                        console.log("Error in fetching data");
-                    })
-                });
-            })
-            .fail(function(data){
-                console.log("Error in fetching data");
-            })
+
+                        $.ajax({
+                            cache: false,
+                            type:"GET",
+                            url: url,
+                        })
+                        .done(function(data){
+
+                            if (url_location == 'bulletin'){
+                                $(`#post${img_id}`).replaceWith(data); 
+                            } else {
+                                $(`.dashboard #${img_id}`).replaceWith(data)
+                            }
+                            
+                        })
+                        .fail(function(data){
+                            console.log("Error in fetching data");
+                        })
+                    });
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                })
+            }
         }
       // END OPEN COMMENT MODAL
 
