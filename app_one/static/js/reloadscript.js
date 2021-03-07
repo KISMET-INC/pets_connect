@@ -69,6 +69,7 @@ var quote_colors = [
     }
 
 
+ 
 
 
     //*********************************************//
@@ -81,7 +82,7 @@ var quote_colors = [
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var stats = `#stat${img_id}`
-
+        
             // if heart was not clicked toggle dimage opacity and stat show
             if(heart == false){
                 $('.stats_board').hide()
@@ -95,6 +96,9 @@ var quote_colors = [
                     $(`${stats}`).show()
                 }
             }
+
+            $(this).click(openCommentModal)
+            
                 
         });
     
@@ -103,6 +107,7 @@ var quote_colors = [
     // Mousover / Mouseout Behavior
     //*********************************************//
     } else {
+        $('body').on('click', '.dimage', openCommentModal)
         $('body').on('mouseover', '.dimage', function(){
                 
                // Declare Variables needed 
@@ -111,6 +116,7 @@ var quote_colors = [
                 var stats = `#stat${img_id}` 
                 $( `${img}`).css('opacity', '.6')
                 $(`${stats}`).show()
+
 
             })
 
@@ -126,6 +132,63 @@ var quote_colors = [
         
         // END DEVICE DEPENDENT INSTRUCTIONS
 
+    //*********************************************//
+    // LOAD AND OPEN  COMMENT MODAL
+    //*********************************************//     
+        function openCommentModal(){
+            //alert('modal')
+            var img_id = $(this).attr('id');
+            $.ajax({
+                cache: false,
+                type:"GET",
+                url: `/replace_modal/${img_id}`,
+            })
+            .done(function(data){
+
+                $(`#replaceModal`).html(data);
+                $('#comment_modal').modal('show');
+
+
+                $("#comment_modal").on('shown.bs.modal', function(){
+                    scrollToBottom()
+                })
+
+                //*********************************************//
+                // WHEN MODAL IS HIDDEN update background elements
+                //*********************************************//
+                $("#comment_modal").on('hide.bs.modal', function(){
+                    var url;
+
+                    if (url_location == 'bulletin'){
+                        url = `/replace_post/${img_id}`
+                    } else {
+                        url =  `/replace_image/${img_id}`
+                    }
+
+                    $.ajax({
+                        cache: false,
+                        type:"GET",
+                        url: url,
+                    })
+                    .done(function(data){
+
+                        if (url_location == 'bulletin'){
+                            $(`#post${img_id}`).replaceWith(data); 
+                        } else {
+                            $(`.dashboard #${img_id}`).replaceWith(data)
+                        }
+                        
+                    })
+                    .fail(function(data){
+                        console.log("Error in fetching data");
+                    })
+                });
+            })
+            .fail(function(data){
+                console.log("Error in fetching data");
+            })
+        }
+      // END OPEN COMMENT MODAL
 
     //*********************************************//
     // Start USER SEARCH on search button press
@@ -480,61 +543,7 @@ var quote_colors = [
         }); // END PROCESS FOLLOW CLICKS
 
 
-        //*********************************************//
-        // COMMENT ICON - ON CLICK
-        //*********************************************//
-        $('body').on('click', '.comment_button button', function(){
-            var img_id = $(this).attr('id');
-            $.ajax({
-                cache: false,
-                type:"GET",
-                url: `/replace_modal/${img_id}`,
-            })
-            .done(function(data){
-
-                $(`#replaceModal`).html(data);
-                $('#comment_modal').modal('show');
-
-
-                $("#comment_modal").on('shown.bs.modal', function(){
-                    scrollToBottom()
-                })
-
-                //*********************************************//
-                // WHEN MODAL IS HIDDEN update background elements
-                //*********************************************//
-                $("#comment_modal").on('hide.bs.modal', function(){
-                    var url;
-
-                    if (url_location == 'bulletin'){
-                        url = `/replace_post/${img_id}`
-                    } else {
-                        url =  `/replace_image/${img_id}`
-                    }
-
-                    $.ajax({
-                        cache: false,
-                        type:"GET",
-                        url: url,
-                    })
-                    .done(function(data){
-
-                        if (url_location == 'bulletin'){
-                            $(`#post${img_id}`).replaceWith(data); 
-                        } else {
-                            $(`.dashboard #${img_id}`).replaceWith(data)
-                        }
-                        
-                    })
-                    .fail(function(data){
-                        console.log("Error in fetching data");
-                    })
-                });
-            })
-            .fail(function(data){
-                console.log("Error in fetching data");
-            })
-        }); // END ON CLICK COMMENT ICON 
+        
 
         //*********************************************//
         // Process DELETE COMMENT on X click
