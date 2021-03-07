@@ -135,3 +135,15 @@ button:focus {
     border: 0px;
 }
 
+ul.stats_bar li button {
+    margin-top: 5px;
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1024px         
+/*******************************/
+@media (max-width: 1024px){
+    ul.stats_bar i , ul.stats_bar p {
+        font-size: 30px;
+    }
+}

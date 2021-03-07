@@ -208,6 +208,10 @@ def get_more_images(request):
 # profile()
 #=============================================##
 def profile(request, user_id):
+
+    if 'user_id' not in request.session:
+        return redirect('/signin')
+
     session_user = User.objects.get(id=request.session['user_id'])
     images = Image.objects.filter(user = user_id).order_by("-created_at");
 
@@ -305,6 +309,10 @@ def process_remove_user(request, user_id):
 # bulletin()
 #=============================================##
 def bulletin(request,user_id,image_id, modal_trigger):
+
+    if 'user_id' not in request.session:
+        return redirect('/signin')
+        
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
     else:
