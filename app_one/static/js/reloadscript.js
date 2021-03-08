@@ -66,8 +66,11 @@ var quote_colors = [
         $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
     }
 
+    
+    //*********************************************//
+    // Global variable for opacity toggle
+    //*********************************************//
 
- 
     var clickcount = 0;
 
     //*********************************************//
@@ -75,38 +78,47 @@ var quote_colors = [
     // On click toggle opacity and stat behaviour
     //*********************************************//
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
-                
+        
         $('body').on('click', '.dimage', function(){
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var stats = `#stat${img_id}`
             clickcount++
-        
+            localStorage.setItem('lastID', img_id)
+
             // if heart was not clicked toggle dimage opacity and stat show
-            if(heart == false){
+            if(heart == false ){
                 $('.stats_board').hide()
                 if( $(`${img}`).css('opacity') != '1') {
                     $(`${img}`).css('opacity', '1')
                     $(`${stats}`).hide()
+                    
                 } else {
                     $('img').css('opacity', '1');
-                    $('.stats').hide()
+                    $('.stats_board').hide()
                     $(`${img}`).css('opacity', '.6')
                     $(`${stats}`).show()
                 }
 
+                $('.dimage').click(function(){
+                    localStorage.setItem('newID', img_id)              
+                })
+
+
                 if(clickcount == 2 && heart == false){
-                    openCommentModal(img_id)
-                    console.log('open Comments')
-                    clickcount =0;
+                    if(localStorage.getItem("newID") == localStorage.getItem("lastID")){
+                        openCommentModal(img_id)
+                        $(`${img}`).css('opacity', '.6')
+                        $(`${stats}`).show()
+                    }
 
+                    clickcount =1;
                 }
+            }
 
-                    
-                }
-        
-
-            
+            if(clickcount == 2){
+                clickcount = 1;
+            }
                 
         });
     
@@ -120,14 +132,14 @@ var quote_colors = [
             openCommentModal(img_id)
         });
         $('body').on('mouseover', '.dimage', function(){
-                
+                $('img').css('opacity', '1');
+                $('.stats_board').hide()
                // Declare Variables needed 
                 var img_id = $(this).attr('id');
                 var img = `.open_modal${img_id}`
                 var stats = `#stat${img_id}` 
                 $( `${img}`).css('opacity', '.6')
                 $(`${stats}`).show()
-
 
             })
 
@@ -159,6 +171,7 @@ var quote_colors = [
 
                     $(`#replaceModal`).html(data);
                     $('#comment_modal').modal('show');
+                    
 
 
                     $("#comment_modal").on('shown.bs.modal', function(){
@@ -170,6 +183,8 @@ var quote_colors = [
                     //*********************************************//
                     $("#comment_modal").on('hide.bs.modal', function(){
                         var url;
+                        var img = `.open_modal${img_id}`
+                        var stats = `#stat${img_id}`
 
                         if (url_location == 'bulletin'){
                             url = `/replace_post/${img_id}`
@@ -189,16 +204,21 @@ var quote_colors = [
                             } else {
                                 $(`.dashboard #${img_id}`).replaceWith(data)
                             }
+                            $(`${img}`).css('opacity', '.6')
+                            $(`${stats}`).show()
                             
                         })
                         .fail(function(data){
                             console.log("Error in fetching data");
                         })
+
+                        
                     });
                 })
                 .fail(function(data){
                     console.log("Error in fetching data");
                 })
+                
             }
         }
       // END OPEN COMMENT MODAL
@@ -395,7 +415,8 @@ var quote_colors = [
     // Alert on Logout
     //*********************************************//
     $('.logout').on('click',function(){
-        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 HEARTS \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
+        localStorage.removeItem('lastID')
+        localStorage.removeItem('newID')
     })
 
     //*********************************************//
