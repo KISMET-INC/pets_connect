@@ -59,8 +59,6 @@ var quote_colors = [
         var rand = Math.floor(Math.random()*quotes.length)
         var randcolnum = Math.floor(Math.random()*quote_colors.length)
         var randColor = quote_colors[randcolnum]
-        console.log(randColor)
-        console.log(randcolnum)
         var randStr = quotes[rand][0]
         var cite = quotes[rand][1]
         $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
@@ -70,18 +68,19 @@ var quote_colors = [
 
 
  
-
+    var clickcount = 0;
 
     //*********************************************//
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
+                
         $('body').on('click', '.dimage', function(){
-
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var stats = `#stat${img_id}`
+            clickcount++
         
             // if heart was not clicked toggle dimage opacity and stat show
             if(heart == false){
@@ -95,9 +94,18 @@ var quote_colors = [
                     $(`${img}`).css('opacity', '.6')
                     $(`${stats}`).show()
                 }
-            }
 
-            $(this).click(openCommentModal)
+                if(clickcount == 2 && heart == false){
+                    openCommentModal(img_id)
+                    console.log('open Comments')
+                    clickcount =0;
+
+                }
+
+                    
+                }
+        
+
             
                 
         });
@@ -107,7 +115,10 @@ var quote_colors = [
     // Mousover / Mouseout Behavior
     //*********************************************//
     } else {
-        $('body').on('click', '.dimage', openCommentModal)
+        $('body').on('click', '.dimage',function(){
+            var img_id = $(this).attr('id');
+            openCommentModal(img_id)
+        });
         $('body').on('mouseover', '.dimage', function(){
                 
                // Declare Variables needed 
@@ -135,11 +146,10 @@ var quote_colors = [
     //*********************************************//
     // LOAD AND OPEN  COMMENT MODAL
     //*********************************************//     
-        function openCommentModal(){
-            //alert('modal')
+        function openCommentModal(img_id){
             if(heart == false){
 
-                var img_id = $(this).attr('id');
+                //var img_id = $(this).attr('id');
                 $.ajax({
                     cache: false,
                     type:"GET",
@@ -212,7 +222,7 @@ var quote_colors = [
             url: `/search`,
         })
         .done(function(data){
-            console.log(data)
+            
             if(data == 'None'){
                 $('.error').html("Email Not Found")
             } else {
@@ -298,7 +308,6 @@ var quote_colors = [
         var image_id = $(this).attr('img_id')
         var component = $(this).attr('comp')
         var new_comment = $(`.edit_comment_text_${comment_id}${component}`).val()
-        console.log(new_comment)
         $.ajax({
             cache: false,
             headers: { "X-CSRFToken": csrftoken },  
@@ -459,7 +468,6 @@ var quote_colors = [
         .done(function(data){
             heart_sum =  data 
             $('.heart_sum').html(data)
-            console.log(heart_sum)
                 
         })
         .fail(function(data){
@@ -493,7 +501,6 @@ var quote_colors = [
                     url: `/process_heart/${img_id}/${url_location}`,
                 })
                 .done(function(data){
-                    console.log(session_user)
                     if(url_location == 'bulletin'){
                         $(`#post${img_id}`).replaceWith(data);  
                     } else {
@@ -501,6 +508,7 @@ var quote_colors = [
                         get_heart_sum(img_id)
                         $(`#stat${img_id}`).show()          
                     }
+                    clickcount =1
                     heart = false;   
                 })
                 .fail(function(data){
@@ -528,7 +536,6 @@ var quote_colors = [
             })
             .done(function(data){
                 if(url_location != 'bulletin'){
-                    console.log(session_user)
                     for(var i = 0; i <  image_list.images.length; i++){
                         $(`.hide_icon${image_list.images[i]}`).hide()
                     }
