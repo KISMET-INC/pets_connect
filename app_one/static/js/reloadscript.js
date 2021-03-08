@@ -69,19 +69,21 @@ var quote_colors = [
 
  
     var clickcount = 0;
+   
 
     //*********************************************//
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
-                
+    //if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
+        
         $('body').on('click', '.dimage', function(){
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
             var stats = `#stat${img_id}`
             clickcount++
-        
+            localStorage.setItem('lastID', img_id)
+
             // if heart was not clicked toggle dimage opacity and stat show
             if(heart == false){
                 $('.stats_board').hide()
@@ -95,14 +97,30 @@ var quote_colors = [
                     $(`${stats}`).show()
                 }
 
+                $('.dimage').click(function(){
+                    localStorage.setItem('newID', img_id)
+                    
+                })
+
+                console.log(`clickcount: ${clickcount}`)
                 if(clickcount == 2 && heart == false){
-                    openCommentModal(img_id)
+                    console.log(`img_id: ${localStorage.getItem("newID")}`)
+                    console.log(`lastId: ${localStorage.getItem("lastID")}`)
                     console.log('open Comments')
-                    clickcount =0;
+                    if(localStorage.getItem("newID") == localStorage.getItem("lastID")){
+                        openCommentModal(img_id)
+                    }
+                    clickcount =1;
+                    console.log(`clickcount: ${clickcount}`)
 
                 }
 
                     
+                }
+
+                if(clickcount == 2){
+                    clickcount = 1;
+                    console.log(`clickcount: ${clickcount}`)
                 }
         
 
@@ -114,32 +132,32 @@ var quote_colors = [
     // FOR DESKTOP AND LAPTOP
     // Mousover / Mouseout Behavior
     //*********************************************//
-    } else {
-        $('body').on('click', '.dimage',function(){
-            var img_id = $(this).attr('id');
-            openCommentModal(img_id)
-        });
-        $('body').on('mouseover', '.dimage', function(){
+    // } else {
+    //     $('body').on('click', '.dimage',function(){
+    //         var img_id = $(this).attr('id');
+    //         openCommentModal(img_id)
+    //     });
+    //     $('body').on('mouseover', '.dimage', function(){
                 
-               // Declare Variables needed 
-                var img_id = $(this).attr('id');
-                var img = `.open_modal${img_id}`
-                var stats = `#stat${img_id}` 
-                $( `${img}`).css('opacity', '.6')
-                $(`${stats}`).show()
+    //            // Declare Variables needed 
+    //             var img_id = $(this).attr('id');
+    //             var img = `.open_modal${img_id}`
+    //             var stats = `#stat${img_id}` 
+    //             $( `${img}`).css('opacity', '.6')
+    //             $(`${stats}`).show()
 
 
-            })
+    //         })
 
-            .on('mouseleave', '.dimage', function(){
-                var id = $(this).attr('id');
-                var stats = `#stat${id}`
-                var img = `.open_modal${id}`
+    //         .on('mouseleave', '.dimage', function(){
+    //             var id = $(this).attr('id');
+    //             var stats = `#stat${id}`
+    //             var img = `.open_modal${id}`
 
-                $( `${img}`).css('opacity', '1')
-                $(`${stats}`).hide()
-            });
-    }  
+    //             $( `${img}`).css('opacity', '1')
+    //             $(`${stats}`).hide()
+    //         });
+    // }  
         
         // END DEVICE DEPENDENT INSTRUCTIONS
 
