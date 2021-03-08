@@ -144,7 +144,7 @@ ul.stats_bar li button {
 /*******************************/
 @media (max-width: 1024px){
     ul.stats_bar i , ul.stats_bar p {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .stats_board h2.name {
