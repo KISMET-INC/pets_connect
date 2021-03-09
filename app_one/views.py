@@ -333,10 +333,11 @@ def bulletin(request,user_id,image_id, modal_trigger):
 #=============================================##
 # edit_pet VIEW()
 #=============================================##
-def edit_image(request,image_id):
+def edit_image(request,location,image_id):
     context = {
         'image': Image.objects.get(id=image_id),
         'session_user': User.objects.get(id=request.session['user_id']),
+        'location': location
     }
     return render(request,'edit_image.html', context)
 
@@ -373,13 +374,18 @@ def process_add_pet_image(request):
 #=============================================##
 # process_remove_pet_image()
 #=============================================##
-def process_remove_image(request,image_id):
+def process_remove_image(request,location,image_id):
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=image_id)
     this_user = User.objects.get(id = this_image.user.id)
     this_image.delete()
     if session_user.user_level == 9:
         return redirect (f'/admin_edit_user/{this_user.id}')
+
+    # MAKE SPA USING AJAX for registered Users 
+
+    if location == 'explore':
+        return redirect('/explore')
     return redirect (f'/profile/{session_user.id}')
 
 #=============================================##
@@ -390,7 +396,7 @@ def process_edit_image(request):
     if len(errors) > 0:
         for value in errors.values():
             messages.error(request,value)
-        return redirect(f'/edit_image/{request.POST["image_id"]}')
+        return redirect(f'/edit_image/{request.POST["location"]}/{request.POST["image_id"]}')
 
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=request.POST['image_id'])
@@ -399,6 +405,8 @@ def process_edit_image(request):
     this_image.save()
     if session_user.user_level == 9:
         return redirect (f'/edit_image/{this_image.id}')
+    if request.POST['location'] == 'explore':
+        return redirect(f'/explore')
     return redirect (f'/profile/{session_user.id}')
 
 #=============================================##

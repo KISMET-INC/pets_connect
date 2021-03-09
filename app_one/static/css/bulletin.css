@@ -5,9 +5,8 @@
 nav .fa-users::before, nav a.bulletin{
     color: gray;
 }
-
-body {
-   
+.stats_board .edit_stats a {
+    display: none;
 }
 
 

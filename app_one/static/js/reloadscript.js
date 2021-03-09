@@ -6,6 +6,11 @@ $(document).ready(function(){
     //*********************************************//
     $(".opacity").css('opacity', '.99');
     var heart = false;
+    var clickcount = 0;
+
+    var click_delete =  false;
+    var click_edit = false;
+
     var session_user = '';
     var image_list = [];
     var heart_sum = 0;
@@ -46,7 +51,6 @@ var quote_colors = [
     map = map.split('/')
 
     var url_location = map[1]
-    var clicked_user_id = map[2]
 
     $(window).scroll(function() {
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
@@ -66,19 +70,31 @@ var quote_colors = [
         $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
     }
 
-    
+    $('body').on('click', '.delete_image', function(e){
+        
+        click_delete = true;
+        if($('.delete_image').hasClass('disabled')){
+            e.preventDefault();
+            alert("We're Sorry, this feature is disabled for guests.")
+        }
+    })
+
+    $('body').on('click', '.edit_image', function(){
+        click_edit = true;
+    })
+
     //*********************************************//
     // Global variable for opacity toggle
     //*********************************************//
 
-    var clickcount = 0;
+    
 
     //*********************************************//
     // MOBILE DEVICE 
     // On click toggle opacity and stat behaviour
     //*********************************************//
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
-        
+
         $('body').on('click', '.dimage', function(){
             var img_id = $(this).attr('id');
             var img = `.open_modal${img_id}`
@@ -87,7 +103,7 @@ var quote_colors = [
             localStorage.setItem('lastID', img_id)
 
             // if heart was not clicked toggle dimage opacity and stat show
-            if(heart == false ){
+            if(heart == false && click_delete == false && click_edit == false){
                 $('.stats_board').hide()
                 if( $(`${img}`).css('opacity') != '1') {
                     $(`${img}`).css('opacity', '1')
@@ -119,6 +135,8 @@ var quote_colors = [
             if(clickcount == 2){
                 clickcount = 1;
             }
+            click_delete = false;
+            click_edit = false;
                 
         });
     
@@ -129,7 +147,13 @@ var quote_colors = [
     } else {
         $('body').on('click', '.dimage',function(){
             var img_id = $(this).attr('id');
-            openCommentModal(img_id)
+            if(click_delete == false && click_edit == false){
+
+                openCommentModal(img_id)
+            }
+            click_delete = false;
+            click_edit = false;
+            
         });
         $('body').on('mouseover', '.dimage', function(){
                 $('img').css('opacity', '1');
@@ -495,7 +519,9 @@ var quote_colors = [
             console.log("Error in fetching data");
         });
     }
-
+        $('body').on('click','delete_comment', function(){
+            delete_comment = true;
+        })
         //*********************************************//
         // Process Heart Clicks
         //*********************************************//

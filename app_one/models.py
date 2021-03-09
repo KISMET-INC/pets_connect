@@ -132,7 +132,7 @@ class PetManager(models.Manager):
         errors = {}
 
         if len(post['name']) < 1:
-            errors['name'] = 'We need your PETS name.'
+            errors['name'] = 'Please tell us your PETS name.'
 
         if len(post['desc']) < 2:
             errors['desc'] ='Please tell us YOUR name too.'
@@ -149,12 +149,20 @@ class PetManager(models.Manager):
     # EDIT Pet Validations
     #=============================================##
     def basic_validator_edit_pet(self, postData):
-
+        post = postData
         # empty error dictionary
         errors = {}
 
-        if len(postData['name']) < 1:
-            errors['name'] = 'A name is required'
+        
+        if len(post['name']) < 1:
+            errors['name'] = 'Please tell us your PETS name.'
+
+        if len(post['desc']) < 2:
+            errors['desc'] ='Please tell us your YOUR name too.'
+
+        if len(post['desc']) > 10 or len(post['name']) > 10:
+            errors['desc'] ='Sorry, names must be between 2 and 10 characters'
+
 
         return errors
         
