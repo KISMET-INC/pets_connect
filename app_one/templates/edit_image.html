@@ -17,7 +17,7 @@
         <div id="interface_block_one" class='edit_image'>
             <div class = 'heading'>
                 <div class = 'profile_info'>
-                    <img width = '300' style="margin-right: 50px"src= {{image.pet_img.url}}>
+                    <img src= {{image.pet_img.url}}>
                     <form enctype="multipart/form-data" action="/process_edit_image" method="post">
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
@@ -31,14 +31,14 @@
                             <button type ='submit'> SAVE </button>
                             <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>
                         </div>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %} 
                     </form>
-                    {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %} 
                 </div>
                 
 
