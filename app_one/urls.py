@@ -25,7 +25,7 @@ urlpatterns = [
     
     # Image Proceses
     path('process_add_pet_image', views.process_add_pet_image),
-    path('process_remove_image/<int:image_id>', views.process_remove_image),
+    path('process_remove_image/<str:location>/<int:image_id>', views.process_remove_image),
     path('process_edit_image', views.process_edit_image),
     
     # User Proceses

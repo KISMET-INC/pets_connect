@@ -16,7 +16,7 @@
                 <a class = 'edit_image' href='/edit_image/{{location}}/{{image.id}}'>Edit </a>
                 
                 <!-- Dont allow guests to delete guest images -->
-                <a class = 'delete_image disabled' {% if session_user.email != 'guest@petsconnect.com' %} href='/process_remove_image/{{image.id}}' {% else %} href = '' {% endif %}>| Delete</a> 
+                <a {% if session_user.email != 'guest@petsconnect.com' %} class = 'delete_image' href='/process_remove_image/{{location}}/{{image.id}}' {% else %} class = 'delete_image disabled' href = '' {% endif %}>| Delete</a> 
                     
             </section>
         

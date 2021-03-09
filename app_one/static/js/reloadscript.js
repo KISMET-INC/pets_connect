@@ -71,9 +71,10 @@ var quote_colors = [
     }
 
     $('body').on('click', '.delete_image', function(e){
-        e.preventDefault();
+        
         click_delete = true;
         if($('.delete_image').hasClass('disabled')){
+            e.preventDefault();
             alert("We're Sorry, this feature is disabled for guests.")
         }
     })
