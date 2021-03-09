@@ -355,6 +355,8 @@ img.cropped2 {
 
     .color_block2 {
         padding: 20px;
+        width: 100%;
+        text-align: center;
     }
 
     .color_block2 p {
@@ -365,6 +367,13 @@ img.cropped2 {
         width: 90%;
     }
     
+    .dimage {
+        width: 97%;
+    }
+
+    .stats_board {
+        top: -200px;
+    }
 
 
 
