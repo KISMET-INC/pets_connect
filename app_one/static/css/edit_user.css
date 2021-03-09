@@ -129,6 +129,9 @@ form button {
         margin-top: 50px;
         width:100%;
     }
+    img {
+        margin-right: 0px;
+    }
 
 }
 
