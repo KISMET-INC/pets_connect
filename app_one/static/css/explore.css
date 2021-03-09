@@ -7,12 +7,10 @@
 .preload{
     position:absolute;
 }
-.dimage .edit_stats a {
-    display:none;
-}
+
 
 a {
-    display: flex;
+   
     margin: 0px;
     padding: 0px;
     width:fit-content;

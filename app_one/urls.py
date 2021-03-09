@@ -20,7 +20,7 @@ urlpatterns = [
     path('bulletin/<int:user_id>/<int:image_id>/<int:modal_trigger>', views.bulletin),
     path('explore', views.explore),
     path('edit_user/<int:user_id>', views.edit_user),
-    path('edit_image/<int:image_id>', views.edit_image),
+    path('edit_image/<str:location>/<int:image_id>', views.edit_image),
     path('profile/<int:user_id>', views.profile),
     
     # Image Proceses

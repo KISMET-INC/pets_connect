@@ -6,15 +6,18 @@
         {% endif %}
     </header>
         <ul class = 'stats_bar'>
-        {% if session_user == image.user and session_user.email != 'guest@petsconnect.com' or session_user.user_level == 9 %}
+        {% if session_user == image.user or session_user.user_level == 9 %}
             <li class = 'stat_icon'><i class="fas fa-heart" id={{image.id}} title="Your Pet Loves"></i></li>
             <li class= 'stat_num'><p >{{image.loves.count}}</p></li> 
             <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
             <li class = 'stat_num'><p>{{image.comments.count}}</p></li>
         </ul>
             <section class = 'edit_stats'>
-                <a href='/edit_image/{{image.id}}'>Edit |</a>
-                <a href='/process_remove_image/{{image.id}}'>Delete</a>
+                <a class = 'edit_image' href='/edit_image/{{location}}/{{image.id}}'>Edit </a>
+                
+                <!-- Dont allow guests to delete guest images -->
+                <a class = 'delete_image disabled' {% if session_user.email != 'guest@petsconnect.com' %} href='/process_remove_image/{{image.id}}' {% else %} href = '' {% endif %}>| Delete</a> 
+                    
             </section>
         
         {% else %}
@@ -35,6 +38,7 @@
 
             <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title ="Comment"></i></button>
             <li class = 'stat_num'><p >{{image.comments.count}}</p></li>
+        </ul>
 
     {% endif %}
 </ul>

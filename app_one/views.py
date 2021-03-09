@@ -333,10 +333,11 @@ def bulletin(request,user_id,image_id, modal_trigger):
 #=============================================##
 # edit_pet VIEW()
 #=============================================##
-def edit_image(request,image_id):
+def edit_image(request,location,image_id):
     context = {
         'image': Image.objects.get(id=image_id),
         'session_user': User.objects.get(id=request.session['user_id']),
+        'location': location
     }
     return render(request,'edit_image.html', context)
 
@@ -399,6 +400,8 @@ def process_edit_image(request):
     this_image.save()
     if session_user.user_level == 9:
         return redirect (f'/edit_image/{this_image.id}')
+    if request.POST['location'] == 'explore':
+        return redirect(f'/explore')
     return redirect (f'/profile/{session_user.id}')
 
 #=============================================##

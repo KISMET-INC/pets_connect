@@ -17,21 +17,16 @@
         <div id="interface_block_one" class='edit_image'>
             <div class = 'heading'>
                 <div class = 'profile_info'>
-                    
                     <img width = '300' style="margin-right: 50px"src= {{image.pet_img.url}}>
-                    {% if session_user.user_name != 'guest' %}
                     <form enctype="multipart/form-data" action="/process_edit_image" method="post">
-                    {% else %}
-                    <form>
-                    <p>As a guest you are not allowed to edit these fields</p>
-                    {% endif %}
                         <!-- <a href=''> RECIEVE EMAIL NOTIFICATIONS: <span>False</span></a> -->
                         {% csrf_token %}
                         <label for ='name'>Pet Name</label>
                         <input type= 'text' value = '{{image.name}}' name = 'name' placeholder='Pet Name'> 
-                        <label for ='desc'>Tell Us About Your Pet!</label>
-                        <input maxlength= '50' type= 'text' value = '{{image.desc}}' name = 'text' placeholder="Description"> 
+                        <label for ='desc'>You Name!</label>
+                        <input maxlength= '50' type= 'text' value = '{{image.desc}}' name = 'text' placeholder="Your Name"> 
                         <input type= 'hidden' value = '{{image.id}}' name = 'image_id'>
+                        <input type= 'hidden' value = '{{location}}' name = 'location'>
                         <div>
                             <button type ='submit'> SUBMIT </button>
                             <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>

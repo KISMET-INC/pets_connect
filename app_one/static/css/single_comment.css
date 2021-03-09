@@ -28,6 +28,8 @@
         font-size:20px;
     }
 
+
+
     .single_comment .edit_actions i.edit_comment_cancel {
         margin-right:0px;
     }
@@ -74,3 +76,27 @@
     margin-right: 10px;
 }
 
+/*******************************/
+/*  MEDIA BREAKPOINT 387px        
+/*******************************/
+@media (max-width: 387px){
+
+    .single_comment .edit_actions i.delete_comment {
+        margin-right:0px;
+    }
+
+    .single_comment .edit_actions i.edit_comment {
+        margin-right:10px;
+    }
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 290px        
+/*******************************/
+@media (max-width: 290px){
+    .single_comment p {
+        width:140px;
+    }
+ 
+}
