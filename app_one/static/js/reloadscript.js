@@ -91,12 +91,10 @@ var quote_colors = [
 
         if($('.slide').is(":visible")){
             $('.slide').slideUp()
-            $('.share_pet .left').css('align-items','center');
             
         } else {
             $('.slide').css('display','flex')
             $('.slide').slideDown()
-            $('.share_pet .left').css('align-items','left');
             
         }
 
@@ -111,7 +109,7 @@ var quote_colors = [
     if(window.innerWidth <1024 && localStorage.getItem('share_pet_click') == null){
         console.log('here!')
         $('.slide').css('display', 'none')
-        $('.share_pet .left').css('align-items','center');
+        
     }
 
 
