@@ -90,11 +90,11 @@ var quote_colors = [
         localStorage.setItem('share_pet_click', 'lock')
 
         if($('.slide').is(":visible")){
-            $('.slide').slideUp()
+            // $('.slide').slideUp()
             
         } else {
             $('.slide').css('display','flex')
-            $('.slide').slideDown()
+            // $('.slide').slideDown()
             
         }
 
