@@ -10,7 +10,7 @@
     margin-top: 10px;
 }
 
-.share_pet section.left {
+.share_pet .left {
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -27,4 +27,9 @@
 
 .share_pet .messages li {
     list-style: none;
+}
+
+.share_pet .left .slide {
+    display: flex;
+    flex-direction: column;
 }
