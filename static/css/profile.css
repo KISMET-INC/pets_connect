@@ -4,16 +4,7 @@
 
 
 nav .fa-user::before, nav a.profile {
-    color:#E5E5E5;
-}
-
-.stats {
-    display: none;
-    padding: 0px;
-}
-
-.stats p.name {
-    display:none;
+    color:gray;
 }
 
 .dimage {
@@ -124,7 +115,7 @@ form .share_pet button {
     display:flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: right;
+    justify-content: left;
 }
 
 .dashboard h3 {

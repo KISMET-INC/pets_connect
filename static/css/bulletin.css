@@ -3,15 +3,75 @@
 @import 'stats.css';
 
 nav .fa-users::before, nav a.bulletin{
-    color:#E5E5E5;
+    color: gray;
+}
+.stats_board .edit_stats a {
+    display: none;
 }
 
-.btn {
-    margin-bottom: 20px;
+
+
+header a.search_btn{
+    text-decoration: underline;
+    color: var(--blue1);
+    cursor: pointer;
 }
 
+header h3, header a {
+    margin:0px;
+}
+
+.stats_board {
+    display: unset;
+}
+.user , .followers{
+    position:sticky;
+    
+}
+
+
+.user {
+    display:flex;
+    top: 105px;
+    align-items: center;
+}
+.session_user .user_img{
+    width: 80px;
+    height: auto;
+    border: none;
+}
+
+.session_user .person {
+    width:100px;
+}
+
+.person {
+    width: 100px;
+}
 .person .user_email {
     display:none;
+}
+
+
+.btn-info {
+    margin-bottom: 20px;
+    background-color: var(--blue1);
+    border: none;
+    
+}
+
+
+.post {
+    margin-bottom: 20px;
+    border:1px solid grey;
+}
+
+input {
+    height:40px;
+    width:100%;
+    margin: 0 auto; 
+    background-color:transparent;
+    border:none;
 }
 
 #search_modal .person .user_email {
@@ -20,234 +80,130 @@ nav .fa-users::before, nav a.bulletin{
 #interface_block_two {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 85%;
     margin: 0 auto;
     padding-top: 20px;
-}
-
-.bulletin_left {
-    width:50%;
-    
-}
-.bulletin_left .following .person div.outline {
-    display:flex;
-    justify-content: center;
-    border: 2px solid teal;
+    background-color: white;
+    padding:30px;
 
 }
 
-.bulletin_left .post .person{
-    display:flex;
-    align-items: center;
-    width:200px;
+.left_side {
+    width:55%;  
 }
-
-.bulletin_right .followers .person {
-    width:75px;
-}
-
-.bulletin_left .post .person p,  .bulletin_right .followers .person p{
-    font-weight: bold;
-    font-size:14px;
-}
-
-.post {
-    margin-bottom: 50px;
-    border:1px solid grey;
-}
-.posts .user_img, .followers .person .user_img{
-    width:40px;
-    height:40px;
-}
-
-.user_img {
-    width:60px;
-    height:60px;
-}
-
-.stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    background-color: #E5E5E5;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top:10px;
-    position:static;
-    height:fit-content;
-    align-items: left;
-}
-.stats p {
-    width:fit-content;
-}
-.stats p:nth-child(1){
-    color: #E5E5E5;
-}
-
-.stats p span {
-    display:none;
-}
-.stats h2 {
-    font-size: 14px;
-    margin:5px;
-}
-
-.single_comment {
-    display:flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    width:100%;
-}
-
-.single_comment i.delete_comment::before, i.edit_comment::before{
-    margin-left: 10px;
-    color: #55AAAA;
-}
- .single_comment h2 {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size:17px;
-    margin: 0px;
-    margin-bottom: 5px;
-    width:90%;
-}
-
-
-.single_comment p {
-    font-size:15px;
-    text-align: right;
-    width: 140px;
-}
-
-
-
-.single_comment span {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:16px;
-    font-weight:normal;
-}
-
-
-input {
-    height:40px;
-    width:100%;
-    margin: 0 auto; 
-    /* padding-right:70px; */
-    background-color:transparent;
-    border:none;
-}
-.following {
-    display:flex;
-    height:125px;
-    border:1px solid grey;
-    min-width: 70px;
-    padding:15px;
-    padding-bottom: 20px;
-    border-radius: 5px;
-    overflow: scroll;
-    margin-bottom: 50px;
-
-}
-
-.bulletin_right {
-
-    width: 40%;
-    padding-left: 50px;
-    display:flex;
-    flex-direction: column;
-    
-
-}
-.bulletin_right .followers h2:nth-child(1){
-    margin:0px;
-    font-size: 15px;
-    color: gray
-
-}
-
-
-
-.bulletin_right .session_user div p{
-    font-size:16px;
-}
-
-.bulletin_right .user div {
-    width: 30%;
-}
-
-.user {
-    display:flex;
-    top: 105px;
-    align-items: center;
-}
-
-.bulletin_right h2, .session_user div p {
-    font-size: 25px;
-    font-family: 'Montserrat Alternates', sans-serif;
-    margin-top: 0px;
-}
-
-
-.user , .followers{
-    position:sticky;
-    
-}
-
-.btn-info {
-    background-color: var(--blue1);
-    border: none;
-}
-
-.followers {
-    width: 100%;
-    top:220px;
-    
-}
-
-.followers div:nth-child(1) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-.followers .person {
-    margin: 0px;
-}
-.bulletin_right .user .person .user_img {
-    margin: 0px;
-    margin-right: 20px;
-}
-.bulletin_right .user .person p {
-    display:none;
-}
-
-.bulletin_right .session_user .user_img{
-    width: 80px;
-    height: 80px
-}
-
-
-.bulletin_right .footer {
-    display: none;
-    position:sticky;
-    top: 320px;
-    width:100%;
-    text-align:center;
-}
-.bulletin_right .footer p{
-   margin-bottom:5px;
-   color:grey;
-}
-
-@media (max-width:767px){
-    #interface_block_two {
-        width: 70%;
+    .following {
+        display:flex;
+        flex-wrap: wrap;
+        height:140px;
+        border:2px dotted var(--blue1);
+        min-width: 70px;
+        padding:10px;
+        border-radius: 5px;
+        overflow: scroll;
+        margin-bottom: 50px;
     }
-    .bulletin_left {
+
+    .left_side .post .user_img {
+        border:none;
+        width: 60px;
+    }
+
+    .left_side .post .person{
+        display:flex;
+        align-items: center;
+        width:200px;
+    }
+
+    .left_side .post .person p,  .right_side .followers .person p{
+        font-weight: bold;
+        font-size:14px;
+    }
+
+    .search_btn_grp{
+        width:100%;
+    }
+        .search_btn_grp button {
+            width: 100%;
+            font-size: 17px;
+        }
+
+
+section.right_side {
+    position: relative;
+    top: -100px;
+    background-color: #D0E7E7;
+    width: 40%;
+    padding-left: 20px;
+    padding-right: 30px;
+    display:flex;
+    margin-bottom: -150px;
+    flex-direction: column;
+    scroll-behavior: none;
+    border-left: 2px dotted var(--blue1);
+    border-right: 2px dotted var(--blue1);
+}
+    .right_side h2 {
+        font-size: 18px;
+        font-family: 'Montserrat Alternates', sans-serif;
+        margin: 0;
+    }
+
+    .right_side .person .user_info {
+        display:none;
+    }
+
+    .right_side .person .outline {
+        padding: 0;
+    }
+
+    .followers {
+        width: 100%;
+        top:220px;
+        
+    }
+        .followers header {
+
+            color: teal;
+            margin-bottom: 20px;
+            margin-left:20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .followers .person {
+            width:75px;
+        }
+            .followers .person .user_img{
+                width:50px;
+                border:none;
+                height:auto;
+            }
+
+            .followers .follower_info{
+                margin:0;
+                font-size: 15px;
+                color: teal;
+                height:fit-content;
+            }
+                .followers .follower_info p {
+                    margin: 0;
+                }
+
+
+@media (max-width:769px){
+    #interface_block_two {
+        width: 90%;
+    }
+
+    .person{
+        width:17%;
+    }
+    .left_side {
         width: 100%;
         margin: 0 auto; 
     }
-    .bulletin_right{
+    section.right_side{
         display:none;
     }
 
@@ -260,31 +216,39 @@ input {
 
 @media (max-width: 1200px){
 
+    .right_side {
+        width: 50%;
+    }
+
     .session_user {
         display:flex;
         flex-direction: column;
-        top: 75px;
     }
 
     .followers {
         top: 255px;
+    }  
+
+    .followers .heading {
+        flex-direction: column;
+    }
+    .followers .heading h3{
+        display:none;
     }
 
-   
-
     .followers .heading p {
-       display:none;
+        display:none;
     }
 
     .session_user div {
         text-align:center;
         width: 100%;
     }
-    .bulletin_right .user div {
+    .right_side .user div {
         width: 100%;
     }
 
-.bulletin_right .session_user .user_img {
+.right_side .session_user .user_img {
     width: 90px;
     height: 90px;
 }
@@ -296,11 +260,47 @@ input {
     #interface_block_two {
         width: 90%;
     }
-    .bulletin_left {
+
+    .person{
+        width:20%;
+    }
+
+    .left_side {
         width: 100%;
         margin: 0 auto; 
     }
-    .bulletin_right{
+    .right_side{
         display:none;
     }
+}
+
+
+@media (max-width:426px){
+    .person{
+        width:20%;
+    }
+    #interface_block_two {
+        width:100%;
+        padding: 10px;
+    }
+
+    .post p.loves {
+        font-size:15px;
+    }
+
+
+}
+
+@media (max-width:326px){
+    .person{
+        width:28%;
+    }
+
+}
+
+@media (max-width:281px){
+    .person{
+        width:27%;
+    }
+
 }

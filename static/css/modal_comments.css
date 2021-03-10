@@ -1,0 +1,12 @@
+.modal .comments {
+    border-radius: 5px;
+    background-color: var(--gray2);
+    text-align: left;
+    padding: 15px;
+    height: 95%;
+    width:90%;
+    margin: 0 auto; 
+    overflow: scroll;
+    vertical-align: baseline;
+}
+

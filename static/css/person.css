@@ -1,21 +1,19 @@
 .user_img {
-    width:200px;
-    height: 200px;
+
     background-size: cover;
-    background-color: #E5E5E5;
+    background-color: transparent;
     border-radius: 100px;
+    border: 2px solid teal;
+    padding: 5px;
     margin: 0 auto;
 }
 
 .person {
     text-align: center;
     margin-bottom: 20px;
-    width: 75px;
-    white-space: nowrap;
-    /* overflow: hidden; */
-    
-    margin: 5px;
-    display:inline-block
+    margin: 0px 7px 9px 6px;
+    display:inline-block;
+    overflow: hidden;
 }
 
 .person div:nth-child(2){
@@ -37,10 +35,16 @@
 
 .person p {
     margin: 0px;
-    text-decoration: none;
+    text-align: center;
+    color: black;
+    text-overflow: ellipsis;
 }
 
-.user_info a {
+.user_info {
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+.person a {
     text-decoration: none;
-    color: black;
 }

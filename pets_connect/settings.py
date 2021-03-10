@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'zr!7u7egu1zq25ghl+5(kg@rj+m6nv%188it^0uzxzkg(m^)&!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['18.223.23.111', 'pets-connect.com','www.pets-connect.com']
 DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
 DJANGORESIZED_DEFAULT_QUALITY = 100
 DJANGORESIZED_DEFAULT_KEEP_META = True

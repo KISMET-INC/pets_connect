@@ -1,75 +1,56 @@
 $(document).ready(function(){
-    $('.comm_edit').hide()
-    $('body').on('click', '.fa-pen', function(e){
-        var comment_id = $(this).attr('id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
-        $(`.comm_text`).show()
-        $(`.comm_edit`).hide()
-        
-        $(`.eform${comment_id}`).css('display','flex').show()
-        $(`.single_comment #comment${comment_id}`).hide()
 
-        $('body').on('click', '.edit_comment_cancel', function(e){
-            e.preventDefault()
-            var comment_id = $(this).attr('comm_id')
-            $(`.comm_text`).show()
-            
-            $(`.edit_comment_text_${comment_id}`).val(new_comment)
-            $(`.eform${comment_id}`).hide()
-    
-            $(`.single_comment #comment${comment_id}`).show()
-        })
-        
-    })
-
- 
-    $('body').on('click', '.edit_comment_btn', function(e){
-        e.preventDefault()
-        var comment_id = $(this).attr('comm_id')
-        var image_id = $(this).attr('img_id')
-        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
-        var component = $(this).attr('comp')
-        $.ajax({
-            cache: false,
-            headers: { "X-CSRFToken": csrftoken },  
-            type:'POST',
-            data : { text : new_comment, component : component, image_id : image_id},
-            url: `/process_edit_comment/${comment_id}`,
-        })
-        .done(function(data){
-            if( component == 'from_post'){
-                $(`#post${image_id}`).html(data);   
-            } else {
-                $('#replace_comments').html(data)                                  
-                //scrollToBottom()
-            }
-            //$(`${form_text}`).val("")
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        })
-        
-    });
 
     //*********************************************//
     // Set starting variables
     //*********************************************//
     $(".opacity").css('opacity', '.99');
     var heart = false;
-    var selfclick = false;  //may not need
+    var clickcount = 0;
+
+    var click_delete =  false;
+    var click_edit = false;
+
     var session_user = '';
     var image_list = [];
     var heart_sum = 0;
+    var quotes = [
+    ["Dogs are not our whole lives, but they make our lives whole.", 'Roger Caras'], 
+    ['Some angels choose fur instead of wings.','Unknown'],
+    ['Our perfect companions never have fewer than four feet.','Collete'],
+    ['Heartbeat at my feet.','Unknown'],
+    ["Until one has loved an aimal a part of one's soul remains unawakened.",'Anatole France'],
+    ["Dogs eat.<br>Cats dine.",'Ann Taylor'],
+    ["An animal's eyes speak a great language.",'Martin Burber'],
+    ["I think having an animal in your life makes you a better human.",'Rachael Ray'],
+    ["Time spent with cats is never wasted.",'Sigmund Freud'],
+    ["You cannot look at a sleeping cat and feel tense.",'Jane Pauley'],
+    ["If I could be half the person my dog is, I'd be twice the human I am.",'Charles Yu'],
+    ["Pets understand humans better than humans do.",'Ruchi Prabhu'],
+    ["Sometimes, your pet picks you.",'Julie Wenzel'],
+    ["No one can feel as helpless as the owner of a sick goldfish.",'Kin Hubbard'],
+    ["Cats leave paw prints on your heart.",'Unknown'],
+    ["Heaven will never be paradise unless my cats are there waiting for me.",'Unknown'],
+    ["A kitten in the animal world is what a rosebud is in the garden.",'Robert Southey'],
+
+]
+
+var quote_colors = [
+    ['hsl(253, 45%, 60%)','hsl(253, 45%, 90%)'],
+    ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
+    ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
+]
+
 
     //*********************************************//
     // Get URL Route variables
+    // Split URL string to extract useful variables into
+    // an array 
     //*********************************************//
     map = window.location.pathname.toString()
     map = map.split('/')
-    console.log(map)
 
     var url_location = map[1]
-    var clicked_user_id = map[2]
 
     $(window).scroll(function() {
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
@@ -77,10 +58,197 @@ $(document).ready(function(){
         }
     });
 
+    var color_blocks = ($('.color_block2').length)
+    for(var i = 0; i<color_blocks; i++){
+        var rand = Math.floor(Math.random()*quotes.length)
+        var randcolnum = Math.floor(Math.random()*quote_colors.length)
+        var randColor = quote_colors[randcolnum]
+        var randStr = quotes[rand][0]
+        var cite = quotes[rand][1]
+        $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
+        $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
+        $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
+    }
 
+    $('body').on('click', '.delete_image', function(e){
+        
+        click_delete = true;
+        if($('.delete_image').hasClass('disabled')){
+            e.preventDefault();
+            alert("We're Sorry, this feature is disabled for guests.")
+        }
+    })
+
+    $('body').on('click', '.edit_image', function(){
+        click_edit = true;
+    })
 
     //*********************************************//
-    // Search
+    // Global variable for opacity toggle
+    //*********************************************//
+
+    
+
+    //*********************************************//
+    // MOBILE DEVICE 
+    // On click toggle opacity and stat behaviour
+    //*********************************************//
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){ 
+
+        $('body').on('click', '.dimage', function(){
+            var img_id = $(this).attr('id');
+            var img = `.open_modal${img_id}`
+            var stats = `#stat${img_id}`
+            clickcount++
+            localStorage.setItem('lastID', img_id)
+
+            // if heart was not clicked toggle dimage opacity and stat show
+            if(heart == false && click_delete == false && click_edit == false){
+                $('.stats_board').hide()
+                if( $(`${img}`).css('opacity') != '1') {
+                    $(`${img}`).css('opacity', '1')
+                    $(`${stats}`).hide()
+                    
+                } else {
+                    $('img').css('opacity', '1');
+                    $('.stats_board').hide()
+                    $(`${img}`).css('opacity', '.6')
+                    $(`${stats}`).show()
+                }
+
+                $('.dimage').click(function(){
+                    localStorage.setItem('newID', img_id)              
+                })
+
+
+                if(clickcount == 2 && heart == false){
+                    if(localStorage.getItem("newID") == localStorage.getItem("lastID")){
+                        openCommentModal(img_id)
+                        $(`${img}`).css('opacity', '.6')
+                        $(`${stats}`).show()
+                    }
+
+                    clickcount =1;
+                }
+            }
+
+            if(clickcount == 2){
+                clickcount = 1;
+            }
+            click_delete = false;
+            click_edit = false;
+                
+        });
+    
+    //*********************************************//
+    // FOR DESKTOP AND LAPTOP
+    // Mousover / Mouseout Behavior
+    //*********************************************//
+    } else {
+        $('body').on('click', '.dimage',function(){
+            var img_id = $(this).attr('id');
+            if(click_delete == false && click_edit == false){
+
+                openCommentModal(img_id)
+            }
+            click_delete = false;
+            click_edit = false;
+            
+        });
+        $('body').on('mouseover', '.dimage', function(){
+                $('img').css('opacity', '1');
+                $('.stats_board').hide()
+               // Declare Variables needed 
+                var img_id = $(this).attr('id');
+                var img = `.open_modal${img_id}`
+                var stats = `#stat${img_id}` 
+                $( `${img}`).css('opacity', '.6')
+                $(`${stats}`).show()
+
+            })
+
+            .on('mouseleave', '.dimage', function(){
+                var id = $(this).attr('id');
+                var stats = `#stat${id}`
+                var img = `.open_modal${id}`
+
+                $( `${img}`).css('opacity', '1')
+                $(`${stats}`).hide()
+            });
+    }  
+        
+        // END DEVICE DEPENDENT INSTRUCTIONS
+
+    //*********************************************//
+    // LOAD AND OPEN  COMMENT MODAL
+    //*********************************************//     
+        function openCommentModal(img_id){
+            if(heart == false){
+
+                //var img_id = $(this).attr('id');
+                $.ajax({
+                    cache: false,
+                    type:"GET",
+                    url: `/replace_modal/${img_id}`,
+                })
+                .done(function(data){
+
+                    $(`#replaceModal`).html(data);
+                    $('#comment_modal').modal('show');
+                    
+
+
+                    $("#comment_modal").on('shown.bs.modal', function(){
+                        scrollToBottom()
+                    })
+
+                    //*********************************************//
+                    // WHEN MODAL IS HIDDEN update background elements
+                    //*********************************************//
+                    $("#comment_modal").on('hide.bs.modal', function(){
+                        var url;
+                        var img = `.open_modal${img_id}`
+                        var stats = `#stat${img_id}`
+
+                        if (url_location == 'bulletin'){
+                            url = `/replace_post/${img_id}`
+                        } else {
+                            url =  `/replace_image/${img_id}`
+                        }
+
+                        $.ajax({
+                            cache: false,
+                            type:"GET",
+                            url: url,
+                        })
+                        .done(function(data){
+
+                            if (url_location == 'bulletin'){
+                                $(`#post${img_id}`).replaceWith(data); 
+                            } else {
+                                $(`.dashboard #${img_id}`).replaceWith(data)
+                            }
+                            $(`${img}`).css('opacity', '.6')
+                            $(`${stats}`).show()
+                            
+                        })
+                        .fail(function(data){
+                            console.log("Error in fetching data");
+                        })
+
+                        
+                    });
+                })
+                .fail(function(data){
+                    console.log("Error in fetching data");
+                })
+                
+            }
+        }
+      // END OPEN COMMENT MODAL
+
+    //*********************************************//
+    // Start USER SEARCH on search button press
     //*********************************************//
     $('.search').on('click', function(e){
 
@@ -98,7 +266,7 @@ $(document).ready(function(){
             url: `/search`,
         })
         .done(function(data){
-            console.log(data)
+            
             if(data == 'None'){
                 $('.error').html("Email Not Found")
             } else {
@@ -111,13 +279,13 @@ $(document).ready(function(){
 
     })
 
-     //*********************************************//
+    //*********************************************//
     // WHEN Search Modal is shown insert correct querylist
     //*********************************************//
 
         $('.search_btn').on('click', function(){
             url='';
-            if($(this).html() == 'All Pet Owners'){
+            if($(this).html() == 'Search All Pet Owners'){
                 $('.modal-title').html("Search All Pet Owners")
                 url = "/get_all_users_list"
             } else {
@@ -140,9 +308,95 @@ $(document).ready(function(){
             })
 
         })
+    
+    
 
     //*********************************************//
-    // WHEN MODAL IS HIDDEN update background elements
+    // On EDIT ICON CLICK
+    // Show Edit Input - Hide comment elements behind
+    //*********************************************//
+    $('body').on('click', '.fa-pen', function(e){
+        var comment_id = $(this).attr('id')
+        var new_comment = $(`.edit_comment_text_${comment_id}`).val()
+        var component =$(this).attr('comp')
+        //Reset and show all comments and hide all inputs when
+        //user clicks another comment
+        $(`.comm_text`).show()
+        $(`.comm_edit`).hide()
+        
+
+        $(`.eform${comment_id}${component}` ).css('display','flex').show()
+        
+        $(`.single_comment #comment${comment_id}${component}`).hide()
+
+        // On CANCEL CLICK - re-show text / hide edit input
+        $('body').on('click', '.edit_comment_cancel', function(e){
+            e.preventDefault()
+            var comment_id = $(this).attr('comm_id')
+            $(`.comm_text`).show()
+            
+            $(`.edit_comment_text_${comment_id}${component}`).val(new_comment)
+            $(`.eform${comment_id}${component}`).hide()
+    
+            $(`.single_comment #comment${comment_id}${component}`).show()
+        })
+        
+    })
+
+    //*********************************************//
+    // On EDIT COMMENT SUBMIT BUTTON CLICK
+    //*********************************************//
+    $('body').on('click', '.edit_comment_btn', function(e){
+        e.preventDefault()
+        var comment_id = $(this).attr('comm_id')
+        var image_id = $(this).attr('img_id')
+        var component = $(this).attr('comp')
+        var new_comment = $(`.edit_comment_text_${comment_id}${component}`).val()
+        $.ajax({
+            cache: false,
+            headers: { "X-CSRFToken": csrftoken },  
+            type:'POST',
+            data : { text : new_comment, component : component, image_id : image_id},
+            url: `/process_edit_comment/${comment_id}`,
+        })
+        .done(function(data){
+            if( component == 'from_post'){
+                $(`#post${image_id}`).replaceWith(data);   
+            } else {
+                $('#replace_comments').replaceWith(data)                                  
+                scrollToBottom()
+            }
+            $(`${form_text}`).val("")
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        })
+    });
+
+    //*********************************************//
+    // Hide COMMENT EDIT INPUTS on load
+    //*********************************************//
+    $('.comm_edit').hide()
+
+    // if (url_location != 'bulletin'){
+    //     $('.stats_board').css('display', 'flex')
+    // }
+    
+
+    
+
+    //*********************************************//
+    // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
+    //*********************************************//
+    if (url_location == 'profile'){
+        $('.following').hide()
+    } else {
+        $('.following').show()
+    }
+
+
+    //*********************************************//
+    // WHEN SEARCH MODAL IS HIDDEN clear previous errors
     //*********************************************//
     $("#search_modal").on('hide.bs.modal', function(){
         $('.error').html("")
@@ -152,7 +406,6 @@ $(document).ready(function(){
     //*********************************************//
     // get more images
     //*********************************************//
-
     function get_more_images() {
 
         $.ajax({
@@ -173,26 +426,27 @@ $(document).ready(function(){
         });
 
     }
-    
-    $(document).ajaxStart(function(){
-        $('.loader').show();
-    });
-    $(document).ajaxStop(function(){
-    $('.loader').hide();
-    });
+    //*********************************************//
+    // OPEN LOADER ON AJAX START
+    //*********************************************//
+    // $(document).ajaxStart(function(){
+    // });
+    // $(document).ajaxStop(function(){
+    // $('.loader').hide();
+    // });
 
-     //*********************************************//
+    //*********************************************//
     // Alert on Logout
     //*********************************************//
     $('.logout').on('click',function(){
-        alert('Thank you for visiting Pets-Connect! We hope you saw some pets as "PAW-SOME" as yours! Come back soon to collect your  \u2661 hearts \u2661, and see the new pets that have been added! See you and your fur-kids soon!')
-     })
+        localStorage.removeItem('lastID')
+        localStorage.removeItem('newID')
+    })
 
     //*********************************************//
     // scrollToBottom()
     // When called scrolls into view element with id 'bottom'
     //*********************************************//
-
     function scrollToBottom() {
         if(document.body.contains(document.getElementById('bottom'))){
             $(".comments").scrollTop($('.comments')[0].scrollHeight);
@@ -202,19 +456,16 @@ $(document).ready(function(){
     //*********************************************//
     // Close guest Message
     //*********************************************//
-
     $('.close_guest_message').on('click', function(){
-
             $('.guest_message').remove()
-    })
+    });
 
     //*********************************************//
     // Close Modal on 'x' click
     //*********************************************//
     $('body').on('click', '.close_modal', function(){
         $('#comment_modal').modal('hide');
-    })
-
+    });
 
     //*********************************************//
     // Pull Session_user_id from database
@@ -226,13 +477,12 @@ $(document).ready(function(){
             url: `/get_session_id`,
         })
         .done(function(data){
-            session_user =  data           
+            session_user = data       
         })
         .fail(function(data){
             console.log("Error in fetching data");
         });
     }
-
 
     //*********************************************//
     // Pull Image List from database
@@ -263,70 +513,15 @@ $(document).ready(function(){
         .done(function(data){
             heart_sum =  data 
             $('.heart_sum').html(data)
-            console.log(heart_sum)
                 
         })
         .fail(function(data){
             console.log("Error in fetching data");
         });
     }
-
-
-    //*********************************************//
-    // MOBILE DEVICE 
-    // On click toggle opacity and stat behaviour
-    //*********************************************//
-
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-        $('body').on('click', '.dimage', function(){
-
-            var img_id = $(this).attr('id');
-            var img = `.open_modal${img_id}`
-            var stats = `#stat${img_id}`
-            
-            // if heart was not clicked toggle dimage opacity and stat show
-            if(heart == false && selfclick == false){
-                if( $(`${img}`).css('opacity') != '1') {
-                    $(`${img}`).css('opacity', '1')
-                    $(`${stats}`).hide()
-                } else {
-                    $('img').css('opacity', '1');
-                    $('.stats').hide()
-                    $(`${img}`).css('opacity', '.6')
-                    $(`${stats}`).show()
-                }
-            }
-                
-        });
-    
-    //*********************************************//
-    // FOR DESKTOP AND LAPTOP
-    // Mousover / Mouseout Behavior
-    //*********************************************//
-    } else {
-        $('body').on('mouseover', '.dimage', function(){
-                
-               // Declare Variables needed 
-                var img_id = $(this).attr('id');
-                var img = `.open_modal${img_id}`
-                var stats = `#stat${img_id}` 
-                $( `${img}`).css('opacity', '.6')
-                $(`${stats}`).show()
-            })
-
-            .on('mouseleave', '.dimage', function(){
-                var id = $(this).attr('id');
-                var stats = `#stat${id}`
-                var img = `.open_modal${id}`
-
-                $( `${img}`).css('opacity', '1')
-                $(`${stats}`).hide()
-            });
-        }  
-        
-        // END DEVICE DEPENDENT INSTRUCTIONS
-
-
+        $('body').on('click','delete_comment', function(){
+            delete_comment = true;
+        })
         //*********************************************//
         // Process Heart Clicks
         //*********************************************//
@@ -338,6 +533,7 @@ $(document).ready(function(){
             var stats = `#stat${img_id}`
             get_session_id()
             
+        
             // Stops the ability to like your own pet
             if(title == 'Your Pet Loves' && session_user.session_user_name != 'guest'){
                 heart = false;
@@ -353,11 +549,13 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     if(url_location == 'bulletin'){
-                        $(`#post${img_id}`).html(data);  
+                        $(`#post${img_id}`).replaceWith(data);  
                     } else {
-                        $(`#replace${img_id}`).html(data); 
-                        get_heart_sum(img_id)          
+                        $(`#stat${img_id}`).replaceWith(data); 
+                        get_heart_sum(img_id)
+                        $(`#stat${img_id}`).show()          
                     }
+                    clickcount =1
                     heart = false;   
                 })
                 .fail(function(data){
@@ -366,6 +564,7 @@ $(document).ready(function(){
             }
             
         }); // END PROCESS HEART CLICKS
+
 
         //*********************************************//
         // Process Follow Clicks
@@ -401,61 +600,7 @@ $(document).ready(function(){
         }); // END PROCESS FOLLOW CLICKS
 
 
-        //*********************************************//
-        // COMMENT ICON - ON CLICK
-        //*********************************************//
-        $('body').on('click', 'p button', function(){
-            var img_id = $(this).attr('id');
-            $.ajax({
-                cache: false,
-                type:"GET",
-                url: `/replace_modal/${img_id}`,
-            })
-            .done(function(data){
-
-                $(`#replaceModal`).html(data);
-                $('#comment_modal').modal('show');
-
-
-                $("#comment_modal").on('shown.bs.modal', function(){
-                    scrollToBottom()
-                })
-
-                //*********************************************//
-                // WHEN MODAL IS HIDDEN update background elements
-                //*********************************************//
-                $("#comment_modal").on('hide.bs.modal', function(){
-                    var url;
-
-                    if (url_location == 'bulletin'){
-                        url = `/replace_post/${img_id}`
-                    } else {
-                        url =  `/replace_image/${img_id}`
-                    }
-
-                    $.ajax({
-                        cache: false,
-                        type:"GET",
-                        url: url,
-                    })
-                    .done(function(data){
-
-                        if (url_location == 'bulletin'){
-                            $(`#post${img_id}`).html(data); 
-                        } else {
-                            $(`.dashboard #${img_id}`).html(data)
-                        }
-                        
-                    })
-                    .fail(function(data){
-                        console.log("Error in fetching data");
-                    })
-                });
-            })
-            .fail(function(data){
-                console.log("Error in fetching data");
-            })
-        }); // END ON CLICK COMMENT ICON 
+        
 
         //*********************************************//
         // Process DELETE COMMENT on X click
@@ -465,6 +610,7 @@ $(document).ready(function(){
             var img_id = $(this).attr('img');
             var component = $(this).attr('comp')
             var url;
+
             if ( $(this).hasClass( "from_post" )){
                 url = `/process_delete_comment/${comment_id}/from_post`
             } else {
@@ -476,15 +622,12 @@ $(document).ready(function(){
                 type:'GET',
                 url: url,
             })
-            .done(function(data){
-                
-                if (component == 'from_post'){
-            
-                    $(`#post${img_id}`).html(data); 
+            .done(function(data){   
 
-                } else {
-                    
-                    $('#replace_comments').html(data)                                  
+                if (component == 'from_post'){ 
+                    $(`#post${img_id}`).replaceWith(data); 
+                } else {    
+                    $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
                 }
             })
@@ -499,7 +642,7 @@ $(document).ready(function(){
         // Process ADD COMMENT on POST Click
         //*********************************************//
         $('body').on('click', '.comment_form button', function(e){
-           e.preventDefault()
+            e.preventDefault()
             var img_id = $(this).attr('id');
             var component = $(this).attr('comp')
             // get informatin from form classes
@@ -516,9 +659,9 @@ $(document).ready(function(){
             })
             .done(function(data){
                 if( $(`${form_compnt}`).val() == 'from_post'){
-                    $(`#post${img_id}`).html(data);   
+                    $(`#post${img_id}`).replaceWith(data);   
                 } else {
-                    $('#replace_comments').html(data)                                  
+                    $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
                 }
                 $(`${form_text}`).val("")

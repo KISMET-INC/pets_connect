@@ -1,31 +1,46 @@
 .users_modal {
-    display:flex;
     flex-direction: column;
     overflow: scroll;
     width: 100%;
-    height: 600px;
+    height: 95%;
+    align-items: flex-start;
     background-color:var(--gray1);
     padding-top: 20px;
+    align-self: end;
 }
 
-
+#search_modal .modal-header button.close {
+    font-size: 40px;
+    margin-top: -12px;
+}
 .users_modal .person {
     display:flex;
     width: fit-content;
     align-items: center;
     width: 75%;
     overflow: unset;
-    margin: 0 auto;
+    margin: auto;
     margin-bottom:10px;
 }
+
+#search_modal .user_img {
+    width: 70px;
+    border:none;
+}
+
 #search_modal .person p:nth-child(1) {
     font-family: 'Montserrat Alternates', sans-serif;
     margin-right: 10px;
 }
 
+#search_modal .person p {
+    text-align:left;
+}
+
+
 #search_modal .modal-dialog {
     width: 400px;
-    height: 610px;
+    margin-top: 2%;
     border-radius: 10px 10px 10px 10px;
 }
 
@@ -74,6 +89,20 @@
     padding-left: 10px;
 }
 
+@media (max-width: 426px){
+    #search_modal form {
+        flex-direction:column;
+    }
+
+    #search_modal button.search {
+        margin: 10px 0px;
+    }
+    #search_modal .users_modal {
+        height: 75%;
+    }
+}
+
+
 @media (max-width: 725px){
     #search_modal .modal-dialog {
         width:300px;
@@ -83,11 +112,16 @@
         font-size: 13px;
     }
 
-    .users_modal .person {
-        margin:10px;
-    }
+ 
 
     .btn {
         width: 100%;
     }
+}
+
+@media (max-width: 281px){
+    #search_modal .modal-dialog {
+        width: 100%;
+    }
+
 }
