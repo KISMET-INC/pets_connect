@@ -81,11 +81,46 @@ var quote_colors = [
 
     $('body').on('click', '.edit_image', function(){
         click_edit = true;
-    })
+    });
 
     //*********************************************//
     // Global variable for opacity toggle
     //*********************************************//
+    $('.share_pet_h3').click(function(){
+        localStorage.setItem('share_pet_click', 'lock')
+
+        if($('.slide').is(":visible")){
+            $('.slide').slideUp()
+            $('.share_pet .left').css('align-items','center');
+            
+        } else {
+            $('.slide').css('display','flex')
+            $('.slide').slideDown()
+            $('.share_pet .left').css('align-items','left');
+            
+        }
+
+    });
+
+    //*********************************************//
+    // If image window is small and user has not expanded
+    // share pet window, display none
+    //*********************************************//
+    if(window.innerWidth <1024 && localStorage.getItem('share_pet_click') == null){
+        console.log('here!')
+        $('.slide').css('display', 'none')
+        $('.share_pet .left').css('align-items','center');
+    }
+
+
+     //*********************************************//
+    //  Unlock share pet click variable upon navigation
+    //*********************************************//
+    $('a').click(function(){
+        localStorage.removeItem('share_pet_click')
+    })
+
+
 
     
 
@@ -439,8 +474,7 @@ var quote_colors = [
     // Alert on Logout
     //*********************************************//
     $('.logout').on('click',function(){
-        localStorage.removeItem('lastID')
-        localStorage.removeItem('newID')
+        localStorage.clear()
     })
 
     //*********************************************//
