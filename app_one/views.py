@@ -400,7 +400,7 @@ def process_edit_image(request):
 
     session_user = User.objects.get(id=request.session['user_id'])
     this_image = Image.objects.get(id=request.POST['image_id'])
-    this_image.desc = request.POST['text']
+    this_image.desc = request.POST['desc']
     this_image.name = request.POST['name']
     this_image.save()
     if session_user.user_level == 9:

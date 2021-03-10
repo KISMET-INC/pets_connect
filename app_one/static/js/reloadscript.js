@@ -93,8 +93,8 @@ var quote_colors = [
             $('.slide').slideUp()
             
         } else {
-            $('.slide').css('display','flex')
             $('.slide').slideDown()
+            $('.slide').css('display','flex')
             
         }
 
@@ -107,7 +107,6 @@ var quote_colors = [
     // share pet window, display none
     //*********************************************//
     if(window.innerWidth <1024 && localStorage.getItem('share_pet_click') == null){
-        console.log('here!')
         $('.slide').css('display', 'none')
         
     }

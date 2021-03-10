@@ -29,8 +29,13 @@
                         <input type= 'hidden' value = '{{location}}' name = 'location'>
                         <div>
                             <button type ='submit'> SAVE </button>
-                            <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>
+                            {% if location == 'explore' %}
+                                <a href= '/explore'><button type='button'>CANCEL</button></a>
+                            {% else %}
+                                <a href= '/profile/{{session_user.id}}'><button type='button'>CANCEL</button></a>
+                            {% endif %}
                         </div>
+
                         {% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
