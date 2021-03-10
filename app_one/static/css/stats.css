@@ -38,22 +38,20 @@ ul.stats_bar {
 
 .stats_board {
     position: relative;
-    top: -135px;
+    top: -145px;
     height:0px;  
     /* margin-right: 10px; */
     width: 100%;
     z-index: 1;
 }
 
-.stats_board header {
-    padding-top: 20px;
-}
+
 .stats_board header h1 {
     font-family: 'Montserrat Alternates', sans-serif;   
     margin: 0px;
     text-align: center;
     color:#BFBFBF;
-    font-size: 20px;
+    font-size: 25px;
     margin: 0px;
     padding: 0px;
 }
@@ -115,11 +113,14 @@ p button i{
 
 .stats_board .edit_stats {
     text-align: center;
-    margin-top: -15px;
+
 }
 .stats_board .edit_stats a {
         color: var(--gray1);
         font-family: 'Montserrat Alternates', sans-serif;
+        font-size: 20px;
+        margin-top: -5px;
+        margin-bottom: 5px;
     }
 
 .stats_board .statnums span {
@@ -146,7 +147,4 @@ ul.stats_bar li button {
         font-size: 25px;
     }
 
-    .stats_board h2.name {
-        font-size: 25px;
-    }
 }

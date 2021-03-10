@@ -105,12 +105,12 @@ aside.icons div {
 .share_pet input#id_pet_img p input {
     border:none;
 }
-.share_pet section.left h3 {
+.share_pet .left h3 {
     color: var(--blue1);
     font-style: normal;
 
 }
-.share_pet section.left {
+.share_pet .left {
     width: 70%;
 }
 
@@ -204,6 +204,7 @@ img.cropped2 {
         width: 97.5%;
         padding: 20px 20px;
         margin-bottom:5px;
+        justify-content: center;
         
     }
     .share_pet h3 {
@@ -214,7 +215,7 @@ img.cropped2 {
         margin-top: 10px;
     }
 
-    .share_pet section.left {
+    .share_pet .left {
         width: 100%;
     }
     .share_pet section.right {
@@ -355,6 +356,8 @@ img.cropped2 {
 
     .color_block2 {
         padding: 20px;
+        width: 100%;
+        text-align: center;
     }
 
     .color_block2 p {
@@ -365,6 +368,13 @@ img.cropped2 {
         width: 90%;
     }
     
+    .dimage {
+        width: 97%;
+    }
+
+    .stats_board {
+        top: -200px;
+    }
 
 
 
