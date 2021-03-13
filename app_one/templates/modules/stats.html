@@ -6,7 +6,7 @@
         {% endif %}
     </header>
         <ul class = 'stats_bar'>
-        {% if session_user == image.user or session_user.user_level == 9 %}
+        {% if session_user.user_level == 9 %}
             <li class = 'stat_icon'><i class="fas fa-heart" id={{image.id}} title="Your Pet Loves"></i></li>
             <li class= 'stat_num'><p >{{image.loves.count}}</p></li> 
             <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
