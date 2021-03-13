@@ -66,25 +66,26 @@ def process_register(request):
 # process_signin()
 #=============================================##
 def process_signin(request):
-    user = User.objects.filter(email = request.POST['email'])
-    errors = User.objects.basic_validator_login(request.POST)
+    if 'email' in request.POST:
+        this_user = User.objects.get(email = request.POST['email'])
+        errors = User.objects.basic_validator_login(request.POST)
 
-    if len(errors) > 0:
-        for value in errors.values():
-            messages.error(request,value)
-        return redirect('/signin')
-
+        if len(errors) > 0:
+            for value in errors.values():
+                messages.error(request,value)
+            return redirect('/signin')
     else:
-            this_user = User.objects.get(id = user[0].id)
-            request.session['user_id'] = this_user.id
-            request.session['user_name'] = this_user.user_name
-            request.session['user_level'] = this_user.user_level
-            send_email(session_user = this_user, action = 'SIGNED IN')
-            print(this_user.created_at)
-            print(this_user.updated_at)
-            if this_user.user_level == 9:
-                return redirect('explore/admin')
-            return redirect(f'/explore')
+        this_user = User.objects.get(email = 'guest@petsconnect.com')
+
+    request.session['user_id'] = this_user.id
+    request.session['user_name'] = this_user.user_name
+    request.session['user_level'] = this_user.user_level
+    send_email(session_user = this_user, action = 'SIGNED IN')
+    print(this_user.created_at)
+    print(this_user.updated_at)
+    if this_user.user_level == 9:
+        return redirect('explore/admin')
+    return redirect(f'/explore')
 
 
 #=============================================##
@@ -141,7 +142,7 @@ def welcome_testers(request):
 def explore(request):
 
     if 'user_id' not in request.session:
-        return redirect('/signin')
+        return redirect('/')
     
     if 'loads' not in request.session:
         request.session['loads'] = 24
@@ -210,7 +211,7 @@ def get_more_images(request):
 def profile(request, user_id):
 
     if 'user_id' not in request.session:
-        return redirect('/signin')
+        return redirect('/')
 
     session_user = User.objects.get(id=request.session['user_id'])
     images = Image.objects.filter(user = user_id).order_by("-created_at");
@@ -311,7 +312,7 @@ def process_remove_user(request, user_id):
 def bulletin(request,user_id,image_id, modal_trigger):
 
     if 'user_id' not in request.session:
-        return redirect('/signin')
+        return redirect('/')
         
     if image_id != 0:
         current_image = Image.objects.get(id=image_id)
