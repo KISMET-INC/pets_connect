@@ -16,6 +16,7 @@
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_one">
+            <div class='loader'></div>
             <div id='get_more' class = 'dashboard'>
                 <aside class = 'icons'>
                     <div>
@@ -30,15 +31,37 @@
                         <i class ='fas fa-user'><a href ='/profile/{{session_user.id}}'></a></i><p><a href ='/profile/{{session_user.id}}'>Edit Profile</a></p>
                         <i class ='fas fa-compass'></i><p>Browse Pets</p>  
                     </div>
+                    {% if images2.has_other_pages %}
+                    <ul class="pagination">
+                        {% if images2.has_previous %}
+                        <li><a href="?page={{ images2.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in images2.paginator.page_range %}
+                        {% if images2.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if images2.has_next %}
+                        <li><a href="?page={{ images2.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
                 </aside>
-               
+
+
                 {% with location='explore' %}   
 
                     {% include 'modules/share_pet.html' %}
 
                 {% endwith %}
 
-
+              
                 {% with location='explore' %}
                 {% with num=randomNumbers|random %}
                     {% for image in images2 %}

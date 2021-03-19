@@ -54,7 +54,7 @@ var quote_colors = [
 
     $(window).scroll(function() {
         if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
-            get_more_images()
+            //get_more_images()
         }
     });
 
@@ -436,11 +436,19 @@ var quote_colors = [
         $('.error').html("")
     })
 
+
+    // get_more_images()
     
     //*********************************************//
     // get more images
     //*********************************************//
     function get_more_images() {
+        // $(document).ajaxStart(function(){
+        //     $('.loader').show   ();
+        // });
+        // $(document).ajaxStop(function(){
+        // $('.loader').hide();
+        // });
 
         $.ajax({
             cache: false,
@@ -466,7 +474,7 @@ var quote_colors = [
     // $(document).ajaxStart(function(){
     // });
     // $(document).ajaxStop(function(){
-    // $('.loader').hide();
+    // // $('.loader').hide();
     // });
 
     //*********************************************//

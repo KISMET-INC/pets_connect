@@ -65,9 +65,6 @@ a:focus {
 
 .loader {
     display: none;
-    position: absolute;
-    right: 300px;
-    top: 300px;
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
@@ -80,7 +77,9 @@ a:focus {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-
+.pagination {
+    align-self: end;
+}
 
 /* 
 .cropped {
