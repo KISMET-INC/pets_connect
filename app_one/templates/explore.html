@@ -16,6 +16,9 @@
     <div id="CANVAS_long">
         {% include 'modules/nav.html' %}
         <div id="interface_block_one">
+
+          
+
             <div id='get_more' class = 'dashboard'>
                 <aside class = 'icons'>
                     <div>
@@ -31,13 +34,15 @@
                         <i class ='fas fa-compass'></i><p>Browse Pets</p>  
                     </div>
                 </aside>
-               
+
+                <!-- <div class="load_holder">
+                    <div class='loader'></div>
+                </div> -->
+
+
                 {% with location='explore' %}   
-
                     {% include 'modules/share_pet.html' %}
-
                 {% endwith %}
-
 
                 {% with location='explore' %}
                 {% with num=randomNumbers|random %}
@@ -51,7 +56,10 @@
                 
             </div>
 
+            
+
     <div id='replaceModal'>
+
         {% include 'modules/modal.html' %} 
     </div>
     

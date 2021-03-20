@@ -144,25 +144,14 @@ def explore(request):
     if 'user_id' not in request.session:
         return redirect('/')
     
-    if 'loads' not in request.session:
-        request.session['loads'] = 24
-    if 'page_num' not in request.session:
-        request.session['page_num'] = 1
+    # if 'loads' not in request.session:
+    #     request.session['loads'] = 6
 
+    images2 = None;
     current_user = User.objects.get(id=request.session['user_id'])
     
-    image_list = Image.objects.order_by("-created_at")
-    page = request.GET.get('page',request.session['page_num'])
-
-    paginator = Paginator(image_list, request.session['loads'])
-    try:
-        images2 = paginator.page(page)
-    except PageNotAnInteger:
-        images2 = paginator.page(1)
-    except EmptyPage:
-        pass
-        images2 = paginator.page(paginator.num_pages)
-
+    if 'loads' in request.session:
+        images2 = Image.objects.order_by("-created_at")[:request.session['loads']]
 
     context = {
         'session_user': current_user,
@@ -190,20 +179,51 @@ def explore(request):
 # get_more_images()
 #=============================================##
 def get_more_images(request):
-    request.session['page_num'] += 1
+    load_value = 24
+    if 'page_lock' not in request.session:
+        request.session['page_lock'] = False;
+
+    if 'loads' not in request.session:
+        request.session['loads']= load_value
+    elif request.session['page_lock'] == False:
+        request.session['loads']+=load_value
+
+
+    if 'page_num' not in request.session:
+        request.session['page_num'] = 1
+    elif request.session['page_lock'] == False:
+        request.session['page_num'] += 1
+
+
     image_list = Image.objects.order_by("-created_at")
-    page = request.GET.get('page',request.session['page_num'])
-    paginator = Paginator(image_list,request.session['loads'])
-    request.session['loads'] += 24
+    page = request.GET.get('page', request.session['page_num'])
+    paginator = Paginator(image_list,load_value)
+    
+
+    # print('*'*80)
+    # print(request.session['loads'])
+    # print(request.session['page_num'])
+    # print(paginator.num_pages)
 
     try:
         images2 = paginator.page(page)
+        print('not empty')
+
     except PageNotAnInteger:
         images2 = paginator.page(1)
+        
     except EmptyPage:
+        print('empty page')
+        request.session['page_lock'] = True
         return HttpResponse("none")
 
-    return render(request, 'modules/dashboard.html', {'images2': images2, 'session_user' : User.objects.get(id=request.session['user_id'])})
+    context = {
+        'images2': images2, 
+        'session_user' : User.objects.get(id=request.session['user_id']), 
+        'randomNumbers': [4,5,7] 
+    }
+
+    return render(request, 'modules/dashboard.html', context)
 
 #=============================================##
 # profile()

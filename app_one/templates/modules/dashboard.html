@@ -1,3 +1,10 @@
-{% for image in images2 %}
+
+{% with location='explore' %}
+{% with num=randomNumbers|random %}
+        {% for image in images2 %}
+
         {% include 'modules/image.html' %} 
-{% endfor %}
+
+        {% endfor %}
+{% endwith %}
+{% endwith %}
