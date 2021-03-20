@@ -146,22 +146,12 @@ def explore(request):
     
     # if 'loads' not in request.session:
     #     request.session['loads'] = 6
-    # if 'page_num' not in request.session:
-    #     request.session['page_num'] = 1
 
+    images2 = None;
     current_user = User.objects.get(id=request.session['user_id'])
-
-    image_list = Image.objects.all()
-    page = request.GET.get('page', 1)
-
-    paginator = Paginator(image_list, 10)
-    try:
-        images2 = paginator.page(page)
-    except PageNotAnInteger:
-        images2 = paginator.page(1)
-    except EmptyPage:
-        images2 = paginator.page(paginator.num_pages)
-
+    
+    if 'loads' in request.session:
+        images2 = Image.objects.order_by("-created_at")[:request.session['loads']]
 
     context = {
         'session_user': current_user,
@@ -189,14 +179,14 @@ def explore(request):
 # get_more_images()
 #=============================================##
 def get_more_images(request):
-    
+    load_value = 8
     if 'page_lock' not in request.session:
         request.session['page_lock'] = False;
 
     if 'loads' not in request.session:
-        request.session['loads']= 7
+        request.session['loads']= load_value
     elif request.session['page_lock'] == False:
-        request.session['loads']+= 7
+        request.session['loads']+=load_value
 
 
     if 'page_num' not in request.session:
@@ -207,7 +197,7 @@ def get_more_images(request):
 
     image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page', request.session['page_num'])
-    paginator = Paginator(image_list,7)
+    paginator = Paginator(image_list,load_value)
     # images2 = Image.objects.all()
 
     print('*'*80)

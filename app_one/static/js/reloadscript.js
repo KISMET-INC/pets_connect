@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 
     //*********************************************//
-    // Set starting variables
+    // START UP
     //*********************************************//
     $(".opacity").css('opacity', '.99');
     var heart = false;
@@ -14,6 +14,7 @@ $(document).ready(function(){
     var session_user = '';
     var image_list = [];
     var heart_sum = 0;
+
     var quotes = [
     ["Dogs are not our whole lives, but they make our lives whole.", 'Roger Caras'], 
     ['Some angels choose fur instead of wings.','Unknown'],
@@ -35,12 +36,14 @@ $(document).ready(function(){
 
 ]
 
-var quote_colors = [
-    ['hsl(253, 45%, 60%)','hsl(253, 45%, 90%)'],
-    ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
-    ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
-]
-
+    var quote_colors = [
+        ['hsl(253, 45%, 60%)','hsl(253, 45%, 90%)'],
+        ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
+        ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
+    ]
+    
+    get_more_images()
+    add_quotes()
 
     //*********************************************//
     // Get URL Route variables
@@ -53,31 +56,22 @@ var quote_colors = [
     var url_location = map[1]
 
     $(window).scroll(function() {
-        if($(window).scrollTop() >= $(document).height() - $(window).height()-1) {
-            //get_more_images()
+        if($(window).scrollTop() == $(document).height() - $(window).height()) {
+            console.log('MORE MORE MORE')
+            get_more_images()
+            $('loader').show();
         }
     });
 
-    var color_blocks = ($('.color_block2').length)
-    for(var i = 0; i<color_blocks; i++){
-        var rand = Math.floor(Math.random()*quotes.length)
-        var randcolnum = Math.floor(Math.random()*quote_colors.length)
-        var randColor = quote_colors[randcolnum]
-        var randStr = quotes[rand][0]
-        var cite = quotes[rand][1]
-        $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
-        $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
-        $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
-    }
 
     $('body').on('click', '.delete_image', function(e){
-        
         click_delete = true;
         if($('.delete_image').hasClass('disabled')){
             e.preventDefault();
             alert("We're Sorry, this feature is disabled for guests.")
         }
     })
+
 
     $('body').on('click', '.edit_image', function(){
         click_edit = true;
@@ -95,12 +89,9 @@ var quote_colors = [
         } else {
             $('.slide').slideDown()
             $('.slide').css('display','flex')
-            
         }
-
-        
-
     });
+
 
     //*********************************************//
     // If image window is small and user has not expanded
@@ -108,7 +99,6 @@ var quote_colors = [
     //*********************************************//
     if(window.innerWidth <1024 && localStorage.getItem('share_pet_click') == null){
         $('.slide').css('display', 'none')
-        
     }
 
 
@@ -119,9 +109,6 @@ var quote_colors = [
         localStorage.removeItem('share_pet_click')
     })
 
-
-
-    
 
     //*********************************************//
     // MOBILE DEVICE 
@@ -417,8 +404,6 @@ var quote_colors = [
     // }
     
 
-    
-
     //*********************************************//
     // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
     //*********************************************//
@@ -436,46 +421,54 @@ var quote_colors = [
         $('.error').html("")
     })
 
-
-    // get_more_images()
-    
     //*********************************************//
     // get more images
     //*********************************************//
     function get_more_images() {
-        // $(document).ajaxStart(function(){
-        //     $('.loader').show   ();
-        // });
-        // $(document).ajaxStop(function(){
-        // $('.loader').hide();
-        // });
-
+    
         $.ajax({
             cache: false,
             type:"GET",
             url: `/get_more_images`,
         })
         .done(function(data){
-            if (data != 'none'){
 
+            if (data != 'none'){
                 $(`#get_more`).append(data);
-                        
-            }
-                
+                add_quotes()
+            }      
         })
         .fail(function(data){
             console.log("Error in fetching data");
         });
 
     }
+
+    function add_quotes() {
+        var color_blocks = ($('.color_block2').length)
+        for(var i = 0; i<color_blocks; i++){
+            var rand = Math.floor(Math.random()*quotes.length)
+            var randcolnum = Math.floor(Math.random()*quote_colors.length)
+            var randColor = quote_colors[randcolnum]
+            var randStr = quotes[rand][0]
+            var cite = quotes[rand][1]
+            $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
+            $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
+            $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
+        }
+    } 
+    
     //*********************************************//
     // OPEN LOADER ON AJAX START
     //*********************************************//
-    // $(document).ajaxStart(function(){
-    // });
-    // $(document).ajaxStop(function(){
-    // // $('.loader').hide();
-    // });
+    $(document).ajaxStart(function(){
+        $('.loader').show();
+    });
+    
+    $(document).ajaxStop(function(){
+        $('.loader').hide();
+    });
+
 
     //*********************************************//
     // Alert on Logout
