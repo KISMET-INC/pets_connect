@@ -7,8 +7,13 @@
     </header>
         <ul class = 'stats_bar'>
         {% if session_user.user_level == 9 or session_user.email == 'guest@petsconnect.com' %}
-            <li class = 'stat_icon'><i class="fas fa-heart" id={{image.id}} title="Your Pet Loves"></i></li>
-            <li class= 'stat_num'><p >{{image.loves.count}}</p></li> 
+            {% if session_user in image.loves.all %}
+                <li class = 'stat_icon loved'><i id={{image.id}} class="fas fa-heart" title="You Already Love {{image.name}}"></i>
+                <li class = 'stat_num loved'><p>{{image.loves.count}}</p></li>
+            {% else %}
+                <li class = stat_icon><i id={{image.id}} class="fas fa-heart" title="Send {{image.name}} Your Love"></i>
+                <li class = 'stat_num'><p>{{image.loves.count}}</p></li>
+            {% endif %}
             <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
             <li class = 'stat_num'><p>{{image.comments.count}}</p></li>
         </ul>
