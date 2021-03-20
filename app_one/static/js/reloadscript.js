@@ -41,9 +41,14 @@ $(document).ready(function(){
         ['hsl(119, 39%, 60%)','hsl(119, 39%, 90%)'],
         ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
     ]
-    
+
     get_more_images()
+    $('.loader').delay(800).css('display', 'none')
     add_quotes()
+
+    function loaderoff(){
+        window.setTimeout()
+    }
 
     //*********************************************//
     // Get URL Route variables
@@ -59,7 +64,7 @@ $(document).ready(function(){
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
             console.log('MORE MORE MORE')
             get_more_images()
-            $('loader').show();
+            $('loader').css('display', 'unset');
         }
     });
 
@@ -403,7 +408,7 @@ $(document).ready(function(){
     //     $('.stats_board').css('display', 'flex')
     // }
     
-
+    
     //*********************************************//
     // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
     //*********************************************//
@@ -420,12 +425,14 @@ $(document).ready(function(){
     $("#search_modal").on('hide.bs.modal', function(){
         $('.error').html("")
     })
-
+    
+    
     //*********************************************//
     // get more images
     //*********************************************//
     function get_more_images() {
-    
+
+        $('.loader').css('display', 'unset')
         $.ajax({
             cache: false,
             type:"GET",
@@ -436,11 +443,15 @@ $(document).ready(function(){
             if (data != 'none'){
                 $(`#get_more`).append(data);
                 add_quotes()
-            }      
+            } else {
+                //$('.loader').css('display', 'none')
+            }     
         })
         .fail(function(data){
             console.log("Error in fetching data");
         });
+
+       
 
     }
 
@@ -461,13 +472,13 @@ $(document).ready(function(){
     //*********************************************//
     // OPEN LOADER ON AJAX START
     //*********************************************//
-    $(document).ajaxStart(function(){
-        $('.loader').show();
-    });
+    // $(document).ajaxStart(function(){
+    //     $('.loader').show();
+    // });
     
-    $(document).ajaxStop(function(){
-        $('.loader').hide();
-    });
+    // $(document).ajaxStop(function(){
+    //     $('.loader').hide();
+    // });
 
 
     //*********************************************//

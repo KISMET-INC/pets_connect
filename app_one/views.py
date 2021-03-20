@@ -179,7 +179,7 @@ def explore(request):
 # get_more_images()
 #=============================================##
 def get_more_images(request):
-    load_value = 8
+    load_value = 24
     if 'page_lock' not in request.session:
         request.session['page_lock'] = False;
 
@@ -198,12 +198,12 @@ def get_more_images(request):
     image_list = Image.objects.order_by("-created_at")
     page = request.GET.get('page', request.session['page_num'])
     paginator = Paginator(image_list,load_value)
-    # images2 = Image.objects.all()
+    
 
-    print('*'*80)
-    print(request.session['loads'])
-    print(request.session['page_num'])
-    print(paginator.num_pages)
+    # print('*'*80)
+    # print(request.session['loads'])
+    # print(request.session['page_num'])
+    # print(paginator.num_pages)
 
     try:
         images2 = paginator.page(page)
