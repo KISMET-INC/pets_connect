@@ -147,7 +147,7 @@ $(document).ready(function(){
                 })
 
 
-                if(clickcount == 2 && heart == false){
+                if(clickcount == 2 && heart == false ){
                     if(localStorage.getItem("newID") == localStorage.getItem("lastID")){
                         openCommentModal(img_id)
                         $(`${img}`).css('opacity', '.6')
@@ -204,6 +204,17 @@ $(document).ready(function(){
     }  
         
         // END DEVICE DEPENDENT INSTRUCTIONS
+
+    
+    
+        $('.open_modal').click(function(){
+            var img_id = $(this).attr('id');
+            if(url_location =='bulletin'){
+                openCommentModal(img_id)
+            }
+        })
+       
+
 
     //*********************************************//
     // LOAD AND OPEN  COMMENT MODAL

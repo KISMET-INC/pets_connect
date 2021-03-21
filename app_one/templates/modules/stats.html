@@ -14,7 +14,7 @@
                 <li class = stat_icon><i id={{image.id}} class="fas fa-heart" title="Send {{image.name}} Your Love"></i>
                 <li class = 'stat_num'><p>{{image.loves.count}}</p></li>
             {% endif %}
-            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
+            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal' type = 'button' ><i class="fas fa-comment-alt" title="Comments"></i></button></li>
             <li class = 'stat_num'><p>{{image.comments.count}}</p></li>
         </ul>
             <section class = 'edit_stats'>
@@ -41,7 +41,7 @@
                 <li class = 'stat_num'><p>{{image.loves.count}}</p></li>
             {% endif %}
 
-            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal{{image.id}}x' type = 'button' ><i class="fas fa-comment-alt" title ="Comment"></i></button>
+            <li class = 'stat_icon comment_button'><button id = {{image.id}} class = 'open_modal' type = 'button' ><i class="fas fa-comment-alt" title ="Comment"></i></button>
             <li class = 'stat_num'><p >{{image.comments.count}}</p></li>
         </ul>
 

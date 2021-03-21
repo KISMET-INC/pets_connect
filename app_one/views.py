@@ -86,7 +86,7 @@ def process_signin(request):
     if this_user.user_level == 9:
         return redirect('explore/admin')
     if this_user.email == 'guest@petsconnect.com':
-        return redirect(f"/bulletin/{this_user.id}/0/0")
+        return redirect(f"/bulletin")
     else:
         return redirect(f'/explore')
 
@@ -332,24 +332,24 @@ def process_remove_user(request, user_id):
 #=============================================##
 # bulletin()
 #=============================================##
-def bulletin(request,user_id,image_id, modal_trigger):
+def bulletin(request):
 
     if 'user_id' not in request.session:
         return redirect('/')
         
-    if image_id != 0:
-        current_image = Image.objects.get(id=image_id)
-    else:
-        current_image = 0;
+    # if image_id != 0:
+    #     current_image = Image.objects.get(id=image_id)
+    # else:
+    #     current_image = 0;
 
     context = {
         'session_user': User.objects.get(id=request.session['user_id']),
-        'selected_user': User.objects.get(id=user_id),
-        'url' : f'/user/bulletin/{user_id}/{image_id}',
-        'image': current_image,
+        # 'selected_user': User.objects.get(id=user_id),
+        # 'url' : f'/user/bulletin/{user_id}/{image_id}',
+        # 'image': current_image,
         'images': Image.objects.order_by("-updated_at"),
         'users': User.objects.order_by("updated_at"),
-        'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
+        # 'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
     }
     return render(request,'bulletin.html',context)
 
