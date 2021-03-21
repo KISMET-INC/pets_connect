@@ -85,8 +85,8 @@ def process_signin(request):
     print(this_user.updated_at)
     if this_user.user_level == 9:
         return redirect('explore/admin')
-    # if this_user.email == 'guest@petsconnect.com':
-    #     return redirect('/bulletin/3/0/0')
+    if this_user.email == 'guest@petsconnect.com':
+        return redirect(f"/bulletin/{this_user.id}/0/0")
     else:
         return redirect(f'/explore')
 
