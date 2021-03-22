@@ -1,10 +1,12 @@
+
+
 $(document).ready(function(){
 
 
     //*********************************************//
     // START UP
     //*********************************************//
-
+    
 
     $(".opacity").css('opacity', '.99');
     var heart = false;
@@ -131,6 +133,26 @@ $(document).ready(function(){
     map = window.location.pathname.toString()
     map = map.split('/')
     var url_location = map[1]
+
+
+    //*********************************************//
+    //  OVERRIDE back history on profile page
+    // to always return to bulletin
+    //*********************************************//   
+    if (url_location == 'profile'){
+        localStorage.setItem('profile_redirect', true);
+        window.history.pushState("", "Pets Connect", "/bulletin/");
+    }
+
+    //*********************************************//  
+    // BULLETIN RELOAD when back button is pressed
+    // catches changes to following user
+    //*********************************************//   
+    
+    if (url_location == 'bulletin'  && localStorage.getItem('profile_redirect') != null){
+        localStorage.removeItem('profile_redirect');
+        location.reload()
+    }
 
 
     //*********************************************//
