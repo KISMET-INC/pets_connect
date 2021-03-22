@@ -1,6 +1,13 @@
 @import 'person.css';
 @import 'post.css';
 @import 'stats.css';
+@import 'share_pet.css';
+
+/* OVERRIDE SHARE PET */
+.nursery_bg {
+    width: 100%;
+}
+
 
 nav .fa-users::before, nav a.bulletin{
     color: gray;
@@ -48,7 +55,7 @@ header h3, header a {
 .person {
     width: 100px;
 }
-.person .user_email {
+.person .user_email, .person .user_name {
     display:none;
 }
 
@@ -94,7 +101,7 @@ input {
     .following {
         display:flex;
         flex-wrap: wrap;
-        height:140px;
+        height:30%;
         border:2px dotted var(--blue1);
         min-width: 70px;
         padding:10px;
@@ -189,16 +196,17 @@ section.right_side {
                 .followers .follower_info p {
                     margin: 0;
                 }
-
-
+/*******************************/
+/*  MEDIA BREAKPOINT 769px         
+/*******************************/
 @media (max-width:769px){
     #interface_block_two {
         width: 90%;
     }
 
-    .person{
+    /* .person{
         width:17%;
-    }
+    } */
     .left_side {
         width: 100%;
         margin: 0 auto; 
@@ -213,7 +221,9 @@ section.right_side {
     }
 }
 
-
+/*******************************/
+/*  MEDIA BREAKPOINT          
+/*******************************/
 @media (max-width: 1200px){
 
     .right_side {
@@ -254,16 +264,18 @@ section.right_side {
 }
 }
 
-
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
 
 @media (max-width:501px){
     #interface_block_two {
         width: 90%;
     }
 
-    .person{
+    /* .person{
         width:20%;
-    }
+    } */
 
     .left_side {
         width: 100%;
@@ -277,7 +289,7 @@ section.right_side {
 
 @media (max-width:426px){
     .person{
-        width:20%;
+        width:25%;
     }
     #interface_block_two {
         width:100%;
@@ -290,8 +302,10 @@ section.right_side {
 
 
 }
-
-@media (max-width:326px){
+/*******************************/
+/*  MEDIA BREAKPOINT        
+/*******************************/
+/* @media (max-width:326px){
     .person{
         width:28%;
     }
@@ -303,4 +317,4 @@ section.right_side {
         width:27%;
     }
 
-}
+} */

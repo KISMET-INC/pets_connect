@@ -4,12 +4,14 @@ $(document).ready(function(){
     //*********************************************//
     // START UP
     //*********************************************//
+
+
     $(".opacity").css('opacity', '.99');
     var heart = false;
     var clickcount = 0;
 
-    var click_delete =  false;
-    var click_edit = false;
+    var clicked_delete =  false;
+    var clicked_edit = false;
 
     var session_user = '';
     var image_list = [];
@@ -42,48 +44,125 @@ $(document).ready(function(){
         ['hsl(337,46%, 60%)','hsl(337,46%, 90%)'],   
     ]
 
-    get_more_images()
-    $('.loader').delay(800).css('display', 'none')
-    add_quotes()
 
-    function loaderoff(){
-        window.setTimeout()
+    get_more_images()
+    add_quotes()
+    addCommentClickListener();
+
+    //*********************************************//
+    // Add click listeners to comment button
+    //*********************************************// 
+    function addCommentClickListener(){
+        $('.open_modal').unbind();
+        $('.open_modal').click(function(){
+            var img_id = $(this).attr('id');
+            if(url_location =='bulletin'){
+                openCommentModal(img_id)
+            }
+        })
+    }
+    
+    //*********************************************//
+    // get more images from db
+    //*********************************************//
+    function get_more_images() {
+
+        $('.loader').css('display', 'unset')
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_more_images`,
+        })
+        .done(function(data){
+
+            if (data != 'none'){
+                $(`#get_more`).append(data);
+                add_quotes()
+            } else {
+                //$('.loader').css('display', 'none')
+            }     
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
     }
 
     //*********************************************//
+    // Add colors and quotes to color blocks
+    //*********************************************// 
+    function add_quotes() {
+        var color_blocks = ($('.color_block2').length)
+        for(var i = 0; i<color_blocks; i++){
+            var rand = Math.floor(Math.random()*quotes.length)
+            var randcolnum = Math.floor(Math.random()*quote_colors.length)
+            var randColor = quote_colors[randcolnum]
+            var randStr = quotes[rand][0]
+            var cite = quotes[rand][1]
+            $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
+            $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
+            $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
+        }
+    } 
+
+    //*********************************************//
+    // Pull Heart Sum from DB
+    //*********************************************//
+    function get_heart_sum(img_id){
+        $.ajax({
+            cache: false,
+            type:"GET",
+            url: `/get_heart_sum/${img_id}`,
+        })
+        .done(function(data){
+            heart_sum =  data 
+            $('.heart_sum').html(data)
+                
+        })
+        .fail(function(data){
+            console.log("Error in fetching data");
+        });
+    }
+
+
+
+    //*********************************************//
     // Get URL Route variables
-    // Split URL string to extract useful variables into
-    // an array 
     //*********************************************//
     map = window.location.pathname.toString()
     map = map.split('/')
-
     var url_location = map[1]
 
+
+    //*********************************************//
+    // Load more images on scroll to bottom of screen
+    //*********************************************//   
     $(window).scroll(function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
-            console.log('MORE MORE MORE')
             get_more_images()
             $('loader').css('display', 'unset');
         }
     });
 
-
+    //*********************************************//  
+    // On DELETE_IMAGE <a> click, Alert if Guest
+    //*********************************************//   
     $('body').on('click', '.delete_image', function(e){
-        click_delete = true;
+        clicked_delete = true;
         if($('.delete_image').hasClass('disabled')){
             e.preventDefault();
             alert("We're Sorry, this feature is disabled for guests.")
         }
     })
 
-
+    //*********************************************//  
+    // on EDIT_IMAGE <a> click
+    //*********************************************//   
     $('body').on('click', '.edit_image', function(){
-        click_edit = true;
+        clicked_edit = true;
     });
 
     //*********************************************//
-    // Global variable for opacity toggle
+    // SHARE PET CLICK toggle
     //*********************************************//
     $('.share_pet_h3').click(function(){
         localStorage.setItem('share_pet_click', 'lock')
@@ -97,6 +176,14 @@ $(document).ready(function(){
         }
     });
 
+    
+    //*********************************************//
+    //  RESET Share pet slide toggle on navigation
+    //*********************************************//
+    $('a').click(function(){
+        localStorage.removeItem('share_pet_click')
+    })
+
 
     //*********************************************//
     // If image window is small and user has not expanded
@@ -106,13 +193,6 @@ $(document).ready(function(){
         $('.slide').css('display', 'none')
     }
 
-
-     //*********************************************//
-    //  Unlock share pet click variable upon navigation
-    //*********************************************//
-    $('a').click(function(){
-        localStorage.removeItem('share_pet_click')
-    })
 
 
     //*********************************************//
@@ -129,7 +209,7 @@ $(document).ready(function(){
             localStorage.setItem('lastID', img_id)
 
             // if heart was not clicked toggle dimage opacity and stat show
-            if(heart == false && click_delete == false && click_edit == false){
+            if(heart == false && clicked_delete == false && clicked_edit == false){
                 $('.stats_board').hide()
                 if( $(`${img}`).css('opacity') != '1') {
                     $(`${img}`).css('opacity', '1')
@@ -161,8 +241,8 @@ $(document).ready(function(){
             if(clickcount == 2){
                 clickcount = 1;
             }
-            click_delete = false;
-            click_edit = false;
+            clicked_delete = false;
+            clicked_edit = false;
                 
         });
     
@@ -173,12 +253,12 @@ $(document).ready(function(){
     } else {
         $('body').on('click', '.dimage',function(){
             var img_id = $(this).attr('id');
-            if(click_delete == false && click_edit == false){
+            if(clicked_delete == false && clicked_edit == false){
 
                 openCommentModal(img_id)
             }
-            click_delete = false;
-            click_edit = false;
+            clicked_delete = false;
+            clicked_edit = false;
             
         });
         $('body').on('mouseover', '.dimage', function(){
@@ -205,15 +285,6 @@ $(document).ready(function(){
         
         // END DEVICE DEPENDENT INSTRUCTIONS
 
-    
-    
-        $('.open_modal').click(function(){
-            var img_id = $(this).attr('id');
-            if(url_location =='bulletin'){
-                openCommentModal(img_id)
-            }
-        })
-       
 
 
     //*********************************************//
@@ -261,7 +332,8 @@ $(document).ready(function(){
                         .done(function(data){
 
                             if (url_location == 'bulletin'){
-                                $(`#post${img_id}`).replaceWith(data); 
+                                $(`#post${img_id}`).replaceWith(data);
+                                addCommentClickListener();
                             } else {
                                 $(`.dashboard #${img_id}`).replaceWith(data)
                             }
@@ -398,7 +470,8 @@ $(document).ready(function(){
         })
         .done(function(data){
             if( component == 'from_post'){
-                $(`#post${image_id}`).replaceWith(data);   
+                $(`#post${image_id}`).replaceWith(data);
+                addCommentClickListener();
             } else {
                 $('#replace_comments').replaceWith(data)                                  
                 scrollToBottom()
@@ -415,10 +488,6 @@ $(document).ready(function(){
     //*********************************************//
     $('.comm_edit').hide()
 
-    // if (url_location != 'bulletin'){
-    //     $('.stats_board').css('display', 'flex')
-    // }
-    
     
     //*********************************************//
     // Hide FOLLOWING STAT on image when on USER PROFILE PAGE
@@ -438,62 +507,9 @@ $(document).ready(function(){
     })
     
     
-    //*********************************************//
-    // get more images
-    //*********************************************//
-    function get_more_images() {
-
-        $('.loader').css('display', 'unset')
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_more_images`,
-        })
-        .done(function(data){
-
-            if (data != 'none'){
-                $(`#get_more`).append(data);
-                add_quotes()
-            } else {
-                //$('.loader').css('display', 'none')
-            }     
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-
-       
-
-    }
-
-    function add_quotes() {
-        var color_blocks = ($('.color_block2').length)
-        for(var i = 0; i<color_blocks; i++){
-            var rand = Math.floor(Math.random()*quotes.length)
-            var randcolnum = Math.floor(Math.random()*quote_colors.length)
-            var randColor = quote_colors[randcolnum]
-            var randStr = quotes[rand][0]
-            var cite = quotes[rand][1]
-            $(`.color_block2 p:eq(${i})`).html(`${randStr} <br><cite> -${cite} </cite>`);
-            $(`.color_block2 p:eq(${i})`).css('color', `${randColor[0]}`);
-            $(`.color_block2:eq(${i})`).css('background-color', `${randColor[1]}`).css('border-color',`${randColor[0]}`);
-        }
-    } 
-    
-    //*********************************************//
-    // OPEN LOADER ON AJAX START
-    //*********************************************//
-    // $(document).ajaxStart(function(){
-    //     $('.loader').show();
-    // });
-    
-    // $(document).ajaxStop(function(){
-    //     $('.loader').hide();
-    // });
-
 
     //*********************************************//
-    // Alert on Logout
+    // on LOGOUT clear cookies
     //*********************************************//
     $('.logout').on('click',function(){
         localStorage.clear()
@@ -509,12 +525,6 @@ $(document).ready(function(){
         }
     }
 
-    //*********************************************//
-    // Close guest Message
-    //*********************************************//
-    $('.close_guest_message').on('click', function(){
-            $('.guest_message').remove()
-    });
 
     //*********************************************//
     // Close Modal on 'x' click
@@ -557,27 +567,14 @@ $(document).ready(function(){
         });
     }
 
-    //*********************************************//
-    // Pull Heart Sum from DB
-    //*********************************************//
-    function get_heart_sum(img_id){
-        $.ajax({
-            cache: false,
-            type:"GET",
-            url: `/get_heart_sum/${img_id}`,
-        })
-        .done(function(data){
-            heart_sum =  data 
-            $('.heart_sum').html(data)
-                
-        })
-        .fail(function(data){
-            console.log("Error in fetching data");
-        });
-    }
+
+
+
+
         $('body').on('click','delete_comment', function(){
             delete_comment = true;
         })
+
         //*********************************************//
         // Process Heart Clicks
         //*********************************************//
@@ -605,7 +602,8 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     if(url_location == 'bulletin'){
-                        $(`#post${img_id}`).replaceWith(data);  
+                        $(`#post${img_id}`).replaceWith(data);
+                        addCommentClickListener();  
                     } else {
                         $(`#stat${img_id}`).replaceWith(data); 
                         get_heart_sum(img_id)
@@ -644,7 +642,8 @@ $(document).ready(function(){
                     }
                     $(`#replace${img_id}`).html(data)
                 } else {
-                    $(`#post${img_id}`).html(data);  
+                    $(`#post${img_id}`).html(data);
+                    addCommentClickListener();
                 }
                 heart = false;   
             })
@@ -681,7 +680,8 @@ $(document).ready(function(){
             .done(function(data){   
 
                 if (component == 'from_post'){ 
-                    $(`#post${img_id}`).replaceWith(data); 
+                    $(`#post${img_id}`).replaceWith(data);
+                    addCommentClickListener();
                 } else {    
                     $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
@@ -715,7 +715,8 @@ $(document).ready(function(){
             })
             .done(function(data){
                 if( $(`${form_compnt}`).val() == 'from_post'){
-                    $(`#post${img_id}`).replaceWith(data);   
+                    $(`#post${img_id}`).replaceWith(data);
+                    addCommentClickListener();
                 } else {
                     $('#replace_comments').replaceWith(data)                                  
                     scrollToBottom()
@@ -728,3 +729,17 @@ $(document).ready(function(){
         });
 
 });
+
+
+
+   // $('.loader').delay(800).css('display', 'none')
+    // function loaderoff(){
+    //     window.setTimeout()
+    // }
+
+//     //*********************************************//
+//     // Close guest Message
+//     //*********************************************//
+//     $('.close_guest_message').on('click', function(){
+//         $('.guest_message').remove()
+// });

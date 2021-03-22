@@ -138,7 +138,7 @@ class PetManager(models.Manager):
             errors['desc'] ='Please tell us YOUR name too.'
 
         if len(post['desc']) > 10 or len(post['name']) > 10:
-            errors['desc'] ='Sorry, names must be between 2 and 10 characters'
+            errors['desc2'] ='Sorry, names must be between 2 and 10 characters'
 
         if 'pet_img' not in postFiles:
             errors['image'] = 'An image is required.' 

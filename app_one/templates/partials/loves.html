@@ -1,0 +1,21 @@
+
+<li {% if session_user in image.loves.all %} 
+        class = 'stat_icon loved'
+    {% else %} 
+        class = 'stat_icon' 
+    {% endif %}>
+    <i id={{image.id}} class="fas fa-heart" 
+        {% if session_user in image.loves.all %} title="You Already Love {{image.name}}"
+        {% else %} title ='Give {{image.name}} some love!' 
+        {% endif %}>
+    </i>
+
+</li>
+
+<li {% if session_user in image.loves.all %} 
+        class = 'stat_num loved'    
+    {% else %} 
+        class = 'stat_num'
+    {% endif %}>
+    <p>{{image.loves.count}}</p>
+</li>

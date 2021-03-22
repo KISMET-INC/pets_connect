@@ -33,3 +33,135 @@
     display: flex;
     flex-direction: column;
 }
+
+
+/*******************************/
+/*  OVERRIDE Share Pet Form       
+/*******************************/
+
+.share_pet section.right {
+    width: 30%;
+    margin-top: 50px;
+    margin-left: 20px;
+    
+}
+.share_pet {
+    display: flex;
+    width:100%;
+    font-style: normal;
+}
+
+.share_pet input {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0px;
+}
+
+.share_pet input#id_pet_img {
+    background-color: transparent;
+}
+.share_pet input#id_pet_img p input {
+    border:none;
+}
+.share_pet .left h3 {
+    color: var(--blue1);
+    font-style: normal;
+
+}
+.share_pet .left {
+    width: 70%;
+}
+
+
+.share_pet i:before, .share_pet button {
+    color: var(--blue1);
+}
+
+.share_pet button {
+    text-align: left;
+}
+
+.nursery_bg {
+    border-radius: 5px;
+    background-color: #C6E2E2;
+    font-style: italic;
+    font-size: 14px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px dotted var(--blue1);
+    width: 49%;
+    margin:3px;
+}
+
+.nursery_bg h2 {
+    font-size: 18px;
+}
+
+.nursery_bg i::before{
+    margin-right: 4px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 1025px){
+
+    .share_pet h3 {
+        margin-top: 0px;
+    }
+    .share_pet input {
+        height: 40px;
+        margin-top: 10px;
+    }
+
+    .nursery_bg {
+        width: 97.5%;
+        padding: 20px 20px;
+        margin-bottom:5px;
+        justify-content: center;
+        
+    }
+
+    .share_pet .left {
+        width: 100%;
+    }
+    .share_pet section.right {
+        margin: 0px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .share_pet button  {
+        margin-top:-10px;
+        font-size: 20px;
+    }
+
+    .share_pet {
+        flex-direction: column;
+    }
+
+    .share_pet i::before {
+        font-size: 25px;
+    }
+
+    .share_pet input#id_pet_img {
+        margin-top: 15px;
+    }
+}
+
+
+/*******************************/
+/*  MEDIA BREAKPOINT 425px         
+/*******************************/
+@media (max-width: 426px){
+
+    .share_pet input#id_pet_img {
+        width: 90%;
+    }
+  
+    
+}

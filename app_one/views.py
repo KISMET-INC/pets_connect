@@ -147,8 +147,6 @@ def explore(request):
     if 'user_id' not in request.session:
         return redirect('/')
     
-    # if 'loads' not in request.session:
-    #     request.session['loads'] = 6
 
     images2 = None;
     current_user = User.objects.get(id=request.session['user_id'])
@@ -202,11 +200,6 @@ def get_more_images(request):
     page = request.GET.get('page', request.session['page_num'])
     paginator = Paginator(image_list,load_value)
     
-
-    # print('*'*80)
-    # print(request.session['loads'])
-    # print(request.session['page_num'])
-    # print(paginator.num_pages)
 
     try:
         images2 = paginator.page(page)
@@ -337,19 +330,12 @@ def bulletin(request):
     if 'user_id' not in request.session:
         return redirect('/')
         
-    # if image_id != 0:
-    #     current_image = Image.objects.get(id=image_id)
-    # else:
-    #     current_image = 0;
-
     context = {
         'session_user': User.objects.get(id=request.session['user_id']),
-        # 'selected_user': User.objects.get(id=user_id),
-        # 'url' : f'/user/bulletin/{user_id}/{image_id}',
-        # 'image': current_image,
         'images': Image.objects.order_by("-updated_at"),
         'users': User.objects.order_by("updated_at"),
-        # 'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
+        'upload_pet_form': UploadPetForm(),
+    
     }
     return render(request,'bulletin.html',context)
 
@@ -374,14 +360,14 @@ def process_add_pet_image(request):
     errors = Image.objects.basic_validator_add_pet(request.POST, request.FILES)
     session_user = User.objects.get(id=request.session['user_id'])
     user = User.objects.get(id=request.POST['user_id'])
-
+    print(f'errors: {len(errors)}')
     if len(errors) > 0:
         for value in errors.values():
             messages.error(request,value)
         if session_user.user_level == 9:
             return redirect (f'/admin_edit_user/{user.id}')
-        if request.POST['location'] == 'explore':
-            return redirect('/explore')
+        if 'location' in request.POST:
+            return redirect(f'/{request.POST["location"]}')
 
     upload_pet_form = UploadPetForm(request.POST, request.FILES)
     this_image = Image.objects.create(pet_img = request.FILES['pet_img'], user = user, name = request.POST['name'], desc = request.POST['desc'] )
@@ -389,8 +375,8 @@ def process_add_pet_image(request):
     send_email(session_user = user, action = 'SHARED', image = this_image)
     if session_user.user_level == 9:
         return redirect (f'/admin_edit_user/{user.id}')
-    if request.POST['location'] == 'explore':
-        return redirect('/explore')
+    if 'location' in request.POST:
+        return redirect(f'/{request.POST["location"]}')
 
     return redirect (f'/profile/{user.id}')
 
