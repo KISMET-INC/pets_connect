@@ -6,7 +6,7 @@
     {% endif %}>
     <i id={{image.id}} class="fas fa-heart" 
         {% if session_user in image.loves.all %} title="You Already Love {{image.name}}"
-        {% else %} title ='Give this pet some love' 
+        {% else %} title ='Give {{image.name}} some love!' 
         {% endif %}>
     </i>
 

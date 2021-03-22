@@ -10,7 +10,6 @@
 
 
 a {
-   
     margin: 0px;
     padding: 0px;
     width:fit-content;
@@ -31,29 +30,6 @@ nav .fa-compass::before, nav a.explore{
     justify-content: center;
 }
 
-.dashboard .nursery_bg {
-    border-radius: 5px;
-    background-color: #C6E2E2;
-    font-style: italic;
-    font-size: 14px;
-    padding-left: 30px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 2px dotted var(--blue1);
-    width: 49%;
-    margin:3px;
-}
-.dashboard .nursery_bg h2 {
-    font-size: 18px;
-}
-
-.dashboard .nursery_bg i::before{
-    margin-right: 4px;
-    margin-left: 10px;
-    font-size: 20px;
-}
 
 .dashboard aside.icons {
     display:flex;
@@ -76,54 +52,6 @@ aside.icons div {
     font-size: 20px;
     opacity: .5;
 }
-
-
-/*******************************/
-/*  OVERRIDE Share Pet Form       
-/*******************************/
-
-.share_pet section.right {
-    margin-top: 50px;
-    width: 30%;
-    margin-left: 20px;
-    
-}
-.share_pet {
-    display: flex;
-    width:100%;
-    font-style: normal;
-}
-
-.share_pet input {
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 0px;
-}
-
-.share_pet input#id_pet_img {
-    background-color: transparent;
-}
-.share_pet input#id_pet_img p input {
-    border:none;
-}
-.share_pet .left h3 {
-    color: var(--blue1);
-    font-style: normal;
-
-}
-.share_pet .left {
-    width: 70%;
-}
-
-
-
-.share_pet i:before, .share_pet button {
-    color: var(--blue1);
-}
-
-.share_pet button {
-    text-align: left;
-}
-
 
 
 
@@ -200,48 +128,6 @@ img.cropped2 {
     .dimage, .color_block2 {
         width:32.5%;
     }
-    .dashboard .nursery_bg {
-        width: 97.5%;
-        padding: 20px 20px;
-        margin-bottom:5px;
-        justify-content: center;
-        
-    }
-    .share_pet h3 {
-        margin-top: 0px;
-    }
-    .share_pet input {
-        height: 40px;
-        margin-top: 10px;
-    }
-
-    .share_pet .left {
-        width: 100%;
-    }
-    .share_pet section.right {
-        margin: 0px;
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    .share_pet button  {
-        margin-top:-10px;
-        font-size: 20px;
-    }
-
-    .share_pet {
-        flex-direction: column;
-    }
-
-    .dashboard .share_pet i::before {
-        font-size: 25px;
-    }
-
-    .share_pet input#id_pet_img {
-        margin-top: 15px;
-    }
-
-
 
     .dashboard aside.icons p{
         font-size:17px;
@@ -266,22 +152,6 @@ img.cropped2 {
 }
 
 
-/*******************************/
-/*  MEDIA BREAKPOINT 1025px         
-/*******************************/
-@media (max-width: 1300px){
-    /* .share_pet h3 {
-        margin-top: 8px;
-        font-size:20px;
-    }
-    .share_pet input#id_pet_img{
-        margin:0px;
-        height:22px;
-    } */
-
-    
-
-}
 
 /*******************************/
 /*  MEDIA BREAKPOINT 767px         
@@ -364,10 +234,6 @@ img.cropped2 {
         font-size: 18px;
     }
 
-    .share_pet input#id_pet_img {
-        width: 90%;
-    }
-    
     .dimage {
         width: 97%;
     }
