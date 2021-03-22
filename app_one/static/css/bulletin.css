@@ -48,7 +48,7 @@ header h3, header a {
 .person {
     width: 100px;
 }
-.person .user_email {
+.person .user_email, .person .user_name {
     display:none;
 }
 

@@ -14,7 +14,8 @@
         {% else %}
             <a class = 'user_info' href = '/profile/{{user.id}}'>
         {% endif %}
-            <p>{{user.user_name}}</p>
+            <p class = user_desc>{{image.desc}}</p>
+            <p class = user_name>{{user.user_name}}</p>
             <p class = 'user_email'>{{user.email}}</p>
         </a> 
     </article>
