@@ -149,7 +149,7 @@ section.right_side {
     border-left: 2px dotted var(--blue1);
     border-right: 2px dotted var(--blue1);
 }
-    .right_side h2 {
+    .right_side h2, .followers .follower_info a {
         font-size: 18px;
         font-family: 'Montserrat Alternates', sans-serif;
         margin: 0;
@@ -195,6 +195,13 @@ section.right_side {
             }
                 .followers .follower_info p {
                     margin: 0;
+                }
+
+                .followers .follower_info a {
+                    font-weight: bold;
+                    color: teal;   
+
+                    font-size: 18px;
                 }
 /*******************************/
 /*  MEDIA BREAKPOINT 769px         
