@@ -4,7 +4,9 @@ $(document).ready(function(){
     //*********************************************//
     // START UP
     //*********************************************//
-
+    if(window.performance.type == 2){
+        window.location.reload();
+    }
 
     $(".opacity").css('opacity', '.99');
     var heart = false;
