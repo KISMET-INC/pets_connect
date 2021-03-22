@@ -147,8 +147,6 @@ def explore(request):
     if 'user_id' not in request.session:
         return redirect('/')
     
-    # if 'loads' not in request.session:
-    #     request.session['loads'] = 6
 
     images2 = None;
     current_user = User.objects.get(id=request.session['user_id'])
@@ -202,11 +200,6 @@ def get_more_images(request):
     page = request.GET.get('page', request.session['page_num'])
     paginator = Paginator(image_list,load_value)
     
-
-    # print('*'*80)
-    # print(request.session['loads'])
-    # print(request.session['page_num'])
-    # print(paginator.num_pages)
 
     try:
         images2 = paginator.page(page)
@@ -337,20 +330,12 @@ def bulletin(request):
     if 'user_id' not in request.session:
         return redirect('/')
         
-    # if image_id != 0:
-    #     current_image = Image.objects.get(id=image_id)
-    # else:
-    #     current_image = 0;
-
     context = {
         'session_user': User.objects.get(id=request.session['user_id']),
-        # 'selected_user': User.objects.get(id=user_id),
-        # 'url' : f'/user/bulletin/{user_id}/{image_id}',
-        # 'image': current_image,
         'images': Image.objects.order_by("-updated_at"),
         'users': User.objects.order_by("updated_at"),
         'upload_pet_form': UploadPetForm(),
-        # 'comments': Comment.objects.filter(image = current_image).order_by('-created_at'),
+    
     }
     return render(request,'bulletin.html',context)
 
