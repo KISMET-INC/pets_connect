@@ -34,17 +34,18 @@
                             Following <b>{{clicked_user.is_following.all.count}} </b> |
                             Posts <b>{{clicked_user.images.all.count}} </b> | 
                             Hearts: <b><span class = 'heart_sum'>{{heart_sum}}</span></b></span></p>
-                        {% if session_user == clicked_user %}
-                            <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE | </a> 
-                        {% else %}
-                            {% if clicked_user in session_user.is_following.all %}
-                            <a href='/process_follow/{{clicked_user.id}}/0'> STOP FOLLOWING |</a>
+
+                            {% if session_user == clicked_user %}
+                            <a href='/edit_user/{{session_user.id}}'> EDIT PROFILE</a> 
                             {% else %}
-                            <a href='/process_follow/{{clicked_user.id}}/0'> FOLLOW USER |</a>
+                            {% if clicked_user in session_user.is_following.all %}
+                            <a href='/process_follow/{{clicked_user.id}}/0'> STOP FOLLOWING</a>
+                            {% else %}
+                            <a href='/process_follow/{{clicked_user.id}}/0'> FOLLOW USER</a>
                             {% endif %}
                             
-                        {% endif %}
-                        <a href='/bulletin/'> GO BACK </a>
+                            {% endif %}
+                            <a class = 'go_back' href='/bulletin/'> << GO BACK</a>
                     </div>
                 </div>
 
