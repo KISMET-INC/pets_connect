@@ -181,20 +181,24 @@ $(document).ready(function(){
     //*********************************************//   
     $('body').on('click', '.edit_image', function(){
         clicked_edit = true;
-    });
+    })
+
 
     //*********************************************//
     // SHARE PET CLICK toggle
     //*********************************************//
     $('.share_pet_h3').click(function(){
-        localStorage.setItem('share_pet_click', 'lock')
+        localStorage.setItem('share_pet_click', true)
 
-        if($('.slide').is(":visible")){
-            $('.slide').slideUp()
+        
+
+        if($('#slide').is(":visible")){
+            $('#slide').slideUp()
             
         } else {
-            $('.slide').slideDown()
-            $('.slide').css('display','flex')
+        
+            $('#slide').slideDown()
+            $('#slide').css('display','flex')
         }
     });
 
@@ -208,12 +212,27 @@ $(document).ready(function(){
 
 
     //*********************************************//
-    // If image window is small and user has not expanded
-    // share pet window, display none
+    // WINDOW SIZE share pet slide function
     //*********************************************//
-    if(window.innerWidth <1024 && localStorage.getItem('share_pet_click') == null){
-        $('.slide').css('display', 'none')
+    if(window.innerWidth > 1024 && localStorage.getItem('share_pet_click') == null && url_location == 'explore'){
+
+        $('#slide').slideDown()
+        $('#slide').css('display','flex')
+
     }
+
+    if(localStorage.getItem('share_pet_click') != null){
+            
+           // $('.share_pet #slide').removeClass("hide")
+            if(localStorage.getItem('errors') == null){
+                $('#slide').slideDown()
+                //$('#slide').css("display", 'flex')
+                localStorage.setItem('errors',true)
+            }
+
+        }
+
+
 
 
 

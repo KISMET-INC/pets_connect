@@ -4,7 +4,7 @@
 
         <h3 class = 'share_pet_h3'>Share Your Pet Here</h3>
 
-        <div class = 'slide'>
+        <div id = 'slide'>
             {% csrf_token %}
             {% if messages %}
                 <p class = 'messages'>{% for message in messages %}{% if message.extra_tags == 'image' %} Please upload a photo {% else %} Names must be at least 2 letters long {% endif %}{% endfor%}</p>
