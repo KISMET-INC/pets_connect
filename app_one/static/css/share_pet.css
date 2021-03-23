@@ -1,3 +1,4 @@
+
 .share_pet input {
     margin-bottom: 10px;
     height:35px;
@@ -29,7 +30,7 @@
     background-color: transparent;
 }
 
-.share_pet .left .slide .messages {
+.share_pet .left #slide .messages {
     color:#FE6C6C;
     margin:0px;
     margin-bottom: 6px;
@@ -38,7 +39,7 @@
     font-weight: bold;
 }
 
-.share_pet .left .slide {
+.share_pet #slide {
     display: flex;
     flex-direction: column;
 }
@@ -116,8 +117,9 @@
     font-size: 20px;
 }
 
-.share_pet .slide {
+.share_pet #slide {
     margin-top:10px;
+    display: none;
 }
 
 /*******************************/
@@ -166,7 +168,15 @@
         margin-top: 15px;
     }
 }
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 1024px){
+    /* .slide {
+        display:none;
+    } */
 
+}
 /*******************************/
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
