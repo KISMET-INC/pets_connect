@@ -5,6 +5,10 @@
     border-radius: 5px;
 }
 
+.share_pet input.red_outline {
+    border:2px solid #FE6C6C;
+}
+
 .share_pet input#id_pet_img{
     padding:0px;
     margin-top: 10px;
@@ -26,7 +30,12 @@
 }
 
 .share_pet .left .slide .messages {
-    color:red;
+    color:#FE6C6C;
+    margin:0px;
+    margin-bottom: 6px;
+    margin-top: -8px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .share_pet .left .slide {
@@ -87,7 +96,7 @@
     background-color: #C6E2E2;
     font-style: italic;
     font-size: 14px;
-    padding: 10px 30px;
+    padding: 5px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,7 +123,7 @@
 /*******************************/
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
-@media (max-width: 1025px){
+@media (max-width: 1200px){
 
 
     .share_pet input {
@@ -123,7 +132,7 @@
     }
 
     .nursery_bg {
-        width: 97.5%;
+        width: 110%;
         padding: 20px 20px;
         margin-bottom:5px;
         justify-content: center;
@@ -158,6 +167,15 @@
     }
 }
 
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 767px){
+    .nursery_bg {
+        width: 97.5%;
+    }
+
+}
 
 /*******************************/
 /*  MEDIA BREAKPOINT 425px         

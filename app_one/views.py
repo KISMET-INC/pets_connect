@@ -362,13 +362,11 @@ def process_add_pet_image(request):
     user = User.objects.get(id=request.POST['user_id'])
     print(f'errors: {len(errors)}')
     if len(errors) > 0:
-        for key, value in errors.items():
-            if(key == 'desc'):
-                messages.error(request,value, extra_tags= 'desc')
-            if(key == 'name'):
-                messages.error(request,value, extra_tags= 'name')
-            if(key == 'length'):
-                messages.error(request,value, extra_tags= 'length')
+        for key, value in errors.items():     
+            print(value)
+            messages.error(request,value, extra_tags= f'{value}')
+    
+
     
 
         if session_user.user_level == 9:
