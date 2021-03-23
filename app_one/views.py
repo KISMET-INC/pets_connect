@@ -353,7 +353,7 @@ def edit_image(request,location,image_id):
 
 
 #=============================================##
-# process_add_pet_image()
+# PROCESS ADD PET IMAGE
 # return redirect('/')
 #=============================================##
 def process_add_pet_image(request):
@@ -362,8 +362,13 @@ def process_add_pet_image(request):
     user = User.objects.get(id=request.POST['user_id'])
     print(f'errors: {len(errors)}')
     if len(errors) > 0:
-        for value in errors.values():
-            messages.error(request,value)
+        for key, value in errors.items():     
+            print(value)
+            messages.error(request,value, extra_tags= f'{value}')
+    
+
+    
+
         if session_user.user_level == 9:
             return redirect (f'/admin_edit_user/{user.id}')
         if 'location' in request.POST:

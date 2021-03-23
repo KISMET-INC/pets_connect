@@ -1,28 +1,27 @@
 <form class="share_pet  nursery_bg" enctype="multipart/form-data" action = '/process_add_pet_image' method ='post'>
 
     <section class = 'left'>
+
         <h3 class = 'share_pet_h3'>Share Your Pet Here</h3>
+
         <div class = 'slide'>
-    {% csrf_token %}
-        <label for ='name'>Enter Pet Name</label>     
-        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
-        <label for = 'desc'>Tell us your name</label>  
-        <input name = 'desc' maxlength="10" placeholder="Tell us your name!">
-        <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
-        <input type='hidden' name = 'location' value='{{location}}'>
-         {{ upload_pet_form.as_p}}
-      
-        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
-    </div>
-    </section>
-    <section class = 'right'>
-        <ul class="messages">
-        {% for message in messages %}
+            {% csrf_token %}
             {% if messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %} 
-        {% endfor %}
-        </ul>
+                <p class = 'messages'>{% for message in messages %}{% if message.extra_tags == 'image' %} Please upload a photo {% else %} Sorry, names must be at least 2 letters long {% endif %}{% endfor%}</p>
+            {% endif%}
+
+            <label for ='name'>Enter Pet Name</label>
+            <input {% for message in messages %}{% if message.extra_tags == 'name' or  message.extra_tags == 'both' %} class ="red_outline" placeholder="What is your pet's name?" {% endif%} {%endfor%} placeholder = 'Pets name' type='text' name ='name' minlength= '1' maxlength="10" >
+            
+            <label for = 'desc'>Your name</label>
+            <input {% for message in messages %}{% if message.extra_tags == 'desc' or  message.extra_tags == 'both' %} class ="red_outline" placeholder="What is YOUR name?" {% endif%} {%endfor%} type='text' name ='desc' minlength= '1' maxlength="10" placeholder="Tell us your name!">
+
+            {{ upload_pet_form.as_p}}
+            <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
+            <input type='hidden' name = 'location' value='{{location}}'>
+
+            <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
+            </div>
     </section>
         
 </form>

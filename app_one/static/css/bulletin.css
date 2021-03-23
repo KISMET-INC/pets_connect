@@ -6,6 +6,11 @@
 /* OVERRIDE SHARE PET */
 .nursery_bg {
     width: 100%;
+    min-height: auto;
+}
+
+.share_pet .left {
+    margin: 10px 0px;
 }
 
 

@@ -131,17 +131,19 @@ class PetManager(models.Manager):
         # empty error dictionary
         errors = {}
 
-        if len(post['name']) < 1:
-            errors['name'] = 'Please tell us your PETS name.'
-
-        if len(post['desc']) < 2:
-            errors['desc'] ='Please tell us YOUR name too.'
-
-        if len(post['desc']) > 10 or len(post['name']) > 10:
-            errors['desc2'] ='Sorry, names must be between 2 and 10 characters'
+        
+        if len(post['desc']) <= 1 or len(post['name']) <= 1:
+            if len(post['desc']) <=1 and len(post['name']) <=1:
+                errors['both'] ='both'
+            elif len(post['desc']) <= 1:
+                errors['both'] ='desc'
+            elif len(post['name']) <= 1:
+                errors['both'] ='name'
+        # if (len(post['desc']) >= 1 and len(post['desc']) < 10) or (len(post['name']) >= 1 and len(post['name']) < 10):
+        #     errors['length'] ='Names must be between 2 and 10 characters'
 
         if 'pet_img' not in postFiles:
-            errors['image'] = 'An image is required.' 
+            errors['image'] = 'image' 
 
         return errors
 

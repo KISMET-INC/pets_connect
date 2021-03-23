@@ -5,6 +5,10 @@
     border-radius: 5px;
 }
 
+.share_pet input.red_outline {
+    border:2px solid #FE6C6C;
+}
+
 .share_pet input#id_pet_img{
     padding:0px;
     margin-top: 10px;
@@ -25,8 +29,13 @@
     background-color: transparent;
 }
 
-.share_pet .messages li {
-    list-style: none;
+.share_pet .left .slide .messages {
+    color:#FE6C6C;
+    margin:0px;
+    margin-bottom: 6px;
+    margin-top: -8px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .share_pet .left .slide {
@@ -65,10 +74,11 @@
 .share_pet .left h3 {
     color: var(--blue1);
     font-style: normal;
+    margin: 0px;
 
 }
 .share_pet .left {
-    width: 70%;
+    width: 100%;
 }
 
 
@@ -78,6 +88,7 @@
 
 .share_pet button {
     text-align: left;
+    margin-top: -15px;
 }
 
 .nursery_bg {
@@ -85,14 +96,14 @@
     background-color: #C6E2E2;
     font-style: italic;
     font-size: 14px;
-    padding-left: 30px;
-    padding-bottom: 10px;
+    padding: 5px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 2px dotted var(--blue1);
-    width: 49%;
+    width: 49.3%;
     margin:3px;
+    min-height:220px;
 }
 
 .nursery_bg h2 {
@@ -105,24 +116,27 @@
     font-size: 20px;
 }
 
+.share_pet .slide {
+    margin-top:10px;
+}
+
 /*******************************/
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
-@media (max-width: 1025px){
+@media (max-width: 1200px){
 
-    .share_pet h3 {
-        margin-top: 0px;
-    }
+
     .share_pet input {
         height: 40px;
         margin-top: 10px;
     }
 
     .nursery_bg {
-        width: 97.5%;
+        width: 110%;
         padding: 20px 20px;
         margin-bottom:5px;
         justify-content: center;
+        min-height:unset;
         
     }
 
@@ -153,6 +167,15 @@
     }
 }
 
+/*******************************/
+/*  MEDIA BREAKPOINT 1025px         
+/*******************************/
+@media (max-width: 767px){
+    .nursery_bg {
+        width: 97.5%;
+    }
+
+}
 
 /*******************************/
 /*  MEDIA BREAKPOINT 425px         
@@ -162,6 +185,5 @@
     .share_pet input#id_pet_img {
         width: 90%;
     }
-  
     
 }
