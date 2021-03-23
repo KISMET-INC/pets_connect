@@ -141,7 +141,7 @@ $(document).ready(function(){
     //*********************************************//   
     if (url_location == 'profile'){
         localStorage.setItem('profile_redirect', true);
-        window.history.replaceState("", "Pets Connect", "/bulletin/");
+        window.history.pushState("", "Pets Connect", "/bulletin/");
     }
 
     //*********************************************//  
