@@ -3,26 +3,41 @@
     <section class = 'left'>
         <h3 class = 'share_pet_h3'>Share Your Pet Here</h3>
         <div class = 'slide'>
-    {% csrf_token %}
-        <label for ='name'>Enter Pet Name</label>     
-        <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
-        <label for = 'desc'>Tell us your name</label>  
-        <input name = 'desc' maxlength="10" placeholder="Tell us your name!">
-        <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
-        <input type='hidden' name = 'location' value='{{location}}'>
-         {{ upload_pet_form.as_p}}
-      
-        <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
-    </div>
+            {% csrf_token %}
+            <label for ='name'>Enter Pet Name</label>
+            {% for message in messages %}
+                {% if message.extra_tags == 'length'%}
+                <p class = 'messages'>{{message}}</p>
+                {% endif %}
+            {% endfor %}     
+            <input type='text' name ='name' minlength= '1' maxlength="10" placeholder="Pets name">
+            {% for message in messages %}
+                {% if message.extra_tags == 'name'%}
+                <p class = 'messages'>{{message}}</p>
+                {% endif %}
+            {% endfor %}
+
+            <label for = 'desc'>Tell us your name</label>
+            <input name = 'desc' maxlength="10" placeholder="Tell us your name!">
+            {% for message in messages %}
+                {% if message.extra_tags == 'desc'%}
+                <p class = 'messages'>{{message}}</p>
+                {% endif %}
+            {% endfor %}
+            <input type="hidden" name = 'user_id' value= '{{session_user.id}}'>
+            <input type='hidden' name = 'location' value='{{location}}'>
+            {{ upload_pet_form.as_p}}
+            <button type ='submit'> <i class="fas fa-cloud-upload-alt"></i> POST</button>
+            </div>
     </section>
-    <section class = 'right'>
+    <!-- <section class = 'right'>
         <ul class="messages">
         {% for message in messages %}
             {% if messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li {% if message.tags %} class="{{ message.extra_tags }}"{% endif %}>{{ message }}</li>
             {% endif %} 
         {% endfor %}
         </ul>
-    </section>
+    </section>  -->
         
 </form>

@@ -25,8 +25,8 @@
     background-color: transparent;
 }
 
-.share_pet .messages li {
-    list-style: none;
+.share_pet .left .slide .messages {
+    color:red;
 }
 
 .share_pet .left .slide {
@@ -65,10 +65,11 @@
 .share_pet .left h3 {
     color: var(--blue1);
     font-style: normal;
+    margin: 0px;
 
 }
 .share_pet .left {
-    width: 70%;
+    width: 100%;
 }
 
 
@@ -78,6 +79,7 @@
 
 .share_pet button {
     text-align: left;
+    margin-top: -15px;
 }
 
 .nursery_bg {
@@ -85,14 +87,14 @@
     background-color: #C6E2E2;
     font-style: italic;
     font-size: 14px;
-    padding-left: 30px;
-    padding-bottom: 10px;
+    padding: 10px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 2px dotted var(--blue1);
-    width: 49%;
+    width: 49.3%;
     margin:3px;
+    min-height:220px;
 }
 
 .nursery_bg h2 {
@@ -105,14 +107,16 @@
     font-size: 20px;
 }
 
+.share_pet .slide {
+    margin-top:10px;
+}
+
 /*******************************/
 /*  MEDIA BREAKPOINT 1025px         
 /*******************************/
 @media (max-width: 1025px){
 
-    .share_pet h3 {
-        margin-top: 0px;
-    }
+
     .share_pet input {
         height: 40px;
         margin-top: 10px;
@@ -123,6 +127,7 @@
         padding: 20px 20px;
         margin-bottom:5px;
         justify-content: center;
+        min-height:unset;
         
     }
 
@@ -162,6 +167,5 @@
     .share_pet input#id_pet_img {
         width: 90%;
     }
-  
     
 }
