@@ -188,9 +188,8 @@ $(document).ready(function(){
     // SHARE PET CLICK toggle
     //*********************************************//
     $('.share_pet_h3').click(function(){
+        //alert('hey')
         localStorage.setItem('share_pet_click', true)
-
-        
 
         if($('#slide').is(":visible")){
             $('#slide').slideUp()
