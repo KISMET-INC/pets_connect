@@ -188,9 +188,8 @@ $(document).ready(function(){
     // SHARE PET CLICK toggle
     //*********************************************//
     $('.share_pet_h3').click(function(){
-        localStorage.setItem('share_pet_click', true)
 
-        
+        localStorage.setItem('share_pet_click', true)
 
         if($('#slide').is(":visible")){
             $('#slide').slideUp()
@@ -202,7 +201,6 @@ $(document).ready(function(){
         }
     });
 
-    
     //*********************************************//
     //  RESET Share pet slide toggle on navigation
     //*********************************************//
@@ -221,18 +219,18 @@ $(document).ready(function(){
 
     }
 
+    //*********************************************//
+    // Slide down share pet to present validation
+    // errors
+    //*********************************************//
     if(localStorage.getItem('share_pet_click') != null){
             
-           // $('.share_pet #slide').removeClass("hide")
             if(localStorage.getItem('errors') == null){
                 $('#slide').slideDown()
-                //$('#slide').css("display", 'flex')
+                $('#slide').css("display", 'flex')
                 localStorage.setItem('errors',true)
             }
-
-        }
-
-
+    }
 
 
 
@@ -275,13 +273,14 @@ $(document).ready(function(){
                         $(`${stats}`).show()
                     }
 
-                    clickcount =1;
+                    clickcount = 1;
                 }
             }
 
             if(clickcount == 2){
                 clickcount = 1;
             }
+
             clicked_delete = false;
             clicked_edit = false;
                 
@@ -324,7 +323,7 @@ $(document).ready(function(){
             });
     }  
         
-        // END DEVICE DEPENDENT INSTRUCTIONS
+    // END DEVICE DEPENDENT INSTRUCTIONS
 
 
 
@@ -334,7 +333,6 @@ $(document).ready(function(){
         function openCommentModal(img_id){
             if(heart == false){
 
-                //var img_id = $(this).attr('id');
                 $.ajax({
                     cache: false,
                     type:"GET",

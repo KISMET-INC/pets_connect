@@ -7,6 +7,10 @@ nav .fa-user::before, nav a.profile {
     color:gray;
 }
 
+.user_img {
+    border: 1px solid gray;
+}
+
 .dimage {
     width:24.5%;
 }
@@ -45,13 +49,20 @@ nav .fa-user::before, nav a.profile {
     margin-bottom: 25px;
     
 }
-.profile_info h2:nth-child(2) {
-    font-size: 20px;
+    .profile_info h2:nth-child(2) {
+        font-size: 20px;
 
-}
-.profile_info p, .profile_info a,.profile_info b{
-    font-size: 16px;
-}
+    }
+    .profile_info p, .profile_info a , .profile_info b{
+        font-size: 16px;
+    }
+
+    .profile_info a.go_back {
+        width: 100%;
+        display: block;
+        font-weight: bold;
+        margin-top:10px;
+    }
 .user_img {
     width:200px;
     height: 200px;
