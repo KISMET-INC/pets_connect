@@ -141,18 +141,18 @@ $(document).ready(function(){
     //*********************************************//   
     if (url_location == 'profile'){
         localStorage.setItem('profile_redirect', true);
-        window.history.pushState("", "Pets Connect", "/bulletin/");
+        window.history.replaceState("", "Pets Connect", "/bulletin/");
     }
 
     //*********************************************//  
     // BULLETIN RELOAD when back button is pressed
     // catches changes to following user
     //*********************************************//   
-    
-    if (url_location == 'bulletin'  && localStorage.getItem('profile_redirect') != null){
-        localStorage.removeItem('profile_redirect');
-        location.reload()
-    }
+
+    // if (url_location == 'bulletin'  && localStorage.getItem('profile_redirect') != null){
+    //     localStorage.removeItem('profile_redirect');
+    //     location.reload()
+    // }
 
 
     //*********************************************//
